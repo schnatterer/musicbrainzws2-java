@@ -19,7 +19,6 @@ public abstract class DomainsWs2 {
     */
     public static final String WS_VERSION = "2"; 
 
-   
     public static final String MAINHOST = "musicbrainz.org";
     public static final String ANNOTATIONHOST = "search.musicbrainz.org";
    	
