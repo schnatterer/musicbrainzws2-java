@@ -53,7 +53,7 @@ public class DiscWs2 extends EntityWs2 {
     /**
      * The disc's Tracks
      */
-    private List<DiscTrackWs2> tracks;
+    private List<DiscTrackWs2> tracks = new ArrayList<DiscTrackWs2>();
      /**
      * The disc's Releases
      */
@@ -136,12 +136,14 @@ public class DiscWs2 extends EntityWs2 {
      * @return a list of Disc.Tracks that contain offset and length as Integers
      */
     public List<DiscTrackWs2> getTracks(){
+            if (tracks == null) tracks = new ArrayList<DiscTrackWs2>();
             return tracks;
     }
     /**
      * @param tracks the tracks to set
      */
     public void setTracks(List<DiscTrackWs2> tracks) {
+        if (tracks == null) tracks = new ArrayList<DiscTrackWs2>();
         this.tracks = tracks;
     }
     /**
@@ -155,9 +157,43 @@ public class DiscWs2 extends EntityWs2 {
      * @see getTracks()
      */
     public void addTrack(DiscTrackWs2 track){
-            tracks.add(track);
+            getTracks().add(track);
     }
+    public boolean isTrackListEquals(List<DiscTrackWs2> otherTracks){
 
+        if (tracks== null && otherTracks == null) return true;
+        if (tracks == null) return false;
+        if (otherTracks == null) return false;
+        if (tracks.size() != otherTracks.size()) return false;
+        
+        for (DiscTrackWs2 t1 : tracks)
+        {
+            if (!otherTracks.contains(t1)) return false;
+            DiscTrackWs2 t2 = otherTracks.get(otherTracks.indexOf(t1));
+            if(t1.getLength()!= t2.getLength()) return false;
+            if(t1.getOffset()!= t2.getOffset()) return false;
+        }
+        
+        return true;
+    }
+    public boolean isTocEquals(String otherToc){
+    
+          if (this.getToc() == null && otherToc == null) return true;
+
+          if (otherToc == null) return false;
+          if (this.getToc() == null) return false;
+
+          return (otherToc.equals(this.getToc()));
+    }
+    public boolean isDiscIdEquals(String otherDiscId){
+    
+          if (this.getDiscId() == null && otherDiscId == null) return true;
+
+          if (otherDiscId == null) return false;
+          if (this.getDiscId() == null) return false;
+
+          return (otherDiscId.equals(this.getDiscId()));
+    }
    /**
      * Gets the underlying <code>List</clode> of releases.
      * 
@@ -219,5 +255,16 @@ public class DiscWs2 extends EntityWs2 {
     public String toString() {
             return "Disc discId=" + discId + ", sectors=" + getSectors();
     }
-    
+    @Override
+        public boolean equals(Object object) {
+            if (!(object instanceof DiscWs2)) {
+                return false;
+            }
+            DiscWs2 other = (DiscWs2) object;
+            if (this.discId == null) return false;
+            if (other.getDiscId()== null) return false;
+            if (!this.discId.equals(other.getDiscId()))return false;
+            
+            return true;
+        }   
 }
