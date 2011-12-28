@@ -1,11 +1,11 @@
 package org.musicbrainz.model.entity;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 
 import org.apache.commons.lang3.StringUtils;
+import org.mc2.CalendarUtils;
 import org.musicbrainz.model.ArtistCreditWs2;
 import org.musicbrainz.model.IsrcWs2;
 import org.musicbrainz.model.PuidWs2;
@@ -33,27 +33,7 @@ public class RecordingWs2 extends EntityWs2
     
     
     public String getDuration(){
-
-        if (this.getDurationInMillis()==null)
-            return "";
-        
-        Calendar cal = Calendar.getInstance();
-
-        long durms = this.getDurationInMillis();
-        String dur;
-
-        cal.setTimeInMillis(durms);
-
-        if (durms>3600000) //1 h.
-        {
-             dur = String.format("%1$tH:%1$tM:%1$tS", cal);
-        }
-        else
-        {
-            dur = String.format("%1$tM:%1$tS", cal);
-        }
-
-        return dur;
+        return CalendarUtils.calcDuration(this.getDurationInMillis());
     }
     
         

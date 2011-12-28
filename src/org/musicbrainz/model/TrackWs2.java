@@ -1,9 +1,11 @@
 package org.musicbrainz.model;
 
-import java.util.Calendar;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.mc2.CalendarUtils;
 import org.musicbrainz.model.entity.RecordingWs2;
+
 
 /**
  * <p>A single recordings in a Medium of a specific release. 
@@ -76,27 +78,10 @@ public class TrackWs2
     }
 
     public String getDuration(){
-        
-      if (this.getDurationInMillis()==null)
-            return "";
-        
-        Calendar cal = Calendar.getInstance();
-
-        long durms = this.getDurationInMillis();
-        String dur;
-
-        cal.setTimeInMillis(durms);
-
-        if (durms>3600000) //1 h.
-        {
-             dur = String.format("%1$tH:%1$tM:%1$tS", cal);
-        }
-        else
-        {
-            dur = String.format("%1$tM:%1$tS", cal);
-        }
-
-        return dur;
+       
+      return CalendarUtils.calcDuration(this.getDurationInMillis());
+      
+      
     }
     public Long getDurationInMillis(){
         

@@ -3,11 +3,11 @@ package org.musicbrainz.model;
 import org.musicbrainz.wsxml.element.ListElement;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.mc2.CalendarUtils;
 
 /**
  * <p>A List of Track Info (Track & catalog number)referred by a release</p>
@@ -55,26 +55,6 @@ public class TrackListWs2 extends ListElement
         return dur;
     }
     public String getDuration(){
-
-        if (this.getDurationInMillis()==null)
-            return "";
-        
-        Calendar cal = Calendar.getInstance();
-
-        long durms = this.getDurationInMillis();
-        String dur;
-
-        cal.setTimeInMillis(durms);
-
-        if (durms>3600000) //1 h.
-        {
-             dur = String.format("%1$tH:%1$tM:%1$tS", cal);
-        }
-        else
-        {
-            dur = String.format("%1$tM:%1$tS", cal);
-        }
-
-        return dur;
+        return CalendarUtils.calcDuration(this.getDurationInMillis());
     }
 }

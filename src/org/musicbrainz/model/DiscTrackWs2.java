@@ -1,5 +1,7 @@
 package org.musicbrainz.model;
-import java.util.Calendar;
+
+import org.mc2.CalendarUtils;
+
 /**
  * A DiscTrack consists of tracknum, offset and length of the drack IN the disc.
  * Primary used to rebuild TOC.
@@ -99,28 +101,6 @@ public class DiscTrackWs2 {
     }
     private String getTimeString(Long millis){
 
-        if (millis==null) return "";
-        
-        Calendar cal = Calendar.getInstance();
-
-        long durms = millis;
-        String dur;
-
-        cal.setTimeInMillis(durms);
-        dur = String.format("%1$tM:%1$tS", cal);
-        
-        return dur;
+        return CalendarUtils.calcDuration(millis);
     }
-     @Override
-        public boolean equals(Object object) {
-            if (!(object instanceof DiscTrackWs2)) {
-                return false;
-            }
-            DiscTrackWs2 other = (DiscTrackWs2) object;
-            
-            if (this.tracknum != other.tracknum) return false;
-
-            return true;
-        }   
-    
 }
