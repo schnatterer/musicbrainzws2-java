@@ -111,5 +111,16 @@ public class DiscTrackWs2 {
         
         return dur;
     }
+     @Override
+        public boolean equals(Object object) {
+            if (!(object instanceof DiscTrackWs2)) {
+                return false;
+            }
+            DiscTrackWs2 other = (DiscTrackWs2) object;
+            
+            if (this.tracknum != other.tracknum) return false;
+
+            return true;
+        }   
     
 }
