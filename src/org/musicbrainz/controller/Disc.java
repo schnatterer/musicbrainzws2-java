@@ -18,6 +18,7 @@ import org.musicbrainz.discid.DiscInfo;
 import org.musicbrainz.discid.DiscInfo.TrackInfo;
 import org.musicbrainz.filter.DiscTocFilterWs2;
 import org.musicbrainz.model.DiscTrackWs2;
+import org.musicbrainz.webservice.ResourceNotFoundException;
 
 public class Disc extends Controller{
 
@@ -96,16 +97,18 @@ public class Disc extends Controller{
 
         return inc;
     }
-    private boolean needsLookUp(ReleaseIncludesWs2 inc){
+    private boolean needsLookUp(DiscWs2 disc, ReleaseIncludesWs2 inc){
         
-        return (  getDiscWs2() == null ||
-                     super.needsLookUp(inc) ||
-                     inc.isLabel()||
-                     inc.isReleaseGroups()||
-                     inc.isArtistCredits()||
-                     inc.isMedia()||
-                     inc.isRecordings()||
-                     inc.isDiscids());
+
+        return (getDiscWs2()==null ||
+                   super.needsLookUp(inc) ||
+                   inc.isLabel()||
+                   inc.isReleaseGroups()||
+                   inc.isArtistCredits()||
+                   inc.isMedia()||
+                   inc.isRecordings()||
+                   inc.isDiscids()
+                );
     }
     public DiscWs2 lookUp(String id, String toc) throws MBWS2Exception{
 
@@ -134,30 +137,55 @@ public class Disc extends Controller{
              (disc.getTracks() == null|| disc.getTracks().isEmpty())) {
                 throw new MBWS2Exception("Invalid request");
         }
-                
-        if ((disc.getDiscId() == null || disc.getDiscId().isEmpty()) &&  
-             (disc.getToc() == null|| disc.getToc().isEmpty())) {
+        
+        if ((disc.getToc() == null|| disc.getToc().isEmpty()) &&
+               disc.getTracks() != null && !disc.getTracks().isEmpty()){
             
-            this.setDiscWs2(calcDiscIdFromTrackList(disc));
+            DiscWs2 transit = calcDiscIdFromTrackList(disc);
+            disc.setToc(transit.getToc());
+            
+            if (disc.getDiscId()== null || disc.getDiscId().isEmpty()){
+                disc.setDiscId(transit.getDiscId());
+            }
+            else if (transit.getDiscId() != null && 
+                       !transit.getDiscId().equals( disc.getDiscId())){
+                log.warn("libdiscId changed discId");
+            };
+        }
+        else if ((disc.getTracks() == null|| disc.getTracks().isEmpty()) &&
+               disc.getToc() != null && !disc.getToc().isEmpty()) {
+            
+            DiscWs2 transit = calcDiscIdFromToc(disc.getToc());
+            disc.setTracks(transit.getTracks());
+            
+            if (disc.getDiscId()== null || disc.getDiscId().isEmpty()){
+                disc.setDiscId(transit.getDiscId());
+            }
+            else if (transit.getDiscId() != null && 
+                       !transit.getDiscId().equals( disc.getDiscId())){
+                log.warn("libdiscId changed discId");
+            };
             
         }
-        else if((disc.getDiscId() == null || disc.getDiscId().isEmpty()) && 
-                  (disc.getTracks() == null|| disc.getTracks().isEmpty())){
-            
-            this.setDiscWs2(calcDiscIdFromToc(disc.getToc()));
-
-        }
-        else if(disc.getDiscId() == null || disc.getDiscId().isEmpty()){
+        else if (disc.getTracks() != null && !disc.getTracks().isEmpty()&&
+                    disc.getToc() != null && !disc.getToc().isEmpty()){
             
             DiscWs2 transit = new DiscWs2();
             transit.setTracks(disc.getTracks());
+            transit = calcDiscIdFromTrackList(transit);
             
-            transit = lookUp(transit);
             if (!transit.getToc().equals(disc.getToc()))
-                throw new MBWS2Exception("Invalid request toc and trackList not corresponding");
+                throw new MBWS2Exception("Invalid request: non corresponding toc and trackList");
+            
+            if (disc.getDiscId()== null || disc.getDiscId().isEmpty()){
+                disc.setDiscId(transit.getDiscId());
+            }
+            else if (transit.getDiscId() != null && 
+                       !transit.getDiscId().equals( disc.getDiscId())){
+                log.warn("libdiscId changed discId");
+            };
         }
-        else this.setDiscWs2(disc);
-
+        
         ReleaseIncludesWs2 inc = getIncrementalInc(new ReleaseIncludesWs2());
        
         // Sanity check.
@@ -176,23 +204,57 @@ public class Disc extends Controller{
         inc.setDiscids(false);// invalid request
         inc.setMedia(false);// invalid request
 
-        if (needsLookUp(inc))
-        {    
+        if (needsLookUp(disc, inc)){    
             setLookUp(new LookUpWs2(getQueryWs()));
             
             DiscTocFilterWs2 tocFilter = new DiscTocFilterWs2();
-            tocFilter.setToc(getDiscWs2().getToc());
-                        
-            DiscWs2 transit = getLookUp().getDiscById(getDiscWs2(), inc, tocFilter);
-            getDiscWs2().setReleaseList(transit.getReleaseList());
- 
-            setIncluded(inc);
+            tocFilter.setToc(disc.getToc());
+            try{
+                disc = getLookUp().getDiscById(disc, inc, tocFilter);
+            }catch (ResourceNotFoundException ex){
+                disc.getReleaseList().getReleases().clear();
+            }
+                setDiscWs2(disc);
+                setIncluded(inc);
+            
+            return getDiscWs2();
         }
       
         return getDiscWs2();
     }
-    // --------------- LibDiscId -----------------------------------//
     
+    // --------------- LibDiscId -----------------------------------//
+    private List<DiscTrackWs2> copyAndOrderTrackList(List<DiscTrackWs2> in) throws MBWS2Exception{
+    
+        List<DiscTrackWs2> ordered = new ArrayList<DiscTrackWs2>(in.size());
+        
+        for (int i=0; i<in.size();i++)
+        {
+            ordered.add(null);
+        }
+        for (DiscTrackWs2 t : in)
+        {
+            if (t.getTracknum() <1 ) 
+                throw new MBWS2Exception("invalid trackList");
+            if (t.getTracknum() > in.size()+1) 
+                throw new MBWS2Exception("invalid trackList");
+            if (ordered.get(t.getTracknum()-1) != null) 
+                throw new MBWS2Exception("invalid trackList");
+                
+                ordered.set(t.getTracknum()-1, t);
+            
+        }
+        return ordered;
+    }
+    private DiscWs2 replaceTrackList(DiscWs2 disc, List<DiscTrackWs2> tracklist){
+        
+        disc.getTracks().clear();
+        for (DiscTrackWs2 t : tracklist)
+        {
+            disc.getTracks().add(t);
+        }
+        return disc;
+    }
     private DiscWs2 readFromDisk(String drive) throws MBWS2Exception {
         
         DiscWs2 disc = new DiscWs2();
@@ -243,33 +305,16 @@ public class Disc extends Controller{
         if (disc.getTracks() == null ||disc.getTracks().isEmpty())
             throw new MBWS2Exception("Invalid track list");
         
-        List<DiscTrackWs2>ordered = new ArrayList<DiscTrackWs2>(disc.getTracks().size());
-        for (int i=0; i<disc.getTracks().size();i++)
-        {
-            ordered.add(null);
-        }
-        for (DiscTrackWs2 t : disc.getTracks())
-        {
-            if (t.getTracknum() <1 ) 
-                throw new MBWS2Exception("invalid trackList");
-            if (t.getTracknum() > disc.getTracks().size()+1) 
-                throw new MBWS2Exception("invalid trackList");
-            if (ordered.get(t.getTracknum()-1) != null) 
-                throw new MBWS2Exception("invalid trackList");
-                
-                ordered.set(t.getTracknum()-1, t);
-            
-        }
-        disc.getTracks().clear();
-        disc.setTracks(ordered);
+        List<DiscTrackWs2> ordered = copyAndOrderTrackList(disc.getTracks());
+       
+        disc= replaceTrackList(disc, ordered);
         
-        int totalLength=0;
+        int totalLength= disc.getTracks().get(0).getOffset();
 
         int[] offsets = new int[disc.getTracks().size()+1];
         for (DiscTrackWs2 t : disc.getTracks())
         {
-            if (totalLength>0)
-                t.setOffset(totalLength);
+            t.setOffset(totalLength);
             
             offsets[t.getTracknum()]=t.getOffset();
             totalLength=totalLength+t.getLength();
@@ -288,12 +333,10 @@ public class Disc extends Controller{
              int firstTrack= Integer.parseInt(tocArray[0]);
              int lastTrack= Integer.parseInt(tocArray[1]);
              int sectors= Integer.parseInt(tocArray[2]);
-             int [] offset= new int[tocArray.length-3];
+             int [] offset= new int[tocArray.length-2];
 
-             for (int i=3; i<tocArray.length; i++ )
-             {
-                  offset[i-3]= Integer.parseInt(tocArray[i]);
-
+             for (int i=2; i<tocArray.length; i++ ){
+                  offset[i-2]= Integer.parseInt(tocArray[i]);
              }
              DiscInfo discInfo = calcDiscIdFromOffsets(offset);
              disc.setDiscId(discInfo.discid);
@@ -310,5 +353,4 @@ public class Disc extends Controller{
          return disc;
     }
 
-   
 }
