@@ -33,7 +33,7 @@ public class RecordingWs2 extends EntityWs2
     
     
     public String getDuration(){
-        return CalendarUtils.calcDuration(this.getDurationInMillis());
+        return CalendarUtils.calcDurationString(this.getDurationInMillis());
     }
     
         

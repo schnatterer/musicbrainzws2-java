@@ -55,6 +55,6 @@ public class TrackListWs2 extends ListElement
         return dur;
     }
     public String getDuration(){
-        return CalendarUtils.calcDuration(this.getDurationInMillis());
+        return CalendarUtils.calcDurationString(this.getDurationInMillis());
     }
 }

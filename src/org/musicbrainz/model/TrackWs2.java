@@ -79,7 +79,7 @@ public class TrackWs2
 
     public String getDuration(){
        
-      return CalendarUtils.calcDuration(this.getDurationInMillis());
+      return CalendarUtils.calcDurationString(this.getDurationInMillis());
       
       
     }

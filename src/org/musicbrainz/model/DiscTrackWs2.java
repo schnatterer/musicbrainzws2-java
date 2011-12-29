@@ -1,5 +1,7 @@
 package org.musicbrainz.model;
 
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import org.mc2.CalendarUtils;
 
 /**
@@ -30,31 +32,51 @@ public class DiscTrackWs2 {
      * @param tracknum the tracknum to set
      */
     public void setTracknum(int tracknum) {
+        
+        int oldTracknum = this.tracknum;
         this.tracknum = tracknum;
+        changeSupport.firePropertyChange("tracknum", oldTracknum, tracknum);
+
     }
     /**
      * @param offset the offset to set in sectors
      */
-    public void setOffset(int sectors) {
-        this.offset = sectors;
+    public void setOffset(int offset) {
+        
+        int oldOffset = this.offset;
+        long oldOffsetInMillis = getOffsetInMillis();
+        String oldOffsetString = getOffsetString();
+        this.offset = offset;
+        changeSupport.firePropertyChange("offset", oldOffset, offset);
+        changeSupport.firePropertyChange("offsetInMillis", oldOffsetInMillis, getOffsetInMillis());
+        changeSupport.firePropertyChange("offsetString", oldOffsetString, getOffsetString());
     }
     /**
      * @param length the length to set
      */
     public void setLength(int length) {
+        
+        int oldLength = this.length;
+        long oldLengthInMillis = getLengthInMillis();
+        String oldLengthString = getLengthString();
+        
         this.length = length;
+        
+        changeSupport.firePropertyChange("length", oldLength, length);
+        changeSupport.firePropertyChange("lengthInMillis", oldLengthInMillis, getLengthInMillis());
+        changeSupport.firePropertyChange("lengthString", oldLengthString, getLengthString());
     }
     /**
      * @param offset the offset to set in milliseconds
      */
     public void setOffsetInMillis(long millis) {
-        this.offset = (int)millis*75/1000;
+        setOffset((int)millis*75/1000);
     }
     /**
      * @param length the length to set in milliseconds
      */
     public void setLengthInMillis(long millis) {
-        this.length = (int)millis*75/1000;;
+        setLength((int)millis*75/1000);
     }
     /**
      * @return the tracknum
@@ -101,6 +123,15 @@ public class DiscTrackWs2 {
     }
     private String getTimeString(Long millis){
 
-        return CalendarUtils.calcDuration(millis);
+        return CalendarUtils.calcDurationString(millis);
+    }
+    private final PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);
+
+    public void addPropertyChangeListener(PropertyChangeListener listener) {
+        changeSupport.addPropertyChangeListener(listener);
+    }
+
+    public void removePropertyChangeListener(PropertyChangeListener listener) {
+        changeSupport.removePropertyChangeListener(listener);
     }
 }

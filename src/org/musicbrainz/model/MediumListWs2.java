@@ -120,7 +120,7 @@ public class MediumListWs2 extends ListElement
         return dur;
     }
     public String getDuration(){
-        return CalendarUtils.calcDuration(this.getDurationInMillis());
+        return CalendarUtils.calcDurationString(this.getDurationInMillis());
     }
     public List<TrackWs2> getCompleteTrackList(){
        
