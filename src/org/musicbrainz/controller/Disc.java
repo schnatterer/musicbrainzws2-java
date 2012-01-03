@@ -131,7 +131,7 @@ public class Disc extends Controller{
     public DiscWs2 lookUp(DiscWs2 disc) throws MBWS2Exception{
 
         if (disc == null) return null;
-                
+        
         if ((disc.getDiscId() == null || disc.getDiscId().isEmpty()) &&  
              (disc.getToc() == null|| disc.getToc().isEmpty()) &&
              (disc.getTracks() == null|| disc.getTracks().isEmpty())) {

@@ -250,7 +250,6 @@ public class DiscWs2 extends EntityWs2 {
             releaseList.addRelease(release);
     }
 
-    
     @Override
     public String toString() {
             return "Disc discId=" + discId + ", sectors=" + getSectors();

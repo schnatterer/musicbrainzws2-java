@@ -67,18 +67,6 @@ public class DiscTrackWs2 {
         changeSupport.firePropertyChange("lengthString", oldLengthString, getLengthString());
     }
     /**
-     * @param offset the offset to set in milliseconds
-     */
-    public void setOffsetInMillis(long millis) {
-        setOffset((int)millis*75/1000);
-    }
-    /**
-     * @param length the length to set in milliseconds
-     */
-    public void setLengthInMillis(long millis) {
-        setLength((int)millis*75/1000);
-    }
-    /**
      * @return the tracknum
      */
     public int getTracknum() {
