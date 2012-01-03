@@ -26,7 +26,6 @@ import org.musicbrainz.controller.Release;
 import org.musicbrainz.controller.ReleaseGroup;
 import org.musicbrainz.controller.Work;
 
-import org.musicbrainz.discid.DiscIdException;
 import org.musicbrainz.filter.ReleaseTypeFilterWs2;
 
 import org.musicbrainz.model.DiscTrackWs2;
@@ -381,55 +380,6 @@ public class UnitTests {
         track.setTracknum(5);
         
         track.setLength(56250);
-        disc.addTrack(track);
-        
-        Disc controller = new Disc();
-        
-        try {
-               controller.lookUp(disc);
-               System.out.println("DISC: "+disc.getDiscId()+" match: "+disc.getReleases().size()+" releases");
-                 for (ReleaseWs2 rel : disc.getReleases())
-                 {
-                     System.out.println(rel.toString());
-                 }
-             } catch (MBWS2Exception ex) {
-                    Logger.getLogger(UnitTests.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-    }
-    //@Test
-    public void DiscIdfromTrackListInMillis(){
-        
-        DiscWs2 disc = new DiscWs2();
-        
-        DiscTrackWs2 track = new DiscTrackWs2();
-        track.setTracknum(1);
-        track.setOffsetInMillis(0);
-        track.setLengthInMillis(813000);
-        disc.addTrack(track);
-        
-        track = new DiscTrackWs2();
-        track.setTracknum(2);
-       
-        track.setLengthInMillis(452000);
-        disc.addTrack(track);
-        
-        track = new DiscTrackWs2();
-        track.setTracknum(3);
-        
-        track.setLengthInMillis(308000);
-        disc.addTrack(track);
-        
-        track = new DiscTrackWs2();
-        track.setTracknum(4);
-        
-        track.setLengthInMillis(335000);
-        disc.addTrack(track);
-        
-        track = new DiscTrackWs2();
-        track.setTracknum(5);
-        
-        track.setLengthInMillis(750000);
         disc.addTrack(track);
         
         Disc controller = new Disc();
