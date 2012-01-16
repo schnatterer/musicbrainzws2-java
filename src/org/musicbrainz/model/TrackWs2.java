@@ -8,7 +8,7 @@ import org.musicbrainz.model.entity.RecordingWs2;
 
 
 /**
- * <p>A single recordings in a Medium of a specific release. 
+ * <p>A single recordings in a Medium by a specific release. 
  * .
  */
 public class TrackWs2 
@@ -25,10 +25,7 @@ public class TrackWs2
     /**
    * Default Constructor
    */
-    public TrackWs2()
-    {
-
-    }
+    public TrackWs2(){}
 
     /**
      * @return the position
