@@ -802,7 +802,13 @@ public class JDOMParserWs2 extends DomainsWs2 implements MbXmlParser  {
             child = (Element)itr.next();
 
             if (TARGET.equals(child.getName())){
-                relation.setTargetId(MbUtils.convertIdToURI(child.getText(), resType));
+                
+                try{
+                    relation.setTargetId(MbUtils.extractUuid(child.getText(), resType));
+                }
+                catch (IllegalArgumentException ex){
+                    relation.setTargetId(child.getText());
+                }
             }
             else if (DIRECTION.equals(child.getName())){
                 relation.setDirection(getText(child.getText(),directionPattern,RelationWs2.DIR_BOTH));

@@ -74,6 +74,20 @@ public class UnitTests {
 
     }
 
+    @Test
+    public void aaa() throws MBWS2Exception{
+    
+        Release release = new Release();
+        
+        ReleaseWs2 result;
+        
+        //include or exclude some data in LookUp
+        
+        
+       
+        result = release.lookUp("b54e4ad1-188a-352f-85d8-ca40d4ec4748");
+    
+    }
     //@Test
     public void searchISRC(){
         
@@ -184,7 +198,7 @@ public class UnitTests {
              System.out.println(rel.toString());
         }
     }
-    @Test
+    //@Test
     public void PostTagsAndRating() throws MBWS2Exception{
         
         Artist controller = new Artist();
@@ -552,7 +566,7 @@ public class UnitTests {
         artist.getFullReleaseList();
         
     }
-     //@Test
+    //@Test
     public void SynopsisUseCase7() throws MBWS2Exception{
 
         log.debug("synopsisUseCase7");
