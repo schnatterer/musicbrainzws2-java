@@ -219,7 +219,7 @@ public class HttpClientWebServiceWs2 extends DefaultWebServiceWs2
         HttpProtocolParamBean paramsBean = new HttpProtocolParamBean(params);
         paramsBean.setUserAgent(USERAGENT);
         method.setParams(params);
-
+        wait(1);
         try 
         {
           // Execute the method.
