@@ -45,7 +45,7 @@ public class RecordingWs2 extends EntityWs2
     }
     
     public Long getDurationInMillis() {
-        return durationInMillis;
+        return durationInMillis == null ?  0 : durationInMillis;
     }
     public void setDurationInMillis(Long durationInMillis) {
         this.durationInMillis = durationInMillis;

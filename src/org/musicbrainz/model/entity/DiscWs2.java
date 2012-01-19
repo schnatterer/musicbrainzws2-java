@@ -8,8 +8,6 @@ import org.musicbrainz.controller.Disc;
 import org.musicbrainz.model.DiscTrackWs2;
 import org.musicbrainz.model.IsrcWs2;
 import org.musicbrainz.model.MediumWs2;
-import org.musicbrainz.model.entity.EntityWs2;
-import org.musicbrainz.model.entity.ReleaseWs2;
 import org.musicbrainz.model.entity.listelement.ReleaseListWs2;
 
 
