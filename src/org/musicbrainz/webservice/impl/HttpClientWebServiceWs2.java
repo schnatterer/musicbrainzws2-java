@@ -9,6 +9,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.net.ssl.SSLHandshakeException;
 
+import org.apache.http.Header;
+import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
 import org.apache.http.HttpEntityEnclosingRequest;
@@ -312,7 +314,7 @@ public class HttpClientWebServiceWs2 extends DefaultWebServiceWs2
             catch (IllegalStateException ignore) {}
             
         finally {
-            try {EntityUtils.consume(response.getEntity());} catch (IOException ex) {} 
+            try {consume(response.getEntity());} catch (IOException ex) {} 
         }
         return msg;
     }
@@ -359,5 +361,26 @@ public class HttpClientWebServiceWs2 extends DefaultWebServiceWs2
          {  
             return null;  
          }  
-     }  
+     }
+     
+    /**
+     * Ensures that the entity content is fully consumed and the content stream,
+     * if exists, is closed.
+     * 
+     * @param entity
+     * @throws IOException
+     *             if an error occurs reading the input stream
+     * 
+     */
+    private void consume(final HttpEntity entity) throws IOException {
+        if (entity == null) {
+            return;
+        }
+        if (entity.isStreaming()) {
+            InputStream instream = entity.getContent();
+            if (instream != null) {
+                instream.close();
+            }
+        }
+    }
 }
