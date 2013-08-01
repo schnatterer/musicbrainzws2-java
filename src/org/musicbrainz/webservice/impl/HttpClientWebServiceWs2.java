@@ -7,6 +7,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.zip.GZIPInputStream;
 import javax.net.ssl.SSLHandshakeException;
 
 import org.apache.http.Header;
@@ -222,6 +223,9 @@ public class HttpClientWebServiceWs2 extends DefaultWebServiceWs2
         paramsBean.setUserAgent(USERAGENT);
         method.setParams(params);
 
+        // Try using compression
+        method.setHeader("Accept-Encoding", "gzip");
+        
         try 
         {
           // Execute the method.
@@ -252,6 +256,13 @@ public class HttpClientWebServiceWs2 extends DefaultWebServiceWs2
             }
             case HttpStatus.SC_OK:
                     InputStream instream = response.getEntity().getContent();
+                    // Check if content is compressed
+                    Header contentEncoding = response
+                            .getFirstHeader("Content-Encoding");
+                    if (contentEncoding != null
+                            && contentEncoding.getValue().equalsIgnoreCase("gzip")) {
+                        instream = new GZIPInputStream(instream);
+                    }
                     Metadata mtd= getParser().parse(instream);
                     //Closing the input stream will trigger connection release
                     try { instream.close(); } catch (Exception ignore) {}
