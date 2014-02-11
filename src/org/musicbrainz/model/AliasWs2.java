@@ -1,8 +1,6 @@
 package org.musicbrainz.model;
 
-import org.musicbrainz.model.entity.listelement.DiscListWs2;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import java.util.logging.Logger;
 
 /**
  * <p>Represents an alias for Artist, Works or Labels </p>
@@ -13,7 +11,7 @@ import org.apache.commons.logging.LogFactory;
 public class AliasWs2 
 {
     
-    private Log log = LogFactory.getLog(DiscListWs2.class);
+     private static Logger log = Logger.getLogger(AliasWs2.class.getName());
     /**
      * The alias
      */

@@ -1,9 +1,8 @@
 package org.musicbrainz.model;
 
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.mc2.CalendarUtils;
+import java.util.logging.Logger;
+import org.mc2.util.miscellaneous.CalendarUtils;
 import org.musicbrainz.model.entity.RecordingWs2;
 
 
@@ -13,7 +12,7 @@ import org.musicbrainz.model.entity.RecordingWs2;
  */
 public class TrackWs2 
 {
-    private Log log = LogFactory.getLog(TrackWs2.class);
+    private static Logger log = Logger.getLogger(TrackWs2.class.getName());
 
     private MediumWs2 medium;
     private int position;

@@ -8,9 +8,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import java.util.logging.Logger;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.musicbrainz.DomainsWs2;
 import org.musicbrainz.query.submission.SubmissionException;
 import org.musicbrainz.wsxml.MbXMLException;
@@ -26,7 +25,7 @@ import org.musicbrainz.wsxml.impl.JDOMWriterWs2;
  */
 public abstract class DefaultWebServiceWs2 extends DomainsWs2 implements WebService {
 	
-    private Log log = LogFactory.getLog(DefaultWebServiceWs2.class);
+    static Logger log = Logger.getLogger(DefaultWebServiceWs2.class.getName());
 
     /**
      * Encoding used to encode url parameters
@@ -301,7 +300,7 @@ public abstract class DefaultWebServiceWs2 extends DomainsWs2 implements WebServ
                     try {
                             url.append(e.getKey()).append("=").append(URLEncoder.encode(e.getValue(), URL_ENCODING)).append("&");
                     } catch (UnsupportedEncodingException ex) {
-                            log.error("Internal Error: Could not encode url parameter " + e.getKey(), ex);
+                            log.severe("Internal Error: Could not encode url parameter " + e.getKey());
                     }
             }
 

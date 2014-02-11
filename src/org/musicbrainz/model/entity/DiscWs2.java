@@ -2,11 +2,9 @@ package org.musicbrainz.model.entity;
 
 import java.util.ArrayList;
 import java.util.List;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import java.util.logging.Logger;
 import org.musicbrainz.controller.Disc;
 import org.musicbrainz.model.DiscTrackWs2;
-import org.musicbrainz.model.IsrcWs2;
 import org.musicbrainz.model.MediumWs2;
 import org.musicbrainz.model.entity.listelement.ReleaseListWs2;
 
@@ -28,7 +26,7 @@ import org.musicbrainz.model.entity.listelement.ReleaseListWs2;
  */
 public class DiscWs2 extends EntityWs2 {
 
-    private Log log = LogFactory.getLog(IsrcWs2.class);
+    private static Logger log = Logger.getLogger(DiscWs2.class.getName());
      /**
      * The medium this disk is in.
      */

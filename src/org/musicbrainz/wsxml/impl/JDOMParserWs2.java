@@ -10,8 +10,6 @@ import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.jdom.Attribute;
 import org.jdom.DataConversionException;
 import org.jdom.Document;
@@ -95,7 +93,7 @@ import org.musicbrainz.model.searchresult.listelement.WorkSearchResultsWs2;
  */
 public class JDOMParserWs2 extends DomainsWs2 implements MbXmlParser  {
     
-    private Log log = LogFactory.getLog(JDOMParserWs2.class);
+     static Logger log = Logger.getLogger(JDOMParserWs2.class.getName());
 
     /**
      * Default constructor
@@ -128,8 +126,8 @@ public class JDOMParserWs2 extends DomainsWs2 implements MbXmlParser  {
     }
 
     protected Metadata createMetadata(Element elem){
-        Metadata md = new Metadata();
-
+        Metadata md = new Metadata();       
+        
         Iterator itr = elem.getChildren().iterator();
         Element node;
         while(itr.hasNext()) 
@@ -195,7 +193,7 @@ public class JDOMParserWs2 extends DomainsWs2 implements MbXmlParser  {
              }
              else
             {
-               log.warn("Unrecognised metadata element: "+node.getName());
+               log.warning("Unrecognised metadata element: "+node.getName());
             }
        }
        return md;
@@ -218,7 +216,7 @@ public class JDOMParserWs2 extends DomainsWs2 implements MbXmlParser  {
             }
             else
             {
-                log.warn("Unrecognised Collection attribute: "+attribute.getName());
+                log.warning("Unrecognised Collection attribute: "+attribute.getName());
             }
         }
         itr = node.getChildren().iterator();
@@ -238,7 +236,7 @@ public class JDOMParserWs2 extends DomainsWs2 implements MbXmlParser  {
              }
             else
             {
-                log.warn("Unrecognised Collection element: "+child.getName());
+                log.warning("Unrecognised Collection element: "+child.getName());
             }
         }
         return collection;
@@ -260,7 +258,7 @@ public class JDOMParserWs2 extends DomainsWs2 implements MbXmlParser  {
             }  
             else
             {
-                log.warn("Unrecognised Annotation attribute: "+attribute.getName());
+                log.warning("Unrecognised Annotation attribute: "+attribute.getName());
             }
         }
 
@@ -280,7 +278,7 @@ public class JDOMParserWs2 extends DomainsWs2 implements MbXmlParser  {
                 annotation.setText(child.getText());
             }
             else{
-               log.warn("Unrecognised Annotation element: "+child.getName());
+               log.warning("Unrecognised Annotation element: "+child.getName());
             }
         }
         return annotation;
@@ -302,7 +300,7 @@ public class JDOMParserWs2 extends DomainsWs2 implements MbXmlParser  {
               //ignore.
             }  
             else{
-              log.warn("Unrecognised Label attribute: "+attribute.getName());
+              log.warning("Unrecognised Label attribute: "+attribute.getName());
             }
         }
 
@@ -356,7 +354,7 @@ public class JDOMParserWs2 extends DomainsWs2 implements MbXmlParser  {
              } 
              else
             {
-               log.warn("Unrecognised Label element: "+child.getName());
+               log.warning("Unrecognised Label element: "+child.getName());
             }
         }
         return label;
@@ -381,7 +379,7 @@ public class JDOMParserWs2 extends DomainsWs2 implements MbXmlParser  {
               //ignore.
             }  
             else{
-              log.warn("Unrecognised Artist attribute: "+attribute.getName());
+              log.warning("Unrecognised Artist attribute: "+attribute.getName());
             }
         }
 
@@ -448,7 +446,7 @@ public class JDOMParserWs2 extends DomainsWs2 implements MbXmlParser  {
                  addUserTags (child, artist);
              } 
              else {
-             log.warn("Unrecognised Artist element: "+child.getName());
+             log.warning("Unrecognised Artist element: "+child.getName());
              }
         }
         return artist;
@@ -479,7 +477,7 @@ public class JDOMParserWs2 extends DomainsWs2 implements MbXmlParser  {
                   //ignore.
               }  
               else{
-                  log.warn("Unrecognised Artist attribute: "+attribute.getName());
+                  log.warning("Unrecognised Release Group attribute: "+attribute.getName());
               }
           }
 
@@ -520,7 +518,7 @@ public class JDOMParserWs2 extends DomainsWs2 implements MbXmlParser  {
             }
             else
             {
-               log.warn("Unrecognised Release Group element: "+child.getName());
+               log.warning("Unrecognised Release Group element: "+child.getName());
             }
         }
         return releaseGroup;
@@ -541,7 +539,7 @@ public class JDOMParserWs2 extends DomainsWs2 implements MbXmlParser  {
               //ignore.
             }  
             else{
-              log.warn("Unrecognised Release attribute: "+attribute.getName());
+              log.warning("Unrecognised Release attribute: "+attribute.getName());
             }
         }
 
@@ -627,7 +625,7 @@ public class JDOMParserWs2 extends DomainsWs2 implements MbXmlParser  {
                 addUserTags (child, release);
             }
             else{
-               log.warn("Unrecognised Release element: "+child.getName());
+               log.warning("Unrecognised Release element: "+child.getName());
             }
         }
         return release;
@@ -647,7 +645,7 @@ public class JDOMParserWs2 extends DomainsWs2 implements MbXmlParser  {
                   //ignore.
               }  
               else{
-                  log.warn("Unrecognised Recording attribute: "+attribute.getName());
+                  log.warning("Unrecognised Recording attribute: "+attribute.getName());
               }
         }
 
@@ -667,7 +665,7 @@ public class JDOMParserWs2 extends DomainsWs2 implements MbXmlParser  {
                             Long l = Long.parseLong(d);
                             recording.setDurationInMillis(l);
                     } catch (NumberFormatException e) {
-                            log.warn("Illegal duration value!", e);
+                            log.warning("Illegal duration value!");
                     }
                 }	
             }
@@ -702,7 +700,7 @@ public class JDOMParserWs2 extends DomainsWs2 implements MbXmlParser  {
                 addUserTags (child, recording);
             }
             else{
-                log.warn("Unrecognised Recording element: "+child.getName());
+                log.warning("Unrecognised Recording element: "+child.getName());
             }
         }   
         return recording;
@@ -726,7 +724,7 @@ public class JDOMParserWs2 extends DomainsWs2 implements MbXmlParser  {
                   //ignore.
               }  
               else{
-                  log.warn("Unrecognised Work attribute: "+attribute.getName());
+                  log.warning("Unrecognised Work attribute: "+attribute.getName());
               }
         }
 
@@ -767,7 +765,7 @@ public class JDOMParserWs2 extends DomainsWs2 implements MbXmlParser  {
             }
             else
             {
-                log.warn("Unrecognised Work element: "+child.getName());
+                log.warning("Unrecognised Work element: "+child.getName());
             }
         }
         return work;
@@ -790,7 +788,7 @@ public class JDOMParserWs2 extends DomainsWs2 implements MbXmlParser  {
                   relation.setType(MbUtils.convertTypeToURI(attribute.getValue(), NS_REL_2_PREFIX));
               }
               else{
-                  log.warn("Unrecognised Relation attribute: "+attribute.getName());
+                  log.warning("Unrecognised Relation attribute: "+attribute.getName());
               }
         }
 
@@ -842,7 +840,7 @@ public class JDOMParserWs2 extends DomainsWs2 implements MbXmlParser  {
             }
             // URL is ok this way..
             else{
-                log.warn("Unrecognised Relation element: "+child.getName());
+                log.warning("Unrecognised Relation element: "+child.getName());
             }
         }
         if (relation.getType() == null) return null;
@@ -861,7 +859,7 @@ public class JDOMParserWs2 extends DomainsWs2 implements MbXmlParser  {
         Iterator itrNameCredit = node.getAttributes().iterator();
         while (itrNameCredit.hasNext()) {
               Attribute attribute = (Attribute)itrNameCredit.next();
-              log.warn("Unrecognised ArtistCredit attribute: "+attribute.getName());
+              log.warning("Unrecognised ArtistCredit attribute: "+attribute.getName());
         }
 
         itrNameCredit = node.getChildren().iterator();
@@ -881,7 +879,7 @@ public class JDOMParserWs2 extends DomainsWs2 implements MbXmlParser  {
                       if (attribute.getName().equals(JOINPHRASE)){
                             nameCredit.setJoinphrase(attribute.getValue());
                       }
-                      else log.warn("Unrecognised Name Credit attribute: "+attribute.getName());
+                      else log.warning("Unrecognised Name Credit attribute: "+attribute.getName());
                 }
 
                 Iterator itrArtistOrName = elNameCredit.getChildren().iterator();
@@ -897,7 +895,7 @@ public class JDOMParserWs2 extends DomainsWs2 implements MbXmlParser  {
                             Iterator itrNameAttributes = elArtistOrName.getAttributes().iterator();
                             while (itrNameAttributes.hasNext()) {
                                 Attribute attribute = (Attribute)itrNameAttributes.next();
-                                log.warn("Unrecognised NameCredit, name attribute: "+attribute.getName());
+                                log.warning("Unrecognised NameCredit, name attribute: "+attribute.getName());
                             }
                         }
                         else if (ARTIST.equals(elArtistOrName.getName())){
@@ -905,14 +903,14 @@ public class JDOMParserWs2 extends DomainsWs2 implements MbXmlParser  {
                         }
                         else
                         {
-                            log.warn("Unrecognised Name Credit element: "+elArtistOrName.getName());
+                            log.warning("Unrecognised Name Credit element: "+elArtistOrName.getName());
                         }
                 }
                 nameCredits.add(nameCredit);
             }
             else
             {
-                log.warn("Unrecognised Artist Credit element: "+elNameCredit.getName());
+                log.warning("Unrecognised Artist Credit element: "+elNameCredit.getName());
             }
         }
         return new ArtistCreditWs2(nameCredits);
@@ -924,7 +922,7 @@ public class JDOMParserWs2 extends DomainsWs2 implements MbXmlParser  {
         Iterator itr = node.getAttributes().iterator();
         while (itr.hasNext()) {
               Attribute attribute = (Attribute)itr.next();
-              log.warn("Unrecognised LifeSpan attribute: "+attribute.getName());
+              log.warning("Unrecognised LifeSpan attribute: "+attribute.getName());
         }
 
         itr = node.getChildren().iterator();
@@ -941,7 +939,7 @@ public class JDOMParserWs2 extends DomainsWs2 implements MbXmlParser  {
             }
             else
             {
-                    log.warn("Unrecognised Life Span element: "+child.getName());
+                    log.warning("Unrecognised Life Span element: "+child.getName());
             }
         }
         return new LifeSpanWs2(begin, end);
@@ -959,7 +957,7 @@ public class JDOMParserWs2 extends DomainsWs2 implements MbXmlParser  {
               {
                  //ignore (see updateListElement).
               }
-              else log.warn("Unrecognised LabelInfoList attribute: "+attribute.getName());
+              else log.warning("Unrecognised LabelInfoList attribute: "+attribute.getName());
         }
 
         itr = node.getChildren().iterator();
@@ -973,7 +971,7 @@ public class JDOMParserWs2 extends DomainsWs2 implements MbXmlParser  {
 
                 while (itrC.hasNext()) {
                       Attribute attribute = (Attribute)itrC.next();
-                      log.warn("Unrecognised LabelInfo attribute: "+attribute.getName());
+                      log.warning("Unrecognised LabelInfo attribute: "+attribute.getName());
                 }
 
                 if (LABELINFO.equals(child.getName())) {
@@ -993,7 +991,7 @@ public class JDOMParserWs2 extends DomainsWs2 implements MbXmlParser  {
                                     Iterator itrC2 = el.getAttributes().iterator();
                                     while (itrC2.hasNext()) {
                                         Attribute attribute = (Attribute)itrC2.next();
-                                         log.warn("Unrecognised labelinfo catno attribute: "+attribute.getName());
+                                         log.warning("Unrecognised labelinfo catno attribute: "+attribute.getName());
                                     }
                                 }
                                 else if (LABEL.equals(el.getName())){
@@ -1001,14 +999,14 @@ public class JDOMParserWs2 extends DomainsWs2 implements MbXmlParser  {
                                 }
                                 else
                                 {
-                                        log.warn("Unrecognised Label Info element: "+child.getName());
+                                        log.warning("Unrecognised Label Info element: "+child.getName());
                                 }
                         }
                         LabelInfos.add(labelInfo);
                 }
                 else
                 {
-                        log.warn("Unrecognised Life Info List element: "+child.getName());
+                        log.warning("Unrecognised Life Info List element: "+child.getName());
                 }
         }
         LabelInfoListWs2 out = new LabelInfoListWs2(LabelInfos);
@@ -1028,7 +1026,7 @@ public class JDOMParserWs2 extends DomainsWs2 implements MbXmlParser  {
                    attribute.getName().equals(OFFSET)){
                  //ignore (see updateListElement).
               }
-              else log.warn("Unrecognised MediumList attribute: "+attribute.getName());
+              else log.warning("Unrecognised MediumList attribute: "+attribute.getName());
         }
 
         int trackCount =0;
@@ -1048,7 +1046,7 @@ public class JDOMParserWs2 extends DomainsWs2 implements MbXmlParser  {
                 media.add(m); 
             }
             else{
-                    log.warn("Unrecognised Medium List element: "+child.getName());
+                    log.warning("Unrecognised Medium List element: "+child.getName());
             }
         }
         MediumListWs2 out = new MediumListWs2(media);
@@ -1073,7 +1071,7 @@ public class JDOMParserWs2 extends DomainsWs2 implements MbXmlParser  {
                    attribute.getName().equals(OFFSET)){
                  //ignore (see updateListElement).
               }
-              else log.warn("Unrecognised TrackList attribute: "+attribute.getName());
+              else log.warning("Unrecognised TrackList attribute: "+attribute.getName());
         }
 
         itr = node.getChildren().iterator();
@@ -1084,7 +1082,7 @@ public class JDOMParserWs2 extends DomainsWs2 implements MbXmlParser  {
                 tracks.add(createTrack(child,medium));
             }
             else {
-                    log.warn("Unrecognised TrackList element: "+child.getName());
+                    log.warning("Unrecognised TrackList element: "+child.getName());
             }
         }
         TrackListWs2 out = new TrackListWs2(tracks);
@@ -1104,7 +1102,7 @@ public class JDOMParserWs2 extends DomainsWs2 implements MbXmlParser  {
               {
                  //ignore (see updateListElement).
               }
-              else log.warn("Unrecognised DiscList attribute: "+attribute.getName());
+              else log.warning("Unrecognised DiscList attribute: "+attribute.getName());
         }
 
         itr = node.getChildren().iterator();
@@ -1118,7 +1116,7 @@ public class JDOMParserWs2 extends DomainsWs2 implements MbXmlParser  {
             }
             else
             {
-                    log.warn("Unrecognised Disc List element: "+child.getName());
+                    log.warning("Unrecognised Disc List element: "+child.getName());
             }
         }
         DiscListWs2 out = new DiscListWs2(discs);
@@ -1132,7 +1130,7 @@ public class JDOMParserWs2 extends DomainsWs2 implements MbXmlParser  {
         Iterator itr = node.getAttributes().iterator();
         while (itr.hasNext()) {
               Attribute attribute = (Attribute)itr.next();
-              log.warn("Unrecognised Medium attribute: "+attribute.getName());
+              log.warning("Unrecognised Medium attribute: "+attribute.getName());
         }
 
         itr = node.getChildren().iterator();
@@ -1167,7 +1165,7 @@ public class JDOMParserWs2 extends DomainsWs2 implements MbXmlParser  {
             }
             else
             {
-                    log.warn("Unrecognised Medium element: "+child.getName());
+                    log.warning("Unrecognised Medium element: "+child.getName());
             }
         }
         return medium;
@@ -1179,7 +1177,7 @@ public class JDOMParserWs2 extends DomainsWs2 implements MbXmlParser  {
         Iterator itr = node.getAttributes().iterator();
         while (itr.hasNext()) {
               Attribute attribute = (Attribute)itr.next();
-              log.warn("Unrecognised Track attribute: "+attribute.getName());
+              log.warning("Unrecognised Track attribute: "+attribute.getName());
         }
 
         itr = node.getChildren().iterator();
@@ -1204,13 +1202,13 @@ public class JDOMParserWs2 extends DomainsWs2 implements MbXmlParser  {
                             Long l = Long.parseLong(d);
                             t.setDurationInMillis(l);
                     } catch (NumberFormatException e) {
-                            log.warn("Illegal duration value!", e);
+                            log.warning("Illegal duration value!");
                     }
                 }	
             }
             else
             {
-                    log.warn("Unrecognised Track element: "+child.getName());
+                    log.warning("Unrecognised Track element: "+child.getName());
             }
         }
         return t;
@@ -1235,7 +1233,7 @@ public class JDOMParserWs2 extends DomainsWs2 implements MbXmlParser  {
               }
               else
               {
-                log.warn("Unrecognised Disk attribute: "+attribute.getName());
+                log.warning("Unrecognised Disk attribute: "+attribute.getName());
               }
         }
 
@@ -1252,7 +1250,7 @@ public class JDOMParserWs2 extends DomainsWs2 implements MbXmlParser  {
             }
             else
             {
-                    log.warn("Unrecognised Disc element: "+child.getName());
+                    log.warning("Unrecognised Disc element: "+child.getName());
             }
         }
         return disc;
@@ -1272,7 +1270,7 @@ public class JDOMParserWs2 extends DomainsWs2 implements MbXmlParser  {
               }
               else
               {
-                log.warn("Unrecognised Puid attribute: "+attribute.getName());
+                log.warning("Unrecognised Puid attribute: "+attribute.getName());
               }
         }
         itr = node.getChildren().iterator();
@@ -1285,7 +1283,7 @@ public class JDOMParserWs2 extends DomainsWs2 implements MbXmlParser  {
             }
             else
             {
-                    log.warn("Unrecognised Puid element: "+child.getName());
+                    log.warning("Unrecognised Puid element: "+child.getName());
             }
         }
         return puid;	
@@ -1305,7 +1303,7 @@ public class JDOMParserWs2 extends DomainsWs2 implements MbXmlParser  {
               }
               else
               {
-                log.warn("Unrecognised Isrc attribute: "+attribute.getName());
+                log.warning("Unrecognised Isrc attribute: "+attribute.getName());
               }
         }
 
@@ -1319,7 +1317,7 @@ public class JDOMParserWs2 extends DomainsWs2 implements MbXmlParser  {
             }
             else
             {
-                    log.warn("Unrecognised Isrc element: "+child.getName());
+                    log.warning("Unrecognised Isrc element: "+child.getName());
             }
         }
         return isrc;	
@@ -1342,7 +1340,7 @@ public class JDOMParserWs2 extends DomainsWs2 implements MbXmlParser  {
               }
               else
               {
-                log.warn("Unrecognised Rating attribute: "+attribute.getName());
+                log.warning("Unrecognised Rating attribute: "+attribute.getName());
               }
         }
         rating.setAverageRating(Float.parseFloat(node.getValue()));
@@ -1352,7 +1350,7 @@ public class JDOMParserWs2 extends DomainsWs2 implements MbXmlParser  {
         while(itr.hasNext()) 
         {
             child = (Element)itr.next();
-            log.warn("Unrecognised Rating element: "+child.getName());
+            log.warning("Unrecognised Rating element: "+child.getName());
         }
 
         return rating;	
@@ -1364,7 +1362,7 @@ public class JDOMParserWs2 extends DomainsWs2 implements MbXmlParser  {
         while (itr.hasNext()) {
 
             Attribute attribute = (Attribute)itr.next();
-            log.warn("Unrecognised Rating attribute: "+attribute.getName());
+            log.warning("Unrecognised Rating attribute: "+attribute.getName());
 
         }
         rating.setAverageRating(Float.parseFloat(node.getValue()));
@@ -1374,7 +1372,7 @@ public class JDOMParserWs2 extends DomainsWs2 implements MbXmlParser  {
         while(itr.hasNext()) 
         {
             child = (Element)itr.next();
-            log.warn("Unrecognised Rating element: "+child.getName());
+            log.warning("Unrecognised Rating element: "+child.getName());
         }
 
         return rating;	
@@ -1552,7 +1550,7 @@ public class JDOMParserWs2 extends DomainsWs2 implements MbXmlParser  {
                     //ignore
               }
               else{
-                log.warn("Unrecognised AliasList attribute: "+attribute.getName());
+                log.warning("Unrecognised AliasList attribute: "+attribute.getName());
               }
         }
         itr = node.getChildren().iterator();
@@ -1572,7 +1570,7 @@ public class JDOMParserWs2 extends DomainsWs2 implements MbXmlParser  {
                         alias.setLocale(getAttr(child, LOCALE, localePattern, "en",null));
                   }
                   else{
-                    log.warn("Unrecognised Alias attribute: "+attribute.getName());
+                    log.warning("Unrecognised Alias attribute: "+attribute.getName());
                   }
             }
             if (ALIAS.equals(child.getName())){
@@ -1580,7 +1578,7 @@ public class JDOMParserWs2 extends DomainsWs2 implements MbXmlParser  {
                 entity.addAlias(alias);
             }
             else{
-                log.warn("Unrecognised Alias element: "+child.getName());
+                log.warning("Unrecognised Alias element: "+child.getName());
             }
         }
     }
@@ -1588,7 +1586,7 @@ public class JDOMParserWs2 extends DomainsWs2 implements MbXmlParser  {
         Iterator itr = node.getAttributes().iterator();
         while (itr.hasNext()) {
             Attribute attribute = (Attribute)itr.next();
-            log.warn("Unrecognised TagList attribute: "+attribute.getName());
+            log.warning("Unrecognised TagList attribute: "+attribute.getName());
         }
         itr = node.getChildren().iterator();
         Element child;
@@ -1613,7 +1611,7 @@ public class JDOMParserWs2 extends DomainsWs2 implements MbXmlParser  {
                 }
                 else
                 {
-                log.warn("Unrecognised Tag attribute: "+attribute.getName());
+                log.warning("Unrecognised Tag attribute: "+attribute.getName());
                 }
             }
             itrC = child.getChildren().iterator();
@@ -1624,7 +1622,7 @@ public class JDOMParserWs2 extends DomainsWs2 implements MbXmlParser  {
                 Iterator itrE = el.getAttributes().iterator();
                 while (itrE.hasNext()) {
                       Attribute attribute = (Attribute)itrE.next();
-                      log.warn("Unrecognised TagName attribute: "+attribute.getName());
+                      log.warning("Unrecognised TagName attribute: "+attribute.getName());
                 }
 
                 if (NAME.equals(el.getName())){
@@ -1632,7 +1630,7 @@ public class JDOMParserWs2 extends DomainsWs2 implements MbXmlParser  {
                     entity.addTag(tag);
                 }
                 else {
-                    log.warn("Unrecognised Tag element: "+el.getName());
+                    log.warning("Unrecognised Tag element: "+el.getName());
                 }
             }
         }
@@ -1641,7 +1639,7 @@ public class JDOMParserWs2 extends DomainsWs2 implements MbXmlParser  {
         Iterator itr = node.getAttributes().iterator();
         while (itr.hasNext()) {
               Attribute attribute = (Attribute)itr.next();
-             log.warn("Unrecognised UserTagList attribute: "+attribute.getName());
+             log.warning("Unrecognised UserTagList attribute: "+attribute.getName());
         }
         itr = node.getChildren().iterator();
         Element child;
@@ -1655,7 +1653,7 @@ public class JDOMParserWs2 extends DomainsWs2 implements MbXmlParser  {
             while (itrC.hasNext()) {
 
                   Attribute attribute = (Attribute)itrC.next();
-                    log.warn("Unrecognised userTag attribute: "+attribute.getName());
+                    log.warning("Unrecognised userTag attribute: "+attribute.getName());
             }
             itrC = child.getChildren().iterator();
             Element el;
@@ -1664,7 +1662,7 @@ public class JDOMParserWs2 extends DomainsWs2 implements MbXmlParser  {
                 Iterator itrE = el.getAttributes().iterator();
                 while (itrE.hasNext()) {
                     Attribute attribute = (Attribute)itrE.next();
-                    log.warn("Unrecognised TagName attribute: "+attribute.getName());
+                    log.warning("Unrecognised TagName attribute: "+attribute.getName());
                 }
 
                 if (NAME.equals(el.getName())) 
@@ -1674,7 +1672,7 @@ public class JDOMParserWs2 extends DomainsWs2 implements MbXmlParser  {
                 }
                 else
                 {
-                    log.warn("Unrecognised userTag element: "+el.getName());
+                    log.warning("Unrecognised userTag element: "+el.getName());
                 }
             }
         }

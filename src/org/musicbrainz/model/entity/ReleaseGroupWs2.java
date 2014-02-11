@@ -4,9 +4,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Logger;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 import org.musicbrainz.model.ArtistCreditWs2;
 import org.musicbrainz.model.entity.listelement.ReleaseListWs2;
@@ -18,7 +17,7 @@ import org.musicbrainz.model.entity.listelement.ReleaseListWs2;
  */
 public class ReleaseGroupWs2 extends EntityWs2 {
 	
-     private Log log = LogFactory.getLog(ArtistCreditWs2.class);
+     private static Logger log = Logger.getLogger(ReleaseGroupWs2.class.getName());
      
     public static final String TYPE_NONE = NS_MMD_2 + "none";
     
@@ -181,7 +180,7 @@ public class ReleaseGroupWs2 extends EntityWs2 {
         try {
                 return f.parse(firstReleaseDateStr);
         } catch (ParseException e) {
-                log.warn("Could not parse date string - returning null", e);
+                log.warning ("Could not parse date string - returning null");
                 return null;
         }
     }

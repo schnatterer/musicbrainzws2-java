@@ -5,8 +5,7 @@ import org.musicbrainz.wsxml.element.ListElement;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import java.util.logging.Logger;
 
 /**
  * <p>A List of Label Info (Label & catalog number)referred by a release</p>
@@ -14,7 +13,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class LabelInfoListWs2 extends ListElement
 {
-    private Log log = LogFactory.getLog(LabelInfoListWs2.class);
+    private static Logger log = Logger.getLogger(LabelInfoListWs2.class.getName());
 
     /**
     * A string containing the complete credit as join 

@@ -1,8 +1,7 @@
 package org.musicbrainz.model;
 
+import java.util.logging.Logger;
 import org.musicbrainz.model.entity.listelement.DiscListWs2;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <p>A single Medium and relative TrackList.
@@ -10,7 +9,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class MediumWs2 
 {
-    private Log log = LogFactory.getLog(MediumWs2.class);
+    private static Logger log = Logger.getLogger(MediumWs2.class.getName());
 
     private int position;
     private String title;

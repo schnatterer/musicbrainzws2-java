@@ -10,9 +10,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.mc2.CalendarUtils;
+import java.util.logging.Logger;
+import org.mc2.util.miscellaneous.CalendarUtils;
 
 /**
  * <p>A List of Media (Medium) referred by a release</p>
@@ -20,7 +19,7 @@ import org.mc2.CalendarUtils;
  */
 public class MediumListWs2 extends ListElement
 {
-    private Log log = LogFactory.getLog(MediumListWs2.class);
+    private static Logger log = Logger.getLogger(MediumListWs2.class.getName());
 
     private int tracksCount;
     

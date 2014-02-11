@@ -3,8 +3,7 @@ package org.musicbrainz.wsxml.impl;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import java.util.logging.Logger;
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.output.XMLOutputter;
@@ -23,7 +22,7 @@ import org.musicbrainz.wsxml.element.Metadata;
 
 public class JDOMWriterWs2 extends DomainsWs2 implements MbXmlWriter {
 
-    private Log log = LogFactory.getLog(JDOMWriterWs2.class);
+    static Logger log = Logger.getLogger(JDOMWriterWs2.class.getName());
     
     /**
     * Default constructor

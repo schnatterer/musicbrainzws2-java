@@ -1,8 +1,7 @@
 package org.musicbrainz.model;
 
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import java.util.logging.Logger;
 
 /**
  * <p>A Life Span definition.
@@ -24,7 +23,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class LifeSpanWs2 
 {
-    private Log log = LogFactory.getLog(LifeSpanWs2.class);
+    private static Logger log = Logger.getLogger(LifeSpanWs2.class.getName());
 
     private String begin;
     private String end;

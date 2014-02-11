@@ -27,9 +27,6 @@ import org.apache.http.protocol.ExecutionContext;
 import org.apache.http.protocol.HttpContext;
 
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 import org.apache.http.auth.AuthScope;
 import org.apache.http.auth.UsernamePasswordCredentials;
 import org.apache.http.client.methods.HttpDelete;
@@ -55,7 +52,7 @@ public class HttpClientWebServiceWs2 extends DefaultWebServiceWs2
     /**
     * A logger
     */
-    private Log log = LogFactory.getLog(HttpClientWebServiceWs2.class);
+    static Logger log = Logger.getLogger(HttpClientWebServiceWs2.class.getName());
 
     /**
      * A {@link HttpClient} instance
@@ -161,7 +158,7 @@ public class HttpClientWebServiceWs2 extends DefaultWebServiceWs2
               {
                     String em = "ABORTED: web service returned an error "
                                      +maxtrial+" time consecutively";
-                    log.error(em);
+                    log.severe(em);
                     throw new WebServiceException(em);
                }
               else if (md != null)
@@ -234,7 +231,7 @@ public class HttpClientWebServiceWs2 extends DefaultWebServiceWs2
           {
             case HttpStatus.SC_SERVICE_UNAVAILABLE: { 
                     // Maybe the server is too busy, let's try again.
-                    log.warn(buildMessage(response, "Service unavaillable"));
+                    log.warning(buildMessage(response, "Service unavaillable"));
                     method.abort();
                     lastHitTime =System.currentTimeMillis();   
                     wait(1);
@@ -242,7 +239,7 @@ public class HttpClientWebServiceWs2 extends DefaultWebServiceWs2
             }
              case HttpStatus.SC_BAD_GATEWAY: { 
                     // Maybe the server is too busy, let's try again.
-                    log.warn(buildMessage(response, "Bad Gateway"));
+                    log.warning(buildMessage(response, "Bad Gateway"));
                     method.abort();
                     lastHitTime =System.currentTimeMillis();   
                     wait(1);
@@ -275,14 +272,14 @@ public class HttpClientWebServiceWs2 extends DefaultWebServiceWs2
             default: {
                     
                     String em = buildMessage(response,"");
-                    log.error("Fatal web service error: " + em);
+                    log.severe("Fatal web service error: " + em);
                     throw new WebServiceException(em);
             }
             
           }
         }
         catch (IOException e) {
-            log.error("Fatal transport error: " + e.getMessage());
+            log.severe("Fatal transport error: " + e.getMessage());
             throw new WebServiceException(e.getMessage(), e);
         }
     }
