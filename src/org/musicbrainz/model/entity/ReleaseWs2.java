@@ -7,8 +7,10 @@ import java.util.logging.Logger;
 import org.apache.commons.lang3.StringUtils;
 
 import org.musicbrainz.model.ArtistCreditWs2;
+import org.musicbrainz.model.CoverArtArchiveWs2;
 import org.musicbrainz.model.LabelInfoListWs2;
 import org.musicbrainz.model.MediumListWs2;
+import org.musicbrainz.model.ReleaseEventListWs2;
 /**
  * <p>Represents a release.</p>
  
@@ -54,6 +56,8 @@ public class ReleaseWs2 extends EntityWs2 {
     private ReleaseGroupWs2 releaseGroup;
     private LabelInfoListWs2 labelInfoList;
     private MediumListWs2 mediumList;
+    private ReleaseEventListWs2 eventList;
+    private CoverArtArchiveWs2 coverArtArchive;
     
     // Recording is via Medium.
 
@@ -178,6 +182,12 @@ public class ReleaseWs2 extends EntityWs2 {
     public void setMediumList(MediumListWs2 mediumList) {
         this.mediumList = mediumList;
     }
+    public ReleaseEventListWs2 getEventList() {
+        return eventList;
+    }
+    public void setEventList(ReleaseEventListWs2 eventList) {
+        this.eventList = eventList;
+    }
     public String getFormat() {
        
        if  (getMediumList() == null) return "";
@@ -229,6 +239,16 @@ public class ReleaseWs2 extends EntityWs2 {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy");
         return dateFormat.format(d.getTime());
     }
+   public String getDisplayEvents(){
+       
+       if (getEventList()== null || 
+            getEventList().getReleaseEvents() == null || 
+            getEventList().getReleaseEvents().isEmpty()) return getDateStr();
+       
+       if (getEventList().getReleaseEvents().size()==1)return getDateStr();
+
+       return getEventList().toString();
+   }
     public Long getDurationInMillis(){
         
         if (getMediumList()==null ||
@@ -255,7 +275,47 @@ public class ReleaseWs2 extends EntityWs2 {
         }
         return title;
     }
+    /**
+     * @param coverArtArchive the coverArtArchive to set
+     */
+    public void setCoverArtArchive(CoverArtArchiveWs2 coverArtArchive) {
+        this.coverArtArchive = coverArtArchive;
+    }
+    /**
+     * @return the coverArtArchive
+     */
+    private CoverArtArchiveWs2 getCoverArtArchive() {
+        return coverArtArchive;
+    }
 
+     public boolean hasArtwork() {
+        if (getCoverArtArchive()==null) return false;
+        return getCoverArtArchive().hasArtwork();
+    }
+
+    /**
+     * @return the front
+     */
+    public boolean hasFront() {
+        if (getCoverArtArchive()==null) return false;
+        return getCoverArtArchive().hasFront();
+    }
+
+    /**
+     * @return the back
+     */
+    public boolean hasBack() {
+        if (getCoverArtArchive()==null) return false;
+        return getCoverArtArchive().hasBack();
+    }
+    /**
+     * @return the count
+     */
+    public int getCoverArtCount() {
+        if (getCoverArtArchive()==null) return 0;
+        return getCoverArtArchive().getCount();
+    } 
+    
     @Override
     public String toString() {
         return getUniqueTitle();

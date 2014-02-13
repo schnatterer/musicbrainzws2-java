@@ -16,11 +16,34 @@ public class AliasWs2
      * The alias
      */
     private String value;
+    private String sortName;
+    private String type;
+    private String primary;
+    private String beginDate;
+    private String endDate;
+    private boolean ended;
 
     /**
      * ISO-15924 script code
      */
     private String locale;
+
+    public String getDisplayValue(){
+        
+        String out="";
+        
+        if (!(primary== null) && !(primary.isEmpty())) out = out+primary;
+        if (!(type== null) && !(type.isEmpty())) {
+            
+            if (!out.isEmpty())out= out+" ";
+            out = out+type;
+        }
+         if (!out.isEmpty())out= out+": "; out = out+value;
+         
+         if (!(getLocale()== null) && (getLocale().isEmpty())) out = out+" ("+getLocale()+")";
+         
+        return out;
+    }
 
     /**
      * @return the getScript
@@ -50,4 +73,84 @@ public class AliasWs2
             this.value = value;
     }
 
+    /**
+     * @return the sortName
+     */
+    public String getSortName() {
+        return sortName;
+    }
+
+    /**
+     * @param sortName the sortName to set
+     */
+    public void setSortName(String sortName) {
+        this.sortName = sortName;
+    }
+
+    /**
+     * @return the type
+     */
+    public String getType() {
+        return type;
+    }
+
+    /**
+     * @param type the type to set
+     */
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    /**
+     * @return the primary
+     */
+    public String getPrimary() {
+        return primary;
+    }
+
+    /**
+     * @param primary the primary to set
+     */
+    public void setPrimary(String primary) {
+        this.primary = primary;
+    }
+  /**
+     * @return the beginDate
+     */
+    public String getBeginDate() {
+            return beginDate;
+    }
+
+    /**
+     * @param beginDate the beginDate to set
+     */
+    public void setBeginDate(String beginDate) {
+            this.beginDate = beginDate;
+    }
+    /**
+     * @return the endDate
+     */
+    public String getEndDate() {
+            return endDate;
+    }
+
+    /**
+     * @param endDate the endDate to set
+     */
+    public void setEndDate(String endDate) {
+            this.endDate = endDate;
+    }
+    /**
+     * @return the ended
+     */
+    public boolean isEnded() {
+        return ended;
+    }
+
+    /**
+     * @param ended the ended to set
+     */
+    public void setEnded(boolean ended) {
+        this.ended = ended;
+    }
 }

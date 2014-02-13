@@ -36,6 +36,10 @@ import org.musicbrainz.model.LabelInfoWs2;
 import org.musicbrainz.model.LifeSpanWs2;
 import org.musicbrainz.model.MediumListWs2;
 import org.musicbrainz.model.MediumWs2;
+import org.musicbrainz.model.ReleaseEventListWs2;
+import org.musicbrainz.model.ReleaseEventWs2;
+import org.musicbrainz.model.AreaWs2;
+import org.musicbrainz.model.CoverArtArchiveWs2;
 import org.musicbrainz.model.NameCreditWs2;
 import org.musicbrainz.model.PuidWs2;
 import org.musicbrainz.model.RatingsWs2;
@@ -93,7 +97,7 @@ import org.musicbrainz.model.searchresult.listelement.WorkSearchResultsWs2;
  */
 public class JDOMParserWs2 extends DomainsWs2 implements MbXmlParser  {
     
-     static Logger log = Logger.getLogger(JDOMParserWs2.class.getName());
+     private static Logger log = Logger.getLogger(JDOMParserWs2.class.getName());
 
     /**
      * Default constructor
@@ -328,6 +332,9 @@ public class JDOMParserWs2 extends DomainsWs2 implements MbXmlParser  {
              else if (COUNTRY.equals(child.getName())) {
                 label.setCountry(child.getText());
              }
+             else if (AREA.equals(child.getName())) {
+                label.setArea(createArea(child));
+             }
              else if (LIFESPAN.equals(child.getName())) {
                 label.setLifeSpan(createLifeSpan(child));
              }
@@ -401,6 +408,9 @@ public class JDOMParserWs2 extends DomainsWs2 implements MbXmlParser  {
             else if (COUNTRY.equals(child.getName())) {
                  artist.setCountry(child.getText());
             }
+            else if (AREA.equals(child.getName())) {
+                 artist.setArea(createArea(child));
+            }
             else if (GENDER.equals(child.getName())) {
                  artist.setGender(child.getText());
              }
@@ -410,6 +420,21 @@ public class JDOMParserWs2 extends DomainsWs2 implements MbXmlParser  {
              else if (LIFESPAN.equals(child.getName())) {
                  artist.setLifeSpan(createLifeSpan(child));
              }
+             else if (AREA.equals(child.getName())) {
+                 artist.setArea(createArea(child));
+            }
+            else if (BEGINAREA.equals(child.getName())) {
+                 artist.setBeginArea(createArea(child));
+            }
+            else if (ENDAREA.equals(child.getName())) {
+                 artist.setEndArea(createArea(child));
+            }
+            else if (IPILIST.equals(child.getName())) {
+                 artist.setIpiList(getArrayElementsAsList(child));
+            }
+            else if (ISNILIST.equals(child.getName())) {
+                 artist.setIsniList(getArrayElementsAsList(child));
+            }
              else if (RATING.equals(child.getName())) {
                  artist.setRating(createRating(child));
              }
@@ -491,6 +516,12 @@ public class JDOMParserWs2 extends DomainsWs2 implements MbXmlParser  {
             }
             else if (FIRSTRELEASEDATE.equals(child.getName())) {
                 releaseGroup.setFirstReleaseDateStr(child.getText());
+            }
+            else if (PRIMARYTYPE.equals(child.getName())) {
+                releaseGroup.setPrimaryType(child.getText());
+            }
+             else if (SECONDARYTYPELIST.equals(child.getName())) {
+                releaseGroup.setSecondaryTypes(getArrayElementsAsList(child));
             }
             else if (DISAMBIGUATION.equals(child.getName())) {
                 releaseGroup.setDisambiguation(child.getText());
@@ -604,7 +635,6 @@ public class JDOMParserWs2 extends DomainsWs2 implements MbXmlParser  {
                 release.setRating(createRating(child));
             }
             else if (USERRATING.equals(child.getName())) {
-                // not in MB at the moment.
                 release.setUserRating(createUserRating(child));
             }
             else if (LABELINFOLIST.equals(child.getName())) {
@@ -612,6 +642,15 @@ public class JDOMParserWs2 extends DomainsWs2 implements MbXmlParser  {
             }
             else if (MEDIUMLIST.equals(child.getName())) {
                 release.setMediumList(createMediumList(child));
+            }
+             else if (RELEASEEVENTLIST.equals(child.getName())) {
+                ReleaseEventListWs2 evl = createReleaseEventList(child);
+                release.setEventList(evl);
+            }
+            else if (COVERARTARCHIVE.equals(child.getName())) {
+
+                CoverArtArchiveWs2 caa = createCoverArtArchive(child);
+                release.setCoverArtArchive(caa);
             }
             else if (RELATIONLIST.equals(child.getName())) {
                 addRelationsToEntity(child, release.getRelationList());
@@ -625,7 +664,7 @@ public class JDOMParserWs2 extends DomainsWs2 implements MbXmlParser  {
                 addUserTags (child, release);
             }
             else{
-               log.warning("Unrecognised Release element: "+child.getName());
+               log.log(Level.WARNING, "Unrecognised Release element: {0}", child.getName());
             }
         }
         return release;
@@ -739,8 +778,14 @@ public class JDOMParserWs2 extends DomainsWs2 implements MbXmlParser  {
             else if (DISAMBIGUATION.equals(child.getName())) {
                 work.setDisambiguation(child.getText());
             }
+            else if (ISWCLIST.equals(child.getName())) {
+                work.setIswcList(getArrayElementsAsList(child));
+            }
             else if (ISWC.equals(child.getName())) {
                 work.setIswc(child.getText());
+            }
+            else if (LANGUAGE.equals(child.getName())) {
+                work.setTextLanguage(getText(child.getText(),languagePattern,child.getText()));
             }
             else if (ARTISTCREDIT.equals(child.getName())) {
                 work.setArtistCredit(createArtistCredit(child));
@@ -787,6 +832,9 @@ public class JDOMParserWs2 extends DomainsWs2 implements MbXmlParser  {
               if (attribute.getName().equals(TYPE)){
                   relation.setType(MbUtils.convertTypeToURI(attribute.getValue(), NS_REL_2_PREFIX));
               }
+              else if (attribute.getName().equals(TYPEID)){
+                  relation.setTypeId(MbUtils.extractUuid(attribute.getValue(), resType));
+              }
               else{
                   log.warning("Unrecognised Relation attribute: "+attribute.getName());
               }
@@ -817,8 +865,11 @@ public class JDOMParserWs2 extends DomainsWs2 implements MbXmlParser  {
             else if (END.equals(child.getName())){
                 relation.setEndDate(child.getText());
             }
+            else if (ENDED.equals(child.getName())){
+                relation.setEnded(getBoolean(child.getText()));
+            }
             else if (ATTRIBUTELIST.equals(child.getName())){
-                relation.setAttributes(getAttributeList(child));
+                relation.setAttributes(getArrayElementsAsList(child));
             }
             else if (LABEL.equals(child.getName())) {
                 target = createLabel(child);
@@ -918,6 +969,7 @@ public class JDOMParserWs2 extends DomainsWs2 implements MbXmlParser  {
     protected LifeSpanWs2 createLifeSpan(Element node) {
         String begin=null;
         String end=null;
+        boolean ended=false;
 
         Iterator itr = node.getAttributes().iterator();
         while (itr.hasNext()) {
@@ -937,12 +989,15 @@ public class JDOMParserWs2 extends DomainsWs2 implements MbXmlParser  {
             else if (END.equals(child.getName())) {
                     end=(child.getText());
             }
+            else if (ENDED.equals(child.getName())) {
+                    ended=getBoolean(child.getText());
+            }
             else
             {
                     log.warning("Unrecognised Life Span element: "+child.getName());
             }
         }
-        return new LifeSpanWs2(begin, end);
+        return new LifeSpanWs2(begin, end, ended);
 }
     protected LabelInfoListWs2 createLabelInfoList(Element node) {
         List<LabelInfoWs2> LabelInfos
@@ -1014,6 +1069,45 @@ public class JDOMParserWs2 extends DomainsWs2 implements MbXmlParser  {
 
         return out;
     }
+    protected CoverArtArchiveWs2 createCoverArtArchive(Element node) {
+         
+        boolean artwork=false;
+        boolean front=false;
+        boolean back=false;
+        int count=0;
+
+        Iterator itr = node.getAttributes().iterator();
+        while (itr.hasNext()) {
+              Attribute attribute = (Attribute)itr.next();
+              log.warning("Unrecognised Cover Art Archive attribute: "+attribute.getName());
+        }
+
+        itr = node.getChildren().iterator();
+        Element child;
+        while(itr.hasNext()) 
+        {
+            child = (Element)itr.next();
+            if (ARTWORK.equals(child.getName())) {
+                     artwork=getBoolean(child.getText());
+
+            }
+            if (COUNT.equals(child.getName())) {
+                    count=getInt(child.getText());
+
+            }
+            else if (FRONT.equals(child.getName())) {
+                    front=getBoolean(child.getText());
+            }
+            else if (BACK.equals(child.getName())) {
+                    back=getBoolean(child.getText());
+            }
+            else
+            {
+                    log.warning("Unrecognised Cover Art Archive element: "+child.getName());
+            }
+        }
+        return new CoverArtArchiveWs2(artwork, count, front,back);
+}
     protected MediumListWs2 createMediumList(Element node) {
         List<MediumWs2> media
             = new ArrayList<MediumWs2>(); 
@@ -1056,6 +1150,40 @@ public class JDOMParserWs2 extends DomainsWs2 implements MbXmlParser  {
             }
         }
         out.setTracksCount(trackCount);
+        updateListElement(node, out);
+
+        return out;
+    }
+    protected ReleaseEventListWs2 createReleaseEventList(Element node) {
+        List<ReleaseEventWs2> events
+            = new ArrayList<ReleaseEventWs2>(); 
+
+        Iterator itr = node.getAttributes().iterator();
+        while (itr.hasNext()) {
+              Attribute attribute = (Attribute)itr.next();
+
+              if (attribute.getName().equals(COUNT)||
+                   attribute.getName().equals(OFFSET)){
+                 //ignore (see updateListElement).
+              }
+              else log.warning("Unrecognised ReleaseEventList attribute: "+attribute.getName());
+        }
+
+        itr = node.getChildren().iterator();
+        Element child;
+        while(itr.hasNext()){
+            
+            child = (Element)itr.next();
+
+            if (RELEASEEVENT.equals(child.getName())) {
+                ReleaseEventWs2 e = createReleaseEvent(child);
+                events.add(e); 
+            }
+            else{
+                    log.warning("Unrecognised Release Event List element: "+child.getName());
+            }
+        }
+        ReleaseEventListWs2 out = new ReleaseEventListWs2(events);
         updateListElement(node, out);
 
         return out;
@@ -1124,6 +1252,90 @@ public class JDOMParserWs2 extends DomainsWs2 implements MbXmlParser  {
 
         return out;
    }
+    protected ReleaseEventWs2 createReleaseEvent(Element node) {
+        ReleaseEventWs2 event = new ReleaseEventWs2();
+        //isrc.setId(node.getAttributeValue(ID));
+
+        Iterator itr = node.getAttributes().iterator();
+        while (itr.hasNext()) {
+
+            Attribute attribute = (Attribute)itr.next();
+            log.warning("Unrecognised Isrc attribute: "+attribute.getName());
+        }
+
+        itr = node.getChildren().iterator();
+        Element child;
+        while(itr.hasNext()) 
+        {
+            child = (Element)itr.next();
+             if (DATE.equals(child.getName())){
+                   event.setDateString(child.getValue());
+            }
+            else if (AREA.equals(child.getName())) {
+                   event.setArea(createArea(child));
+            }
+            else
+            {
+                   log.warning("Unrecognised Release Event element: "+child.getName());
+            }
+        }
+        return event;	
+    }
+        protected AreaWs2 createArea(Element node) {
+        AreaWs2 area = new AreaWs2();
+
+        Iterator itr = node.getAttributes().iterator();
+        while (itr.hasNext()) {
+
+            Attribute attribute = (Attribute)itr.next();
+
+              if (attribute.getName().equals(ID)){
+                   area.setId(attribute.getValue());
+              }
+              else if (attribute.getName().equals(TYPE)){
+                   area.setType(attribute.getValue());
+              }
+              else{
+                log.warning("Unrecognised Isrc attribute: "+attribute.getName());
+              }
+        }
+
+        itr = node.getChildren().iterator();
+        Element child;
+        while(itr.hasNext()) 
+        {
+            child = (Element)itr.next();
+            if (NAME.equals(child.getName())) {
+                area.setName(child.getText());
+            }
+            else if (SORTNAME.equals(child.getName())) {
+                area.setName(child.getText());
+            }
+            else if (DISAMBIGUATION.equals(child.getName())) {
+                area.setDisambiguation(child.getText());
+            }
+             else if (LIFESPAN.equals(child.getName())) {
+                area.setLifeSpan(createLifeSpan(child));
+            } 
+            else if (ALIASLIST.equals(child.getName())){
+                   area.setAliasList(createAliasList(child));
+            }
+             else if (ISO31661CODELIST.equals(child.getName())) {
+                area.setIso_3166_1_codes(getArrayElementsAsList(child));
+            }
+            else if (ISO31662CODELIST.equals(child.getName())) {
+                area.setIso_3166_2_codes(getArrayElementsAsList(child));
+            }
+            else if (ISO31663CODELIST.equals(child.getName())) {
+                area.setIso_3166_3_codes(getArrayElementsAsList(child));
+            }
+            else 
+            {
+                    log.warning("Unrecognised Isrc element: "+child.getName());
+            }
+        }
+        return area;	
+    }
     protected MediumWs2 createMedium(Element node){
         MediumWs2 medium = new MediumWs2();
 
@@ -1177,7 +1389,12 @@ public class JDOMParserWs2 extends DomainsWs2 implements MbXmlParser  {
         Iterator itr = node.getAttributes().iterator();
         while (itr.hasNext()) {
               Attribute attribute = (Attribute)itr.next();
-              log.warning("Unrecognised Track attribute: "+attribute.getName());
+              if (attribute.getName().equals(ID)){
+                   t.setId(attribute.getValue());
+              }
+              else{
+                log.warning("Unrecognised Track attribute: "+attribute.getName());
+              }
         }
 
         itr = node.getChildren().iterator();
@@ -1187,6 +1404,9 @@ public class JDOMParserWs2 extends DomainsWs2 implements MbXmlParser  {
             child = (Element)itr.next();
             if (POSITION.equals(child.getName())) {
                 t.setPosition(getInt(child.getText()));
+            }
+            else if (NUMBER.equals(child.getName())) {
+                t.setNumber(getInt(child.getText()));
             }
             else if (TITLE.equals(child.getName())) {
                 t.setTitle(child.getText());
@@ -1538,9 +1758,9 @@ public class JDOMParserWs2 extends DomainsWs2 implements MbXmlParser  {
             }
         }
     }
-
-    protected void addAliases(Element node, EntityWs2 entity){
+protected List<AliasWs2> createAliasList(Element node){
         
+        List<AliasWs2> aliases = new ArrayList<AliasWs2>(); 
         Iterator itr = node.getAttributes().iterator();
         while (itr.hasNext()) {
 
@@ -1569,18 +1789,49 @@ public class JDOMParserWs2 extends DomainsWs2 implements MbXmlParser  {
                   if (attribute.getName().equals(LOCALE)){
                         alias.setLocale(getAttr(child, LOCALE, localePattern, "en",null));
                   }
+                  else if (attribute.getName().equals(SORTNAME)){
+                        alias.setSortName(attribute.getValue());
+                  }
+                  else if (attribute.getName().equals(PRIMARY)){
+                        alias.setPrimary(attribute.getValue());
+                  }
+                  else if (attribute.getName().equals(TYPE)){
+                        alias.setType(attribute.getValue());
+                  }
+                  else if (attribute.getName().equals(BEGINDATE)){
+                        alias.setBeginDate(child.getText());
+                  }
+                  else if (attribute.getName().equals(ENDDATE)){
+                        alias.setEndDate(child.getText());
+                  }
+                  else if (attribute.getName().equals(ENDED)){
+                        alias.setEnded(getBoolean(child.getText()));
+                  }
                   else{
                     log.warning("Unrecognised Alias attribute: "+attribute.getName());
                   }
             }
             if (ALIAS.equals(child.getName())){
                 alias.setValue(child.getText());
-                entity.addAlias(alias);
+                aliases.add(alias);
             }
             else{
                 log.warning("Unrecognised Alias element: "+child.getName());
             }
         }
+        return aliases;
+    }
+    protected void addAliases(Element node, EntityWs2 entity){
+        
+            List<AliasWs2> aliases = createAliasList(node);
+            
+            //entity.setAliases(aliases); retain previous existings.
+             Iterator itrC = aliases.iterator();
+             
+             while (itrC.hasNext()) {
+                 AliasWs2 alias = (AliasWs2)itrC.next();
+                 entity.addAlias(alias);
+            }
     }
     protected void addTags(Element node, EntityWs2 entity) {
         Iterator itr = node.getAttributes().iterator();
@@ -1677,7 +1928,7 @@ public class JDOMParserWs2 extends DomainsWs2 implements MbXmlParser  {
             }
         }
     }
-    
+
     protected void addLabelsToList(Element node, 
                             LabelListWs2 labelList){
         if (labelList == null)
@@ -1917,7 +2168,7 @@ public class JDOMParserWs2 extends DomainsWs2 implements MbXmlParser  {
         return getInt(value);
     }
 
-    protected List<String> getAttributeList(Element element){
+    protected List<String> getArrayElementsAsList(Element element){
         List<String> out = new ArrayList<String>();
 
         Iterator itr = element.getChildren().iterator();
@@ -1941,5 +2192,12 @@ public class JDOMParserWs2 extends DomainsWs2 implements MbXmlParser  {
                 }
         }
         return 0;
+   }
+    private boolean getBoolean(String str){
+
+        if (str != null && !str.isEmpty() && str.equals("true")) {
+                return true;
+        }
+        return false;
    }
 }

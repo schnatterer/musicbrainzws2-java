@@ -14,8 +14,10 @@ public class TrackWs2
 {
     private static Logger log = Logger.getLogger(TrackWs2.class.getName());
 
+    private String id;
     private MediumWs2 medium;
     private int position;
+    private int number;
     private String title;
     private RecordingWs2 recording;
     private Long durationInMillis;
@@ -26,6 +28,12 @@ public class TrackWs2
    */
     public TrackWs2(){}
 
+    public String getId() {
+        return id;
+    }
+    public void setId(String id) {
+        this.id = id;
+    }
     /**
      * @return the position
      */
@@ -40,6 +48,19 @@ public class TrackWs2
         this.position = position;
     }
 
+    /**
+     * @return the number
+     */
+    public int getNumber() {
+        return number;
+    }
+
+    /**
+     * @param number the number to set
+     */
+    public void setNumber(int number) {
+        this.number = number;
+    }
     /**
      * @return the title
      */

@@ -76,6 +76,9 @@ public abstract class DomainsWs2 {
     public static final String TRACK = "track";
     public static final String TEXTREPRESENTATION = "text-representation";
     public static final String LIFESPAN = "life-span";
+    public static final String RELEASEEVENT= "release-event";
+    public static final String AREA= "area";
+    
     public static final String TAG = "tag";
     public static final String RATING = "rating";
     public static final String USERRATING = "user-rating";
@@ -98,6 +101,9 @@ public abstract class DomainsWs2 {
     public static final String DISCLIST = "disc-list";
     public static final String TRACKLIST = "track-list";
     public static final String MEDIUMLIST = "medium-list";
+    public static final String RELEASEEVENTLIST= "release-event-list";
+    public static final String SECONDARYTYPELIST =  "secondary-type-list";
+    
     public static final String ATTRIBUTELIST = "attribute-list";
     public static final String TAGLIST = "tag-list";
     public static final String USERTAGLIST = "user-tag-list";
@@ -123,19 +129,42 @@ public abstract class DomainsWs2 {
     public static final String LENGTH = "length";
     public static final String PACKAGING = "packaging";
     public static final String POSITION = "position";
+    public static final String NUMBER = "number";
     public static final String QUALITY = "quality";
+    public static final String PRIMARYTYPE =  "primary-type";
+    public static final String SECONDARYTYPE =  "secondary-type";
     public static final String STATUS = "status";
     public static final String SECTORS = "sectors";
     public static final String TRACKCOUNT = "track-count";
     
+    public static final String COVERARTARCHIVE = "cover-art-archive";
+    public static final String ARTWORK ="artwork";
+    public static final String FRONT ="front";
+    public static final String BACK = "back";
+
+    public static final String ISO31661CODELIST = "iso-3166-1-code-list";
+    public static final String ISO31662CODELIST = "iso-3166-2-code-list";
+    public static final String ISO31663CODELIST = "iso-3166-3-code-list";
+
+    public static final String IPILIST = "ipi-list";
+    public static final String ISNILIST = "isni-list";
+    public static final String ISWCLIST = "iswc-list";
+    
+    public static final String TYPEID="type-id";
     public static final String TARGET = "target";
     public static final String DIRECTION = "direction";
+    public static final String BEGINDATE = "begin-date";
+    public static final String ENDDATE = "end-date";
     public static final String BEGIN = "begin";
     public static final String END = "end";
+    public static final String ENDED = "ended";
+    public static final String BEGINAREA ="begin-area";
+    public static final String ENDAREA ="end-area";
     
     public static final String LANGUAGE = "language";
     public static final String SCRIPT = "script";
     public static final String LOCALE = "locale";
+    public static final String PRIMARY = "primary";
     
     public static final String TEXT = "text";
     public static final String EDITOR = "editor";

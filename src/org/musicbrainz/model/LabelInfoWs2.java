@@ -52,7 +52,7 @@ public class LabelInfoWs2
        
         if (catalogNumber!=null&& !catalogNumber.equals(""))
         {
-            if (!labelInfoString.equals(""))
+            if (!(labelInfoString==null) && !(labelInfoString.equals("")))
                 labelInfoString = labelInfoString+" ";
             
             labelInfoString= labelInfoString+"cat.No: "+catalogNumber;

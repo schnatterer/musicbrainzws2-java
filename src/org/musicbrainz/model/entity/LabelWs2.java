@@ -3,6 +3,7 @@ package org.musicbrainz.model.entity;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
+import org.musicbrainz.model.AreaWs2;
 import org.musicbrainz.model.LifeSpanWs2;
 import org.musicbrainz.model.entity.listelement.ReleaseListWs2;
 
@@ -53,6 +54,7 @@ public class LabelWs2 extends EntityWs2 {
 	 * The label's country.
 	 */
            private String country;
+           private AreaWs2 area;
            /**
 	 * The label's code (without the "LC-" prefix).
 	 */
@@ -142,7 +144,20 @@ public class LabelWs2 extends EntityWs2 {
 	public void setCountry(String country) {
 		this.country = country;
 	}
-        /**
+            /**
+         * @return the area
+         */
+            public AreaWs2 getArea() {
+                return area;
+            }
+
+            /**
+             * @param area the area to set
+             */
+            public void setArea(AreaWs2 area) {
+                this.area = area;
+            }
+            /**
 	 * @return the country
 	 */
 	public String getLabelCode() {
