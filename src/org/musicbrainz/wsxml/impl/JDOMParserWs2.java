@@ -1413,7 +1413,7 @@ public class JDOMParserWs2 extends DomainsWs2 implements MbXmlParser  {
             else if (TITLE.equals(child.getName())) {
                 t.setTitle(child.getText());
             }
-            else if (RECORDING.equals(child.getName())) {
+            else if (ARTISTCREDIT.equals(child.getName())) {
                 t.setArtistCredit(createArtistCredit(child));
             }
             else if (RECORDING.equals(child.getName())) {
