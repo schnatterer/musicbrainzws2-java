@@ -1414,6 +1414,9 @@ public class JDOMParserWs2 extends DomainsWs2 implements MbXmlParser  {
                 t.setTitle(child.getText());
             }
             else if (RECORDING.equals(child.getName())) {
+                t.setArtistCredit(createArtistCredit(child));
+            }
+            else if (RECORDING.equals(child.getName())) {
                 t.setRecording(createRecording(child));
             }
             else if (LENGTH.equals(child.getName())) 
