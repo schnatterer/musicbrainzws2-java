@@ -19,6 +19,7 @@ public class TrackWs2
     private int position;
     private int number;
     private String title;
+    private ArtistCreditWs2 artistCredit;
     private RecordingWs2 recording;
     private Long durationInMillis;
            
@@ -134,5 +135,19 @@ public class TrackWs2
     @Override
     public String toString() {
         return getPosition()+" - "+getTitle();
+    }
+
+    /**
+     * @return the artistCredit
+     */
+    public ArtistCreditWs2 getArtistCredit() {
+        return artistCredit;
+    }
+
+    /**
+     * @param artistCredit the artistCredit to set
+     */
+    public void setArtistCredit(ArtistCreditWs2 artistCredit) {
+        this.artistCredit = artistCredit;
     }
 }
