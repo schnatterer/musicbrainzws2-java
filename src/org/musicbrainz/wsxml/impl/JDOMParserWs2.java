@@ -17,6 +17,8 @@ import org.jdom.Element;
 import org.jdom.Namespace;
 import org.jdom.input.SAXBuilder;
 
+import org.musicbrainz.coverart.Image;
+import org.musicbrainz.coverart.ImageGetter;
 import org.musicbrainz.wsxml.MbXMLException;
 import org.musicbrainz.wsxml.MbXMLParseException;
 import org.musicbrainz.wsxml.MbXmlParser;
@@ -649,7 +651,7 @@ public class JDOMParserWs2 extends DomainsWs2 implements MbXmlParser  {
             }
             else if (COVERARTARCHIVE.equals(child.getName())) {
 
-                CoverArtArchiveWs2 caa = createCoverArtArchive(child);
+                CoverArtArchiveWs2 caa = createCoverArtArchive(child,release.getId());
                 release.setCoverArtArchive(caa);
             }
             else if (RELATIONLIST.equals(child.getName())) {
@@ -1069,7 +1071,7 @@ public class JDOMParserWs2 extends DomainsWs2 implements MbXmlParser  {
 
         return out;
     }
-    protected CoverArtArchiveWs2 createCoverArtArchive(Element node) {
+    protected CoverArtArchiveWs2 createCoverArtArchive(Element node, String mbid) {
          
         boolean artwork=false;
         boolean front=false;
@@ -1091,7 +1093,7 @@ public class JDOMParserWs2 extends DomainsWs2 implements MbXmlParser  {
                      artwork=getBoolean(child.getText());
 
             }
-            if (COUNT.equals(child.getName())) {
+            else if (COUNT.equals(child.getName())) {
                     count=getInt(child.getText());
 
             }
@@ -1106,7 +1108,7 @@ public class JDOMParserWs2 extends DomainsWs2 implements MbXmlParser  {
                     log.warning("Unrecognised Cover Art Archive element: "+child.getName());
             }
         }
-        return new CoverArtArchiveWs2(artwork, count, front,back);
+        return new CoverArtArchiveWs2(artwork, count, front,back, mbid);
 }
     protected MediumListWs2 createMediumList(Element node) {
         List<MediumWs2> media

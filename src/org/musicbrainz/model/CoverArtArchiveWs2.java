@@ -1,7 +1,11 @@
 package org.musicbrainz.model;
 
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Logger;
+import org.musicbrainz.coverart.Image;
+import org.musicbrainz.coverart.ImageGetter;
 
 /**
  * <p>A  Cover Art Archive definition.
@@ -27,15 +31,26 @@ public class CoverArtArchiveWs2
     private boolean front=false;
     private boolean back=false;
     private int count=0;
+    private String mbId;
+    private List<Image> imageList = new ArrayList<Image>();
     
-    public CoverArtArchiveWs2(boolean artwork, int count, boolean front, boolean back)
+    public CoverArtArchiveWs2(boolean artwork, int count, boolean front, boolean back, String mbId)
     {
         this.artwork= artwork;
         this.front = front;
         this.back = back;
         this.count = count;
+        this.mbId = mbId;
+        
     }
-
+    /**
+     * @return the imageList
+     */
+    public List<Image> getImageList() {
+        if (!imageList.isEmpty())return imageList;
+        if (artwork) imageList = ImageGetter.getInstance().getImageListByMbID(mbId);
+        return imageList;
+    }
     /**
      * @return the artwork
      */
@@ -63,5 +78,4 @@ public class CoverArtArchiveWs2
     public int getCount() {
         return count;
     }
-   
 }

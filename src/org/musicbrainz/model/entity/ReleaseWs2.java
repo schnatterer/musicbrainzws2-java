@@ -3,9 +3,11 @@ package org.musicbrainz.model.entity;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.logging.Logger;
 import org.apache.commons.lang3.StringUtils;
 
+import org.musicbrainz.coverart.Image;
 import org.musicbrainz.model.ArtistCreditWs2;
 import org.musicbrainz.model.CoverArtArchiveWs2;
 import org.musicbrainz.model.LabelInfoListWs2;
@@ -315,6 +317,9 @@ public class ReleaseWs2 extends EntityWs2 {
         if (getCoverArtArchive()==null) return 0;
         return getCoverArtArchive().getCount();
     } 
+    public List<Image> getImageList(){
+        return getCoverArtArchive().getImageList();
+    }
     
     @Override
     public String toString() {
