@@ -100,7 +100,7 @@ public abstract class DefaultWebServiceWs2 extends DomainsWs2 implements WebServ
     /**
      * The protocol, defaults to http
      */
-    private String protocol = "http";
+    private String protocol = "https";
 
     /**
      * The port, defaults to null
