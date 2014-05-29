@@ -25,7 +25,7 @@ import org.musicbrainz.wsxml.impl.JDOMWriterWs2;
  * properties of a web service client that can be extended.
  */
 public abstract class DefaultWebServiceWs2 extends DomainsWs2 implements WebService {
-	
+    
     private Log log = LogFactory.getLog(DefaultWebServiceWs2.class);
 
     /**
@@ -33,17 +33,48 @@ public abstract class DefaultWebServiceWs2 extends DomainsWs2 implements WebServ
      */
     protected static final String URL_ENCODING = "UTF-8";
     
-    /* Starting on May 16th, 2011 the MusicBrainz Web Service requires all 
-     * requests to have a proper User-Agent header that identifies the 
-     * application and the version of the application making the request. 
-     * Please do no use generic User-Agent strings like 
-     * “Java/1.6.0_24″ or “PHP/5.3.4″ -- they do not allow us to identify 
-     * the application making the request. On November 16, 2011 we're going 
-     * to start blocking requests with generic User-Agent strings 
+    /**
+     * Name of this library that will be used as part of the default user agent
+     * string or as part of a custom user agent string.
      * 
+     * @see DefaultWebServiceWs2#createUserAgent()
+     * @see DefaultWebServiceWs2#createUserAgent(String, String, String)
+     * @see <a
+     *      href="https://musicbrainz.org/doc/XML_Web_Service/Rate_Limiting#How_can_I_be_a_good_citizen_and_be_smart_about_using_the_Web_Service.3F">How
+     *      can I be a good citizen and be smart about using the Web Service?
+     *      </a>
      */
-    protected static final String USERAGENT
-       = "MusicBrainz-Java/2.01beta http://code.google.com/p/musicbrainzws2-java/";
+    protected static final String USER_AGENT_LIB_NAME
+       = "MusicBrainz-Java";
+
+     // TODO Read the constant value from properties file that gets written during maven build
+     /**
+     * Version of this library that will be used as part of the default user
+     * agent string or as part of a custom user agent string.
+     * 
+     * @see DefaultWebServiceWs2#createUserAgent()
+     * @see DefaultWebServiceWs2#createUserAgent(String, String, String)
+     * @see <a
+     *      href="https://musicbrainz.org/doc/XML_Web_Service/Rate_Limiting#How_can_I_be_a_good_citizen_and_be_smart_about_using_the_Web_Service.3F">How
+     *      can I be a good citizen and be smart about using the Web Service?
+     *      </a>
+     */
+    protected static final String USER_AGENT_LIB_VERSION
+       = "2.01beta-nusicEdition";
+
+    /**
+     * Contact information of this library that will be used as part of the
+     * default user agent string.
+     * 
+     * @see DefaultWebServiceWs2#createUserAgent()
+     * @see DefaultWebServiceWs2#createUserAgent(String, String, String)
+     * @see <a
+     *      href="https://musicbrainz.org/doc/XML_Web_Service/Rate_Limiting#How_can_I_be_a_good_citizen_and_be_smart_about_using_the_Web_Service.3F">How
+     *      can I be a good citizen and be smart about using the Web Service?
+     *      </a>
+     */
+    protected static final String USER_AGENT_LIB_CONTACT
+       = "http://code.google.com/p/musicbrainzws2-java/";
 
      /**
      * The authentication scheme, could only be DIGEST.
@@ -306,6 +337,30 @@ public abstract class DefaultWebServiceWs2 extends DomainsWs2 implements WebServ
             }
 
             return url.substring(0, url.length()-1);
+    }
+
+    protected String createUserAgent() {
+        return USER_AGENT_LIB_NAME + "/" + USER_AGENT_LIB_VERSION + " ( "
+                + USER_AGENT_LIB_CONTACT + " )";
+    }
+
+    /**
+     * Creates a custom user agent string which will be formatted as follows:<br/>
+     * <code>&lt;name&gt;</code>/<code>&lt;version&gt;</code>
+     * {@link #USER_AGENT_LIB_NAME}/{@link #USER_AGENT_LIB_VERSION} (
+     * <code>&lt;contact&gt;</code> )
+     * 
+     * @param name
+     *            custom application name
+     * @param version
+     *            custom application version
+     * @param contact
+     *            application contact URL or author email
+     * @return
+     */
+    protected String createUserAgent(String name, String version, String contact) {
+        return name + "/" + version + " " + USER_AGENT_LIB_NAME + "/"
+                + USER_AGENT_LIB_VERSION + " ( " + contact + " )";
     }
 
     /**

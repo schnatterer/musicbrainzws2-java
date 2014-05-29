@@ -60,6 +60,11 @@ public class MyWebServiceImplementation extends DefaultWebServiceWs2
     private Log log = LogFactory.getLog(MyWebServiceImplementation.class);
 
     /**
+    * Some user agent string sufficient for testing
+    */
+    protected static final String USERAGENT
+       = "MusicBrainz-Java/2.01beta http://code.google.com/p/musicbrainzws2-java/";
+    /**
      * A {@link HttpClient} instance
      */
     private DefaultHttpClient httpClient;
