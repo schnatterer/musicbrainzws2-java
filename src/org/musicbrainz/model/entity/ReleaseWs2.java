@@ -3,6 +3,7 @@ package org.musicbrainz.model.entity;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.TimeZone;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -211,6 +212,8 @@ public class ReleaseWs2 extends EntityWs2 {
 
         if (dateStr.length() == 7) 
                 f = new SimpleDateFormat("yyyy-MM");
+        // Values retunred by musicbrainz are always in UTC!
+        f.setTimeZone(TimeZone.getTimeZone("UTC"));
 
         try {
                 return f.parse(dateStr);
@@ -228,6 +231,9 @@ public class ReleaseWs2 extends EntityWs2 {
         Date d = getDate();
 
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy");
+        // Values retunred by musicbrainz are always in UTC!
+        dateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
+
         return dateFormat.format(d.getTime());
     }
     public Long getDurationInMillis(){
