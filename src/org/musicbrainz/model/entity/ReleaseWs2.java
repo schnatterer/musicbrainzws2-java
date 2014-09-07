@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
+import java.util.TimeZone;
 import org.apache.commons.lang3.StringUtils;
 
 import org.musicbrainz.coverart.Image;
@@ -223,6 +224,8 @@ public class ReleaseWs2 extends EntityWs2 {
         if (dateStr.length() == 7) 
                 f = new SimpleDateFormat("yyyy-MM");
 
+        f.setTimeZone(TimeZone.getTimeZone("UTC"));
+
         try {
                 return f.parse(dateStr);
         } catch (ParseException e) {
@@ -239,6 +242,9 @@ public class ReleaseWs2 extends EntityWs2 {
         Date d = getDate();
 
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy");
+        // Values retunred by musicbrainz are always in UTC!
+        dateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
+
         return dateFormat.format(d.getTime());
     }
    public String getDisplayEvents(){

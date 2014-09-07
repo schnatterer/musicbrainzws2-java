@@ -42,10 +42,36 @@ public abstract class Controller extends DomainsWs2{
     
     private EntityWs2 incoming;
     
-    public Controller(){
+    private String applicationContact;
+    private String applicationVersion;
+    private String applicationName;
+
     
+    /**
+     * Creates a Controller with a default user agent string.
+     */
+    public Controller(){
+        this(null, null, null);
     }
-     
+    
+    /**
+     * Creates a Controller with a custom user agent string.
+     * 
+     * @param applicationName
+     *            custom application name used in user agent string. If
+     *            <code>null</code>, the default user agent string is used
+     * @param applicationVersion
+     *            custom application version used in user agent string
+     * @param applicationContact
+     *            contact URL or author email used in user agent string
+     */
+    public Controller(String applicationName, String applicationVersion,
+            String applicationContact) {
+        this.applicationName = applicationName;
+        this.applicationVersion = applicationVersion;
+        this.applicationContact = applicationContact;
+    }
+    
     // -------------- Search  -------------------------------------------------//
     
     // To be Overridden
@@ -386,16 +412,42 @@ public abstract class Controller extends DomainsWs2{
     
     private WebService getDefaultQueryWs(){
         
-        return new HttpClientWebServiceWs2();
+        return createWebService(applicationName, applicationVersion,
+                applicationContact);
     }
     private WebService getDefaultAnnotationWs(){
         
-        WebService adws = new HttpClientWebServiceWs2();
+        WebService adws = createWebService(applicationName, applicationVersion,
+                applicationContact);
 
         ((DefaultWebServiceWs2)adws).setHost(ANNOTATIONHOST);
         
         return adws;
     }
+
+    /**
+     * Creates an instance of the web service implementation.
+     * 
+     * @param userAgentName
+     *            custom application name used in user agent string. If
+     *            <code>null</code>, the default user agent string is used.
+     * @param userAgentVersion
+     *            custom application version used in user agent string
+     * @param userAgentContact
+     *            contact URL or author email used in user agent string
+     * 
+     * @return a new instance of the web service implementation.
+     */
+    private WebService createWebService(String userAgentName,
+            String userAgentVersion, String userAgentContact) {
+        if (userAgentName != null) {
+            return new HttpClientWebServiceWs2(userAgentName, userAgentVersion,
+                    userAgentContact);
+        } else {
+            return new HttpClientWebServiceWs2();
+        }
+    }
+
     /**
      * @return the queryWs
      */

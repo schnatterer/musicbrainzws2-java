@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Logger;
+import java.util.TimeZone;
 import org.apache.commons.lang3.StringUtils;
 
 import org.musicbrainz.model.ArtistCreditWs2;
@@ -232,6 +233,9 @@ public class ReleaseGroupWs2 extends EntityWs2 {
 
         if (firstReleaseDateStr.length() == 7) 
                 f = new SimpleDateFormat("yyyy-MM");
+
+        // Values returned by musicbrainz.org are always in UTC!
+        f.setTimeZone(TimeZone.getTimeZone("UTC"));
 
         try {
                 return f.parse(firstReleaseDateStr);

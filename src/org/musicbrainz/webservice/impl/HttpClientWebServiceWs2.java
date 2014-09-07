@@ -7,8 +7,11 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.zip.GZIPInputStream;
 import javax.net.ssl.SSLHandshakeException;
 
+import org.apache.http.Header;
+import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
 import org.apache.http.HttpEntityEnclosingRequest;
@@ -60,11 +63,34 @@ public class HttpClientWebServiceWs2 extends DefaultWebServiceWs2
     private DefaultHttpClient httpClient;
 	
     /**
+     * Default constructor creates a httpClient with default properties.      */
+    private String userAgent;
+
+    /**
      * Default constructor creates a httpClient with default properties. 
      */
     public HttpClientWebServiceWs2() 
     {
+            userAgent = createUserAgent();
             this.httpClient = new DefaultHttpClient();
+    }
+
+    /**
+     * Use this constructor to inject a configured {@link DefaultHttpClient}.
+     * 
+     * @param httpClient A configured {@link DefaultHttpClient}.
+     *
+     *            custom application name used in user agent string
+     * @param applicationVersion
+     *            custom application version used in user agent string
+     * @param applicationContact
+     *            contact URL or author email used in user agent string
+     */
+    public HttpClientWebServiceWs2(String applicationName,
+            String applicationVersion, String applicationContact) {
+        userAgent = createUserAgent(applicationName, applicationVersion,
+                applicationContact);
+        this.httpClient = new DefaultHttpClient();
     }
 
     /**
@@ -83,7 +109,7 @@ public class HttpClientWebServiceWs2 extends DefaultWebServiceWs2
 
         HttpConnectionParams.setConnectionTimeout(connectionParams, 60000);
         HttpConnectionParams.setSoTimeout(connectionParams, 60000);
-        connectionParams.setParameter("http.useragent", USERAGENT);
+        connectionParams.setParameter("http.useragent", userAgent);
         connectionParams.setParameter("http.protocol.content-charset", "UTF-8");
         
         if (getUsername() != null && !getUsername().isEmpty())
@@ -214,13 +240,16 @@ public class HttpClientWebServiceWs2 extends DefaultWebServiceWs2
         
         HttpParams params = new BasicHttpParams();
         HttpProtocolParamBean paramsBean = new HttpProtocolParamBean(params);
-        paramsBean.setUserAgent(USERAGENT);
+        paramsBean.setUserAgent(userAgent);
         method.setParams(params);
         wait(1);
+        // Try using compression
+        method.setHeader("Accept-Encoding", "gzip");
+        
         try 
         {
           // Execute the method.
-          System.out.println("Hitting url: " + method.getURI().toString());
+          log.finer("Hitting url: " + method.getURI().toString());
           HttpResponse response = this.httpClient.execute(method);
           
           lastHitTime =System.currentTimeMillis();
@@ -247,6 +276,13 @@ public class HttpClientWebServiceWs2 extends DefaultWebServiceWs2
             }
             case HttpStatus.SC_OK:
                     InputStream instream = response.getEntity().getContent();
+                    // Check if content is compressed
+                    Header contentEncoding = response
+                            .getFirstHeader("Content-Encoding");
+                    if (contentEncoding != null
+                            && contentEncoding.getValue().equalsIgnoreCase("gzip")) {
+                        instream = new GZIPInputStream(instream);
+                    }
                     Metadata mtd= getParser().parse(instream);
                     //Closing the input stream will trigger connection release
                     try { instream.close(); } catch (Exception ignore) {}
@@ -309,7 +345,7 @@ public class HttpClientWebServiceWs2 extends DefaultWebServiceWs2
             catch (IllegalStateException ignore) {}
             
         finally {
-            try {EntityUtils.consume(response.getEntity());} catch (IOException ex) {} 
+            try {consume(response.getEntity());} catch (IOException ex) {} 
         }
         return msg;
     }
@@ -357,4 +393,26 @@ public class HttpClientWebServiceWs2 extends DefaultWebServiceWs2
             return null;  
          }  
      }  
+     
+    /**
+     * Ensures that the entity content is fully consumed and the content stream,
+     * if exists, is closed.
+     * 
+     * @param entity
+     * @throws IOException
+     *             if an error occurs reading the input stream
+     * 
+     */
+    private void consume(final HttpEntity entity) throws IOException {
+        if (entity == null) {
+            return;
 }
+        if (entity.isStreaming()) {
+            InputStream instream = entity.getContent();
+            if (instream != null) {
+                instream.close();
+            }
+        }
+    }
+}
+    

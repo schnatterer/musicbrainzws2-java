@@ -48,6 +48,7 @@ import org.musicbrainz.query.QueryWs2;
 import org.musicbrainz.webservice.AuthorizationException;
 import org.musicbrainz.webservice.DefaultWebServiceWs2;
 
+// TODO proper unit test coverage is needed and all commented @test should pass
 public class UnitTests {
 
     static Logger log = Logger.getLogger(UnitTests.class.getName());
@@ -445,7 +446,7 @@ public class UnitTests {
         }
     }
     //@Test
-    public void SynopsisUseCase3(){
+    public void SynopsisUseCase3() throws MBWS2Exception {
         log.info("synopsisUseCase3");
         
         //To search releases by pink floyd, released in 1982:
