@@ -105,6 +105,7 @@ public abstract class DomainsWs2 {
     public static final String SECONDARYTYPELIST =  "secondary-type-list";
     
     public static final String ATTRIBUTELIST = "attribute-list";
+    public static final String ATTRIBUTE = "attribute";
     public static final String TAGLIST = "tag-list";
     public static final String USERTAGLIST = "user-tag-list";
 

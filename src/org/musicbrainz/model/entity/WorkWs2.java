@@ -8,6 +8,7 @@ import java.util.Arrays;
 import org.apache.commons.lang3.StringUtils;
 import org.musicbrainz.model.ArtistCreditWs2;
 import org.musicbrainz.model.RelationWs2;
+import org.musicbrainz.model.WorkAttributeWs2;
 import org.musicbrainz.utils.MbUtils;
 
 /**
@@ -30,6 +31,8 @@ public class WorkWs2 extends EntityWs2
     private List<String> iswcList = new ArrayList <String>();
     private String disambiguation;
     private String textLanguage;
+    //15/09/2014
+    private List<WorkAttributeWs2> attributes = new ArrayList <WorkAttributeWs2>();
     
     public WorkWs2() {
 
@@ -139,7 +142,20 @@ public class WorkWs2 extends EntityWs2
            return getWritersString();
            
    }
+   /**
+     * @return the attributeList
+     */
+    public List<WorkAttributeWs2> getAttributes() {
+        return attributes;
+    }
 
+    /**
+     * @param attributeList the attributeList to set
+     */
+    public void setAttributes(List<WorkAttributeWs2> attributes) {
+        this.attributes = attributes;
+    }
+    
     @Override
     public String toString() {
         return getUniqueTitle()+" by "+getBy();

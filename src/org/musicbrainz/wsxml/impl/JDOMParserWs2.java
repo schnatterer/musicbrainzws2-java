@@ -61,6 +61,7 @@ import org.musicbrainz.model.entity.listelement.ArtistListWs2;
 import org.musicbrainz.model.entity.listelement.LabelListWs2;
 import org.musicbrainz.model.entity.listelement.RecordingListWs2;
 import org.musicbrainz.model.RelationListWs2;
+import org.musicbrainz.model.WorkAttributeWs2;
 import org.musicbrainz.model.entity.listelement.ReleaseGroupListWs2;
 import org.musicbrainz.model.entity.listelement.ReleaseListWs2;
 import org.musicbrainz.model.entity.listelement.WorkListWs2;
@@ -763,7 +764,7 @@ public class JDOMParserWs2 extends DomainsWs2 implements MbXmlParser  {
               }
               else if (attribute.getName().equals(SCORE)){
                   //ignore.
-              }  
+              } 
               else{
                   log.warning("Unrecognised Work attribute: "+attribute.getName());
               }
@@ -810,14 +811,67 @@ public class JDOMParserWs2 extends DomainsWs2 implements MbXmlParser  {
             else if (USERTAGLIST.equals(child.getName())) { 
                         addUserTags (child, work);
             }
-            else
-            {
+            else if (ATTRIBUTELIST.equals(child.getName())){
+                work.setAttributes(createAttributeList(child));  
+            }
+            else {
                 log.warning("Unrecognised Work element: "+child.getName());
             }
         }
         return work;
     }
+    protected List<WorkAttributeWs2>  createAttributeList(Element node){
+         List<WorkAttributeWs2> workAttributes
+            = new ArrayList<WorkAttributeWs2>(); 
 
+        Iterator itr = node.getAttributes().iterator();
+        while (itr.hasNext()) {
+              Attribute attribute = (Attribute)itr.next();
+              log.warning("Unrecognised Work Attribute List attribute: "+attribute.getName());
+        }
+
+        itr = node.getChildren().iterator();
+        Element child;
+        while(itr.hasNext()){
+            
+            child = (Element)itr.next();
+
+            if (ATTRIBUTE.equals(child.getName())) {
+                WorkAttributeWs2 wa = createWorkAttribute(child);
+                workAttributes.add(wa); 
+            }
+            else{
+                    log.warning("Unrecognised Release Event List element: "+child.getName());
+            }
+        }
+        return workAttributes;
+    }
+    protected WorkAttributeWs2 createWorkAttribute(Element node) {
+        
+        String type="";
+        String value="";
+        
+        Iterator itrWorkAttribute = node.getAttributes().iterator();
+        while (itrWorkAttribute.hasNext()) {
+            
+            Attribute attribute = (Attribute)itrWorkAttribute.next();
+            if (attribute.getName().equals(TYPE)){     
+                type = attribute.getValue();
+              }
+            else {
+              log.warning("Unrecognised Work Attribute attribute: "+attribute.getName());
+            }
+        }
+        itrWorkAttribute = node.getChildren().iterator();
+        Element elWorkAttribute;
+        while(itrWorkAttribute.hasNext())  {
+            elWorkAttribute = (Element)itrWorkAttribute.next();
+            log.warning("Unrecognised Work Attribute element: "+elWorkAttribute.getName());
+        }
+        value = node.getText();
+        return new WorkAttributeWs2(type, value);
+    }
+    
     protected RelationWs2 createRelation(Element node, String targetType){
 
         RelationWs2 relation = new RelationWs2();
@@ -2091,7 +2145,7 @@ protected List<AliasWs2> createAliasList(Element node){
             }
         }
     }
-
+//-------------------------------------------------------------------//
     protected void updateListElement(Element node, ListElement le) {
         le.setCount(getLongAttr(node, COUNT));
         le.setOffset(getLongAttr(node, OFFSET));

@@ -123,7 +123,7 @@ public class Image {
         if (thumbnail == null){
             smallThumbnail=getSmallThumbnail();
         }
-        Thumbnail150 = new ImageIcon(ImageHandler.resizeProps(thumbnail,150,150));
+        Thumbnail150 = new ImageIcon(ImageHandler.resizeMantainProps(thumbnail,150,150));
         return Thumbnail150;
     }
     /**

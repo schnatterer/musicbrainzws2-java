@@ -95,16 +95,7 @@ public class RelationWs2 extends DomainsWs2{
 	 * The target entity
 	 */
 	private EntityWs2 target;
-            /**
-	 * The description of the relation, calculatet on
-         * the Type and the Attributes.
-	 */
-	private String description;
-
-           private List<String> attrValList;
-           private List<String> attrKeyList;
-           private List<String> wordList;
-
+            
     /**
      * @return the attributes
      */
