@@ -78,7 +78,7 @@ public class InstrumentSearchWs2 extends SearchWs2{
     private InstrumentSearchResultsWs2 execQuery() throws MBWS2Exception
     {
 
-        InstrumentSearchResultsWs2 le = getMetadata(ARTIST).getInstrumentResultsWs2();
+        InstrumentSearchResultsWs2 le = getMetadata(INSTRUMENT).getInstrumentResultsWs2();
         setListElement(le);
         
         int sz  = le.getInstrumentResults().size();

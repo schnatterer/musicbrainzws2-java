@@ -78,7 +78,7 @@ public class AreaSearchWs2 extends SearchWs2{
     private AreaSearchResultsWs2 execQuery() throws MBWS2Exception
     {
 
-        AreaSearchResultsWs2 le = getMetadata(ARTIST).getAreaResultsWs2();
+        AreaSearchResultsWs2 le = getMetadata(AREA).getAreaResultsWs2();
         setListElement(le);
         
         int sz  = le.getAreaResults().size();

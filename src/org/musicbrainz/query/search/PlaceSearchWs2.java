@@ -78,7 +78,7 @@ public class PlaceSearchWs2 extends SearchWs2{
     private PlaceSearchResultsWs2 execQuery() throws MBWS2Exception
     {
 
-        PlaceSearchResultsWs2 le = getMetadata(ARTIST).getPlaceResultsWs2();
+        PlaceSearchResultsWs2 le = getMetadata(PLACE).getPlaceResultsWs2();
         setListElement(le);
         
         int sz  = le.getPlaceResults().size();

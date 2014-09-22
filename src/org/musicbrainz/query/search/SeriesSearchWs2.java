@@ -78,7 +78,7 @@ public class SeriesSearchWs2 extends SearchWs2{
     private SeriesSearchResultsWs2 execQuery() throws MBWS2Exception
     {
 
-        SeriesSearchResultsWs2 le = getMetadata(ARTIST).getSeriesResultsWs2();
+        SeriesSearchResultsWs2 le = getMetadata(SERIES).getSeriesResultsWs2();
         setListElement(le);
         
         int sz  = le.getSeriesResults().size();
