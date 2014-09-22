@@ -1,5 +1,4 @@
 package org.musicbrainz.junit;
-import org.musicbrainz.webservice.impl.*;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -34,7 +33,6 @@ import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.message.BasicHeader;
 import org.apache.http.util.EntityUtils;
-import org.musicbrainz.query.submission.SubmissionWs2;
 import org.musicbrainz.webservice.AuthorizationException;
 import org.musicbrainz.webservice.DefaultWebServiceWs2;
 import org.musicbrainz.webservice.RequestException;

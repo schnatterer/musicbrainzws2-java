@@ -2,7 +2,10 @@ package org.musicbrainz.model.entity;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Logger;
 import org.apache.commons.lang3.StringUtils;
@@ -12,6 +15,7 @@ import org.musicbrainz.model.ArtistCreditWs2;
 import org.musicbrainz.model.CoverArtArchiveWs2;
 import org.musicbrainz.model.LabelInfoListWs2;
 import org.musicbrainz.model.MediumListWs2;
+import org.musicbrainz.model.RelationWs2;
 import org.musicbrainz.model.ReleaseEventListWs2;
 /**
  * <p>Represents a release.</p>
@@ -60,6 +64,8 @@ public class ReleaseWs2 extends EntityWs2 {
     private MediumListWs2 mediumList;
     private ReleaseEventListWs2 eventList;
     private CoverArtArchiveWs2 coverArtArchive;
+    
+    private SeriesWs2 series;
     
     // Recording is via Medium.
 
@@ -320,7 +326,30 @@ public class ReleaseWs2 extends EntityWs2 {
     public List<Image> getImageList(){
         return getCoverArtArchive().getImageList();
     }
-    
+    public String getSeriesDisplay() {
+        
+        if (getRelationList() == null ) return "";
+        if (getRelationList().getRelations().isEmpty()) return "";
+
+        List<String> names = new ArrayList<String>();
+        for (Iterator <RelationWs2> i = getRelationList().getRelations().iterator(); i.hasNext();)
+        {
+            RelationWs2 r = i.next();
+            if (!r.getTargetType().equals(RelationWs2.TO_SERIES)) continue;
+            if (!r.getType().equals(RelationWs2.PARTOFSERIES)) continue;
+            
+            SeriesWs2 series = (SeriesWs2)r.getTarget();
+            String name = series.getName();
+
+            names.add(name);
+        }
+        String out = Arrays.toString(names.toArray()).trim();
+        out = out.substring(1);
+        out = out.substring(0, out.length()-1).trim();
+
+        return out;
+        
+    }
     @Override
     public String toString() {
         return getUniqueTitle();
@@ -335,7 +364,6 @@ public class ReleaseWs2 extends EntityWs2 {
         {
             return true;
         }
-
         return false;
     }
 

@@ -251,41 +251,6 @@ public class ReleaseGroupWs2 extends EntityWs2 {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy");
         return dateFormat.format(d.getTime());
     }
-    /*
-    // Older method to retrieve the first release.
-    
-    private ReleaseWs2 getEarliestRelease() {
-            
-            if ( getReleaseList() == null ||
-                  getReleaseList().getReleases() == null || 
-                  getReleaseList().getReleases().isEmpty())
-                   
-                return null;
-            
-            List<ReleaseWs2> sorted = 
-                    new ArrayList<ReleaseWs2>();
-            
-            for (ReleaseWs2 rel : getReleaseList().getReleases())
-            {
-                if (rel.getDate()!=null)
-                {
-                    sorted.add(rel);
-                }
-            }
-            
-            if (sorted.isEmpty()) return null;
-            
-            Collections.sort(sorted, new Comparator<ReleaseWs2>()
-                    {
-                            public int compare(ReleaseWs2 o1, ReleaseWs2 o2) {         
-                                    return o1.getDate().compareTo(o2.getDate());
-                            }
-                    }
-            );
-
-            return sorted.get(0);
-    }
-   */
     @Override
     public String toString() {
             return getTitle();
@@ -303,6 +268,5 @@ public class ReleaseGroupWs2 extends EntityWs2 {
 
         return false;
     }
-
-    
+ 
 }

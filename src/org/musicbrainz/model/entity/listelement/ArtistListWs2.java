@@ -25,7 +25,7 @@ public class ArtistListWs2 extends ListElement{
 	/**
 	 * @param artists the artists to set
 	 */
-	public void setArtist(List<ArtistWs2> artists) {
+	public void setArtists(List<ArtistWs2> artists) {
 		this.artists = artists;
 	}
 	

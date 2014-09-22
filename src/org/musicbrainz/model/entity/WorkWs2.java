@@ -33,10 +33,6 @@ public class WorkWs2 extends EntityWs2
     private String textLanguage;
     //15/09/2014
     private List<WorkAttributeWs2> attributes = new ArrayList <WorkAttributeWs2>();
-    
-    public WorkWs2() {
-
-    }
 
     public String getTypeURI() {
         return typeURI;

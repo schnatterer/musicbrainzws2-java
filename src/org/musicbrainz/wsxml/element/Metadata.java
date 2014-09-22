@@ -14,20 +14,32 @@ import org.musicbrainz.model.entity.ReleaseGroupWs2;
 import org.musicbrainz.model.entity.ReleaseWs2;
 import org.musicbrainz.model.entity.WorkWs2;
 import org.musicbrainz.model.AnnotationListWs2;
+import org.musicbrainz.model.entity.AreaWs2;
+import org.musicbrainz.model.entity.InstrumentWs2;
+import org.musicbrainz.model.entity.PlaceWs2;
+import org.musicbrainz.model.entity.SeriesWs2;
+import org.musicbrainz.model.entity.listelement.AreaListWs2;
 import org.musicbrainz.model.entity.listelement.ArtistListWs2;
 import org.musicbrainz.model.entity.listelement.CollectionListWs2;
+import org.musicbrainz.model.entity.listelement.InstrumentListWs2;
 import org.musicbrainz.model.entity.listelement.LabelListWs2;
+import org.musicbrainz.model.entity.listelement.PlaceListWs2;
 import org.musicbrainz.model.entity.listelement.RecordingListWs2;
 import org.musicbrainz.model.entity.listelement.ReleaseGroupListWs2;
 import org.musicbrainz.model.entity.listelement.ReleaseListWs2;
+import org.musicbrainz.model.entity.listelement.SeriesListWs2;
 import org.musicbrainz.model.entity.listelement.WorkListWs2;
 import org.musicbrainz.model.searchresult.listelement.AnnotationSearchResultsWs2;
+import org.musicbrainz.model.searchresult.listelement.AreaSearchResultsWs2;
 import org.musicbrainz.model.searchresult.listelement.ArtistSearchResultsWs2;
 import org.musicbrainz.model.searchresult.listelement.CollectionSearchResultsWs2;
+import org.musicbrainz.model.searchresult.listelement.InstrumentSearchResultsWs2;
 import org.musicbrainz.model.searchresult.listelement.LabelSearchResultsWs2;
+import org.musicbrainz.model.searchresult.listelement.PlaceSearchResultsWs2;
 import org.musicbrainz.model.searchresult.listelement.RecordingSearchResultsWs2;
 import org.musicbrainz.model.searchresult.listelement.ReleaseGroupSearchResultsWs2;
 import org.musicbrainz.model.searchresult.listelement.ReleaseSearchResultsWs2;
+import org.musicbrainz.model.searchresult.listelement.SeriesSearchResultsWs2;
 import org.musicbrainz.model.searchresult.listelement.WorkSearchResultsWs2;
 import org.musicbrainz.query.submission.SubmissionWs2;
 import org.musicbrainz.wsxml.MbXmlParser;
@@ -47,14 +59,16 @@ import org.musicbrainz.wsxml.MbXmlParser;
  */
 public class Metadata {
 
-    //Ws2
-    
     private LabelSearchResultsWs2 labelResultsWs2 = new LabelSearchResultsWs2();
     private ArtistSearchResultsWs2 artistResultsWs2 = new ArtistSearchResultsWs2();
     private ReleaseGroupSearchResultsWs2 releaseGroupResultsWs2 = new ReleaseGroupSearchResultsWs2();
     private ReleaseSearchResultsWs2 releaseResultsWs2 = new ReleaseSearchResultsWs2();
     private WorkSearchResultsWs2 workResultsWs2 = new WorkSearchResultsWs2();
     private RecordingSearchResultsWs2 recordingResultsWs2 = new RecordingSearchResultsWs2();
+    private AreaSearchResultsWs2 areaResultsWs2 = new AreaSearchResultsWs2();
+    private PlaceSearchResultsWs2 placeResultsWs2 = new PlaceSearchResultsWs2();
+    private InstrumentSearchResultsWs2 instrumentResultsWs2 = new InstrumentSearchResultsWs2();
+    private SeriesSearchResultsWs2 seriesResultsWs2 = new SeriesSearchResultsWs2();
     private AnnotationSearchResultsWs2 annotationResultsWs2 = new AnnotationSearchResultsWs2();
     private CollectionSearchResultsWs2 collectionResultsWs2 = new CollectionSearchResultsWs2();
     
@@ -65,6 +79,11 @@ public class Metadata {
     private ReleaseWs2 releaseWs2 = null;
     private WorkWs2 workWs2 = null;
     private RecordingWs2 recordingWs2 = null;
+    private AreaWs2 areaWs2 = null;
+    private PlaceWs2 placeWs2 = null;
+    private InstrumentWs2 instrumentWs2 = null;
+    private SeriesWs2 seriesWs2 = null;
+    
     private AnnotationWs2 annotationWs2 = null;
     private CollectionWs2 collectionWs2 = null;
     private DiscWs2 discWs2 = null;
@@ -227,7 +246,6 @@ public class Metadata {
     public void setMessage(String message) {
         this.message = message;
     }
-
     /**
      * @return the submissionWs2
      */
@@ -241,4 +259,125 @@ public class Metadata {
     public void setSubmissionWs2(SubmissionWs2 submissionWs2) {
         this.submissionWs2 = submissionWs2;
     }
+
+    /**
+     * @return the areaWs2
+     */
+    public AreaWs2 getAreaWs2() {
+        return areaWs2;
+    }
+
+    /**
+     * @return the placeWs2
+     */
+    public PlaceWs2 getPlaceWs2() {
+        return placeWs2;
+    }
+
+    /**
+     * @return the instrumentWs2
+     */
+    public InstrumentWs2 getInstrumentWs2() {
+        return instrumentWs2;
+    }
+
+    /**
+     * @return the seriesWs2
+     */
+    public SeriesWs2 getSeriesWs2() {
+        return seriesWs2;
+    }
+
+    /**
+     * @param areaWs2 the areaWs2 to set
+     */
+    public void setAreaWs2(AreaWs2 areaWs2) {
+        this.areaWs2 = areaWs2;
+    }
+
+    /**
+     * @param placeWs2 the placeWs2 to set
+     */
+    public void setPlaceWs2(PlaceWs2 placeWs2) {
+        this.placeWs2 = placeWs2;
+    }
+
+    /**
+     * @param instrumentWs2 the instrumentWs2 to set
+     */
+    public void setInstrumentWs2(InstrumentWs2 instrumentWs2) {
+        this.instrumentWs2 = instrumentWs2;
+    }
+
+    /**
+     * @param seriesWs2 the seriesWs2 to set
+     */
+    public void setSeriesWs2(SeriesWs2 seriesWs2) {
+        this.seriesWs2 = seriesWs2;
+    }
+
+    /**
+     * @return the areaResultsWs2
+     */
+    public AreaSearchResultsWs2 getAreaResultsWs2() {
+        return areaResultsWs2;
+    }
+    public AreaListWs2 getAreaListWs2() {
+        return getAreaResultsWs2().getAreaList();
+    }
+    /**
+     * @return the placeResultsWs2
+     */
+    public PlaceSearchResultsWs2 getPlaceResultsWs2() {
+        return placeResultsWs2;
+    }
+    public PlaceListWs2 getPlaceListWs2() {
+        return getPlaceResultsWs2().getPlaceList();
+    }
+    /**
+     * @return the instrumentResultsWs2
+     */
+    public InstrumentSearchResultsWs2 getInstrumentResultsWs2() {
+        return instrumentResultsWs2;
+    }
+    public InstrumentListWs2 getInstrumentListWs2() {
+        return getInstrumentResultsWs2().getInstrumentList();
+    }
+    /**
+     * @return the seriesResultsWs2
+     */
+    public SeriesSearchResultsWs2 getSeriesResultsWs2() {
+        return seriesResultsWs2;
+    }
+    public SeriesListWs2 getSeriesListWs2() {
+        return getSeriesResultsWs2().getSeriesList();
+    }
+    /**
+     * @param areaResultsWs2 the areaResultsWs2 to set
+     */
+    public void setAreaResultsWs2(AreaSearchResultsWs2 areaResultsWs2) {
+        this.areaResultsWs2 = areaResultsWs2;
+    }
+
+    /**
+     * @param placeResultsWs2 the placeResultsWs2 to set
+     */
+    public void setPlaceResultsWs2(PlaceSearchResultsWs2 placeResultsWs2) {
+        this.placeResultsWs2 = placeResultsWs2;
+    }
+
+    /**
+     * @param instrumentResultsWs2 the instrumentResultsWs2 to set
+     */
+    public void setInstrumentResultsWs2(InstrumentSearchResultsWs2 instrumentResultsWs2) {
+        this.instrumentResultsWs2 = instrumentResultsWs2;
+    }
+
+    /**
+     * @param seriesResultsWs2 the seriesResultsWs2 to set
+     */
+    public void setSeriesResultsWs2(SeriesSearchResultsWs2 seriesResultsWs2) {
+        this.seriesResultsWs2 = seriesResultsWs2;
+    }
+
 }

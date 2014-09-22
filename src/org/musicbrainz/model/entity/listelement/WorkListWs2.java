@@ -28,7 +28,7 @@ public class WorkListWs2 extends ListElement{
 		this.works = works;
 	}
 
-	public void addWorks(WorkWs2 work) 
+	public void addWork(WorkWs2 work) 
 	{
 		if (works == null) {
 			works = new ArrayList<WorkWs2>();
@@ -36,12 +36,12 @@ public class WorkListWs2 extends ListElement{
 		
 		works.add(work);
 	}
-           public void addAllWorks(List<WorkWs2> WorkList) 
+           public void addAllWorks(List<WorkWs2> workList) 
 	{
                 if (works == null) {
                         works = new ArrayList<WorkWs2>();
                 }
 
-                works.addAll(WorkList);
+                works.addAll(workList);
 	}
 }

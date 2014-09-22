@@ -7,7 +7,6 @@ import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 
-import org.musicbrainz.model.AreaWs2;
 import org.musicbrainz.model.LifeSpanWs2;
 import org.musicbrainz.model.entity.listelement.RecordingListWs2;
 import org.musicbrainz.model.entity.listelement.ReleaseGroupListWs2;
@@ -544,7 +543,7 @@ public class ArtistWs2 extends EntityWs2 {
 		if (workList == null) {
 			workList = new WorkListWs2();
 		} 
-		workList.addWorks(work);
+		workList.addWork(work);
 	}
 
 	/* (non-Javadoc)

@@ -35,18 +35,26 @@ public class RelationWs2 extends DomainsWs2{
            public static final String TO_RELEASE_GROUP = NS_REL_2_PREFIX + "release_group";
 	public static final String TO_URL = NS_REL_2_PREFIX + "url";
            public static final String TO_WORK = NS_REL_2_PREFIX + "work";
-          
+           // 2014/09/20
+           public static final String TO_AREA = NS_REL_2_PREFIX + "area";
+           public static final String TO_PLACE = NS_REL_2_PREFIX + "place";
+           public static final String TO_INSTRUMENT = NS_REL_2_PREFIX + "instrument";
+           public static final String TO_SERIES= NS_REL_2_PREFIX + "series";
 	/**
 	 * Relation reading directions
 	 */
 	public static final String DIR_BOTH = "both";
 	public static final String DIR_FORWARD = "forward";
-	public static final String DIR_BACKWARD = "backward";
+	public static final String DIR_BACKWARD = "backward";	
+          // prefixed.
+           public static final String DIR_BOTH_PREF= NS_REL_2_PREFIX + DIR_BOTH;
+	public static final String DIR_FORWARD_PREF = NS_REL_2_PREFIX + DIR_FORWARD;
+	public static final String DIR_BACKWARD_PREF = NS_REL_2_PREFIX + DIR_BACKWARD;
+        
            
            /*
          *  Attributes not on/off
          */
-            
             public static final String ATTR_DESCRIPTION = "description";
             public static final String ATTR_LICENSE = "license";
             public static final String ATTR_POSITION = "position"; //proposal RFC-315
@@ -55,6 +63,17 @@ public class RelationWs2 extends DomainsWs2{
             public static final String ATTR_VOCAL = "vocal";
             public static final String ATTR_INSTRUMENT = "instrument";
 
+            /*
+         *  Relation types fixed for special purposes   
+         */
+            // From recording to Series.
+            public static final String PARTOFSERIES = NS_REL_2_PREFIX + "part of";
+            // From release to place.
+            public static final String RECORDEDAT = NS_REL_2_PREFIX + "recorded at";
+            public static final String MIXEDAT = NS_REL_2_PREFIX + "mixed at";
+            // From area to Area
+            public static final String PARTOFAREA = NS_REL_2_PREFIX + "part of";
+            
 	/**
 	 * The relation's tpye
 	 */
@@ -70,7 +89,10 @@ public class RelationWs2 extends DomainsWs2{
 	 * The target's type
 	 */
 	private String targetType;
-	
+	/**
+	* The ordering Key.
+	*/
+           private Integer orderingKey;
 	/**
 	 * One of {@link RelationWs1#DIR_FORWARD}, {@link RelationWs1#DIR_BACKWARD} or {@link RelationWs1#DIR_BOTH} 
 	 */
@@ -238,5 +260,19 @@ public class RelationWs2 extends DomainsWs2{
      */
     public void setEnded(boolean ended) {
         this.ended = ended;
+    }
+
+    /**
+     * @return the orderingKey
+     */
+    public Integer getOrderingKey() {
+        return orderingKey;
+    }
+
+    /**
+     * @param orderingKey the orderingKey to set
+     */
+    public void setOrderingKey(Integer orderingKey) {
+        this.orderingKey = orderingKey;
     }
 }

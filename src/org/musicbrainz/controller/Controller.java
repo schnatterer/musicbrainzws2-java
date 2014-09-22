@@ -155,6 +155,11 @@ public abstract class Controller extends DomainsWs2{
         if (getIncludes().isWorkRelations() && !getIncluded().isWorkRelations()) inc.setWorkRelations(true);
         if (getIncludes().isUrlRelations() && !getIncluded().isUrlRelations()) inc.setUrlRelations(true);
         
+        if (getIncludes().isAreaRelations() && !getIncluded().isAreaRelations()) inc.setAreaRelations(true);
+        if (getIncludes().isPlaceRelations() && !getIncluded().isPlaceRelations()) inc.setPlaceRelations(true);
+        if (getIncludes().isInstrumentRelations() && !getIncluded().isInstrumentRelations()) inc.setInstrumentRelations(true);
+        if (getIncludes().isSeriesRelations() && !getIncluded().isSeriesRelations()) inc.setSeriesRelations(true);
+        
         if (getIncludes().isRecordingLevelRelations() && !getIncluded().isRecordingLevelRelations()) inc.setRecordingLevelRelations(true);
         if (getIncludes().isWorkLevelRelations() && !getIncluded().isWorkLevelRelations()) inc.setWorkLevelRelations(true);
         
@@ -177,6 +182,10 @@ public abstract class Controller extends DomainsWs2{
                     inc.isRecordingRelations()||
                     inc.isWorkRelations()||
                     inc.isUrlRelations()||
+                    inc.isAreaRelations()||
+                    inc.isPlaceRelations()||
+                    inc.isInstrumentRelations()||
+                    inc.isSeriesRelations()||
                     inc.isTags()||
                     inc.isRatings()||
                     inc.isUserTags()||
@@ -184,11 +193,12 @@ public abstract class Controller extends DomainsWs2{
     }
     protected void updateEntity(EntityWs2 entity, EntityWs2 transit, IncludesWs2 inc) throws MBWS2Exception{
     
+        updateRelations(entity,transit,inc);
         updateTags(entity,transit,inc);
         updateRatings(entity,transit,inc);
         updateUserTags(entity,transit,inc);
         updateUserRatings(entity,transit,inc);
-        updateRelations(entity,transit,inc);
+        
         
     }
     
@@ -314,6 +324,10 @@ public abstract class Controller extends DomainsWs2{
             if (inc.isReleaseGroupRelations()) getIncluded().setReleaseGroupRelations(true);
             if (inc.isRecordingRelations()) getIncluded().setRecordingRelations(true);
             if (inc.isWorkRelations()) getIncluded().setWorkRelations(true);
+            if (inc.isAreaRelations()) getIncluded().setAreaRelations(true);
+            if (inc.isPlaceRelations()) getIncluded().setPlaceRelations(true);
+            if (inc.isInstrumentRelations()) getIncluded().setInstrumentRelations(true);
+            if (inc.isSeriesRelations()) getIncluded().setSeriesRelations(true);
             if (inc.isUrlRelations()) getIncluded().setUrlRelations(true);
             
             if (inc.isRecordingLevelRelations()) getIncluded().setRecordingLevelRelations(true);

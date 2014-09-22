@@ -93,11 +93,16 @@ public class Recording extends Controller{
         inc.setRecordingRelations(true);
         inc.setWorkRelations(true);
         
+        inc.setAreaRelations(true);
+        inc.setPlaceRelations(true);
+        inc.setInstrumentRelations(true);
+        inc.setSeriesRelations(true);
+        
         inc.setAnnotation(true);
         inc.setTags(true);
         inc.setRatings(true);
-        inc.setUserTags(false);
-        inc.setUserRatings(false);
+        inc.setUserTags(true);
+        inc.setUserRatings(true);
         inc.setArtistCredits(true);
         
         inc.setIsrcs(true);
@@ -315,6 +320,11 @@ public class Recording extends Controller{
         inc.setReleaseRelations(false);
         inc.setRecordingRelations(false);
         inc.setWorkRelations(false);
+        
+        inc.setAreaRelations(false);
+        inc.setPlaceRelations(false);
+        inc.setInstrumentRelations(false);
+        inc.setSeriesRelations(false);
 
         if (recordinginc == null) return inc;
         //if (recordinginc.isRecordingLevelRelations()) inc.setRecordingLevelRelations(true);
@@ -368,7 +378,4 @@ public class Recording extends Controller{
     public void setReleaseBrowseFilter(ReleaseBrowseFilterWs2 releaseBrowseFilter) {
         this.releaseBrowseFilter = releaseBrowseFilter;
     }
-
-
-
 }

@@ -1,0 +1,2335 @@
+{\rtf1\ansi\ansicpg1252\deff0\deflang1040{\fonttbl{\f0\fswiss\fcharset0 Arial;}}
+{\*\generator Msftedit 5.41.15.1515;}\viewkind4\uc1\pard\f0\fs20 <?xml version="1.0" encoding="UTF-8"?>\par
+\par
+<!-- ==================================================================\par
+     $Id$\par
+\par
+     Relax NG Schema for MusicBrainz XML Metadata Version 2.0\par
+\par
+\par
+     This XML schema has been designed to represent music metadata.\par
+     Documentation and the latest revision can be found at\par
+\par
+        http://musicbrainz.org/development/mmd/\par
+\par
+\par
+     Copyright (c) 2006 Robert Kaye, Matthias Friedrich\par
+\par
+     The schema is released under the Creative Commons\par
+     Attribution-ShareAlike 2.5 license.\par
+\par
+     http://creativecommons.org/licenses/by-sa/2.5/\par
+\par
+     NOTE: This document was downloaded from musicbrainz at 20014-09-19.\par
+\par
+     ================================================================== -->\par
+\par
+\par
+<grammar xmlns="http://relaxng.org/ns/structure/1.0"\par
+         datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"\par
+         ns="http://musicbrainz.org/ns/mmd-2.0#">\par
+\par
+\par
+    <start>\par
+        <ref name="def_metadata-element"/>\par
+    </start>\par
+\par
+\par
+    <define name="def_metadata-element">\par
+        <element name="metadata">\par
+            <optional>\par
+                <attribute name="generator">\par
+                    <data type="anyURI"/>\par
+                </attribute>\par
+            </optional>\par
+            <optional>\par
+                <attribute name="created">\par
+                    <data type="dateTime"/>\par
+                </attribute>\par
+            </optional>\par
+\par
+            <optional>\par
+                <ref name="def_artist-element"/>\par
+            </optional>\par
+            <optional>\par
+                <ref name="def_release-element"/>\par
+            </optional>\par
+            <optional>\par
+                <ref name="def_release-group-element"/>\par
+            </optional>\par
+            <optional>\par
+                <ref name="def_recording-element"/>\par
+            </optional>\par
+            <optional>\par
+                <ref name="def_label-element"/>\par
+            </optional>\par
+            <optional>\par
+                <ref name="def_work-element"/>\par
+            </optional>\par
+            <optional>\par
+                <ref name="def_area-element"/>\par
+            </optional>\par
+            <optional>\par
+                <ref name="def_place-element"/>\par
+            </optional>\par
+            <optional>\par
+                <ref name="def_instrument-element"/>\par
+            </optional>\par
+            <optional>\par
+                <ref name="def_series-element"/>\par
+            </optional>\par
+            <optional>\par
+                <ref name="def_url-element"/>\par
+            </optional>\par
+            <optional>\par
+                <ref name="def_puid-element"/>\par
+            </optional>\par
+            <optional>\par
+                <ref name="def_isrc-element"/>\par
+            </optional>\par
+            <optional>\par
+                <ref name="def_disc-element"/>\par
+            </optional>\par
+            <optional>\par
+                <ref name="def_rating"/>\par
+            </optional>\par
+            <optional>\par
+                <ref name="def_user-rating"/>\par
+            </optional>\par
+            <optional>\par
+                <ref name="def_collection"/>\par
+            </optional>\par
+            <optional>\par
+                <ref name="def_editor-element"/>\par
+            </optional>\par
+            <optional>\par
+                <ref name="def_artist-list"/>\par
+            </optional>\par
+            <optional>\par
+                <ref name="def_release-list"/>\par
+            </optional>\par
+            <optional>\par
+                <ref name="def_release-group-list"/>\par
+            </optional>\par
+            <optional>\par
+                <ref name="def_recording-list"/>\par
+            </optional>\par
+            <optional>\par
+                <ref name="def_label-list"/>\par
+            </optional>\par
+            <optional>\par
+                <ref name="def_work-list"/>\par
+            </optional>\par
+            <optional>\par
+                <ref name="def_area-list"/>\par
+            </optional>\par
+            <optional>\par
+                <ref name="def_place-list"/>\par
+            </optional>\par
+            <optional>\par
+                <ref name="def_instrument-list"/>\par
+            </optional>\par
+            <optional>\par
+                <ref name="def_series-list"/>\par
+            </optional>\par
+            <optional>\par
+                <ref name="def_url-list"/>\par
+            </optional>\par
+            <optional>\par
+                <ref name="def_isrc-list"/>\par
+            </optional>\par
+            <optional>\par
+                <ref name="def_annotation-list"/>\par
+            </optional>\par
+            <optional>\par
+                <ref name="def_cdstub-list"/>\par
+            </optional>\par
+            <optional>\par
+                <ref name="def_freedb-disc-list"/>\par
+            </optional>\par
+            <optional>\par
+                <ref name="def_tag-list"/>\par
+            </optional>\par
+            <optional>\par
+                <ref name="def_user-tag-list"/>\par
+            </optional>\par
+            <optional>\par
+                <ref name="def_collection-list"/>\par
+            </optional>\par
+            <optional>\par
+                <ref name="def_editor-list"/>\par
+            </optional>\par
+            <optional>\par
+                <ref name="def_entity-list"/>\par
+            </optional>\par
+            <ref name="def_metadata-element_extension"/>\par
+        </element>\par
+    </define>\par
+\par
+\par
+    <define name="def_artist-element">\par
+        <element name="artist">\par
+            <optional>\par
+                <attribute name="id">\par
+                    <data type="anyURI"/>\par
+                </attribute>\par
+            </optional>\par
+            <optional>\par
+                <attribute name="type">\par
+                    <data type="anyURI"/>\par
+                </attribute>\par
+            </optional>\par
+            <ref name="def_artist-attribute_extension"/>\par
+\par
+            <optional>\par
+                <element name="name">\par
+                    <text/>\par
+                </element>\par
+            </optional>\par
+            <optional>\par
+                <element name="sort-name">\par
+                    <text/>\par
+                </element>\par
+            </optional>\par
+            <optional>\par
+                <element name="gender">\par
+                    <text/>\par
+                </element>\par
+            </optional>\par
+            <optional>\par
+                <element name="country">\par
+                    <ref name="def_iso-3166-1-code"/>\par
+                </element>\par
+            </optional>\par
+            <optional>\par
+                <ref name="def_area-element"/>\par
+            </optional>\par
+            <optional>\par
+                <element name="begin-area">\par
+                  <ref name="def_area-element_inner"/>\par
+                </element>\par
+            </optional>\par
+            <optional>\par
+                <element name="end-area">\par
+                  <ref name="def_area-element_inner"/>\par
+                </element>\par
+            </optional>\par
+            <optional>\par
+              <ref name="def_annotation" />\par
+            </optional>\par
+            <optional>\par
+                <element name="disambiguation">\par
+                    <text/>\par
+                </element>\par
+            </optional>\par
+            <optional>\par
+                <element name="ipi">\par
+                    <ref name="def_ipi"/>\par
+                </element>\par
+            </optional>\par
+            <optional>\par
+              <ref name="def_ipi-list" />\par
+            </optional>\par
+            <optional>\par
+                <element name="life-span">\par
+                    <optional>\par
+                        <element name="begin">\par
+                            <ref name="def_incomplete-date"/>\par
+                        </element>\par
+                    </optional>\par
+                    <optional>\par
+                        <element name="end">\par
+                            <ref name="def_incomplete-date"/>\par
+                        </element>\par
+                    </optional>\par
+                    <optional>\par
+                        <ref name="def_ended" />\par
+                    </optional>\par
+                </element>\par
+            </optional>\par
+\par
+            <optional>\par
+                <ref name="def_alias-list"/>\par
+            </optional>\par
+            <optional>\par
+                <ref name="def_recording-list"/>\par
+            </optional>\par
+            <optional>\par
+                <ref name="def_release-list"/>\par
+            </optional>\par
+            <optional>\par
+                <ref name="def_release-group-list"/>\par
+            </optional>\par
+            <optional>\par
+                <ref name="def_label-list"/>\par
+            </optional>\par
+            <optional>\par
+                <ref name="def_work-list"/>\par
+            </optional>\par
+            <zeroOrMore>\par
+                <ref name="def_relation-list"/>\par
+            </zeroOrMore>\par
+            <optional>\par
+                <ref name="def_tag-list"/>\par
+            </optional>\par
+            <optional>\par
+                <ref name="def_user-tag-list"/>\par
+            </optional>\par
+            <optional>\par
+                <ref name="def_rating"/>\par
+            </optional>\par
+            <optional>\par
+                <ref name="def_user-rating"/>\par
+            </optional>\par
+\par
+            <ref name="def_artist-element_extension"/>\par
+        </element>\par
+    </define>\par
+\par
+\par
+    <define name="def_release-element">\par
+        <element name="release">\par
+            <optional>\par
+                <attribute name="id">\par
+                    <data type="anyURI"/>\par
+                </attribute>\par
+            </optional>\par
+            <ref name="def_release-attribute_extension"/>\par
+\par
+            <optional>\par
+                <element name="title">\par
+                    <text/>\par
+                </element>\par
+            </optional>\par
+            <optional>\par
+                <element name="status">\par
+                    <text/>\par
+                </element>\par
+            </optional>\par
+            <optional>\par
+                <element name="quality">\par
+                    <ref name="def_quality"/>\par
+                </element>\par
+            </optional>\par
+            <optional>\par
+              <ref name="def_annotation" />\par
+            </optional>\par
+            <optional>\par
+                <element name="disambiguation">\par
+                    <text/>\par
+                </element>\par
+            </optional>\par
+            <optional>\par
+                <element name="packaging">\par
+                    <text/>\par
+                </element>\par
+            </optional>\par
+            <optional>\par
+                <element name="text-representation">\par
+                    <optional>\par
+                        <element name="language">\par
+                            <ref name="def_iso-639"/>\par
+                        </element>\par
+                    </optional>\par
+                    <optional>\par
+                        <element name="script">\par
+                            <ref name="def_iso-15924"/>\par
+                        </element>\par
+                    </optional>\par
+                </element>\par
+            </optional>\par
+            <optional>\par
+                <ref name="def_artist-credit"/>\par
+            </optional>\par
+            <optional>\par
+                <ref name="def_release-group-element"/>\par
+            </optional>\par
+\par
+            <optional>\par
+                <element name="date">\par
+                    <ref name="def_incomplete-date"/>\par
+                </element>\par
+            </optional>\par
+            <optional>\par
+                <element name="country">\par
+                    <ref name="def_iso-3166-1-code"/>\par
+                </element>\par
+            </optional>\par
+            <optional>\par
+                <ref name="def_release-event-list"/>\par
+            </optional>\par
+            <optional>\par
+                <element name="barcode">\par
+                    <text/>\par
+                </element>\par
+            </optional>\par
+            <optional>\par
+                <element name="asin">\par
+                    <data type="string">\par
+                        <param name="pattern">[A-Z0-9]\{10\}</param>\par
+                    </data>\par
+                </element>\par
+            </optional>\par
+            <optional>\par
+                <ref name="def_cover-art-archive"/>\par
+            </optional>\par
+\par
+            <optional>\par
+                <ref name="def_label-info-list"/>\par
+            </optional>\par
+\par
+            <optional>\par
+                <ref name="def_medium-list"/>\par
+            </optional>\par
+            <zeroOrMore>\par
+                <ref name="def_relation-list"/>\par
+            </zeroOrMore>\par
+            <optional>\par
+                <ref name="def_tag-list"/>\par
+            </optional>\par
+            <optional>\par
+                <ref name="def_user-tag-list"/>\par
+            </optional>\par
+            <optional>\par
+                <ref name="def_collection-list"/>\par
+            </optional>\par
+\par
+            <ref name="def_release-element_extension"/>\par
+        </element>\par
+    </define>\par
+\par
+\par
+    <define name="def_release-group-element">\par
+        <element name="release-group">\par
+            <optional>\par
+                <attribute name="id">\par
+                    <data type="anyURI"/>\par
+                </attribute>\par
+            </optional>\par
+            <optional>\par
+                <attribute name="type">\par
+                    <data type="anyURI"/>\par
+                </attribute>\par
+            </optional>\par
+            <ref name="def_release-group-attribute_extension"/>\par
+            <optional>\par
+                <element name="title">\par
+                    <text/>\par
+                </element>\par
+            </optional>\par
+            <optional>\par
+              <ref name="def_annotation" />\par
+            </optional>\par
+            <optional>\par
+                <element name="disambiguation">\par
+                    <text/>\par
+                </element>\par
+            </optional>\par
+            <optional>\par
+              <element name="first-release-date">\par
+                <ref name="def_incomplete-date" />\par
+              </element>\par
+            </optional>\par
+            <optional>\par
+                <element name="primary-type">\par
+                    <text/>\par
+                </element>\par
+            </optional>\par
+            <optional>\par
+              <element name="secondary-type-list">\par
+                <optional>\par
+                  <zeroOrMore>\par
+                    <element name="secondary-type">\par
+                      <text />\par
+                    </element>\par
+                  </zeroOrMore>\par
+                </optional>\par
+              </element>\par
+            </optional>\par
+\par
+            <optional>\par
+                <ref name="def_artist-credit"/>\par
+            </optional>\par
+            <optional>\par
+                <ref name="def_release-list"/>\par
+            </optional>\par
+            <zeroOrMore>\par
+                <ref name="def_relation-list"/>\par
+            </zeroOrMore>\par
+            <optional>\par
+                <ref name="def_tag-list"/>\par
+            </optional>\par
+            <optional>\par
+                <ref name="def_user-tag-list"/>\par
+            </optional>\par
+            <optional>\par
+                <ref name="def_rating"/>\par
+            </optional>\par
+            <optional>\par
+                <ref name="def_user-rating"/>\par
+            </optional>\par
+\par
+            <ref name="def_release-group-element_extension"/>\par
+        </element>\par
+    </define>\par
+\par
+\par
+    <define name="def_recording-element">\par
+        <element name="recording">\par
+            <optional>\par
+                <attribute name="id">\par
+                    <data type="anyURI"/>\par
+                </attribute>\par
+            </optional>\par
+            <ref name="def_recording-attribute_extension"/>\par
+\par
+            <optional>\par
+                <element name="title">\par
+                    <text/>\par
+                </element>\par
+            </optional>\par
+            <optional>\par
+                <element name="length">\par
+                    <data type="nonNegativeInteger"/>\par
+                </element>\par
+            </optional>\par
+            <optional>\par
+              <ref name="def_annotation" />\par
+            </optional>\par
+            <optional>\par
+                <element name="disambiguation">\par
+                    <text/>\par
+                </element>\par
+            </optional>\par
+            <optional>\par
+                <ref name="def_video"/>\par
+            </optional>\par
+            <optional>\par
+                <ref name="def_artist-credit"/>\par
+            </optional>\par
+\par
+\par
+            <optional>\par
+                <ref name="def_release-list"/>\par
+            </optional>\par
+            <optional>\par
+                <ref name="def_puid-list"/>\par
+            </optional>\par
+            <optional>\par
+                <ref name="def_isrc-list"/>\par
+            </optional>\par
+            <zeroOrMore>\par
+                <ref name="def_relation-list"/>\par
+            </zeroOrMore>\par
+\par
+            <optional>\par
+                <ref name="def_tag-list"/>\par
+            </optional>\par
+            <optional>\par
+                <ref name="def_user-tag-list"/>\par
+            </optional>\par
+            <optional>\par
+                <ref name="def_rating"/>\par
+            </optional>\par
+            <optional>\par
+                <ref name="def_user-rating"/>\par
+            </optional>\par
+\par
+            <ref name="def_recording-element_extension"/>\par
+        </element>\par
+    </define>\par
+\par
+\par
+    <define name="def_label-element">\par
+        <element name="label">\par
+            <optional>\par
+                <attribute name="id">\par
+                    <data type="anyURI"/>\par
+                </attribute>\par
+            </optional>\par
+            <optional>\par
+                <attribute name="type">\par
+                    <data type="anyURI"/>\par
+                </attribute>\par
+            </optional>\par
+            <ref name="def_label-attribute_extension"/>\par
+\par
+            <optional>\par
+                <element name="name">\par
+                    <text/>\par
+                </element>\par
+            </optional>\par
+            <optional>\par
+                <element name="sort-name">\par
+                    <text/>\par
+                </element>\par
+            </optional>\par
+            <optional>\par
+                <element name="label-code">\par
+                    <data type="nonNegativeInteger"/>\par
+                </element>\par
+            </optional>\par
+            <optional>\par
+                <element name="ipi">\par
+                    <ref name="def_ipi"/>\par
+                </element>\par
+            </optional>\par
+            <optional>\par
+              <ref name="def_ipi-list" />\par
+            </optional>\par
+            <optional>\par
+              <ref name="def_annotation" />\par
+            </optional>\par
+            <optional>\par
+                <element name="disambiguation">\par
+                    <text/>\par
+                </element>\par
+            </optional>\par
+            <optional>\par
+                <element name="country">\par
+                    <ref name="def_iso-3166-1-code"/>\par
+                </element>\par
+            </optional>\par
+            <optional>\par
+                <ref name="def_area-element"/>\par
+            </optional>\par
+            <optional>\par
+                <element name="life-span">\par
+                    <optional>\par
+                        <element name="begin">\par
+                            <ref name="def_incomplete-date"/>\par
+                        </element>\par
+                    </optional>\par
+                    <optional>\par
+                        <element name="end">\par
+                            <ref name="def_incomplete-date"/>\par
+                        </element>\par
+                    </optional>\par
+                    <optional>\par
+                        <ref name="def_ended" />\par
+                    </optional>\par
+                </element>\par
+            </optional>\par
+\par
+            <optional>\par
+                <ref name="def_alias-list"/>\par
+            </optional>\par
+            <optional>\par
+                <ref name="def_release-list"/>\par
+            </optional>\par
+            <zeroOrMore>\par
+                <ref name="def_relation-list"/>\par
+            </zeroOrMore>\par
+\par
+            <optional>\par
+                <ref name="def_tag-list"/>\par
+            </optional>\par
+            <optional>\par
+                <ref name="def_user-tag-list"/>\par
+            </optional>\par
+            <optional>\par
+                <ref name="def_rating"/>\par
+            </optional>\par
+            <optional>\par
+                <ref name="def_user-rating"/>\par
+            </optional>\par
+\par
+            <ref name="def_label-element_extension"/>\par
+        </element>\par
+    </define>\par
+\par
+    <define name="def_work-element">\par
+        <element name="work">\par
+            <optional>\par
+                <attribute name="id">\par
+                    <data type="anyURI"/>\par
+                </attribute>\par
+            </optional>\par
+            <optional>\par
+                <attribute name="type">\par
+                    <data type="anyURI"/>\par
+                </attribute>\par
+            </optional>\par
+            <ref name="def_work-attribute_extension"/>\par
+\par
+            <optional>\par
+                <element name="title">\par
+                    <text/>\par
+                </element>\par
+            </optional>\par
+\par
+            <optional>\par
+                <element name="language">\par
+                    <ref name="def_iso-639"/>\par
+                </element>\par
+            </optional>\par
+\par
+            <optional>\par
+                <ref name="def_artist-credit"/>\par
+            </optional>\par
+\par
+            <optional>\par
+              <ref name="def_iswc-element" />\par
+            </optional>\par
+\par
+            <optional>\par
+              <ref name="def_iswc-list" />\par
+            </optional>\par
+\par
+            <optional>\par
+                <ref name="def_work-attribute-list" />\par
+            </optional>\par
+\par
+            <optional>\par
+              <ref name="def_annotation" />\par
+            </optional>\par
+            <optional>\par
+                <element name="disambiguation">\par
+                    <text/>\par
+                </element>\par
+            </optional>\par
+            <optional>\par
+                <ref name="def_alias-list"/>\par
+            </optional>\par
+            <zeroOrMore>\par
+                <ref name="def_relation-list"/>\par
+            </zeroOrMore>\par
+            <optional>\par
+                <ref name="def_tag-list"/>\par
+            </optional>\par
+            <optional>\par
+                <ref name="def_user-tag-list"/>\par
+            </optional>\par
+            <optional>\par
+                <ref name="def_rating"/>\par
+            </optional>\par
+            <optional>\par
+                <ref name="def_user-rating"/>\par
+            </optional>\par
+\par
+            <ref name="def_work-element_extension"/>\par
+        </element>\par
+    </define>\par
+\par
+    <define name="def_area-element">\par
+        <element name="area">\par
+            <ref name="def_area-element_inner"/>\par
+        </element>\par
+    </define>\par
+\par
+    <define name="def_area-element_inner">\par
+        <optional>\par
+            <attribute name="id">\par
+                <data type="anyURI"/>\par
+            </attribute>\par
+        </optional>\par
+        <optional>\par
+            <attribute name="type">\par
+                <data type="anyURI"/>\par
+            </attribute>\par
+        </optional>\par
+        <ref name="def_area-attribute_extension"/>\par
+\par
+        <optional>\par
+            <element name="name">\par
+                <text/>\par
+            </element>\par
+        </optional>\par
+        <optional>\par
+            <element name="sort-name">\par
+                <text/>\par
+            </element>\par
+        </optional>\par
+        <optional>\par
+            <element name="disambiguation">\par
+                <text/>\par
+            </element>\par
+        </optional>\par
+        <optional>\par
+          <ref name="def_iso-3166-1-code-list" />\par
+        </optional>\par
+        <optional>\par
+          <ref name="def_iso-3166-2-code-list" />\par
+        </optional>\par
+        <optional>\par
+          <ref name="def_iso-3166-3-code-list" />\par
+        </optional>\par
+        <optional>\par
+          <ref name="def_annotation" />\par
+        </optional>\par
+        <optional>\par
+            <element name="life-span">\par
+                <optional>\par
+                    <element name="begin">\par
+                        <ref name="def_incomplete-date"/>\par
+                    </element>\par
+                </optional>\par
+                <optional>\par
+                    <element name="end">\par
+                        <ref name="def_incomplete-date"/>\par
+                    </element>\par
+                </optional>\par
+                <optional>\par
+                    <ref name="def_ended" />\par
+                </optional>\par
+            </element>\par
+        </optional>\par
+\par
+        <optional>\par
+            <ref name="def_alias-list"/>\par
+        </optional>\par
+        <zeroOrMore>\par
+            <ref name="def_relation-list"/>\par
+        </zeroOrMore>\par
+\par
+        <ref name="def_area-element_extension"/>\par
+    </define>\par
+\par
+    <define name="def_place-element">\par
+        <element name="place">\par
+            <optional>\par
+                <attribute name="id">\par
+                    <data type="anyURI"/>\par
+                </attribute>\par
+            </optional>\par
+            <optional>\par
+                <attribute name="type">\par
+                    <data type="anyURI"/>\par
+                </attribute>\par
+            </optional>\par
+            <ref name="def_place-attribute_extension"/>\par
+\par
+            <optional>\par
+                <element name="name">\par
+                    <text/>\par
+                </element>\par
+            </optional>\par
+            <optional>\par
+                <element name="disambiguation">\par
+                    <text/>\par
+                </element>\par
+            </optional>\par
+            <optional>\par
+                <element name="address">\par
+                    <text/>\par
+                </element>\par
+            </optional>\par
+            <optional>\par
+                <element name="coordinates">\par
+                    <optional>\par
+                        <element name="latitude">\par
+                            <text/>\par
+                        </element>\par
+                    </optional>\par
+                    <optional>\par
+                        <element name="longitude">\par
+                            <text/>\par
+                        </element>\par
+                    </optional>\par
+                </element>\par
+            </optional>\par
+            <optional>\par
+              <ref name="def_annotation" />\par
+            </optional>\par
+            <optional>\par
+                <ref name="def_area-element"/>\par
+            </optional>\par
+            <optional>\par
+                <element name="life-span">\par
+                    <optional>\par
+                        <element name="begin">\par
+                            <ref name="def_incomplete-date"/>\par
+                        </element>\par
+                    </optional>\par
+                    <optional>\par
+                        <element name="end">\par
+                            <ref name="def_incomplete-date"/>\par
+                        </element>\par
+                    </optional>\par
+                    <optional>\par
+                        <ref name="def_ended" />\par
+                    </optional>\par
+                </element>\par
+            </optional>\par
+\par
+            <optional>\par
+                <ref name="def_alias-list"/>\par
+            </optional>\par
+            <zeroOrMore>\par
+                <ref name="def_relation-list"/>\par
+            </zeroOrMore>\par
+\par
+            <optional>\par
+                <ref name="def_tag-list"/>\par
+            </optional>\par
+            <optional>\par
+                <ref name="def_user-tag-list"/>\par
+            </optional>\par
+\par
+\par
+            <ref name="def_place-element_extension"/>\par
+        </element>\par
+    </define>\par
+\par
+    <define name="def_instrument-element">\par
+        <element name="instrument">\par
+            <optional>\par
+                <attribute name="id">\par
+                    <data type="anyURI"/>\par
+                </attribute>\par
+            </optional>\par
+            <optional>\par
+                <attribute name="type">\par
+                    <data type="anyURI"/>\par
+                </attribute>\par
+            </optional>\par
+            <ref name="def_instrument-attribute_extension"/>\par
+\par
+            <optional>\par
+                <element name="name">\par
+                    <text/>\par
+                </element>\par
+            </optional>\par
+            <optional>\par
+                <element name="disambiguation">\par
+                    <text/>\par
+                </element>\par
+            </optional>\par
+            <optional>\par
+                <element name="description">\par
+                    <text/>\par
+                </element>\par
+            </optional>\par
+            <optional>\par
+              <ref name="def_annotation" />\par
+            </optional>\par
+\par
+            <optional>\par
+                <ref name="def_alias-list"/>\par
+            </optional>\par
+            <zeroOrMore>\par
+                <ref name="def_relation-list"/>\par
+            </zeroOrMore>\par
+\par
+            <ref name="def_instrument-element_extension"/>\par
+        </element>\par
+    </define>\par
+\par
+    <define name="def_series-element">\par
+        <element name="series">\par
+            <optional>\par
+                <attribute name="id">\par
+                    <data type="anyURI"/>\par
+                </attribute>\par
+            </optional>\par
+            <optional>\par
+                <attribute name="type">\par
+                    <data type="anyURI"/>\par
+                </attribute>\par
+            </optional>\par
+            <ref name="def_series-attribute_extension"/>\par
+\par
+            <optional>\par
+                <element name="name">\par
+                    <text/>\par
+                </element>\par
+            </optional>\par
+            <optional>\par
+                <element name="disambiguation">\par
+                    <text/>\par
+                </element>\par
+            </optional>\par
+            <optional>\par
+                <element name="ordering-attribute">\par
+                    <text/>\par
+                </element>\par
+            </optional>\par
+            <optional>\par
+              <ref name="def_annotation" />\par
+            </optional>\par
+\par
+            <optional>\par
+                <ref name="def_alias-list"/>\par
+            </optional>\par
+            <zeroOrMore>\par
+                <ref name="def_relation-list"/>\par
+            </zeroOrMore>\par
+\par
+            <ref name="def_series-element_extension"/>\par
+        </element>\par
+    </define>\par
+\par
+    <define name="def_url-element">\par
+        <element name="url">\par
+            <optional>\par
+                <attribute name="id">\par
+                    <data type="anyURI"/>\par
+                </attribute>\par
+            </optional>\par
+            <ref name="def_url-attribute_extension"/>\par
+            <optional>\par
+                <element name="resource">\par
+                    <text/>\par
+                </element>\par
+            </optional>\par
+            <zeroOrMore>\par
+                <ref name="def_relation-list"/>\par
+            </zeroOrMore>\par
+        </element>\par
+    </define>\par
+\par
+\par
+    <define name="def_disc-element">\par
+        <element name="disc">\par
+            <attribute name="id">\par
+                <data type="string">\par
+                    <param name="pattern">[a-zA-Z0-9._]\{27\}-</param>\par
+                </data>\par
+            </attribute>\par
+            <ref name="def_disc-attribute_extension"/>\par
+            <optional>\par
+                <element name="sectors">\par
+                    <data type="nonNegativeInteger"/>\par
+                </element>\par
+            </optional>\par
+            <optional>\par
+                <ref name="def_release-list"/>\par
+            </optional>\par
+            <ref name="def_disc-element_extension"/>\par
+        </element>\par
+    </define>\par
+\par
+\par
+    <define name="def_puid-element">\par
+        <element name="puid">\par
+            <optional>\par
+                <attribute name="id">\par
+                        <ref name="def_uuid"/>\par
+                </attribute>\par
+            </optional>\par
+            <ref name="def_puid-attribute_extension"/>\par
+\par
+            <optional>\par
+                <ref name="def_recording-list"/>\par
+            </optional>\par
+\par
+            <ref name="def_puid-element_extension"/>\par
+        </element>\par
+    </define>\par
+\par
+\par
+    <define name="def_isrc-element">\par
+        <element name="isrc">\par
+            <optional>\par
+                <attribute name="id">\par
+                     <ref name="def_isrc"/>\par
+                </attribute>\par
+            </optional>\par
+            <ref name="def_isrc-attribute_extension"/>\par
+\par
+            <optional>\par
+              <ref name="def_recording-list"/>\par
+            </optional>\par
+\par
+            <ref name="def_isrc-element_extension"/>\par
+        </element>\par
+    </define>\par
+\par
+\par
+    <define name="def_artist-credit">\par
+        <element name="artist-credit">\par
+            <oneOrMore>\par
+                <element name="name-credit">\par
+                    <optional>\par
+                        <attribute name="joinphrase">\par
+                            <text/>\par
+                        </attribute>\par
+                    </optional>\par
+                    <optional>\par
+                        <element name="name">\par
+                            <text/>\par
+                        </element>\par
+                    </optional>\par
+                    <ref name="def_artist-element"/>\par
+                </element>\par
+            </oneOrMore>\par
+        </element>\par
+    </define>\par
+\par
+\par
+    <define name="def_relation-element">\par
+        <element name="relation">\par
+            <attribute name="type">\par
+                <data type="anyURI"/>\par
+            </attribute>\par
+            <attribute name="type-id">\par
+                <data type="anyURI"/>\par
+            </attribute>\par
+            <element name="target">\par
+                <optional>\par
+                    <attribute name="id">\par
+                        <data type="anyURI"/>\par
+                    </attribute>\par
+                </optional>\par
+                <data type="anyURI"/>\par
+            </element>\par
+            <optional>\par
+                <element name="ordering-key">\par
+                    <data type="nonNegativeInteger"/>\par
+                </element>\par
+            </optional>\par
+            <optional>\par
+                <element name="direction">\par
+                    <ref name="def_direction"/>\par
+                </element>\par
+            </optional>\par
+            <optional>\par
+                <ref name="def_attribute-list"/>\par
+            </optional>\par
+            <optional>\par
+                <element name="begin">\par
+                    <ref name="def_incomplete-date"/>\par
+                </element>\par
+            </optional>\par
+            <optional>\par
+                <element name="end">\par
+                    <ref name="def_incomplete-date"/>\par
+                </element>\par
+            </optional>\par
+            <optional>\par
+              <ref name="def_ended" />\par
+            </optional>\par
+\par
+            <optional>\par
+                <choice>\par
+                    <ref name="def_artist-element"/>\par
+                    <ref name="def_release-element"/>\par
+                    <ref name="def_release-group-element"/>\par
+                    <ref name="def_recording-element"/>\par
+                    <ref name="def_label-element"/>\par
+                    <ref name="def_work-element"/>\par
+                    <ref name="def_area-element"/>\par
+                    <ref name="def_place-element"/>\par
+                    <ref name="def_instrument-element"/>\par
+                    <ref name="def_series-element"/>\par
+                    <ref name="def_relation-element_extension"/>\par
+                </choice>\par
+            </optional>\par
+        </element>\par
+    </define>\par
+\par
+\par
+    <define name="def_alias">\par
+        <element name="alias">\par
+            <optional>\par
+                <attribute name="locale">\par
+                    <ref name="def_locale" />\par
+                </attribute>\par
+            </optional>\par
+            <optional>\par
+              <attribute name="sort-name">\par
+                <text />\par
+              </attribute>\par
+            </optional>\par
+            <optional>\par
+              <attribute name="type">\par
+                <text />\par
+              </attribute>\par
+            </optional>\par
+            <optional>\par
+              <attribute name="primary">\par
+                <text />\par
+              </attribute>\par
+            </optional>\par
+            <optional>\par
+              <attribute name="begin-date">\par
+                <ref name="def_incomplete-date"/>\par
+              </attribute>\par
+            </optional>\par
+            <optional>\par
+              <attribute name="end-date">\par
+                <ref name="def_incomplete-date"/>\par
+              </attribute>\par
+            </optional>\par
+            <text/>\par
+        </element>\par
+    </define>\par
+\par
+    <define name="def_iswc-element">\par
+      <element name="iswc">\par
+        <optional>\par
+          <ref name="def_iswc"/>\par
+        </optional>\par
+      </element>\par
+    </define>\par
+\par
+    <define name="def_tag">\par
+        <element name="tag">\par
+            <optional>\par
+                <attribute name="count">\par
+                    <data type="nonNegativeInteger"/>\par
+                </attribute>\par
+            </optional>\par
+            <ref name="def_tag-attribute_extension"/>\par
+            <element name="name">\par
+                <text/>\par
+            </element>\par
+        </element>\par
+    </define>\par
+\par
+\par
+    <define name="def_user-tag">\par
+        <element name="user-tag">\par
+            <ref name="def_tag-attribute_extension"/>\par
+            <element name="name">\par
+                <text/>\par
+            </element>\par
+        </element>\par
+    </define>\par
+\par
+    <define name="def_rating">\par
+        <element name="rating">\par
+            <optional>\par
+                <attribute name="votes-count">\par
+                    <data type="nonNegativeInteger"/>\par
+                </attribute>\par
+            </optional>\par
+            <data type="float"/>\par
+        </element>\par
+    </define>\par
+\par
+\par
+    <define name="def_user-rating">\par
+        <element name="user-rating">\par
+            <data type="nonNegativeInteger"/>\par
+        </element>\par
+    </define>\par
+\par
+\par
+    <define name="def_label-info">\par
+        <element name="label-info">\par
+            <optional>\par
+                <element name="catalog-number">\par
+                    <text/>\par
+                </element>\par
+            </optional>\par
+            <optional>\par
+                <ref name="def_label-element"/>\par
+            </optional>\par
+        </element>\par
+    </define>\par
+\par
+\par
+    <define name="def_medium">\par
+        <element name="medium">\par
+            <optional>\par
+                <element name="title">\par
+                    <text/>\par
+                </element>\par
+            </optional>\par
+            <optional>\par
+                <element name="position">\par
+                    <data type="nonNegativeInteger"/>\par
+                </element>\par
+            </optional>\par
+            <optional>\par
+                <element name="format">\par
+                    <text/>\par
+                </element>\par
+            </optional>\par
+            <optional>\par
+                <ref name="def_disc-list"/>\par
+            </optional>\par
+            <ref name="def_track-list"/>\par
+        </element>\par
+    </define>\par
+\par
+\par
+    <define name="def_track">\par
+        <element name="track">\par
+            <optional>\par
+                <attribute name="id">\par
+                    <data type="anyURI"/>\par
+                </attribute>\par
+            </optional>\par
+            <optional>\par
+                <element name="position">\par
+                    <data type="nonNegativeInteger"/>\par
+                </element>\par
+            </optional>\par
+            <optional>\par
+                <element name="number">\par
+                    <text/>\par
+                </element>\par
+            </optional>\par
+            <optional>\par
+                <element name="title">\par
+                    <text/>\par
+                </element>\par
+            </optional>\par
+            <optional>\par
+                <element name="length">\par
+                    <data type="nonNegativeInteger"/>\par
+                </element>\par
+            </optional>\par
+            <optional>\par
+                <ref name="def_artist-credit"/>\par
+            </optional>\par
+            <optional>\par
+                <ref name="def_recording-element"/>\par
+            </optional>\par
+        </element>\par
+    </define>\par
+\par
+    <define name="def_annotation">\par
+        <element name="annotation">\par
+            <optional>\par
+                <attribute name="type">\par
+                    <text/>\par
+                </attribute>\par
+            </optional>\par
+            <ref name="def_annotation-attribute_extension"/>\par
+            <optional>\par
+              <element name="entity">\par
+                <data type="anyURI"/>\par
+              </element>\par
+            </optional>\par
+            <optional>\par
+              <element name="name">\par
+                <text/>\par
+              </element>\par
+            </optional>\par
+            <element name="text">\par
+                <text/>\par
+            </element>\par
+            <ref name="def_annotation-element_extension"/>\par
+        </element>\par
+    </define>\par
+\par
+    <define name="def_cdstub">\par
+        <element name="cdstub">\par
+            <attribute name="id">\par
+                <data type="string">\par
+                    <param name="pattern">[a-zA-Z0-9._]\{27\}-</param>\par
+                </data>\par
+            </attribute>\par
+            <ref name="def_cdstub-attribute_extension"/>\par
+            <element name="title">\par
+                <text/>\par
+            </element>\par
+            <optional>\par
+                <element name="artist">\par
+                    <text/>\par
+                </element>\par
+            </optional>\par
+            <optional>\par
+                <element name="barcode">\par
+                    <text/>\par
+                </element>\par
+            </optional>\par
+            <optional>\par
+                <element name="comment">\par
+                    <text/>\par
+                </element>\par
+            </optional>\par
+            <ref name="def_nonmb-track-list"/>\par
+            <ref name="def_cdstub-element_extension"/>\par
+        </element>\par
+    </define>\par
+\par
+    <define name="def_freedb-disc">\par
+        <element name="freedb-disc">\par
+            <optional>\par
+                <attribute name="id">\par
+                    <data type="string">\par
+                        <param name="pattern">[a-zA-Z0-9]\{8\}</param>\par
+                    </data>\par
+                </attribute>\par
+            </optional>\par
+            <ref name="def_freedb-disc-attribute_extension"/>\par
+            <element name="title">\par
+                <text/>\par
+            </element>\par
+            <optional>\par
+                <element name="artist">\par
+                    <text/>\par
+                </element>\par
+            </optional>\par
+            <optional>\par
+                <element name="category">\par
+                    <text/>\par
+                </element>\par
+            </optional>\par
+            <optional>\par
+                <element name="year">\par
+                    <data type="string">\par
+                        <param name="pattern">[0-9]\{4\}</param>\par
+                    </data>\par
+                </element>\par
+            </optional>\par
+            <ref name="def_nonmb-track-list"/>\par
+            <ref name="def_freedb-disc-element_extension"/>\par
+        </element>\par
+    </define>\par
+\par
+    <define name="def_nonmb-track">\par
+        <element name="track">\par
+            <element name="title">\par
+                <text/>\par
+            </element>\par
+            <optional>\par
+                <element name="artist">\par
+                    <text/>\par
+                </element>\par
+            </optional>\par
+            <element name="length">\par
+                <data type="nonNegativeInteger"/>\par
+            </element>\par
+        </element>\par
+    </define>\par
+\par
+    <define name="def_collection">\par
+        <element name="collection">\par
+            <optional>\par
+                <attribute name="id">\par
+                    <data type="anyURI"/>\par
+                </attribute>\par
+            </optional>\par
+            <element name="name">\par
+                <text/>\par
+            </element>\par
+            <optional>\par
+                <element name="editor">\par
+                    <text/>\par
+                </element>\par
+            </optional>\par
+            <ref name="def_release-list"/>\par
+        </element>\par
+    </define>\par
+\par
+    <define name="def_editor-element">\par
+        <element name="editor">\par
+            <optional>\par
+                <attribute name="id">\par
+                    <data type="nonNegativeInteger"/>\par
+                </attribute>\par
+            </optional>\par
+            <ref name="def_editor-attribute_extension"/>\par
+            <element name="name">\par
+                <text/>\par
+            </element>\par
+            <optional>\par
+                <element name="member-since">\par
+                    <ref name="def_incomplete-date"/>\par
+                </element>\par
+            </optional>\par
+            <optional>\par
+                <element name="privs">\par
+                    <data type="nonNegativeInteger"/>\par
+                </element>\par
+            </optional>\par
+            <optional>\par
+                <element name="gender">\par
+                    <text/>\par
+                </element>\par
+            </optional>\par
+            <optional>\par
+                <element name="age">\par
+                    <text/>\par
+                </element>\par
+            </optional>\par
+            <optional>\par
+                <element name="homepage">\par
+                    <data type="anyURI"/>\par
+                </element>\par
+            </optional>\par
+            <optional>\par
+                <element name="bio">\par
+                    <text/>\par
+                </element>\par
+            </optional>\par
+            <optional>\par
+                <ref name="def_area-element"/>\par
+            </optional>\par
+            <optional>\par
+                <ref name="def_language-list"/>\par
+            </optional>\par
+            <optional>\par
+                <element name="edit-information">\par
+                    <element name="edits-accepted">\par
+                        <data type="nonNegativeInteger"/>\par
+                    </element>\par
+                    <element name="edits-rejected">\par
+                        <data type="nonNegativeInteger"/>\par
+                    </element>\par
+                    <element name="auto-edits-accepted">\par
+                        <data type="nonNegativeInteger"/>\par
+                    </element>\par
+                    <element name="edits-failed">\par
+                        <data type="nonNegativeInteger"/>\par
+                    </element>\par
+                </element>\par
+            </optional>\par
+        </element>\par
+    </define>\par
+\par
+    <define name="def_language-list">\par
+        <element name="language-list">\par
+            <ref name="def_list-attributes"/>\par
+            <zeroOrMore>\par
+                <element name="language">\par
+                    <optional>\par
+                        <attribute name="fluency">\par
+                            <choice>\par
+                                <value>basic</value>\par
+                                <value>intermediate</value>\par
+                                <value>advanced</value>\par
+                                <value>native</value>\par
+                            </choice>\par
+                        </attribute>\par
+                    </optional>\par
+                    <ref name="def_iso-639"/>\par
+                </element>\par
+            </zeroOrMore>\par
+        </element>\par
+    </define>\par
+\par
+    <define name="def_release-event-element">\par
+        <element name="release-event">\par
+            <optional>\par
+                <element name="date">\par
+                    <ref name="def_incomplete-date"/>\par
+                </element>\par
+            </optional>\par
+            <optional>\par
+                <ref name="def_area-element"/>\par
+            </optional>\par
+        </element>\par
+    </define>\par
+\par
+    <!--\par
+        This part defines the extensions elements and attributes.\par
+    -->\par
+\par
+    <define name="def_metadata-element_extension">\par
+        <optional>\par
+            <ref name="def_extension_element"/>\par
+        </optional>\par
+    </define>\par
+\par
+\par
+    <define name="def_artist-element_extension">\par
+        <zeroOrMore>\par
+            <ref name="def_extension_element"/>\par
+        </zeroOrMore>\par
+    </define>\par
+\par
+\par
+    <define name="def_release-element_extension">\par
+        <zeroOrMore>\par
+            <ref name="def_extension_element"/>\par
+        </zeroOrMore>\par
+    </define>\par
+\par
+\par
+    <define name="def_release-group-element_extension">\par
+        <zeroOrMore>\par
+            <ref name="def_extension_element"/>\par
+        </zeroOrMore>\par
+    </define>\par
+\par
+\par
+    <define name="def_recording-element_extension">\par
+        <zeroOrMore>\par
+            <ref name="def_extension_element"/>\par
+        </zeroOrMore>\par
+    </define>\par
+\par
+\par
+    <define name="def_series-element_extension">\par
+        <zeroOrMore>\par
+            <ref name="def_extension_element"/>\par
+        </zeroOrMore>\par
+    </define>\par
+\par
+\par
+    <define name="def_label-element_extension">\par
+        <zeroOrMore>\par
+            <ref name="def_extension_element"/>\par
+        </zeroOrMore>\par
+    </define>\par
+\par
+\par
+    <define name="def_work-element_extension">\par
+        <zeroOrMore>\par
+            <ref name="def_extension_element"/>\par
+        </zeroOrMore>\par
+    </define>\par
+\par
+    <define name="def_area-element_extension">\par
+        <zeroOrMore>\par
+            <ref name="def_extension_element"/>\par
+        </zeroOrMore>\par
+    </define>\par
+\par
+    <define name="def_place-element_extension">\par
+        <zeroOrMore>\par
+            <ref name="def_extension_element"/>\par
+        </zeroOrMore>\par
+    </define>\par
+\par
+    <define name="def_instrument-element_extension">\par
+        <zeroOrMore>\par
+            <ref name="def_extension_element"/>\par
+        </zeroOrMore>\par
+    </define>\par
+\par
+    <define name="def_puid-element_extension">\par
+        <zeroOrMore>\par
+            <ref name="def_extension_element"/>\par
+        </zeroOrMore>\par
+    </define>\par
+\par
+\par
+    <define name="def_isrc-element_extension">\par
+        <zeroOrMore>\par
+            <ref name="def_extension_element"/>\par
+        </zeroOrMore>\par
+    </define>\par
+\par
+\par
+    <define name="def_relation-element_extension">\par
+        <ref name="def_extension_element"/>\par
+    </define>\par
+\par
+\par
+    <define name="def_annotation-element_extension">\par
+        <zeroOrMore>\par
+            <ref name="def_extension_element"/>\par
+        </zeroOrMore>\par
+    </define>\par
+\par
+\par
+    <define name="def_disc-element_extension">\par
+        <zeroOrMore>\par
+            <ref name="def_extension_element"/>\par
+        </zeroOrMore>\par
+    </define>\par
+\par
+\par
+    <define name="def_cdstub-element_extension">\par
+        <zeroOrMore>\par
+            <ref name="def_extension_element"/>\par
+        </zeroOrMore>\par
+    </define>\par
+\par
+\par
+    <define name="def_freedb-disc-element_extension">\par
+        <zeroOrMore>\par
+            <ref name="def_extension_element"/>\par
+        </zeroOrMore>\par
+    </define>\par
+\par
+    <define name="def_artist-attribute_extension">\par
+        <zeroOrMore>\par
+            <ref name="def_extension_attribute"/>\par
+        </zeroOrMore>\par
+    </define>\par
+\par
+    <define name="def_area-attribute_extension">\par
+        <zeroOrMore>\par
+            <ref name="def_extension_attribute"/>\par
+        </zeroOrMore>\par
+    </define>\par
+\par
+    <define name="def_place-attribute_extension">\par
+        <zeroOrMore>\par
+            <ref name="def_extension_attribute"/>\par
+        </zeroOrMore>\par
+    </define>\par
+\par
+    <define name="def_instrument-attribute_extension">\par
+        <zeroOrMore>\par
+            <ref name="def_extension_attribute"/>\par
+        </zeroOrMore>\par
+    </define>\par
+\par
+    <define name="def_series-attribute_extension">\par
+        <zeroOrMore>\par
+            <ref name="def_extension_attribute"/>\par
+        </zeroOrMore>\par
+    </define>\par
+\par
+    <define name="def_editor-attribute_extension">\par
+        <zeroOrMore>\par
+            <ref name="def_extension_attribute"/>\par
+        </zeroOrMore>\par
+    </define>\par
+\par
+    <define name="def_url-attribute_extension">\par
+        <zeroOrMore>\par
+            <ref name="def_extension_attribute"/>\par
+        </zeroOrMore>\par
+    </define>\par
+\par
+\par
+    <define name="def_release-attribute_extension">\par
+        <zeroOrMore>\par
+            <ref name="def_extension_attribute"/>\par
+        </zeroOrMore>\par
+    </define>\par
+\par
+\par
+    <define name="def_release-group-attribute_extension">\par
+        <zeroOrMore>\par
+            <ref name="def_extension_attribute"/>\par
+        </zeroOrMore>\par
+    </define>\par
+\par
+\par
+    <define name="def_recording-attribute_extension">\par
+        <zeroOrMore>\par
+            <ref name="def_extension_attribute"/>\par
+        </zeroOrMore>\par
+    </define>\par
+\par
+\par
+    <define name="def_label-attribute_extension">\par
+        <zeroOrMore>\par
+            <ref name="def_extension_attribute"/>\par
+        </zeroOrMore>\par
+    </define>\par
+\par
+\par
+    <define name="def_work-attribute_extension">\par
+        <zeroOrMore>\par
+            <ref name="def_extension_attribute"/>\par
+        </zeroOrMore>\par
+    </define>\par
+\par
+\par
+    <define name="def_puid-attribute_extension">\par
+        <zeroOrMore>\par
+            <ref name="def_extension_attribute"/>\par
+        </zeroOrMore>\par
+    </define>\par
+\par
+\par
+    <define name="def_isrc-attribute_extension">\par
+        <zeroOrMore>\par
+            <ref name="def_extension_attribute"/>\par
+        </zeroOrMore>\par
+    </define>\par
+\par
+\par
+    <define name="def_annotation-attribute_extension">\par
+        <zeroOrMore>\par
+            <ref name="def_extension_attribute"/>\par
+        </zeroOrMore>\par
+    </define>\par
+\par
+\par
+    <define name="def_disc-attribute_extension">\par
+        <zeroOrMore>\par
+            <ref name="def_extension_attribute"/>\par
+        </zeroOrMore>\par
+    </define>\par
+\par
+\par
+    <define name="def_cdstub-attribute_extension">\par
+        <zeroOrMore>\par
+            <ref name="def_extension_attribute"/>\par
+        </zeroOrMore>\par
+    </define>\par
+\par
+\par
+    <define name="def_freedb-disc-attribute_extension">\par
+        <zeroOrMore>\par
+            <ref name="def_extension_attribute"/>\par
+        </zeroOrMore>\par
+    </define>\par
+\par
+\par
+    <define name="def_tag-attribute_extension">\par
+        <zeroOrMore>\par
+            <ref name="def_extension_attribute"/>\par
+        </zeroOrMore>\par
+    </define>\par
+\par
+    <define name="def_extension_element">\par
+        <element>\par
+            <anyName>\par
+                <except>\par
+                    <nsName ns="http://musicbrainz.org/ns/mmd-2.0#"/>\par
+                    <nsName ns=""/>\par
+                </except>\par
+            </anyName>\par
+            <zeroOrMore>\par
+                <choice>\par
+                    <attribute>\par
+                        <anyName/>\par
+                    </attribute>\par
+                    <text/>\par
+                    <ref name="def_anything"/>\par
+                </choice>\par
+            </zeroOrMore>\par
+        </element>\par
+    </define>\par
+\par
+\par
+    <define name="def_extension_attribute">\par
+        <attribute>\par
+            <anyName>\par
+                <except>\par
+                    <nsName ns="http://musicbrainz.org/ns/mmd-2.0#"/>\par
+                    <nsName ns=""/>\par
+                </except>\par
+            </anyName>\par
+        </attribute>\par
+    </define>\par
+\par
+\par
+    <define name="def_anything">\par
+        <element>\par
+            <anyName>\par
+                <except>\par
+                    <nsName ns=""/>\par
+                </except>\par
+            </anyName>\par
+            <zeroOrMore>\par
+                <choice>\par
+                    <attribute>\par
+                    <anyName/>\par
+                    </attribute>\par
+                    <text/>\par
+                    <ref name="def_anything"/>\par
+                </choice>\par
+            </zeroOrMore>\par
+        </element>\par
+    </define>\par
+\par
+\par
+    <define name="def_artist-list">\par
+        <element name="artist-list">\par
+            <ref name="def_list-attributes"/>\par
+            <zeroOrMore>\par
+                <ref name="def_artist-element"/>\par
+            </zeroOrMore>\par
+        </element>\par
+    </define>\par
+\par
+\par
+    <define name="def_medium-list">\par
+        <element name="medium-list">\par
+            <ref name="def_list-attributes"/>\par
+            <optional>\par
+                <element name="track-count">\par
+                    <data type="nonNegativeInteger"/>\par
+                </element>\par
+            </optional>\par
+            <zeroOrMore>\par
+                <ref name="def_medium"/>\par
+            </zeroOrMore>\par
+        </element>\par
+    </define>\par
+\par
+\par
+    <define name="def_release-list">\par
+        <element name="release-list">\par
+            <ref name="def_list-attributes"/>\par
+            <zeroOrMore>\par
+                <ref name="def_release-element"/>\par
+            </zeroOrMore>\par
+        </element>\par
+    </define>\par
+\par
+\par
+    <define name="def_release-group-list">\par
+        <element name="release-group-list">\par
+            <ref name="def_list-attributes"/>\par
+            <zeroOrMore>\par
+                <ref name="def_release-group-element"/>\par
+            </zeroOrMore>\par
+        </element>\par
+    </define>\par
+\par
+\par
+    <define name="def_alias-list">\par
+        <element name="alias-list">\par
+            <ref name="def_list-attributes"/>\par
+            <zeroOrMore>\par
+                <ref name="def_alias"/>\par
+            </zeroOrMore>\par
+        </element>\par
+    </define>\par
+\par
+\par
+    <define name="def_recording-list">\par
+        <element name="recording-list">\par
+            <ref name="def_list-attributes"/>\par
+            <zeroOrMore>\par
+                <ref name="def_recording-element"/>\par
+            </zeroOrMore>\par
+        </element>\par
+    </define>\par
+\par
+\par
+    <define name="def_track-list">\par
+        <element name="track-list">\par
+            <ref name="def_list-attributes"/>\par
+            <zeroOrMore>\par
+                <ref name="def_track"/>\par
+            </zeroOrMore>\par
+        </element>\par
+    </define>\par
+\par
+\par
+    <define name="def_label-list">\par
+        <element name="label-list">\par
+            <ref name="def_list-attributes"/>\par
+            <zeroOrMore>\par
+                <ref name="def_label-element"/>\par
+            </zeroOrMore>\par
+        </element>\par
+    </define>\par
+\par
+\par
+    <define name="def_label-info-list">\par
+        <element name="label-info-list">\par
+            <ref name="def_list-attributes"/>\par
+            <zeroOrMore>\par
+                <ref name="def_label-info"/>\par
+            </zeroOrMore>\par
+        </element>\par
+    </define>\par
+\par
+\par
+    <define name="def_work-list">\par
+        <element name="work-list">\par
+            <ref name="def_list-attributes"/>\par
+            <zeroOrMore>\par
+                <ref name="def_work-element"/>\par
+            </zeroOrMore>\par
+        </element>\par
+    </define>\par
+\par
+    <define name="def_area-list">\par
+        <element name="area-list">\par
+            <ref name="def_list-attributes"/>\par
+            <zeroOrMore>\par
+                <ref name="def_area-element"/>\par
+            </zeroOrMore>\par
+        </element>\par
+    </define>\par
+\par
+    <define name="def_place-list">\par
+        <element name="place-list">\par
+            <ref name="def_list-attributes"/>\par
+            <zeroOrMore>\par
+                <ref name="def_place-element"/>\par
+            </zeroOrMore>\par
+        </element>\par
+    </define>\par
+\par
+    <define name="def_instrument-list">\par
+        <element name="instrument-list">\par
+            <ref name="def_list-attributes"/>\par
+            <zeroOrMore>\par
+                <ref name="def_instrument-element"/>\par
+            </zeroOrMore>\par
+        </element>\par
+    </define>\par
+\par
+    <define name="def_series-list">\par
+        <element name="series-list">\par
+            <ref name="def_list-attributes"/>\par
+            <zeroOrMore>\par
+                <ref name="def_series-element"/>\par
+            </zeroOrMore>\par
+        </element>\par
+    </define>\par
+\par
+    <define name="def_url-list">\par
+        <element name="url-list">\par
+            <ref name="def_list-attributes"/>\par
+            <zeroOrMore>\par
+                <ref name="def_url-element"/>\par
+            </zeroOrMore>\par
+        </element>\par
+    </define>\par
+\par
+    <define name="def_release-event-list">\par
+        <element name="release-event-list">\par
+            <ref name="def_list-attributes" />\par
+            <zeroOrMore>\par
+                <ref name="def_release-event-element"/>\par
+            </zeroOrMore>\par
+        </element>\par
+    </define>\par
+\par
+    <define name="def_annotation-list">\par
+        <element name="annotation-list">\par
+            <ref name="def_list-attributes"/>\par
+            <zeroOrMore>\par
+                <ref name="def_annotation"/>\par
+            </zeroOrMore>\par
+        </element>\par
+    </define>\par
+\par
+    <define name="def_cdstub-list">\par
+        <element name="cdstub-list">\par
+            <ref name="def_list-attributes"/>\par
+            <zeroOrMore>\par
+                <ref name="def_cdstub"/>\par
+            </zeroOrMore>\par
+        </element>\par
+    </define>\par
+\par
+    <define name="def_nonmb-track-list">\par
+        <element name="track-list">\par
+            <ref name="def_list-attributes"/>\par
+            <zeroOrMore>\par
+                <ref name="def_nonmb-track"/>\par
+            </zeroOrMore>\par
+        </element>\par
+    </define>\par
+\par
+    <define name="def_freedb-disc-list">\par
+        <element name="freedb-disc-list">\par
+            <ref name="def_list-attributes"/>\par
+            <zeroOrMore>\par
+                <ref name="def_freedb-disc"/>\par
+            </zeroOrMore>\par
+        </element>\par
+    </define>\par
+\par
+    <define name="def_disc-list">\par
+        <element name="disc-list">\par
+            <ref name="def_list-attributes"/>\par
+            <zeroOrMore>\par
+                <ref name="def_disc-element"/>\par
+            </zeroOrMore>\par
+        </element>\par
+    </define>\par
+\par
+    <define name="def_puid-list">\par
+        <element name="puid-list">\par
+            <ref name="def_list-attributes"/>\par
+            <zeroOrMore>\par
+                <ref name="def_puid-element"/>\par
+            </zeroOrMore>\par
+        </element>\par
+    </define>\par
+\par
+    <define name="def_isrc-list">\par
+        <element name="isrc-list">\par
+            <ref name="def_list-attributes"/>\par
+            <zeroOrMore>\par
+                <ref name="def_isrc-element"/>\par
+            </zeroOrMore>\par
+        </element>\par
+    </define>\par
+\par
+    <define name="def_relation-list">\par
+        <element name="relation-list">\par
+            <attribute name="target-type">\par
+                <data type="anyURI"/>\par
+            </attribute>\par
+            <ref name="def_list-attributes"/>\par
+            <zeroOrMore>\par
+                <ref name="def_relation-element"/>\par
+            </zeroOrMore>\par
+        </element>\par
+    </define>\par
+\par
+    <define name="def_tag-list">\par
+        <element name="tag-list">\par
+            <ref name="def_list-attributes"/>\par
+            <zeroOrMore>\par
+                <ref name="def_tag"/>\par
+            </zeroOrMore>\par
+        </element>\par
+    </define>\par
+\par
+    <define name="def_iswc-list">\par
+      <element name="iswc-list">\par
+        <ref name="def_list-attributes"/>\par
+        <zeroOrMore>\par
+          <ref name="def_iswc-element" />\par
+        </zeroOrMore>\par
+      </element>\par
+    </define>\par
+\par
+    <define name="def_user-tag-list">\par
+        <element name="user-tag-list">\par
+            <ref name="def_list-attributes"/>\par
+            <zeroOrMore>\par
+                <ref name="def_user-tag"/>\par
+            </zeroOrMore>\par
+        </element>\par
+    </define>\par
+\par
+    <define name="def_collection-list">\par
+            <element name="collection-list">\par
+                <ref name="def_list-attributes"/>\par
+                <zeroOrMore>\par
+                    <ref name="def_collection"/>\par
+                </zeroOrMore>\par
+            </element>\par
+    </define>\par
+\par
+    <define name="def_editor-list">\par
+        <element name="editor-list">\par
+            <ref name="def_list-attributes"/>\par
+            <zeroOrMore>\par
+                <ref name="def_editor-element"/>\par
+            </zeroOrMore>\par
+        </element>\par
+    </define>\par
+\par
+    <define name="def_entity-list">\par
+        <element name="entity-list">\par
+            <ref name="def_list-attributes"/>\par
+            <zeroOrMore>\par
+               <ref name="def_artist-element"/>\par
+               <ref name="def_release-element"/>\par
+               <ref name="def_release-group-element"/>\par
+               <ref name="def_recording-element"/>\par
+               <ref name="def_label-element"/>\par
+               <ref name="def_work-element"/>\par
+               <ref name="def_area-element"/>\par
+               <ref name="def_place-element"/>\par
+               <ref name="def_instrument-element"/>\par
+               <ref name="def_series-element"/>\par
+            </zeroOrMore>\par
+        </element>\par
+    </define>\par
+\par
+    <!-- the list of attributes on a relationship. -->\par
+    <define name="def_attribute-list">\par
+        <element name="attribute-list">\par
+            <oneOrMore>\par
+                <element name="attribute">\par
+                    <optional>\par
+                        <attribute name="value">\par
+                            <data type="string"/>\par
+                        </attribute>\par
+                    </optional>\par
+                    <optional>\par
+                        <attribute name="credited-as">\par
+                            <data type="string"/>\par
+                        </attribute>\par
+                    </optional>\par
+                    <text />\par
+                </element>\par
+            </oneOrMore>\par
+        </element>\par
+    </define>\par
+\par
+    <!-- the attributes which can be used on a -list element. -->\par
+    <define name="def_list-attributes">\par
+        <optional>\par
+            <attribute name="count">\par
+                <data type="nonNegativeInteger"/>\par
+            </attribute>\par
+        </optional>\par
+        <optional>\par
+            <attribute name="offset">\par
+                <data type="nonNegativeInteger"/>\par
+            </attribute>\par
+        </optional>\par
+    </define>\par
+\par
+    <define name="def_cover-art-archive">\par
+        <element name="cover-art-archive">\par
+            <element name="artwork"><choice><value>true</value><value>false</value></choice></element>\par
+            <element name="count"><data type="nonNegativeInteger"/></element>\par
+            <element name="front"><choice><value>true</value><value>false</value></choice></element>\par
+            <element name="back"><choice><value>true</value><value>false</value></choice></element>\par
+            <optional><element name="darkened"><choice><value>true</value></choice></element></optional>\par
+        </element>\par
+    </define>\par
+\par
+\par
+    <!-- A date with varying precision in format 'YYYY-MM-DD'. -->\par
+    <define name="def_incomplete-date">\par
+        <data type="string">\par
+            <param name="pattern">[0-9]\{4\}(-[0-9]\{2\})?(-[0-9]\{2\})?</param>\par
+        </data>\par
+    </define>\par
+\par
+    <!-- An IPI code -->\par
+    <define name="def_ipi">\par
+        <data type="string">\par
+            <param name="pattern">[0-9]\{11\}</param>\par
+        </data>\par
+    </define>\par
+\par
+    <define name="def_ipi-list">\par
+      <element name="ipi-list">\par
+        <zeroOrMore>\par
+          <element name="ipi">\par
+            <ref name="def_ipi" />\par
+          </element>\par
+        </zeroOrMore>\par
+      </element>\par
+    </define>\par
+\par
+    <define name="def_ended">\par
+      <element name="ended">\par
+        <choice>\par
+          <value>true</value>\par
+        </choice>\par
+      </element>\par
+    </define>\par
+\par
+    <define name="def_video">\par
+      <element name="video">\par
+        <choice>\par
+          <value>true</value>\par
+        </choice>\par
+      </element>\par
+    </define>\par
+\par
+    <define name="def_locale">\par
+        <data type="string">\par
+            <param name="pattern">[a-z]\{2\}(_[A-Za-z]+)?</param>\par
+        </data>\par
+    </define>\par
+\par
+    <!-- A two-letter country code like 'DE', 'UK', 'FR' etc. -->\par
+    <define name="def_iso-3166-1-code">\par
+        <data type="string">\par
+            <param name="pattern">[A-Z]\{2\}</param>\par
+        </data>\par
+    </define>\par
+\par
+    <define name="def_iso-3166-1-code-list">\par
+      <element name="iso-3166-1-code-list">\par
+        <zeroOrMore>\par
+          <element name="iso-3166-1-code">\par
+            <ref name="def_iso-3166-1-code" />\par
+          </element>\par
+        </zeroOrMore>\par
+      </element>\par
+    </define>\par
+\par
+    <!-- A two-letter country code followed by a subdivision code -->\par
+    <define name="def_iso-3166-2-code">\par
+        <data type="string">\par
+            <param name="pattern">[A-Z]\{2\}\\-[A-Z0-9]+</param>\par
+        </data>\par
+    </define>\par
+\par
+    <define name="def_iso-3166-2-code-list">\par
+      <element name="iso-3166-2-code-list">\par
+        <zeroOrMore>\par
+          <element name="iso-3166-2-code">\par
+            <ref name="def_iso-3166-2-code" />\par
+          </element>\par
+        </zeroOrMore>\par
+      </element>\par
+    </define>\par
+\par
+    <!-- A four-letter country code like "DDDE" -->\par
+    <define name="def_iso-3166-3-code">\par
+        <data type="string">\par
+            <param name="pattern">[A-Z]\{4\}</param>\par
+        </data>\par
+    </define>\par
+\par
+    <define name="def_iso-3166-3-code-list">\par
+      <element name="iso-3166-3-code-list">\par
+        <zeroOrMore>\par
+          <element name="iso-3166-3-code">\par
+            <ref name="def_iso-3166-3-code" />\par
+          </element>\par
+        </zeroOrMore>\par
+      </element>\par
+    </define>\par
+\par
+    <!-- An ISO-639 Part 3 language code like 'deu', 'eng', 'jpn' etc. -->\par
+    <define name="def_iso-639">\par
+        <data type="string">\par
+            <param name="pattern">[a-z]\{3\}</param>\par
+        </data>\par
+    </define>\par
+\par
+\par
+    <!-- A four-letter script code like 'Latn', 'Cyrl', etc. -->\par
+    <define name="def_iso-15924">\par
+        <data type="string">\par
+            <param name="pattern">[A-Z][a-z]\{3\}</param>\par
+        </data>\par
+    </define>\par
+\par
+    <!-- An ISRC code: CCXXXYYNNNNN, with\par
+           CC    - two-letter ISO-3166-1 alpha 2 country code\par
+           XXX   - alphanumeric registrant code (organization)\par
+           YY    - year\par
+           NNNNN - 5-digit number\par
+    -->\par
+    <define name="def_isrc">\par
+        <data type="string">\par
+            <param name="pattern">[A-Z]\{2\}[A-Z0-9]\{3\}[0-9]\{2\}[0-9]\{5\}</param>\par
+        </data>\par
+    </define>\par
+\par
+    <!-- An ISWC code:\par
+           C           - single-letter prefix character\par
+           NNN.NNN.NNN - 9-digit number. A "."-separated grouping in\par
+                         3x3 digits is commonly used.  This grouping\par
+                         is allowed by the standard, but not\par
+                         mandatory.  For consistency we force this\par
+                         grouping in the schema.\par
+           C           - check digit\par
+    -->\par
+    <define name="def_iswc">\par
+        <data type="string">\par
+            <param name="pattern">[A-Z]-[0-9]\{3\}\\.[0-9]\{3\}\\.[0-9]\{3\}-[0-9]</param>\par
+        </data>\par
+    </define>\par
+\par
+    <!-- A 128 Bit UUID in its standard ASCII representation. -->\par
+    <define name="def_uuid">\par
+        <data type="string">\par
+            <param name="pattern">[0-9a-f]\{8\}(-[0-9a-f]\{4\})\{3\}-[0-9a-f]\{12\}</param>\par
+        </data>\par
+    </define>\par
+\par
+\par
+    <!-- Reading direction of a relation. Defaults to "both". -->\par
+    <define name="def_direction">\par
+        <choice>\par
+            <value>both</value>\par
+            <value>forward</value>\par
+            <value>backward</value>\par
+        </choice>\par
+    </define>\par
+\par
+    <!-- Data Quality of an entity. -->\par
+    <define name="def_quality">\par
+        <choice>\par
+            <value>low</value>\par
+            <value>normal</value>\par
+            <value>high</value>\par
+        </choice>\par
+    </define>\par
+\par
+    <!-- A list of work attributes. -->\par
+    <define name="def_work-attribute-list">\par
+        <element name="attribute-list">\par
+            <oneOrMore>\par
+                <element name="attribute">\par
+                    <attribute name="type">\par
+                        <data type="string"/>\par
+                    </attribute>\par
+                    <text />\par
+                </element>\par
+            </oneOrMore>\par
+        </element>\par
+    </define>\par
+\par
+</grammar>\par
+}
+ 

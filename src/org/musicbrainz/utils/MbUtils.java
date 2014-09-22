@@ -138,7 +138,7 @@ public class MbUtils {
 			throw new IllegalArgumentException(uri.toString() + " is no MB ID");
 		}
 		
-        String regex = "^/(label|artist|release-group|release|recording|work|collection)/([^/]*)$";
+        String regex = "^/(label|artist|release-group|release|recording|work|collection|area|place|instrument|series)/([^/]*)$";
         Pattern p = Pattern.compile(regex);
         Matcher m = p.matcher(uri.getPath());
         if(m.matches()) 

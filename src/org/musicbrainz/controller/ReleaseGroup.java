@@ -101,10 +101,15 @@ public class ReleaseGroup extends Controller {
         inc.setRecordingRelations(true);
         inc.setWorkRelations(true);
         
+        inc.setAreaRelations(true);
+        inc.setPlaceRelations(true);
+        inc.setInstrumentRelations(true);
+        inc.setSeriesRelations(true);
+        
         inc.setTags(true);
         inc.setRatings(true);
-        inc.setUserTags(false);
-        inc.setUserRatings(false);
+        inc.setUserTags(true);
+        inc.setUserRatings(true);
         
         inc.setAnnotation(true);
         
@@ -312,6 +317,11 @@ public class ReleaseGroup extends Controller {
         inc.setReleaseRelations(false);
         inc.setRecordingRelations(false);
         inc.setWorkRelations(false);
+        
+        inc.setAreaRelations(false);
+        inc.setPlaceRelations(false);
+        inc.setInstrumentRelations(false);
+        inc.setSeriesRelations(false);
 
         if (releaseGroupinc == null) return inc;
 

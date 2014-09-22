@@ -124,12 +124,16 @@ public class Artist extends Controller{
         inc.setReleaseRelations(true);
         inc.setRecordingRelations(true);
         inc.setWorkRelations(true);
+        inc.setAreaRelations(true);
+        inc.setPlaceRelations(true);
+        inc.setInstrumentRelations(true);
+        inc.setSeriesRelations(true);
         
         inc.setAnnotation(true);
         inc.setTags(true);
         inc.setRatings(true);
-        inc.setUserTags(false);
-        inc.setUserRatings(false);
+        inc.setUserTags(true);
+        inc.setUserRatings(true);
         inc.setAliases(true);
         
         inc.setReleaseGroups(true);
@@ -196,6 +200,11 @@ public class Artist extends Controller{
 
         inc = (ArtistIncludesWs2)super.getIncrementalInc(inc);
         if (getIncludes().isAliases() && !getIncluded().isAliases()) inc.setAliases(true);
+        //if (getIncludes().isReleaseGroups() && !getIncluded().isReleaseGroups()) inc.setReleaseGroups(true);
+        //if (getIncludes().isReleases() && !getIncluded().isReleases()) inc.setReleases(true);
+       // if (getIncludes().isVariousArtists() && !getIncluded().isVariousArtists()) inc.setVariousArtists(true);
+       // if (getIncludes().isVariousArtists() && !getIncluded().isVariousArtists()) inc.setVariousArtists(true);
+       // if (getIncludes().isWorks() && !getIncluded().isWorks()) inc.setWorks(true);
         
         return inc;
     }
@@ -640,6 +649,11 @@ public class Artist extends Controller{
         inc.setRecordingRelations(false);
         inc.setWorkRelations(false);
         
+        inc.setAreaRelations(false);
+        inc.setPlaceRelations(false);
+        inc.setInstrumentRelations(false);
+        inc.setSeriesRelations(false);
+
         if (artistinc == null) return inc;
         
         //if (artistinc.isRecordingLevelRelations()) inc.setRecordingLevelRelations(true);
@@ -665,6 +679,11 @@ public class Artist extends Controller{
         inc.setReleaseRelations(false);
         inc.setRecordingRelations(false);
         inc.setWorkRelations(false);
+        
+        inc.setAreaRelations(false);
+        inc.setPlaceRelations(false);
+        inc.setInstrumentRelations(false);
+        inc.setSeriesRelations(false);
         
         if (artistinc == null) return inc;
         
@@ -693,6 +712,11 @@ public class Artist extends Controller{
         inc.setRecordingRelations(false);
         inc.setWorkRelations(false);
         
+        inc.setAreaRelations(false);
+        inc.setPlaceRelations(false);
+        inc.setInstrumentRelations(false);
+        inc.setSeriesRelations(false);
+        
         if (artistinc == null) return inc;
         
         if (artistinc.isDiscids()) inc.setDiscids(true);
@@ -720,6 +744,11 @@ public class Artist extends Controller{
         inc.setRecordingRelations(false);
         inc.setWorkRelations(false);
         
+        inc.setAreaRelations(false);
+        inc.setPlaceRelations(false);
+        inc.setInstrumentRelations(false);
+        inc.setSeriesRelations(false);
+        
         if (artistinc == null) return inc;
       
         //if (artistinc.isRecordingLevelRelations()) inc.setRecordingLevelRelations(true);
@@ -740,6 +769,11 @@ public class Artist extends Controller{
         inc.setReleaseRelations(false);
         inc.setRecordingRelations(false);
         inc.setWorkRelations(false);
+        
+        inc.setAreaRelations(false);
+        inc.setPlaceRelations(false);
+        inc.setInstrumentRelations(false);
+        inc.setSeriesRelations(false);
         
         if (artistinc == null) return inc;
        

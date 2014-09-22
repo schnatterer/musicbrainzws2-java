@@ -3,6 +3,7 @@ package org.musicbrainz.query.lookUp;
 import org.apache.http.HttpStatus;
 import org.musicbrainz.MBWS2Exception;
 import org.musicbrainz.filter.DiscTocFilterWs2;
+import org.musicbrainz.includes.AreaIncludesWs2;
 import org.musicbrainz.webservice.RequestException;
 import org.musicbrainz.webservice.ResponseException;
 
@@ -13,20 +14,27 @@ import org.musicbrainz.utils.MbUtils;
 import org.musicbrainz.includes.ArtistIncludesWs2;
 import org.musicbrainz.includes.CollectionIncludesWs2;
 import org.musicbrainz.includes.IncludesWs2;
+import org.musicbrainz.includes.InstrumentIncludesWs2;
 import org.musicbrainz.includes.LabelIncludesWs2;
+import org.musicbrainz.includes.PlaceIncludesWs2;
 import org.musicbrainz.includes.RecordingIncludesWs2;
 import org.musicbrainz.includes.ReleaseGroupIncludesWs2;
 import org.musicbrainz.includes.ReleaseIncludesWs2;
+import org.musicbrainz.includes.SeriesIncludesWs2;
 import org.musicbrainz.includes.WorkIncludesWs2;
 import org.musicbrainz.model.entity.DiscWs2;
 import org.musicbrainz.model.PuidWs2;
+import org.musicbrainz.model.entity.AreaWs2;
 import org.musicbrainz.model.entity.ArtistWs2;
 import org.musicbrainz.model.entity.CollectionWs2;
 import org.musicbrainz.model.entity.EntityWs2;
+import org.musicbrainz.model.entity.InstrumentWs2;
 import org.musicbrainz.model.entity.LabelWs2;
+import org.musicbrainz.model.entity.PlaceWs2;
 import org.musicbrainz.model.entity.RecordingWs2;
 import org.musicbrainz.model.entity.ReleaseGroupWs2;
 import org.musicbrainz.model.entity.ReleaseWs2;
+import org.musicbrainz.model.entity.SeriesWs2;
 import org.musicbrainz.model.entity.WorkWs2;
 import org.musicbrainz.model.entity.listelement.ReleaseListWs2;
 import org.musicbrainz.query.QueryWs2;
@@ -357,5 +365,69 @@ public class LookUpWs2 extends QueryWs2 {
         
         if (md.getDiscWs2()!=null) return md.getDiscWs2().getReleaseList();
         else return md.getReleaseListWs2();
+    }
+    public AreaWs2 getAreaById(String id, AreaIncludesWs2 includes) throws MBWS2Exception
+    {
+        String uuid;
+        try {
+                uuid = MbUtils.extractUuid(id, AREA);
+        }
+        catch(IllegalArgumentException e) {
+                throw new RequestException("Invalid area id: " + e.getMessage(), e);
+        }
+
+        Metadata md = getFromWebService(AREA, uuid, includes, null);
+        if(md.getAreaWs2() == null)
+                throw new ResponseException("Server didn't return area!");
+
+        return md.getAreaWs2();
+    }
+    public PlaceWs2 getPlaceById(String id, PlaceIncludesWs2 includes) throws MBWS2Exception
+    {
+        String uuid;
+        try {
+                uuid = MbUtils.extractUuid(id, PLACE);
+        }
+        catch(IllegalArgumentException e) {
+                throw new RequestException("Invalid place id: " + e.getMessage(), e);
+        }
+
+        Metadata md = getFromWebService(PLACE, uuid, includes, null);
+        if(md.getPlaceWs2() == null)
+                throw new ResponseException("Server didn't return place!");
+
+        return md.getPlaceWs2();
+    }
+    public InstrumentWs2 getInstrumentById(String id, InstrumentIncludesWs2 includes) throws MBWS2Exception
+    {
+        String uuid;
+        try {
+                uuid = MbUtils.extractUuid(id, INSTRUMENT);
+        }
+        catch(IllegalArgumentException e) {
+                throw new RequestException("Invalid Instrument id: " + e.getMessage(), e);
+        }
+
+        Metadata md = getFromWebService(INSTRUMENT, uuid, includes, null);
+        if(md.getInstrumentWs2() == null)
+                throw new ResponseException("Server didn't return Instrument!");
+
+        return md.getInstrumentWs2();
+    }
+    public SeriesWs2 getSeriesById(String id, SeriesIncludesWs2 includes) throws MBWS2Exception
+    {
+        String uuid;
+        try {
+                uuid = MbUtils.extractUuid(id, SERIES);
+        }
+        catch(IllegalArgumentException e) {
+                throw new RequestException("Invalid Series id: " + e.getMessage(), e);
+        }
+
+        Metadata md = getFromWebService(SERIES, uuid, includes, null);
+        if(md.getSeriesWs2() == null)
+                throw new ResponseException("Server didn't return Series!");
+
+        return md.getSeriesWs2();
     }
 }

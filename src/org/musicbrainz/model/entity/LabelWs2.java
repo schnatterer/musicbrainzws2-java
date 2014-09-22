@@ -3,7 +3,6 @@ package org.musicbrainz.model.entity;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
-import org.musicbrainz.model.AreaWs2;
 import org.musicbrainz.model.LifeSpanWs2;
 import org.musicbrainz.model.entity.listelement.ReleaseListWs2;
 

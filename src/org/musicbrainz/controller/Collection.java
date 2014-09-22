@@ -62,6 +62,11 @@ public class Collection extends Controller{
         inc.setReleaseRelations(false);
         inc.setRecordingRelations(false);
         inc.setWorkRelations(false);
+        
+        inc.setAreaRelations(false);
+        inc.setPlaceRelations(false);
+        inc.setInstrumentRelations(false);
+        inc.setSeriesRelations(false);
 
         inc.setAnnotation(false);
         inc.setTags(false);
@@ -142,6 +147,11 @@ public class Collection extends Controller{
         inc.setReleaseRelations(false);// invalid request
         inc.setRecordingRelations(false);// invalid request
         inc.setWorkRelations(false);// invalid request
+        
+        inc.setAreaRelations(false);// invalid request
+        inc.setPlaceRelations(false);// invalid request
+        inc.setInstrumentRelations(false);// invalid request
+        inc.setSeriesRelations(false);// invalid request
         
         inc.setUrlRelations(false);// invalid request
         

@@ -48,24 +48,24 @@ public class ArtistIncludesWs2 extends IncludesWs2
     /* (non-Javadoc)
      * @see org.musicbrainz.webservice.Includes#createIncludeTags()
      */
-       @Override
+    @Override
     public List<String> createIncludeTags() 
     {
             List<String> includeTags = super.createIncludeTags();
 
             // not that elegant but straight forward :)
-            if (aliases) includeTags.add(ALIASES_INC);
+            if (isAliases()) includeTags.add(ALIASES_INC);
 
-            if (recordings) includeTags.add(RECORDINGS_INC);
-            if (releases) includeTags.add(RELEASES_INC);
-            if (releaseGroups) includeTags.add(RELEASEGROUPS_INC);
-            if (works) includeTags.add(WORKS_INC);
+            if (isRecordings()) includeTags.add(RECORDINGS_INC);
+            if (isReleases()) includeTags.add(RELEASES_INC);
+            if (isReleaseGroups()) includeTags.add(RELEASEGROUPS_INC);
+            if (isWorks()) includeTags.add(WORKS_INC);
 
-            if (discids) includeTags.add(DISCIDS_INC);
-            if (media) includeTags.add(MEDIA_INC);
-            if (puids) includeTags.add(PUIDS_INC);
-            if (isrcs) includeTags.add(ISRCS_INC);
-            if (variousArtists) includeTags.add(VARIOUSARTISTS_INC);
+            if (isDiscids()) includeTags.add(DISCIDS_INC);
+            if (isMedia()) includeTags.add(MEDIA_INC);
+            if (isPuids()) includeTags.add(PUIDS_INC);
+            if (isIsrcs()) includeTags.add(ISRCS_INC);
+            if (isVariousArtists()) includeTags.add(VARIOUSARTISTS_INC);
 
             return includeTags;
     }

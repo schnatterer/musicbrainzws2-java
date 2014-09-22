@@ -56,12 +56,6 @@ public class DiscWs2 extends EntityWs2 {
     private ReleaseListWs2 releaseList= new ReleaseListWs2();
 
     /**
-     * Default constructor
-     */
-    public DiscWs2() {
-            tracks = new ArrayList<DiscTrackWs2>();
-    }
-    /**
      * @return a string containing a 28-character DiscID 
      */
     public String getDiscId() {

@@ -61,6 +61,11 @@ public class IncludesWs2 extends DomainsWs2 {
     private boolean releaseGroupRelations = false;
     private boolean urlRelations = false;
     private boolean workRelations = false;
+    //2014-09-20
+    private boolean areaRelations = false;
+    private boolean placeRelations = false;
+    private boolean instrumentRelations = false;
+    private boolean seriesRelations = false;
     
     private boolean recordingLevelRelations = false;
     private boolean workLevelRelations = false;
@@ -96,6 +101,13 @@ public class IncludesWs2 extends DomainsWs2 {
                 includeTags.add(WORKRELS_INC);
                 if (isWorkLevelRelations())includeTags.add(WORKLEVELRELS_INC);
             }
+            //2014-09-14
+            if (areaRelations) includeTags.add(AREARELS_INC);
+            if (placeRelations) includeTags.add(PLACERELS_INC);
+            if (instrumentRelations) includeTags.add(INSTRUMENTRELS_INC);
+            if (seriesRelations) includeTags.add(SERIESRELS_INC);
+            //
+            
             if (artistCredits) includeTags.add(ARTISTCREDITS_INC);
             
             if (isTags()) includeTags.add(TAGS_INC);
@@ -223,6 +235,62 @@ public class IncludesWs2 extends DomainsWs2 {
     public void setWorkLevelRelations(boolean workLevelRelations) {
         this.workLevelRelations = workLevelRelations;
     }
+    
+    /**
+     * @return the areaRelations
+     */
+    public boolean isAreaRelations() {
+        return areaRelations;
+    }
+
+    /**
+     * @return the placeRelations
+     */
+    public boolean isPlaceRelations() {
+        return placeRelations;
+    }
+
+    /**
+     * @return the instrumentRelations
+     */
+    public boolean isInstrumentRelations() {
+        return instrumentRelations;
+    }
+
+    /**
+     * @return the seriesRelations
+     */
+    public boolean isSeriesRelations() {
+        return seriesRelations;
+    }
+
+    /**
+     * @param areaRelations the areaRelations to set
+     */
+    public void setAreaRelations(boolean areaRelations) {
+        this.areaRelations = areaRelations;
+    }
+
+    /**
+     * @param placeRelations the placeRelations to set
+     */
+    public void setPlaceRelations(boolean placeRelations) {
+        this.placeRelations = placeRelations;
+    }
+
+    /**
+     * @param instrumentRelations the instrumentRelations to set
+     */
+    public void setInstrumentRelations(boolean instrumentRelations) {
+        this.instrumentRelations = instrumentRelations;
+    }
+
+    /**
+     * @param seriesRelations the seriesRelations to set
+     */
+    public void setSeriesRelations(boolean seriesRelations) {
+        this.seriesRelations = seriesRelations;
+    }
     /**
      * @return the artistCredits
      */
@@ -314,6 +382,10 @@ public class IncludesWs2 extends DomainsWs2 {
         setReleaseRelations(false);
         setRecordingRelations(false);
         setWorkRelations(false);
+        setAreaRelations(false);
+        setPlaceRelations(false);
+        setInstrumentRelations(false);
+        setSeriesRelations(false);
         
         setUrlRelations(false);
         
@@ -339,6 +411,10 @@ public class IncludesWs2 extends DomainsWs2 {
         setReleaseRelations(true);
         setRecordingRelations(true);
         setWorkRelations(true);
+        setAreaRelations(true);
+        setPlaceRelations(true);
+        setInstrumentRelations(true);
+        setSeriesRelations(true);
         
         setUrlRelations(true);
         
@@ -363,6 +439,10 @@ public class IncludesWs2 extends DomainsWs2 {
         target.setReleaseRelations(isReleaseRelations());
         target.setRecordingRelations(isRecordingRelations());
         target.setWorkRelations(isWorkRelations());
+        target.setAreaRelations(isAreaRelations());
+        target.setPlaceRelations(isPlaceRelations());
+        target.setInstrumentRelations(isInstrumentRelations());
+        target.setSeriesRelations(isSeriesRelations());
         
         target.setUrlRelations(isUrlRelations());
         

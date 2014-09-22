@@ -25,7 +25,7 @@ public class CollectionListWs2 extends ListElement{
 	/**
 	 * @param collections the collections to set
 	 */
-	public void setCollection(List<CollectionWs2> collections) {
+	public void setCollections(List<CollectionWs2> collections) {
 		this.collections = collections;
 	}
 	

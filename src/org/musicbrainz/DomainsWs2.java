@@ -58,12 +58,11 @@ public abstract class DomainsWs2 {
     public static final String WORK = "work";
     public static final String RECORDING = "recording";
     public static final String COLLECTION = "collection";
+    
     public static final String DISC = "disc";
     public static final String ANNOTATION = "annotation";
     public static final String RELATION = "relation";
-    
     public static final String MESSAGE = "message";
-
     public static final String ARTISTCREDIT = "artist-credit";
     public static final String NAMECREDIT = "name-credit";
     public static final String LABELINFO = "label-info";
@@ -77,7 +76,6 @@ public abstract class DomainsWs2 {
     public static final String TEXTREPRESENTATION = "text-representation";
     public static final String LIFESPAN = "life-span";
     public static final String RELEASEEVENT= "release-event";
-    public static final String AREA= "area";
     
     public static final String TAG = "tag";
     public static final String RATING = "rating";
@@ -104,7 +102,7 @@ public abstract class DomainsWs2 {
     public static final String RELEASEEVENTLIST= "release-event-list";
     public static final String SECONDARYTYPELIST =  "secondary-type-list";
     
-    public static final String ATTRIBUTELIST = "attribute-list";
+    public static final String WORKATTRIBUTELIST = "attribute-list";
     public static final String ATTRIBUTE = "attribute";
     public static final String TAGLIST = "tag-list";
     public static final String USERTAGLIST = "user-tag-list";
@@ -148,7 +146,6 @@ public abstract class DomainsWs2 {
     public static final String ISO31663CODELIST = "iso-3166-3-code-list";
 
     public static final String IPILIST = "ipi-list";
-    public static final String ISNILIST = "isni-list";
     public static final String ISWCLIST = "iswc-list";
     
     public static final String TYPEID="type-id";
@@ -168,7 +165,6 @@ public abstract class DomainsWs2 {
     public static final String PRIMARY = "primary";
     
     public static final String TEXT = "text";
-    public static final String EDITOR = "editor";
     public static final String VOTESCOUNT = "votes-count";
 
     protected static final Pattern localePattern = Pattern.compile("^[a-z]{2}$");
@@ -200,10 +196,16 @@ public abstract class DomainsWs2 {
     public static final String USERTAGS_INC = "user-tags";
     public static final String WORKLEVELRELS_INC = "work-level-rels";
     public static final String WORKRELS_INC = "work-rels";
+    //2014-09-20
+    public static final String AREARELS_INC = "area-rels";
+    public static final String PLACERELS_INC = "place-rels";
+    public static final String INSTRUMENTRELS_INC = "instrument-rels";
+    public static final String SERIESRELS_INC = "series-rels";
 
     public static final String ALIASES_INC = "aliases";
     public static final String DISCIDS_INC= "discids";
     public static final String ISRCS_INC = "isrcs";
+    public static final String ARTISTS_INC = "artists";
     public static final String LABELS_INC = "labels";
     public static final String MEDIA_INC= "media";
     public static final String PUIDS_INC = "puids";
@@ -212,20 +214,12 @@ public abstract class DomainsWs2 {
     public static final String RELEASES_INC = "releases";
     public static final String VARIOUSARTISTS_INC = "various-artists";
     public static final String WORKS_INC = "works";
+    //2014-09-24
+    public static final String AREAS_INC = "artists";
+    public static final String PLACES_INC = "places";
+    public static final String INSTRUMENTS_INC = "instruments";
+    public static final String SERIES_INC = "series";
    
-    // Valide related Entities for Browses
-    
-    // Maybe we should rename the parameter and modify controllers
-    // according to new names. i.e. REL_LABEL...
-    
-    //public static final String LABEL = "label";
-    //public static final String ARTIST = "artist";
-    //public static final String RELEASEGROUP = "release-group";
-    //public static final String RELEASE = "release";
-    //public static final String RECORDING = "recording";
-    //public static final String COLLECTION = "collection";
-    // WORK and ANNOTATION are  not valid.
-    // Special case for release.
     public static final String TRACKARTIST = "track_artist";
     
     // Valid POST request entities
@@ -233,4 +227,37 @@ public abstract class DomainsWs2 {
     public static final String TAG_POST = "tag";
     public static final String RATING_POST = "rating";
 
+    //2014 09 20
+    public static final String URL = "url";
+    public static final String EDITOR = "editor";
+    public static final String AREA = "area";
+    public static final String PLACE = "place";
+    public static final String INSTRUMENT = "instrument";
+    public static final String SERIES = "series";
+    
+    public static final String URLLIST= "url-list";
+    public static final String EDITORLIST = "editor-list";
+    public static final String AREALIST = "area-list";
+    public static final String PLACELIST = "place-list";
+    public static final String INSTRUMENTLIST = "instrument-list";
+    public static final String SERIESLIST = "series-list";
+    
+    public static final String ENTITYLIST = "entity-list";
+    
+    public static final String VIDEO = "video";
+    public static final String ADDRESS = "address";
+    public static final String COORDINATES ="coordinates";
+    public static final String LATITUDE ="latitude";
+    public static final String LONGITUDE ="longitude";
+    public static final String DESCRIPTION ="description";
+    public static final String ORDERINGATTRIBUTE = "ordering-attribute";
+    public static final String ORDERINGKEY = "ordering-key";
+    public static final String RELATIONATTRIBUTELIST = "attribute-list";
+    public static final String RELATIONATTRIBUTEVALUE = "value";
+    public static final String RELATIONATTRIBUTECREDITEDAS = "credited-as";
+    // not listed anymore in mmd but still returned by ws2 for artists.
+    public static final String ISNILIST = "isni-list";
+    
+    //
+    
 }

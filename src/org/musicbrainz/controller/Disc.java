@@ -66,10 +66,15 @@ public class Disc extends Controller{
         inc.setRecordingRelations(true);
         inc.setWorkRelations(true);
         
-        inc.setTags(false);
-        inc.setRatings(false);
-        inc.setUserTags(false);
-        inc.setUserRatings(false);
+        inc.setAreaRelations(true);
+        inc.setPlaceRelations(true);
+        inc.setInstrumentRelations(true);
+        inc.setSeriesRelations(true);
+        
+        inc.setTags(true);
+        inc.setRatings(true);
+        inc.setUserTags(true);
+        inc.setUserRatings(true);
         
         inc.setArtistCredits(true);
         inc.setLabel(true);
@@ -194,7 +199,11 @@ public class Disc extends Controller{
         {
             inc.setRecordings(true);
         }
-                
+        inc.setAreaRelations(false);// invalid request
+        inc.setPlaceRelations(false);// invalid request
+        inc.setInstrumentRelations(false);// invalid request
+        inc.setSeriesRelations(false);// invalid request    
+        
         inc.setRecordingLevelRelations(false);// invalid request
         inc.setWorkLevelRelations(false);// invalid request
         inc.setTags(false);// invalid request

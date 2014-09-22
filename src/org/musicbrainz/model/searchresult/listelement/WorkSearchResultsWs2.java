@@ -21,7 +21,7 @@ public class WorkSearchResultsWs2 extends ListElement{
                 workList = new WorkListWs2();
         }
         workResults.add(workResult);
-        workList.addWorks(workResult.getWork());
+        workList.addWork(workResult.getWork());
         
         workList.setCount(getCount());
         workList.setOffset(getOffset());

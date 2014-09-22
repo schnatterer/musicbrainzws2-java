@@ -1,5 +1,6 @@
 package org.musicbrainz.model;
 
+import org.musicbrainz.model.entity.AreaWs2;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
