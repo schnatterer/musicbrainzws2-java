@@ -65,8 +65,6 @@ public class ReleaseWs2 extends EntityWs2 {
     private ReleaseEventListWs2 eventList;
     private CoverArtArchiveWs2 coverArtArchive;
     
-    private SeriesWs2 series;
-    
     // Recording is via Medium.
 
     public String getTitle() {

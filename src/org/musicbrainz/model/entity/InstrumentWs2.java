@@ -3,6 +3,7 @@ package org.musicbrainz.model.entity;
 
 import java.util.logging.Logger;
 import org.apache.commons.lang3.StringUtils;
+import org.musicbrainz.utils.MbUtils;
 
 /**
  * <p>A Instrument definition.
@@ -25,18 +26,23 @@ public class InstrumentWs2 extends EntityWs2
     public static final String TYPE_ELECTRONICINSTRUMENT ="Electronic instrument";
     public static final String TYPE_OTHERINSTRUMENT ="Other instrument";
     
-    private String type;
+    private String typeUri;
     private String name;
     private String disambiguation;
     private String description;
 
     /**
-     * @return the type
+     * @return the typeUri
      */
-    public String getType() {
-        return type;
+    public String getTypeUri() {
+        return typeUri;
     }
+    public String getType() {
 
+         if (getTypeUri()== null) return "";
+         if (getTypeUri().isEmpty()) return "";
+         return MbUtils.extractTypeFromURI(getTypeUri());
+    }
     /**
      * @return the name
      */
@@ -59,10 +65,10 @@ public class InstrumentWs2 extends EntityWs2
     }
 
     /**
-     * @param type the type to set
+     * @param type the typeUri to set
      */
-    public void setType(String type) {
-        this.type = type;
+    public void setTypeUri(String typeUri) {
+        this.typeUri = typeUri;
     }
 
     /**

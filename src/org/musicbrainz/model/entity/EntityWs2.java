@@ -101,7 +101,7 @@ public abstract class EntityWs2 extends DomainsWs2 {
     public String getIdUri() {
             return idUri;
     }
-       public String getId() {
+    public String getId() {
 
            String resType = MbUtils.extractResTypeFromURI(getIdUri());
            String idStr = MbUtils.extractUuid(getIdUri(), resType);

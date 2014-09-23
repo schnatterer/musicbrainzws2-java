@@ -12,6 +12,7 @@ import org.musicbrainz.model.entity.listelement.RecordingListWs2;
 import org.musicbrainz.model.entity.listelement.ReleaseGroupListWs2;
 import org.musicbrainz.model.entity.listelement.ReleaseListWs2;
 import org.musicbrainz.model.entity.listelement.WorkListWs2;
+import org.musicbrainz.utils.MbUtils;
 
 /**
  * <p>Represents an artist.</p>
@@ -23,9 +24,9 @@ public class ArtistWs2 extends EntityWs2 {
 	public static final String TYPE_PERSON = NS_MMD_2 + "Person";
 	
 	/**
-	 * The artist's type (as an absolute URI).
+	 * The artist's typeUri (as an absolute URI).
 	 */
-           private String type;
+           private String typeUri;
     
 	/**
 	 * The artist's name.
@@ -120,17 +121,23 @@ public class ArtistWs2 extends EntityWs2 {
 		this.disambiguation = disambiguation;
 	}
    	/**
-	 * @return the type
+	 * @return the typeUri
 	 */
-	public String getType() {
-		return type;
+	public String getTypeUri() {
+		return typeUri;
 	}
+           public String getType() {
 
+                if (getTypeUri()== null) return "";
+                if (getTypeUri().isEmpty()) return "";
+                return MbUtils.extractTypeFromURI(getTypeUri());
+           }
+    
 	/**
-	 * @param type the type to set
+	 * @param type the typeUri to set
 	 */
-	public void setType(String type) {
-		this.type = type;
+	public void setTypeUri(String typeUri) {
+		this.typeUri = typeUri;
 	}
 	/**
          * @return the LifeSpan

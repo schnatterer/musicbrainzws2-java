@@ -85,7 +85,7 @@ public class PlaceBrowseWs2 extends BrowseWs2{
     private PlaceListWs2 execQuery() throws MBWS2Exception
     {
 
-        PlaceListWs2 le = getMetadata(ARTIST).getPlaceListWs2();
+        PlaceListWs2 le = getMetadata(PLACE).getPlaceListWs2();
         listElement = le;
         
         int sz  = le.getPlaces().size();

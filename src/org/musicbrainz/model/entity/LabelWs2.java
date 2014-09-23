@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 import org.musicbrainz.model.LifeSpanWs2;
 import org.musicbrainz.model.entity.listelement.ReleaseListWs2;
+import org.musicbrainz.utils.MbUtils;
 
 /**
  * <p>Represents a  Label.</p>
@@ -22,9 +23,9 @@ public class LabelWs2 extends EntityWs2 {
            public static final String TYPE_OTHER = NS_MMD_2 + "Other";
            
            /**
-	 * The alabel's type (as an absolute URI).
+	 * The alabel's typeUri (as an absolute URI).
 	 */
-           private String type;
+           private String typeUri;
     
 	/**
 	 * The label's name.
@@ -107,17 +108,22 @@ public class LabelWs2 extends EntityWs2 {
 	}
         
    	/**
-	 * @return the type
+	 * @return the typeUri
 	 */
-	public String getType() {
-		return type;
+	public String getTypeUri() {
+		return typeUri;
 	}
+           public String getType() {
 
+                if (getTypeUri()== null) return "";
+                if (getTypeUri().isEmpty()) return "";
+                return MbUtils.extractTypeFromURI(getTypeUri());
+           }
 	/**
-	 * @param type the type to set
+	 * @param type the typeUri to set
 	 */
-	public void setType(String type) {
-		this.type = type;
+	public void setTypeUri(String typeUri) {
+		this.typeUri = typeUri;
 	}
 	/**
          * @return the LifeSpan

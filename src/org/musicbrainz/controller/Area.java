@@ -234,9 +234,9 @@ public class Area extends Controller{
         inc.setPuids(false);
         
         // Sanity check.
-        if(inc.isArtistCredits()) inc.setReleases(true); // to avoid the artist credits exceptions.
+        //if(inc.isArtistCredits()) inc.setReleases(true); // to avoid the artist credits exceptions.
          
-        //inc.setArtistCredits(false); // invalid request
+        inc.setArtistCredits(false); // invalid request
         
         inc.setRecordingLevelRelations(false);// invalid request
         inc.setWorkLevelRelations(false);// invalid request

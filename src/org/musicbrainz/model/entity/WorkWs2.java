@@ -16,7 +16,7 @@ import org.musicbrainz.utils.MbUtils;
  */
 public class WorkWs2 extends EntityWs2 
 {
-    // TODO: Should we add the typeURI URI definitions?
+    // TODO: Should we add the typeUri URI definitions?
     // Seems they are work in progress...
     
     //public static final String TYPE_ARIA = NS_MMD_2 + "Aria";
@@ -24,7 +24,7 @@ public class WorkWs2 extends EntityWs2
     //public static final String TYPE_CANTATA = NS_MMD_2 + "Cantata";
     //...
     
-    private String typeURI;
+    private String typeUri;
     private String title;
     private ArtistCreditWs2 artistCredit;
     private String iswc;
@@ -34,17 +34,17 @@ public class WorkWs2 extends EntityWs2
     //15/09/2014
     private List<WorkAttributeWs2> attributes = new ArrayList <WorkAttributeWs2>();
 
-    public String getTypeURI() {
-        return typeURI;
+    public String getTypeUri() {
+        return typeUri;
     }
-    public void setTypeURI(String type) {
-        this.typeURI = type;
+    public void setTypeUri(String typeUri) {
+        this.typeUri = typeUri;
     }
     public String getType() {
 
-       if (getTypeURI()== null) return "";
-       if (getTypeURI().isEmpty()) return "";
-       return MbUtils.extractTypeFromURI(getTypeURI());
+       if (getTypeUri()== null) return "";
+       if (getTypeUri().isEmpty()) return "";
+       return MbUtils.extractTypeFromURI(getTypeUri());
     }
     
     public String getTitle() {

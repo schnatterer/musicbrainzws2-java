@@ -85,7 +85,7 @@ public class InstrumentBrowseWs2 extends BrowseWs2{
     private InstrumentListWs2 execQuery() throws MBWS2Exception
     {
 
-        InstrumentListWs2 le = getMetadata(ARTIST).getInstrumentListWs2();
+        InstrumentListWs2 le = getMetadata(INSTRUMENT).getInstrumentListWs2();
         listElement = le;
         
         int sz  = le.getInstruments().size();

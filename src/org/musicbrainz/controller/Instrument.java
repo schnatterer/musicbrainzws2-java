@@ -92,10 +92,10 @@ public class Instrument extends Controller{
         inc.setInstrumentRelations(true);
         inc.setSeriesRelations(true);
         
-        inc.setTags(true);
-        inc.setRatings(true);
-        inc.setUserTags(true);
-        inc.setUserRatings(true);
+        inc.setTags(false);
+        inc.setRatings(false);
+        inc.setUserTags(false);
+        inc.setUserRatings(false);
         
         inc.setAnnotation(true);
         inc.setAliases(true);
@@ -171,6 +171,11 @@ public class Instrument extends Controller{
         inc.setArtistCredits(false); // invalid request
         inc.setRecordingLevelRelations(false);// invalid request
         inc.setWorkLevelRelations(false);// invalid request
+        //
+        inc.setTags(false);// invalid request
+        inc.setRatings(false);// invalid request
+        inc.setUserTags(false);// invalid request
+        inc.setUserRatings(false);// invalid request
   
         if (needsLookUp(inc))
         {    

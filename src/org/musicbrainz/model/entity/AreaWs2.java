@@ -16,6 +16,7 @@ import org.musicbrainz.model.entity.listelement.ArtistListWs2;
 import org.musicbrainz.model.entity.listelement.LabelListWs2;
 import org.musicbrainz.model.entity.listelement.PlaceListWs2;
 import org.musicbrainz.model.entity.listelement.ReleaseListWs2;
+import org.musicbrainz.utils.MbUtils;
 
 /**
  * <p>A Area definition.
@@ -28,7 +29,7 @@ public class AreaWs2 extends EntityWs2
 {
     private static Logger log = Logger.getLogger(AreaWs2.class.getName());
 
-    private String type;
+    private String typeUri;
     private String name;
     private String sortName;
     private String disambiguation;
@@ -45,16 +46,22 @@ public class AreaWs2 extends EntityWs2
         
     private AreaWs2 superarea;
  /**
-     * @return the type
+     * @return the typeUri
      */
+    public String getTypeUri() {
+        return typeUri;
+    }
     public String getType() {
-        return type;
+
+       if (getTypeUri()== null) return "";
+       if (getTypeUri().isEmpty()) return "";
+       return MbUtils.extractTypeFromURI(getTypeUri());
     }
     /**
-     * @param type the type to set
+     * @param type the typeUri to set
      */
-    public void setType(String type) {
-        this.type = type;
+    public void setTypeUri(String typeUri) {
+        this.typeUri = typeUri;
     }
     /**
      * @return the name

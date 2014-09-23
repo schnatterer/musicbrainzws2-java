@@ -85,7 +85,7 @@ public class SeriesBrowseWs2 extends BrowseWs2{
     private SeriesListWs2 execQuery() throws MBWS2Exception
     {
 
-        SeriesListWs2 le = getMetadata(ARTIST).getSeriesListWs2();
+        SeriesListWs2 le = getMetadata(SERIES).getSeriesListWs2();
         listElement = le;
         
         int sz  = le.getSeries().size();

@@ -84,7 +84,7 @@ public class AreaBrowseWs2 extends BrowseWs2{
     private AreaListWs2 execQuery() throws MBWS2Exception
     {
 
-        AreaListWs2 le = getMetadata(ARTIST).getAreaListWs2();
+        AreaListWs2 le = getMetadata(AREA).getAreaListWs2();
         listElement = le;
         
         int sz  = le.getAreas().size();

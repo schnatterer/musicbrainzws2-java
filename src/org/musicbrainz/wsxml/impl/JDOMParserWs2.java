@@ -254,7 +254,7 @@ public class JDOMParserWs2 extends DomainsWs2 implements MbXmlParser  {
                 label.setIdUri(MbUtils.convertIdToURI(attribute.getValue(), LABEL));
             }
             else if (attribute.getName().equals(TYPE)){
-                label.setType(MbUtils.convertTypeToURI(attribute.getValue(), NS_MMD_2_PREFIX));
+                label.setTypeUri(MbUtils.convertTypeToURI(attribute.getValue(), NS_MMD_2_PREFIX));
             }
             else if (attribute.getName().equals(SCORE)){
               //ignore.
@@ -337,7 +337,7 @@ public class JDOMParserWs2 extends DomainsWs2 implements MbXmlParser  {
               artist.setIdUri(MbUtils.convertIdToURI(attribute.getValue(), ARTIST));
             }
             else if (attribute.getName().equals(TYPE)){
-              artist.setType(MbUtils.convertTypeToURI(attribute.getValue(), NS_MMD_2_PREFIX));
+              artist.setTypeUri(MbUtils.convertTypeToURI(attribute.getValue(), NS_MMD_2_PREFIX));
             }
             else if (attribute.getName().equals(SCORE)){
               //ignore.
@@ -450,11 +450,9 @@ public class JDOMParserWs2 extends DomainsWs2 implements MbXmlParser  {
                           RELEASEGROUP));
               }
               else if (attribute.getName().equals(TYPE)){
-                  releaseGroup.setType(
+                  releaseGroup.setTypeUri(
                           MbUtils.convertTypeToURI(attribute.getValue(), 
                           NS_MMD_2_PREFIX));
-                  
-                  releaseGroup.setTypeString(attribute.getValue());
               }
               else if (attribute.getName().equals(SCORE)) {
                   //ignore.
@@ -826,7 +824,7 @@ private boolean isVideo (Element node) {
                   work.setIdUri(MbUtils.convertIdToURI(attribute.getValue(), WORK));
               }
               else if (attribute.getName().equals(TYPE)){
-                  work.setTypeURI(MbUtils.convertTypeToURI(attribute.getValue(), NS_MMD_2_PREFIX));
+                  work.setTypeUri(MbUtils.convertTypeToURI(attribute.getValue(), NS_MMD_2_PREFIX));
               }
               else if (attribute.getName().equals(SCORE)){
                   //ignore.
@@ -955,7 +953,10 @@ private boolean isVideo (Element node) {
                   area.setIdUri(MbUtils.convertIdToURI(attribute.getValue(), AREA));
               }
               else if (attribute.getName().equals(TYPE)){
-                   area.setType(attribute.getValue());
+                   area.setTypeUri(attribute.getValue());
+              }
+              else if (attribute.getName().equals(SCORE)) {
+                  //Ignore.
               }
               else{
                 log.warning("Unrecognised Area attribute: "+attribute.getName());
@@ -1016,7 +1017,10 @@ private boolean isVideo (Element node) {
                   place.setIdUri(MbUtils.convertIdToURI(attribute.getValue(), PLACE));
               }
               else if (attribute.getName().equals(TYPE)){
-                   place.setType(attribute.getValue());
+                   place.setTypeUri(attribute.getValue());
+              }
+              else if (attribute.getName().equals(SCORE)) {
+                  //Ignore.
               }
               else{
                 log.warning("Unrecognised Place attribute: "+attribute.getName());
@@ -1094,7 +1098,10 @@ private boolean isVideo (Element node) {
                   instrument.setIdUri(MbUtils.convertIdToURI(attribute.getValue(), PLACE));
               }
               else if (attribute.getName().equals(TYPE)){
-                   instrument.setType(attribute.getValue());
+                   instrument.setTypeUri(attribute.getValue());
+              }
+              else if (attribute.getName().equals(SCORE)) {
+                  //Ignore.
               }
               else{
                 log.warning("Unrecognised Instrument attribute: "+attribute.getName());
@@ -1143,7 +1150,10 @@ private boolean isVideo (Element node) {
                   series.setIdUri(MbUtils.convertIdToURI(attribute.getValue(), PLACE));
               }
               else if (attribute.getName().equals(TYPE)){
-                   series.setType(attribute.getValue());
+                   series.setTypeUri(attribute.getValue());
+              }
+              else if (attribute.getName().equals(SCORE)) {
+                  //Ignore.
               }
               else{
                 log.warning("Unrecognised Series attribute: "+attribute.getName());

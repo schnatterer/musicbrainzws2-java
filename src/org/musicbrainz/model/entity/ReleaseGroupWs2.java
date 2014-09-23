@@ -11,6 +11,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import org.musicbrainz.model.ArtistCreditWs2;
 import org.musicbrainz.model.entity.listelement.ReleaseListWs2;
+import org.musicbrainz.utils.MbUtils;
 
 
 /**
@@ -36,7 +37,7 @@ public class ReleaseGroupWs2 extends EntityWs2 {
     public static final String TYPE_REMIX = NS_MMD_2 + "remix";
     public static final String TYPE_OTHER = NS_MMD_2 + "other";
 
-    private String type;
+    private String typeUri;
     private String typeString;
     
     private String primaryType;
@@ -48,31 +49,23 @@ public class ReleaseGroupWs2 extends EntityWs2 {
     private ArtistCreditWs2 artistCredit;
     private ReleaseListWs2 releaseList = new ReleaseListWs2();
 
-    /**
-     * @return the typeString
-     */
-    public String getTypeString() {
-            return typeString;
-    }
-
-    /**
-     * @param typeString the typeString to set
-     */
-    public void setTypeString(String typeString) {
-            this.typeString = typeString;
-    }
      /**
-     * @return the typeString
+     * @return the typeUriString
      */
-    public String getType() {
-            return type;
+    public String getTypeUri() {
+            return typeUri;
     }
+    public String getType() {
 
+         if (getTypeUri()== null) return "";
+         if (getTypeUri().isEmpty()) return "";
+         return MbUtils.extractTypeFromURI(getTypeUri());
+    }
     /**
-     * @param typeString the typeString to set
+     * @param typeString the typeUriString to set
      */
-    public void setType(String type) {
-            this.type = type;
+    public void setTypeUri(String typeUri) {
+            this.typeUri = typeUri;
     }
 /**
      * @return the primaryType
@@ -102,8 +95,8 @@ public class ReleaseGroupWs2 extends EntityWs2 {
         this.secondaryTypes = secondaryTypes;
     }
     /**
-     * @return a string containing the prymary AND the secondary types,
-     * no matter what type is.
+     * @return a string containing the prymary AND the secondary typeUris,
+ no matter what typeUri is.
    */
     public String getDisplayType() {
         
