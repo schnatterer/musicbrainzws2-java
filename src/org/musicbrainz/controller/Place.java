@@ -91,7 +91,7 @@ public class Place extends Controller{
         inc.setReleaseGroupRelations(true);
         inc.setReleaseRelations(true);
         inc.setRecordingRelations(true);
-        inc.setWorkRelations(true);
+        inc.setWorkRelations(false);
         inc.setAreaRelations(true);
         inc.setPlaceRelations(true);
         inc.setInstrumentRelations(true);
@@ -104,6 +104,7 @@ public class Place extends Controller{
         
         inc.setAnnotation(true);
         inc.setAliases(false);
+        inc.setArtistCredits(false);
 
         return inc;
     }

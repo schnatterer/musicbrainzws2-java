@@ -92,7 +92,6 @@ public class Work extends Controller{
         inc.setReleaseRelations(true);
         inc.setRecordingRelations(true);
         inc.setWorkRelations(true);
-        
         inc.setAreaRelations(true);
         inc.setPlaceRelations(true);
         inc.setInstrumentRelations(true);
@@ -104,6 +103,7 @@ public class Work extends Controller{
         inc.setUserRatings(true);
         
         inc.setAnnotation(true);
+        inc.setArtistCredits(false);
         inc.setAliases(true);
 
         return inc;

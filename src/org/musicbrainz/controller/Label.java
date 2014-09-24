@@ -101,7 +101,7 @@ public class Label extends Controller{
         inc.setReleaseGroupRelations(true);
         inc.setReleaseRelations(true);
         inc.setRecordingRelations(true);
-        inc.setWorkRelations(true);
+        inc.setWorkRelations(false);
 
         inc.setAreaRelations(true);
         inc.setPlaceRelations(true);

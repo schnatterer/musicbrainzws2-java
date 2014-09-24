@@ -91,7 +91,8 @@ public class Series extends Controller{
         inc.setReleaseGroupRelations(true);
         inc.setReleaseRelations(true);
         inc.setRecordingRelations(true);
-        inc.setWorkRelations(true);
+        inc.setWorkRelations(false);
+        
         inc.setAreaRelations(true);
         inc.setSeriesRelations(true);
         inc.setInstrumentRelations(true);
@@ -103,7 +104,8 @@ public class Series extends Controller{
         inc.setUserRatings(false);
         
         inc.setAnnotation(true);
-        inc.setAliases(true);
+        inc.setArtistCredits(false);
+        inc.setAliases(false);
 
         return inc;
     }

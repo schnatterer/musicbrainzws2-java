@@ -118,31 +118,31 @@ public class Artist extends Controller{
         ArtistIncludesWs2 inc =new ArtistIncludesWs2();
         
         inc.setUrlRelations(true);
-        inc.setLabelRelations(true);
+        inc.setLabelRelations(false);
         inc.setArtistRelations(true);
         inc.setReleaseGroupRelations(true);
         inc.setReleaseRelations(true);
         inc.setRecordingRelations(true);
-        inc.setWorkRelations(true);
+        inc.setWorkRelations(false);
         inc.setAreaRelations(true);
         inc.setPlaceRelations(true);
         inc.setInstrumentRelations(true);
         inc.setSeriesRelations(true);
         
         inc.setAnnotation(true);
-        inc.setTags(true);
+        inc.setTags(false);
         inc.setRatings(true);
-        inc.setUserTags(true);
+        inc.setUserTags(false);
         inc.setUserRatings(true);
-        inc.setAliases(true);
+        inc.setAliases(false);
         
-        inc.setReleaseGroups(true);
-        inc.setReleases(true);
-        inc.setVariousArtists(true);
-        inc.setRecordings(true);
-        inc.setWorks(true);
+        inc.setReleaseGroups(false);
+        inc.setReleases(false);
+        inc.setVariousArtists(false);
+        inc.setRecordings(false);
+        inc.setWorks(false);
         
-        inc.setArtistCredits(true);
+        inc.setArtistCredits(false);
         inc.setDiscids(false);
         inc.setIsrcs(false);
         inc.setMedia(false);

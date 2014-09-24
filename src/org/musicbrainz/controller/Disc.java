@@ -58,23 +58,23 @@ public class Disc extends Controller{
         
         ReleaseIncludesWs2 inc =new ReleaseIncludesWs2();
         
-        inc.setUrlRelations(true);
-        inc.setLabelRelations(true);
-        inc.setArtistRelations(true);
-        inc.setReleaseRelations(true);
-        inc.setReleaseRelations(true);
-        inc.setRecordingRelations(true);
-        inc.setWorkRelations(true);
+        inc.setUrlRelations(false);
+        inc.setLabelRelations(false);
+        inc.setArtistRelations(false);
+        inc.setReleaseRelations(false);
+        inc.setReleaseRelations(false);
+        inc.setRecordingRelations(false);
+        inc.setWorkRelations(false);
         
-        inc.setAreaRelations(true);
-        inc.setPlaceRelations(true);
-        inc.setInstrumentRelations(true);
-        inc.setSeriesRelations(true);
+        inc.setAreaRelations(false);
+        inc.setPlaceRelations(false);
+        inc.setInstrumentRelations(false);
+        inc.setSeriesRelations(false);
         
-        inc.setTags(true);
-        inc.setRatings(true);
-        inc.setUserTags(true);
-        inc.setUserRatings(true);
+        inc.setTags(false);
+        inc.setRatings(false);
+        inc.setUserTags(false);
+        inc.setUserRatings(false);
         
         inc.setArtistCredits(true);
         inc.setLabel(true);

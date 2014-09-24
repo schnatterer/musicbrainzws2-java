@@ -43,18 +43,19 @@ public class Puid extends Controller{
         inc.setReleaseGroupRelations(true);
         inc.setReleaseRelations(true);
         inc.setRecordingRelations(true);
-        inc.setWorkRelations(true);
+        inc.setWorkRelations(false);
         
         inc.setAreaRelations(true);
         inc.setPlaceRelations(true);
         inc.setInstrumentRelations(true);
         inc.setSeriesRelations(true);
+
+        inc.setTags(false);
+        inc.setRatings(false);
+        inc.setUserTags(false);
+        inc.setUserRatings(false);
         
         inc.setAnnotation(true);
-        inc.setTags(true);
-        inc.setRatings(true);
-        inc.setUserTags(true);
-        inc.setUserRatings(true);
         inc.setArtistCredits(true);
         
         inc.setIsrcs(true);

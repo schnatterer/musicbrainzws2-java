@@ -91,9 +91,9 @@ public class Instrument extends Controller{
         inc.setReleaseGroupRelations(true);
         inc.setReleaseRelations(true);
         inc.setRecordingRelations(true);
-        inc.setWorkRelations(true);
+        inc.setWorkRelations(false);
         inc.setAreaRelations(true);
-        inc.setInstrumentRelations(true);
+        inc.setPlaceRelations(true);
         inc.setInstrumentRelations(true);
         inc.setSeriesRelations(true);
         

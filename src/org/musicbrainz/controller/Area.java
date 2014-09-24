@@ -123,16 +123,16 @@ public class Area extends Controller{
         inc.setReleaseGroupRelations(true);
         inc.setReleaseRelations(true);
         inc.setRecordingRelations(true);
-        inc.setWorkRelations(true);
+        inc.setWorkRelations(false);
         inc.setAreaRelations(true);
         inc.setPlaceRelations(true);
         inc.setInstrumentRelations(true);
         inc.setSeriesRelations(true);
         
-        inc.setTags(true);
-        inc.setRatings(true);
-        inc.setUserTags(true);
-        inc.setUserRatings(true);
+        inc.setTags(false);
+        inc.setRatings(false);
+        inc.setUserTags(false);
+        inc.setUserRatings(false);
         
         inc.setAnnotation(true);
         inc.setAliases(false);
@@ -141,7 +141,7 @@ public class Area extends Controller{
         inc.setReleases(false);
         inc.setPlaces(false);
         
-        inc.setArtistCredits(true);
+        inc.setArtistCredits(false);
         inc.setDiscids(false);
         inc.setIsrcs(false);
         inc.setMedia(false);

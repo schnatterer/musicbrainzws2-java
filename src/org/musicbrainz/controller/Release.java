@@ -97,13 +97,14 @@ public class Release extends Controller{
         inc.setUserTags(true);
         inc.setUserRatings(true);
         
-        inc.setArtistCredits(true);
         inc.setLabel(true);
         inc.setReleaseGroups(true);
         inc.setMedia(true);
         inc.setRecordings(true);
         inc.setDiscids(true);
-         
+        
+        inc.setAnnotation(true);
+        inc.setArtistCredits(true);
         inc.setWorkLevelRelations(true);
         inc.setRecordingLevelRelations(true);
 

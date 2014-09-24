@@ -98,18 +98,17 @@ public class Recording extends Controller{
         inc.setInstrumentRelations(true);
         inc.setSeriesRelations(true);
         
-        inc.setAnnotation(true);
         inc.setTags(true);
         inc.setRatings(true);
         inc.setUserTags(true);
         inc.setUserRatings(true);
-        inc.setArtistCredits(true);
-        
+   
         inc.setIsrcs(true);
         inc.setPuids(true);
-        
         inc.setReleases(true);
         
+        inc.setAnnotation(true);
+        inc.setArtistCredits(true);
         inc.setWorkLevelRelations(true);
 
 

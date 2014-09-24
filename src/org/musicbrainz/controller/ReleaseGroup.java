@@ -112,7 +112,6 @@ public class ReleaseGroup extends Controller {
         inc.setUserRatings(true);
         
         inc.setAnnotation(true);
-        
         inc.setArtistCredits(true);
         inc.setReleases(true);
 
