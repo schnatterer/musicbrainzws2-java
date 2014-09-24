@@ -20,23 +20,15 @@ The contact he left (http://dev.ruhkopf.name/jmb-wsc) is not a valid link anymor
 
 Here some note from the original README.TXT:
 
-This java implementation was inspired by python-musicbrainz-2,
-Copyright (c) 2006, Matthias Friedrich.
+>> This java implementation was inspired by python-musicbrainz-2,
+>> Copyright (c) 2006, Matthias Friedrich.
 
-In future, this project will possibly be hosted at the MusicBrainz'
-homepage. For now, visit 
+>> In future, this project will possibly be hosted at the MusicBrainz'
+>> homepage. For now, visit 
 
-    http://dev.ruhkopf.name/jmb-wsc
+>>    http://dev.ruhkopf.name/jmb-wsc
     
-to find new releases or ask questions.
-
-
-KNOWN LIMITATIONS OF THIS VERSION
-------------------------------
-This version ob jmb-wsc does not provide functionality for calculating
-DiscIDs from Audio CDs. Furthermore, it does not yet include an xml
-writer, so posting data to the web service (like puids) is not possible
-at the moment.
+>> to find new releases or ask questions.
 
 While the unit tests pass, it is in no way guaranteed that they cover
 everything. Please inform me about any issues that may come up. 
