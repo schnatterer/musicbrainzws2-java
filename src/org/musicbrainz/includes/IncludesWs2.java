@@ -75,8 +75,7 @@ public class IncludesWs2 extends DomainsWs2 {
     /**
      * Default constructor
      */
-    public IncludesWs2()
-    {
+    public IncludesWs2(){
 
     }
 

@@ -198,8 +198,7 @@ public abstract class Controller extends DomainsWs2{
         updateRatings(entity,transit,inc);
         updateUserTags(entity,transit,inc);
         updateUserRatings(entity,transit,inc);
-        
-        
+  
     }
     
     private void updateTags(EntityWs2 entity, EntityWs2 transit, IncludesWs2 inc){
@@ -232,10 +231,14 @@ public abstract class Controller extends DomainsWs2{
     }
     private void updateRelations (EntityWs2 entity, EntityWs2 transit, IncludesWs2 inc) throws MBWS2Exception{
             
-        for (RelationWs2 rel : transit.getRelationList().getRelations())
-        {
+        for (RelationWs2 rel : transit.getRelationList().getRelations()){
             entity.getRelationList().addRelation(rel);
-
+            getRelationTarget(rel, inc);
+        }
+        updateIncludedRelations(inc);
+    }
+    protected void getRelationTarget(RelationWs2 rel, IncludesWs2 inc) throws MBWS2Exception {
+        
             /* MB don't accept Artist Credits requests for works 
           * at the moment,so we have to complete the relations.
           * 
@@ -244,7 +247,7 @@ public abstract class Controller extends DomainsWs2{
           * relations involving a Work.
           */
             
-            if (!getIncludes().isArtistCredits()) continue;
+            if (!getIncludes().isArtistCredits()) return;
 
             if (inc.isWorkRelations() &&
                           rel.getTargetType().equals(RelationWs2.TO_WORK)){
@@ -252,7 +255,7 @@ public abstract class Controller extends DomainsWs2{
                 WorkWs2 wkWs2 = (WorkWs2)rel.getTarget();
 
                 if (wkWs2.getArtistCredit() != null ||
-                    !wkWs2.getWritersString().isEmpty()) continue;
+                    !wkWs2.getWritersString().isEmpty()) return;
 
                 Work work = new Work();
                 work.setQueryWs(getQueryWs());
@@ -265,57 +268,8 @@ public abstract class Controller extends DomainsWs2{
 
                 rel.setTarget(wkWs2);
             }
-            else if (getEntity()instanceof WorkWs2 &&
-                        inc.isRecordingRelations() &&
-                        rel.getTargetType().equals(RelationWs2.TO_RECORDING)) {
-            
-                RecordingWs2 recWs2 = (RecordingWs2)rel.getTarget();
-
-                if (recWs2.getArtistCredit() != null) continue;
-
-                Recording rec = new Recording();
-                rec.setQueryWs(getQueryWs());
-
-                rec.getIncludes().excludeAll();
-                rec.getIncludes().setArtistCredits(true);
-
-                recWs2 = rec.lookUp(recWs2);
-                rel.setTarget(recWs2);
-            }
-            else if (getEntity()instanceof WorkWs2 &&
-                        inc.isReleaseRelations() &&
-                        rel.getTargetType().equals(RelationWs2.TO_RELEASE)){
-                
-                ReleaseWs2 relWs2 = (ReleaseWs2)rel.getTarget();
-
-                if (relWs2.getArtistCredit() != null) continue;
-
-                Release rls = new Release();
-                
-                rls.setQueryWs(getQueryWs());
-                
-                rls.getIncludes().excludeAll();
-                rls.getIncludes().setArtistCredits(true);
-            
-            }
-            else if (getEntity()instanceof WorkWs2 &&
-                        inc.isReleaseGroupRelations() &&
-                        rel.getTargetType().equals(RelationWs2.TO_RELEASE_GROUP)){
-                
-                 ReleaseGroupWs2 relWs2 = (ReleaseGroupWs2)rel.getTarget();
-
-                if (relWs2.getArtistCredit() != null) continue;
-
-                ReleaseGroup rg = new ReleaseGroup();
-                
-                rg.setQueryWs(getQueryWs());
-                
-                rg.getIncludes().excludeAll();
-                rg.getIncludes().setArtistCredits(true);
-            }
-        }
-        updateIncludedRelations(inc);
     }
+    
     private void updateIncludedRelations (IncludesWs2 inc)
     {
             if (inc.isArtistRelations()) getIncluded().setArtistRelations(true);   
@@ -455,7 +409,6 @@ public abstract class Controller extends DomainsWs2{
         this.browseLimit = browseLimit;
     }
 
-    
     /**
      * @return the incoming Entity if any.
      */

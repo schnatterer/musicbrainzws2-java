@@ -111,7 +111,7 @@ public abstract class DefaultWebServiceWs2 extends DomainsWs2 implements WebServ
    private String password;
 
  /**
-  * Default Constructor that uses {@link JDOMParserWs1}
+  * Default Constructor that uses {@link JDOMParserWs2}
   */
     public DefaultWebServiceWs2() {
             this.parser = new JDOMParserWs2();
@@ -189,48 +189,38 @@ public abstract class DefaultWebServiceWs2 extends DomainsWs2 implements WebServ
 
             return doPost(url, metadata);
     }
-        /* (non-Javadoc)
-     * @see org.musicbrainz.webservice.WebService#put(java.lang.String, java.lang.String, List<String>)
-     */
-        public Metadata put (String entity, String id, List<String> data) throws WebServiceException, MbXMLException{
+    /* (non-Javadoc)
+ * @see org.musicbrainz.webservice.WebService#put(java.lang.String, java.lang.String, List<String>)
+ */
+    public Metadata put (String entity, String id, List<String> data) throws WebServiceException, MbXMLException{
 
-                return doPut(buildRequest(entity,id,data));
-        };
-        /* (non-Javadoc)
-     * @see org.musicbrainz.webservice.WebService#delete(java.lang.String, java.lang.String, List<String>)
-     */
-        public Metadata delete (String entity, String id, List<String> data) throws WebServiceException, MbXMLException{
+            return doPut(buildRequest(entity,id,data));
+    };
+    /* (non-Javadoc)
+ * @see org.musicbrainz.webservice.WebService#delete(java.lang.String, java.lang.String, List<String>)
+ */
+    public Metadata delete (String entity, String id, List<String> data) throws WebServiceException, MbXMLException{
 
-                return doDelete(buildRequest(entity,id,data));
-        }
-        /**
-     * Constructs a URL that can be used to query the web service. The url is made
-     * up of the protocol, host, port, version, type, path and parameters.
-     * 
-     * @param entity The entity (i.e. type, e.g. 'artist') the request is targeting
-     * @param id The id of the entity 
-     * @param includeParams A list containing values for the 'inc' parameter (can be null)
-     * @param filterParams Additional parameters depending on the entity (can be null)
-     * 
-     * @return An URL as String
-     */
-    protected String makeURLforPost(String submissionType,String client)
-    {
-            StringBuffer url = new StringBuffer();
-
-            // append protocol, host and port
-            url.append(this.protocol).append("://").append(this.getHost());
-            if (this.port != null) url.append(":").append(this.port);
-
-            // append path
-            url.append(PATHPREFIX).append("/")
-                    .append(WS_VERSION).append("/")
-                             .append(submissionType).append("?client=")
-                             .append(client);
-
-            return url.toString();
+            return doDelete(buildRequest(entity,id,data));
     }
-        private String  buildRequest(String entity, String id, List<String> data){
+
+protected String makeURLforPost(String submissionType,String client)
+{
+        StringBuffer url = new StringBuffer();
+
+        // append protocol, host and port
+        url.append(this.protocol).append("://").append(this.getHost());
+        if (this.port != null) url.append(":").append(this.port);
+
+        // append path
+        url.append(PATHPREFIX).append("/")
+                .append(WS_VERSION).append("/")
+                         .append(submissionType).append("?client=")
+                         .append(client);
+
+        return url.toString();
+    }
+    private String  buildRequest(String entity, String id, List<String> data){
 
             String url = this.makeURL(entity, id, null, null);
             StringBuilder buf=new StringBuilder();

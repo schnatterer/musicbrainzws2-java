@@ -8,7 +8,12 @@ import java.util.List;
 
 import org.musicbrainz.MBWS2Exception;
 import org.musicbrainz.filter.searchfilter.WorkSearchFilterWs2;
+import org.musicbrainz.includes.IncludesWs2;
 import org.musicbrainz.includes.WorkIncludesWs2;
+import org.musicbrainz.model.RelationWs2;
+import org.musicbrainz.model.entity.RecordingWs2;
+import org.musicbrainz.model.entity.ReleaseGroupWs2;
+import org.musicbrainz.model.entity.ReleaseWs2;
 import org.musicbrainz.model.entity.WorkWs2;
 import org.musicbrainz.model.searchresult.WorkResultWs2;
 import org.musicbrainz.query.lookUp.LookUpWs2;
@@ -199,7 +204,68 @@ public class Work extends Controller{
         }
         if (inc.isAnnotation()) loadAnnotation(getWork());
 
-        return getWork();
+        return getWork();    
     }
+    @Override
+    protected void getRelationTarget(RelationWs2 rel, IncludesWs2 inc) throws MBWS2Exception {
 
+            super.getRelationTarget(rel,inc);
+            
+            /* Ws2 don't allow Artist Credits requests for works 
+          * at the moment,so we have to complete the relations.
+          * with target derived informations.
+          * 
+          * Time consuming, but no other way. To avoid it, set 
+          * getIncludes().setArtistCredits(false) when asking for
+          * relations.
+          */
+            
+            if (!getIncludes().isArtistCredits()) return;
+
+            if (inc.isRecordingRelations() &&
+                        rel.getTargetType().equals(RelationWs2.TO_RECORDING)) {
+            
+                RecordingWs2 recWs2 = (RecordingWs2)rel.getTarget();
+
+                if (recWs2.getArtistCredit() != null) return;
+
+                Recording rec = new Recording();
+                rec.setQueryWs(getQueryWs());
+
+                rec.getIncludes().excludeAll();
+                rec.getIncludes().setArtistCredits(true);
+
+                recWs2 = rec.lookUp(recWs2);
+                rel.setTarget(recWs2);
+            }
+            else if (inc.isReleaseRelations() &&
+                        rel.getTargetType().equals(RelationWs2.TO_RELEASE)){
+                
+                ReleaseWs2 relWs2 = (ReleaseWs2)rel.getTarget();
+
+                if (relWs2.getArtistCredit() != null) return;
+
+                Release rls = new Release();
+                
+                rls.setQueryWs(getQueryWs());
+                
+                rls.getIncludes().excludeAll();
+                rls.getIncludes().setArtistCredits(true);
+            
+            }
+            else if (inc.isReleaseGroupRelations() &&
+                        rel.getTargetType().equals(RelationWs2.TO_RELEASE_GROUP)){
+                
+                 ReleaseGroupWs2 relWs2 = (ReleaseGroupWs2)rel.getTarget();
+
+                if (relWs2.getArtistCredit() != null) return;
+
+                ReleaseGroup rg = new ReleaseGroup();
+                
+                rg.setQueryWs(getQueryWs());
+                
+                rg.getIncludes().excludeAll();
+                rg.getIncludes().setArtistCredits(true);
+            }
+    }
 }

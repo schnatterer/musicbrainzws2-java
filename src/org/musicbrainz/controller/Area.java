@@ -15,13 +15,17 @@ import org.musicbrainz.filter.browsefilter.ReleaseBrowseFilterWs2;
 import org.musicbrainz.filter.searchfilter.AreaSearchFilterWs2;
 import org.musicbrainz.includes.AreaIncludesWs2;
 import org.musicbrainz.includes.ArtistIncludesWs2;
+import org.musicbrainz.includes.IncludesWs2;
 import org.musicbrainz.includes.LabelIncludesWs2;
 import org.musicbrainz.includes.PlaceIncludesWs2;
 import org.musicbrainz.includes.ReleaseIncludesWs2;
+import org.musicbrainz.model.RelationWs2;
 import org.musicbrainz.model.entity.AreaWs2;
 import org.musicbrainz.model.entity.ArtistWs2;
 import org.musicbrainz.model.entity.LabelWs2;
 import org.musicbrainz.model.entity.PlaceWs2;
+import org.musicbrainz.model.entity.RecordingWs2;
+import org.musicbrainz.model.entity.ReleaseGroupWs2;
 import org.musicbrainz.model.entity.ReleaseWs2;
 import org.musicbrainz.model.searchresult.AreaResultWs2;
 import org.musicbrainz.query.browse.ArtistBrowseWs2;
@@ -276,6 +280,68 @@ public class Area extends Controller{
         initBrowses();
         
         return getArea();
+    }
+    @Override
+    protected void getRelationTarget(RelationWs2 rel, IncludesWs2 inc) throws MBWS2Exception {
+
+            super.getRelationTarget(rel,inc);
+            
+            /* Ws2 don't allow Artist Credits requests for areas 
+          * at the moment,so we have to complete the relations.
+          * with target derived informations.
+          * 
+          * Time consuming, but no other way. To avoid it, set 
+          * getIncludes().setArtistCredits(false) when asking for
+          * relations.
+          */
+            
+            if (!getIncludes().isArtistCredits()) return;
+
+            if (inc.isRecordingRelations() &&
+                        rel.getTargetType().equals(RelationWs2.TO_RECORDING)) {
+            
+                RecordingWs2 recWs2 = (RecordingWs2)rel.getTarget();
+
+                if (recWs2.getArtistCredit() != null) return;
+
+                Recording rec = new Recording();
+                rec.setQueryWs(getQueryWs());
+
+                rec.getIncludes().excludeAll();
+                rec.getIncludes().setArtistCredits(true);
+
+                recWs2 = rec.lookUp(recWs2);
+                rel.setTarget(recWs2);
+            }
+            else if (inc.isReleaseRelations() &&
+                        rel.getTargetType().equals(RelationWs2.TO_RELEASE)){
+                
+                ReleaseWs2 relWs2 = (ReleaseWs2)rel.getTarget();
+
+                if (relWs2.getArtistCredit() != null) return;
+
+                Release rls = new Release();
+                
+                rls.setQueryWs(getQueryWs());
+                
+                rls.getIncludes().excludeAll();
+                rls.getIncludes().setArtistCredits(true);
+            
+            }
+            else if (inc.isReleaseGroupRelations() &&
+                        rel.getTargetType().equals(RelationWs2.TO_RELEASE_GROUP)){
+                
+                 ReleaseGroupWs2 relWs2 = (ReleaseGroupWs2)rel.getTarget();
+
+                if (relWs2.getArtistCredit() != null) return;
+
+                ReleaseGroup rg = new ReleaseGroup();
+                
+                rg.setQueryWs(getQueryWs());
+                
+                rg.getIncludes().excludeAll();
+                rg.getIncludes().setArtistCredits(true);
+            }
     }
      // ------------- Browse -------------------------------------------------//
     
