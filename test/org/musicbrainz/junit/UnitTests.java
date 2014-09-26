@@ -44,7 +44,6 @@ import org.musicbrainz.model.searchresult.ReleaseGroupResultWs2;
 import org.musicbrainz.model.searchresult.ReleaseResultWs2;
 import org.musicbrainz.model.searchresult.WorkResultWs2;
 
-import org.musicbrainz.query.QueryWs2;
 import org.musicbrainz.webservice.AuthorizationException;
 import org.musicbrainz.webservice.DefaultWebServiceWs2;
 
@@ -68,25 +67,10 @@ public class UnitTests {
   */
     @Before
     public void setUp() throws Exception {
-       
 
     }
 
     @Test
-    public void aaa() throws MBWS2Exception{
-    
-        Release release = new Release();
-        
-        ReleaseWs2 result;
-        
-        //include or exclude some data in LookUp
-        
-        
-       
-        result = release.lookUp("b54e4ad1-188a-352f-85d8-ca40d4ec4748");
-    
-    }
-    //@Test
     public void searchISRC(){
         
         String isrc= "GBAYE6900522";
