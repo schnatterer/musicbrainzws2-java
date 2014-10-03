@@ -4,7 +4,7 @@ package org.musicbrainz.query.browse;
 import java.util.List;
 import java.util.ArrayList;
 
-import org.musicbrainz.MBWS2Exception;
+import org.musicbrainz.exception.MBWS2Exception;
 import org.musicbrainz.filter.browsefilter.SeriesBrowseFilterWs2;
 import org.musicbrainz.includes.SeriesIncludesWs2;
 import org.musicbrainz.model.entity.SeriesWs2;
@@ -73,7 +73,7 @@ public class SeriesBrowseWs2 extends BrowseWs2{
                     SeriesListWs2 temp = execQuery();
                     results.addAll(temp.getSeries());
                     
-            } catch (org.musicbrainz.MBWS2Exception ex) {
+            } catch (org.musicbrainz.exception.MBWS2Exception ex) {
 
                     ex.printStackTrace();
             }

@@ -1,4 +1,4 @@
-package org.musicbrainz;
+package org.musicbrainz.exception;
 
 /**
  * All application specific exceptions extend this class.

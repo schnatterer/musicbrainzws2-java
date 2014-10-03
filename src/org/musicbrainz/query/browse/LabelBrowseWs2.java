@@ -3,7 +3,7 @@ package org.musicbrainz.query.browse;
 import org.musicbrainz.webservice.WebService;
 import java.util.List;
 import java.util.ArrayList;
-import org.musicbrainz.MBWS2Exception;
+import org.musicbrainz.exception.MBWS2Exception;
 import org.musicbrainz.filter.browsefilter.LabelBrowseFilterWs2;
 import org.musicbrainz.includes.LabelIncludesWs2;
 import org.musicbrainz.model.entity.LabelWs2;
@@ -71,7 +71,7 @@ public class LabelBrowseWs2 extends BrowseWs2{
                 LabelListWs2 temp = execQuery();
                 results.addAll(temp.getLabels());
 
-        } catch (org.musicbrainz.MBWS2Exception ex) {
+        } catch (org.musicbrainz.exception.MBWS2Exception ex) {
 
                 ex.printStackTrace();
 

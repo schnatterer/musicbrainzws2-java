@@ -7,7 +7,7 @@ package org.musicbrainz.controller;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.musicbrainz.MBWS2Exception;
+import org.musicbrainz.exception.MBWS2Exception;
 import org.musicbrainz.filter.browsefilter.ArtistBrowseFilterWs2;
 import org.musicbrainz.filter.browsefilter.LabelBrowseFilterWs2;
 import org.musicbrainz.filter.browsefilter.PlaceBrowseFilterWs2;

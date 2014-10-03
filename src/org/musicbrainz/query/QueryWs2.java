@@ -3,7 +3,7 @@ package org.musicbrainz.query;
 
 import java.util.List;
 
-import org.musicbrainz.MBWS2Exception;
+import org.musicbrainz.exception.MBWS2Exception;
 import org.musicbrainz.filter.FilterWs2;
 import org.musicbrainz.includes.IncludesWs2;
 import org.musicbrainz.webservice.WebService;

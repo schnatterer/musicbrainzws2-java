@@ -6,7 +6,7 @@ package org.musicbrainz.controller;
 
 import java.util.List;
 
-import org.musicbrainz.MBWS2Exception;
+import org.musicbrainz.exception.MBWS2Exception;
 import org.musicbrainz.filter.searchfilter.WorkSearchFilterWs2;
 import org.musicbrainz.includes.IncludesWs2;
 import org.musicbrainz.includes.WorkIncludesWs2;

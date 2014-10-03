@@ -4,7 +4,7 @@ package org.musicbrainz.query.browse;
 import java.util.List;
 import java.util.ArrayList;
 
-import org.musicbrainz.MBWS2Exception;
+import org.musicbrainz.exception.MBWS2Exception;
 import org.musicbrainz.filter.browsefilter.PlaceBrowseFilterWs2;
 import org.musicbrainz.includes.PlaceIncludesWs2;
 import org.musicbrainz.model.entity.PlaceWs2;
@@ -73,7 +73,7 @@ public class PlaceBrowseWs2 extends BrowseWs2{
                     PlaceListWs2 temp = execQuery();
                     results.addAll(temp.getPlaces());
                     
-            } catch (org.musicbrainz.MBWS2Exception ex) {
+            } catch (org.musicbrainz.exception.MBWS2Exception ex) {
 
                     ex.printStackTrace();
             }

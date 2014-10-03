@@ -1,7 +1,7 @@
 package org.musicbrainz.query.lookUp;
 
 import org.apache.http.HttpStatus;
-import org.musicbrainz.MBWS2Exception;
+import org.musicbrainz.exception.MBWS2Exception;
 import org.musicbrainz.filter.DiscTocFilterWs2;
 import org.musicbrainz.includes.AreaIncludesWs2;
 import org.musicbrainz.webservice.RequestException;
@@ -76,7 +76,7 @@ public class LookUpWs2 extends QueryWs2 {
         try {
                 return lookup(id, includes);
 
-        } catch (org.musicbrainz.MBWS2Exception ex) {
+        } catch (org.musicbrainz.exception.MBWS2Exception ex) {
 
                 log.severe("Webservice returned: "+HttpStatus.SC_SERVICE_UNAVAILABLE+" message: " + ex.getMessage());
                 throw ex;

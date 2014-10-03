@@ -7,7 +7,7 @@ package org.musicbrainz.controller;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.musicbrainz.MBWS2Exception;
+import org.musicbrainz.exception.MBWS2Exception;
 import org.musicbrainz.includes.CollectionIncludesWs2;
 import org.musicbrainz.model.entity.CollectionWs2;
 import org.musicbrainz.model.entity.ReleaseWs2;

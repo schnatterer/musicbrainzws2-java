@@ -1,6 +1,6 @@
 package org.musicbrainz.query.search;
 
-import org.musicbrainz.MBWS2Exception;
+import org.musicbrainz.exception.MBWS2Exception;
 import org.musicbrainz.webservice.WebService;
 
 import org.musicbrainz.filter.searchfilter.SearchFilterWs2;

@@ -4,7 +4,7 @@ import org.musicbrainz.webservice.WebService;
 
 import java.util.List;
 import java.util.ArrayList;
-import org.musicbrainz.MBWS2Exception;
+import org.musicbrainz.exception.MBWS2Exception;
 import org.musicbrainz.filter.browsefilter.RecordingBrowseFilterWs2;
 import org.musicbrainz.includes.RecordingIncludesWs2;
 import org.musicbrainz.model.entity.RecordingWs2;
@@ -74,7 +74,7 @@ public class RecordingBrowseWs2 extends BrowseWs2{
                 results.addAll(temp.getRecordings());
 
 
-        } catch (org.musicbrainz.MBWS2Exception ex) {
+        } catch (org.musicbrainz.exception.MBWS2Exception ex) {
 
                 ex.printStackTrace();
 

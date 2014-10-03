@@ -4,7 +4,7 @@ import org.musicbrainz.webservice.WebService;
 
 import java.util.List;
 import java.util.ArrayList;
-import org.musicbrainz.MBWS2Exception;
+import org.musicbrainz.exception.MBWS2Exception;
 import org.musicbrainz.filter.browsefilter.ReleaseGroupBrowseFilterWs2;
 import org.musicbrainz.includes.ReleaseGroupIncludesWs2;
 import org.musicbrainz.model.entity.ReleaseGroupWs2;
@@ -73,7 +73,7 @@ public class ReleaseGroupBrowseWs2 extends BrowseWs2{
                 results.addAll(temp.getReleaseGroups());
 
 
-        } catch (org.musicbrainz.MBWS2Exception ex) {
+        } catch (org.musicbrainz.exception.MBWS2Exception ex) {
 
                 ex.printStackTrace();
                     

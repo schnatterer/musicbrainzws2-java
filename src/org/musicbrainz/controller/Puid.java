@@ -7,7 +7,7 @@ package org.musicbrainz.controller;
 
 import java.util.logging.Logger;
 import org.musicbrainz.query.lookUp.LookUpWs2;
-import org.musicbrainz.MBWS2Exception;
+import org.musicbrainz.exception.MBWS2Exception;
 import org.musicbrainz.includes.RecordingIncludesWs2;
 import org.musicbrainz.model.PuidWs2;
 

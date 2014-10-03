@@ -2,7 +2,7 @@ package org.musicbrainz.query.search;
 
 import java.util.List;
 import java.util.ArrayList;
-import org.musicbrainz.MBWS2Exception;
+import org.musicbrainz.exception.MBWS2Exception;
 import org.musicbrainz.filter.searchfilter.LabelSearchFilterWs2;
 import org.musicbrainz.model.searchresult.LabelResultWs2;
 import org.musicbrainz.model.searchresult.listelement.LabelSearchResultsWs2;
@@ -64,7 +64,7 @@ public class LabelSearchWs2 extends SearchWs2{
                     results.addAll(temp.getLabelResults());
                     return results;
           
-        } catch (org.musicbrainz.MBWS2Exception ex) {
+        } catch (org.musicbrainz.exception.MBWS2Exception ex) {
                     ex.printStackTrace();
                     return results;
         }

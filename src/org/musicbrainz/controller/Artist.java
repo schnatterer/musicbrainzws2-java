@@ -6,7 +6,7 @@ package org.musicbrainz.controller;
 
 import java.util.ArrayList;
 import java.util.List;
-import org.musicbrainz.MBWS2Exception;
+import org.musicbrainz.exception.MBWS2Exception;
 import org.musicbrainz.filter.browsefilter.RecordingBrowseFilterWs2;
 import org.musicbrainz.filter.browsefilter.ReleaseBrowseFilterWs2;
 import org.musicbrainz.filter.browsefilter.ReleaseGroupBrowseFilterWs2;

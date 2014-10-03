@@ -10,7 +10,7 @@ import java.util.logging.Logger;
 
 import org.apache.commons.lang3.StringUtils;
 import org.mc2.util.miscellaneous.CalendarUtils;
-import org.musicbrainz.MBWS2Exception;
+import org.musicbrainz.exception.MBWS2Exception;
 import org.musicbrainz.controller.Place;
 import org.musicbrainz.model.ArtistCreditWs2;
 import org.musicbrainz.model.IsrcWs2;

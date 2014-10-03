@@ -1,6 +1,6 @@
 package org.musicbrainz.wsxml;
 
-import org.musicbrainz.MBWS2Exception;
+import org.musicbrainz.exception.MBWS2Exception;
 
 /**
  * This exception and its sublcasses are thrown by

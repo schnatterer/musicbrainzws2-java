@@ -12,7 +12,7 @@ import java.util.logging.Logger;
 import org.musicbrainz.includes.ReleaseIncludesWs2;
 import org.musicbrainz.model.entity.DiscWs2;
 import org.musicbrainz.query.lookUp.LookUpWs2;
-import org.musicbrainz.MBWS2Exception;
+import org.musicbrainz.exception.MBWS2Exception;
 import org.musicbrainz.discid.DiscIdException;
 import org.musicbrainz.discid.DiscInfo;
 import org.musicbrainz.discid.DiscInfo.TrackInfo;

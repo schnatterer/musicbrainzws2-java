@@ -3,7 +3,7 @@
  */
 package org.musicbrainz.controller;
 
-import org.musicbrainz.MBWS2Exception;
+import org.musicbrainz.exception.MBWS2Exception;
 import org.musicbrainz.filter.searchfilter.SearchFilterWs2;
 import org.musicbrainz.includes.IncludesWs2;
 import org.musicbrainz.model.RelationWs2;

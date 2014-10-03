@@ -13,7 +13,7 @@ import org.junit.Test;
 import java.util.List;
 
 import org.musicbrainz.model.entity.DiscWs2;
-import org.musicbrainz.MBWS2Exception;
+import org.musicbrainz.exception.MBWS2Exception;
 import org.musicbrainz.controller.Artist;
 import org.musicbrainz.controller.Collection;
 import org.musicbrainz.controller.Disc;

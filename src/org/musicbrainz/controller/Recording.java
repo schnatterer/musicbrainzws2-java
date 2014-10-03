@@ -9,7 +9,7 @@ import java.util.List;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.musicbrainz.MBWS2Exception;
+import org.musicbrainz.exception.MBWS2Exception;
 import org.musicbrainz.filter.browsefilter.ReleaseBrowseFilterWs2;
 import org.musicbrainz.filter.searchfilter.RecordingSearchFilterWs2;
 import org.musicbrainz.includes.RecordingIncludesWs2;

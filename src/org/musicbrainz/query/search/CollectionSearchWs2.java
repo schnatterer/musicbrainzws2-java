@@ -2,7 +2,7 @@ package org.musicbrainz.query.search;
 
 import java.util.List;
 import java.util.ArrayList;
-import org.musicbrainz.MBWS2Exception;
+import org.musicbrainz.exception.MBWS2Exception;
 import org.musicbrainz.model.searchresult.listelement.CollectionSearchResultsWs2;
 import org.musicbrainz.model.searchresult.CollectionResultWs2;
 import org.musicbrainz.webservice.AuthorizationException;

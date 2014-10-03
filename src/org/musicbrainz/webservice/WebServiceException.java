@@ -1,6 +1,6 @@
 package org.musicbrainz.webservice;
 
-import org.musicbrainz.MBWS2Exception;
+import org.musicbrainz.exception.MBWS2Exception;
 
 /**
  * A general web service exception
