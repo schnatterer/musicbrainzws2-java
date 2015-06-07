@@ -3,11 +3,25 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
  http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>musicbrainzws2-java</groupId>
+	<groupId>info.schnatterer.musicbrainzws2-java</groupId>
 	<artifactId>musicbrainzws2-java</artifactId>
-	<version>2.01beta-nusicEdition</version>
+	<version>3.0-SNAPSHOT</version>
 	<packaging>jar</packaging>
 	<name>musicbrainzws2-java</name>
+
+	<licenses>
+		<license>
+			<name>GNU General Public License 3.0</name>
+			<url>http://www.gnu.org/copyleft/gpl.html</url>
+		</license>
+	</licenses>
+
+	<scm>
+		<connection>scm:git:ssh://github.com/schnatterer/musicbrainzws2-java.git</connection>
+		<developerConnection>scm:git:ssh://git@github.com/schnatterer/musicbrainzws2-java.git</developerConnection>
+		<url>https://github.com/schnatterer/musicbrainzws2-java.git</url>
+		<tag>HEAD</tag>
+	</scm>
 
 	<dependencies>
 		<dependency>
@@ -34,7 +48,8 @@
 	</dependencies>
 
 	<build>
-		<!--TODO Refactor directory structure to comply with maven defaults src/main/java src/test/java -->    
+		<!--TODO Refactor directory structure to comply with maven defaults src/main/java 
+			src/test/java -->
 		<sourceDirectory>src</sourceDirectory>
 		<testSourceDirectory>test</testSourceDirectory>
 
@@ -54,9 +69,22 @@
 				<version>2.17</version>
 				<configuration>
 					<includes>
-						<!--TODO Refactor class names to comply with maven defaults **/*Test.java, etc. -->    
+						<!--TODO Refactor class names to comply with maven defaults **/*Test.java, 
+							etc. -->
 						<include>**/UnitTests.java</include>
 					</includes>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-release-plugin</artifactId>
+				<version>2.5.1</version>
+				<configuration>
+					<arguments>-Prelease</arguments>
+					<!-- Make our tags look like e.g. "v.1.0.1" -->
+					<tagNameFormat>v.@{project.version}</tagNameFormat>
+					<!-- Don't deploy -->
+					<goals>install</goals>
 				</configuration>
 			</plugin>
 		</plugins>
