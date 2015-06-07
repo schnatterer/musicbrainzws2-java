@@ -1,8 +1,6 @@
 package org.musicbrainz.model;
 
-import org.musicbrainz.model.entity.listelement.DiscListWs2;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import java.util.logging.Logger;
 
 /**
 
@@ -10,7 +8,7 @@ import org.apache.commons.logging.LogFactory;
 public class RatingsWs2 
 {
     
-    private Log log = LogFactory.getLog(DiscListWs2.class);
+   private static Logger log = Logger.getLogger(RatingsWs2.class.getName());
 
     /**
      * the numebr of people who votes

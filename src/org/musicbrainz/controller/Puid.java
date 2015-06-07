@@ -5,16 +5,15 @@
 package org.musicbrainz.controller;
 
 
+import java.util.logging.Logger;
 import org.musicbrainz.query.lookUp.LookUpWs2;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.musicbrainz.MBWS2Exception;
 import org.musicbrainz.includes.RecordingIncludesWs2;
 import org.musicbrainz.model.PuidWs2;
 
 public class Puid extends Controller{
 
-   private Log log = LogFactory.getLog(Puid.class);
+    private static Logger log = Logger.getLogger(Puid.class.getName());
    private PuidWs2 puidWs2;
    
    

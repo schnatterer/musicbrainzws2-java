@@ -70,7 +70,7 @@ public class LookUpWs2 extends QueryWs2 {
 
         } catch (org.musicbrainz.MBWS2Exception ex) {
 
-                log.error("Webservice returned: "+HttpStatus.SC_SERVICE_UNAVAILABLE+" message: " + ex.getMessage());
+                log.severe("Webservice returned: "+HttpStatus.SC_SERVICE_UNAVAILABLE+" message: " + ex.getMessage());
                 throw ex;
         }
 

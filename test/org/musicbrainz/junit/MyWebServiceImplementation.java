@@ -26,11 +26,6 @@ import org.apache.http.params.BasicHttpParams;
 import org.apache.http.params.HttpProtocolParamBean;
 import org.apache.http.protocol.ExecutionContext;
 import org.apache.http.protocol.HttpContext;
-
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 import org.apache.http.auth.AuthScope;
 import org.apache.http.auth.UsernamePasswordCredentials;
 import org.apache.http.client.methods.HttpDelete;
@@ -57,7 +52,7 @@ public class MyWebServiceImplementation extends DefaultWebServiceWs2
     /**
     * A logger
     */
-    private Log log = LogFactory.getLog(MyWebServiceImplementation.class);
+    static Logger log = Logger.getLogger(MyWebServiceImplementation.class.getName());
 
     /**
     * Some user agent string sufficient for testing
@@ -169,7 +164,7 @@ public class MyWebServiceImplementation extends DefaultWebServiceWs2
                     String em = "ABORTED: web service returned "+
                                     HttpStatus.SC_SERVICE_UNAVAILABLE+ 
                                     "status '503' "+maxtrial+" time consecutively";
-                    log.error(em);
+                    log.severe(em);
                     throw new WebServiceException(em);
                }
               else if (md != null)
@@ -242,7 +237,7 @@ public class MyWebServiceImplementation extends DefaultWebServiceWs2
           {
             case HttpStatus.SC_SERVICE_UNAVAILABLE: { 
                     // Maybe the server is too busy, let's try again.
-                    log.warn(buildMessage(response, "Service unavaillable"));
+                    log.warning(buildMessage(response, "Service unavaillable"));
                     method.abort();
                     lastHitTime =System.currentTimeMillis();   
                     wait(1);
@@ -275,7 +270,7 @@ public class MyWebServiceImplementation extends DefaultWebServiceWs2
             default: {
                     
                     String em = buildMessage(response,"");
-                    log.error("Fatal web service error: " + em);
+                    log.severe("Fatal web service error: " + em);
                     throw new WebServiceException(em);
             }
             
@@ -287,7 +282,7 @@ public class MyWebServiceImplementation extends DefaultWebServiceWs2
             throw new WebServiceException(e.getMessage(), e);
         } */
         catch (IOException e) {
-            log.error("Fatal transport error: " + e.getMessage());
+            log.severe("Fatal transport error: " + e.getMessage());
             throw new WebServiceException(e.getMessage(), e);
         }
     }

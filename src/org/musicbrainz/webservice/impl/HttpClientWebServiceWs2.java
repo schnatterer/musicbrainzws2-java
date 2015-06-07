@@ -30,9 +30,6 @@ import org.apache.http.protocol.ExecutionContext;
 import org.apache.http.protocol.HttpContext;
 
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 import org.apache.http.auth.AuthScope;
 import org.apache.http.auth.UsernamePasswordCredentials;
 import org.apache.http.client.methods.HttpDelete;
@@ -58,17 +55,17 @@ public class HttpClientWebServiceWs2 extends DefaultWebServiceWs2
     /**
     * A logger
     */
-    private Log log = LogFactory.getLog(HttpClientWebServiceWs2.class);
+    static Logger log = Logger.getLogger(HttpClientWebServiceWs2.class.getName());
 
     /**
      * A {@link HttpClient} instance
      */
     private DefaultHttpClient httpClient;
+	
     /**
-     * User agent string sent to music brainz.
-     */
+     * Default constructor creates a httpClient with default properties.      */
     private String userAgent;
-    
+
     /**
      * Default constructor creates a httpClient with default properties. 
      */
@@ -77,12 +74,12 @@ public class HttpClientWebServiceWs2 extends DefaultWebServiceWs2
             userAgent = createUserAgent();
             this.httpClient = new DefaultHttpClient();
     }
-    
+
     /**
-     * Creates a httpClient with default properties and a custom user agent
-     * string.
+     * Use this constructor to inject a configured {@link DefaultHttpClient}.
      * 
-     * @param applicationName
+     * @param httpClient A configured {@link DefaultHttpClient}.
+     *
      *            custom application name used in user agent string
      * @param applicationVersion
      *            custom application version used in user agent string
@@ -187,7 +184,7 @@ public class HttpClientWebServiceWs2 extends DefaultWebServiceWs2
               {
                     String em = "ABORTED: web service returned an error "
                                      +maxtrial+" time consecutively";
-                    log.error(em);
+                    log.severe(em);
                     throw new WebServiceException(em);
                }
               else if (md != null)
@@ -245,14 +242,14 @@ public class HttpClientWebServiceWs2 extends DefaultWebServiceWs2
         HttpProtocolParamBean paramsBean = new HttpProtocolParamBean(params);
         paramsBean.setUserAgent(userAgent);
         method.setParams(params);
-
+        wait(1);
         // Try using compression
         method.setHeader("Accept-Encoding", "gzip");
         
         try 
         {
           // Execute the method.
-          log.debug("Hitting url: " + method.getURI().toString());
+          log.finer("Hitting url: " + method.getURI().toString());
           HttpResponse response = this.httpClient.execute(method);
           
           lastHitTime =System.currentTimeMillis();
@@ -263,7 +260,7 @@ public class HttpClientWebServiceWs2 extends DefaultWebServiceWs2
           {
             case HttpStatus.SC_SERVICE_UNAVAILABLE: { 
                     // Maybe the server is too busy, let's try again.
-                    log.warn(buildMessage(response, "Service unavaillable"));
+                    log.warning(buildMessage(response, "Service unavaillable"));
                     method.abort();
                     lastHitTime =System.currentTimeMillis();   
                     wait(1);
@@ -271,7 +268,7 @@ public class HttpClientWebServiceWs2 extends DefaultWebServiceWs2
             }
              case HttpStatus.SC_BAD_GATEWAY: { 
                     // Maybe the server is too busy, let's try again.
-                    log.warn(buildMessage(response, "Bad Gateway"));
+                    log.warning(buildMessage(response, "Bad Gateway"));
                     method.abort();
                     lastHitTime =System.currentTimeMillis();   
                     wait(1);
@@ -311,14 +308,14 @@ public class HttpClientWebServiceWs2 extends DefaultWebServiceWs2
             default: {
                     
                     String em = buildMessage(response,"");
-                    log.error("Fatal web service error: " + em);
+                    log.severe("Fatal web service error: " + em);
                     throw new WebServiceException(em);
             }
             
           }
         }
         catch (IOException e) {
-            log.error("Fatal transport error: " + e.getMessage());
+            log.severe("Fatal transport error: " + e.getMessage());
             throw new WebServiceException(e.getMessage(), e);
         }
     }
@@ -395,7 +392,7 @@ public class HttpClientWebServiceWs2 extends DefaultWebServiceWs2
          {  
             return null;  
          }  
-     }
+     }  
      
     /**
      * Ensures that the entity content is fully consumed and the content stream,
@@ -409,7 +406,7 @@ public class HttpClientWebServiceWs2 extends DefaultWebServiceWs2
     private void consume(final HttpEntity entity) throws IOException {
         if (entity == null) {
             return;
-        }
+}
         if (entity.isStreaming()) {
             InputStream instream = entity.getContent();
             if (instream != null) {

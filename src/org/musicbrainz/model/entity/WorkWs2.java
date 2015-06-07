@@ -27,7 +27,9 @@ public class WorkWs2 extends EntityWs2
     private String title;
     private ArtistCreditWs2 artistCredit;
     private String iswc;
+    private List<String> iswcList = new ArrayList <String>();
     private String disambiguation;
+    private String textLanguage;
     
     public WorkWs2() {
 
@@ -52,7 +54,12 @@ public class WorkWs2 extends EntityWs2
     public void setTitle(String title) {
         this.title = title;
     }
-
+    public String getTextLanguage() {
+        return textLanguage;
+    }
+    public void setTextLanguage(String textLanguage) {
+        this.textLanguage = textLanguage;
+    }
     public ArtistCreditWs2 getArtistCredit() {
         return artistCredit;
     }
@@ -65,6 +72,20 @@ public class WorkWs2 extends EntityWs2
     }
     public void setIswc(String iswc) {
         this.iswc = iswc;
+    }
+    
+    /**
+     * @return the iswcList
+     */
+    public List<String> getIswcList() {
+        return iswcList;
+    }
+
+    /**
+     * @param iswcList the iswcList to set
+     */
+    public void setIswcList(List<String> iswcList) {
+        this.iswcList = iswcList;
     }
   
     public String getDisambiguation() {

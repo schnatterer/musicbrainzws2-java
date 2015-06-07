@@ -5,9 +5,8 @@ import org.musicbrainz.wsxml.element.ListElement;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <p>A List of Disc Info (Disc & catalog number)referred by a release</p>
@@ -15,7 +14,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class DiscListWs2 extends ListElement
 {
-    private Log log = LogFactory.getLog(DiscListWs2.class);
+    private static Logger log = Logger.getLogger(DiscListWs2.class.getName());
 
     /**
     * A string containing the complete credit as join 

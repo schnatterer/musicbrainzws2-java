@@ -1,7 +1,6 @@
 package org.musicbrainz.model;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import java.util.logging.Logger;
 import org.musicbrainz.model.entity.LabelWs2;
 
 /**
@@ -10,7 +9,7 @@ import org.musicbrainz.model.entity.LabelWs2;
  */
 public class LabelInfoWs2 
 {
-    private Log log = LogFactory.getLog(LabelInfoWs2.class);
+    private static Logger log = Logger.getLogger(LabelInfoWs2.class.getName());
 
        private String catalogNumber;
        private LabelWs2 label;

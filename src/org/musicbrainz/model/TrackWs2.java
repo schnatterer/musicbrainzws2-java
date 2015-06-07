@@ -1,23 +1,25 @@
 package org.musicbrainz.model;
 
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.mc2.CalendarUtils;
+import java.util.logging.Logger;
+import org.mc2.util.miscellaneous.CalendarUtils;
 import org.musicbrainz.model.entity.RecordingWs2;
 
 
 /**
- * <p>A single recordings in a Medium of a specific release. 
+ * <p>A single recordings in a Medium by a specific release. 
  * .
  */
 public class TrackWs2 
 {
-    private Log log = LogFactory.getLog(TrackWs2.class);
+    private static Logger log = Logger.getLogger(TrackWs2.class.getName());
 
+    private String id;
     private MediumWs2 medium;
     private int position;
+    private int number;
     private String title;
+    private ArtistCreditWs2 artistCredit;
     private RecordingWs2 recording;
     private Long durationInMillis;
            
@@ -25,11 +27,14 @@ public class TrackWs2
     /**
    * Default Constructor
    */
-    public TrackWs2()
-    {
+    public TrackWs2(){}
 
+    public String getId() {
+        return id;
     }
-
+    public void setId(String id) {
+        this.id = id;
+    }
     /**
      * @return the position
      */
@@ -45,6 +50,19 @@ public class TrackWs2
     }
 
     /**
+     * @return the number
+     */
+    public int getNumber() {
+        return number;
+    }
+
+    /**
+     * @param number the number to set
+     */
+    public void setNumber(int number) {
+        this.number = number;
+    }
+    /**
      * @return the title
      */
     public String getTitle() {
@@ -58,6 +76,19 @@ public class TrackWs2
         this.title = title;
     }
 
+    /**
+     * @return the artistCredit
+     */
+    public ArtistCreditWs2 getArtistCredit() {
+        return artistCredit;
+    }
+
+    /**
+     * @param artistCredit the artistCredit to set
+     */
+    public void setArtistCredit(ArtistCreditWs2 artistCredit) {
+        this.artistCredit = artistCredit;
+    }
     /**
      * @return the recording
      */
@@ -79,9 +110,7 @@ public class TrackWs2
 
     public String getDuration(){
        
-      return CalendarUtils.calcDurationString(this.getDurationInMillis());
-      
-      
+      return CalendarUtils.calcDurationString(this.getDurationInMillis());      
     }
     public Long getDurationInMillis(){
         

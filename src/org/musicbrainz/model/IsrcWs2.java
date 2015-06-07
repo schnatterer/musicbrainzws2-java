@@ -2,8 +2,7 @@ package org.musicbrainz.model;
 
 import java.util.List;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import java.util.logging.Logger;
 import org.musicbrainz.model.entity.RecordingWs2;
 import org.musicbrainz.model.entity.listelement.RecordingListWs2;
 
@@ -13,7 +12,7 @@ import org.musicbrainz.model.entity.listelement.RecordingListWs2;
  */
 public class IsrcWs2 
 {
-    private Log log = LogFactory.getLog(IsrcWs2.class);
+     private static Logger log = Logger.getLogger(IsrcWs2.class.getName());
 
     private String id;
     private RecordingListWs2 recordingList = new RecordingListWs2();

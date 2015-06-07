@@ -11,8 +11,6 @@ import java.util.logging.Logger;
 import org.junit.Before;
 import org.junit.Test;
 import java.util.List;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 import org.musicbrainz.model.entity.DiscWs2;
 import org.musicbrainz.MBWS2Exception;
@@ -53,7 +51,7 @@ import org.musicbrainz.webservice.DefaultWebServiceWs2;
 // TODO proper unit test coverage is needed and all commented @test should pass
 public class UnitTests {
 
-    protected Log log = LogFactory.getLog(QueryWs2.class);
+    static Logger log = Logger.getLogger(UnitTests.class.getName());
      
     String labelName = "EMI";
     String artistName = "Pink Floyd";
@@ -75,6 +73,20 @@ public class UnitTests {
 
     }
 
+    @Test
+    public void aaa() throws MBWS2Exception{
+    
+        Release release = new Release();
+        
+        ReleaseWs2 result;
+        
+        //include or exclude some data in LookUp
+        
+        
+       
+        result = release.lookUp("b54e4ad1-188a-352f-85d8-ca40d4ec4748");
+    
+    }
     //@Test
     public void searchISRC(){
         
@@ -400,7 +412,7 @@ public class UnitTests {
     //@Test
     public void synopsisUseCase1(){
         
-        log.debug("synopsisUseCase1");
+        log.info("synopsisUseCase1");
         
         //To retrieve all the labels with name similar to "EMI":
 
@@ -412,7 +424,7 @@ public class UnitTests {
     //@Test
     public void SynopsisUseCase2(){
         
-        log.debug("synopsisUseCase2");
+        log.info("synopsisUseCase2");
         //To retrieve the first 30 artists with name similar to "pink floyd",
        //scored 50 or over:
 
@@ -435,7 +447,7 @@ public class UnitTests {
     }
     //@Test
     public void SynopsisUseCase3() throws MBWS2Exception {
-        log.debug("synopsisUseCase3");
+        log.info("synopsisUseCase3");
         
         //To search releases by pink floyd, released in 1982:
 
@@ -449,7 +461,7 @@ public class UnitTests {
     //@Test
     public void SynopsisUseCase4() throws MBWS2Exception{
         
-        log.debug("synopsisUseCase4"); 
+        log.info("synopsisUseCase4"); 
         Artist artist = new Artist();
       
         artist.getSearchFilter().setLimit((long)30);
@@ -473,7 +485,7 @@ public class UnitTests {
    //@Test
     public void SynopsisUseCase5() throws MBWS2Exception{
         
-        log.debug("synopsisUseCase5");
+        log.info("synopsisUseCase5");
         
         String name = "pink floyd";
 
@@ -527,7 +539,7 @@ public class UnitTests {
     //@Test
     public void SynopsisUseCase6() throws MBWS2Exception{
 
-        log.debug("synopsisUseCase6");
+        log.info("synopsisUseCase6");
         
         String name = "pink floyd";
 
@@ -553,10 +565,10 @@ public class UnitTests {
         artist.getFullReleaseList();
         
     }
-     //@Test
+    //@Test
     public void SynopsisUseCase7() throws MBWS2Exception{
 
-        log.debug("synopsisUseCase7");
+        log.info("synopsisUseCase7");
         
         String name = "pink floyd";
 
@@ -594,7 +606,7 @@ public class UnitTests {
     //@Test
     public void SynopsisUseCase8() throws MBWS2Exception{
 
-        log.debug("synopsisUseCase8");
+        log.info("synopsisUseCase8");
         
         String name = "pink floyd";
 
@@ -650,7 +662,7 @@ public class UnitTests {
     //@Test
     public void SynopsisUseCase9() throws MBWS2Exception{
 
-        log.debug("synopsisUseCase9");
+        log.info("synopsisUseCase9");
         
         String name = "pink floyd";
 
@@ -702,7 +714,7 @@ public class UnitTests {
     //@Test
     public void SynopsisUseCase10() throws MBWS2Exception{
         
-        log.debug("SynopsisUseCase10");
+        log.info("SynopsisUseCase10");
         
         String name = "pink floyd";
         

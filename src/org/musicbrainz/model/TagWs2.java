@@ -1,7 +1,6 @@
 package org.musicbrainz.model;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import java.util.logging.Logger;
 
 /**
  * <p>Represents a Tag for an entity (not release at the moment).
@@ -15,7 +14,7 @@ public class TagWs2
     public TagWs2(String name){
         this.name = name;
     }
-    private Log log = LogFactory.getLog(TagWs2.class);
+    private static Logger log = Logger.getLogger(TagWs2.class.getName());
     /**
      * The tag
      */

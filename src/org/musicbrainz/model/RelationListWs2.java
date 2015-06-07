@@ -3,7 +3,6 @@ package org.musicbrainz.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.musicbrainz.model.RelationWs2;
 import org.musicbrainz.wsxml.element.ListElement;
 
 /**

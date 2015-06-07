@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
-import org.mc2.CalendarUtils;
+import org.mc2.util.miscellaneous.CalendarUtils;
 
 
 public class DiscInfo {

@@ -2,8 +2,6 @@ package org.musicbrainz.query;
 
 
 import java.util.List;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 import org.musicbrainz.MBWS2Exception;
 import org.musicbrainz.filter.FilterWs2;
@@ -14,7 +12,8 @@ import org.musicbrainz.webservice.impl.HttpClientWebServiceWs2;
 import org.musicbrainz.wsxml.MbXMLException;
 import org.musicbrainz.wsxml.element.Metadata;
 import org.musicbrainz.DomainsWs2;
-
+import java.util.logging.Level;
+import java.util.logging.Logger;
 //import com.sun.jmx.mbeanserver.MetaData;
 
 /**
@@ -34,7 +33,7 @@ import org.musicbrainz.DomainsWs2;
 	/**
 	 * A logger
 	 */    
-	protected Log log = LogFactory.getLog(QueryWs2.class);
+	protected static Logger log = Logger.getLogger(QueryWs2.class.getName());
         /**
 	 * The web service implementation to use
 	 */

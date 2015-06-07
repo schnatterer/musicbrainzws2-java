@@ -1,8 +1,7 @@
 package org.musicbrainz.model;
 
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import java.util.logging.Logger;
 
 /**
  * <p>A Life Span definition.
@@ -24,25 +23,30 @@ import org.apache.commons.logging.LogFactory;
  */
 public class LifeSpanWs2 
 {
-    private Log log = LogFactory.getLog(LifeSpanWs2.class);
+    private static Logger log = Logger.getLogger(LifeSpanWs2.class.getName());
 
     private String begin;
     private String end;
+    private boolean ended=false;
     
     /**
     * Minimal Constructor
     * @param nameCredits A list of  NameCreditWs2
     * describing the Artist Credit.
     */
-    public LifeSpanWs2(String begin, String end)
+    public LifeSpanWs2(String begin, String end, boolean ended)
     {
         this.begin= begin;
         this.end = end;
+        this.ended = ended;
     }
     public String getBegin(){
         return begin;
     }
     public String getEnd(){
         return end;
+    }
+    public boolean getEnded(){
+        return ended;
     }
 }

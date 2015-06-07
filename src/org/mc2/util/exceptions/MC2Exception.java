@@ -1,11 +1,11 @@
-package org.mc2;
+package org.mc2.util.exceptions;
 
 /**
  * All application specific exceptions extend this class.
  */
 
 public class MC2Exception extends Exception {
-
+    private static final long serialVersionUID = 1L;
     public MC2Exception() {
 		super();
 	}

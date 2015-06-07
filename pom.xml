@@ -3,8 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>info.schnatterer.musicbrainzws2-java</groupId>
 	<artifactId>musicbrainzws2-java</artifactId>
-	<version>3.0.1-SNAPSHOT</version>
-	<packaging>jar</packaging>
+	<version>3.0.1-SNAPSHOT</version>	<packaging>jar</packaging>
 	<name>musicbrainzws2-java</name>
 
 	<licenses>
@@ -37,6 +36,18 @@
 			<artifactId>jdom</artifactId>
 			<version>1.0</version>
 		</dependency>
+		<dependency>
+			<groupId>fm.last</groupId>
+			<artifactId>coverartarchive-api</artifactId>
+			<version>2.1.0</version>
+		</dependency>
+        <!-- Coverartarchive uses SLF4j, musicbrainzws2-java uses JUL. Force SLF4J calls to be delegated to jul. See http://www.slf4j.org/legacy.html-->
+        <!-- TODO Do it the other way round? Migrate musicbrainzws2-java to SLF4J/Logback?-->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-jdk14</artifactId>
+            <version>1.7.7</version>
+        </dependency>
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>

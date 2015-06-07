@@ -7,11 +7,11 @@ package org.musicbrainz.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.musicbrainz.includes.ReleaseIncludesWs2;
 import org.musicbrainz.model.entity.DiscWs2;
 import org.musicbrainz.query.lookUp.LookUpWs2;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.musicbrainz.MBWS2Exception;
 import org.musicbrainz.discid.DiscIdException;
 import org.musicbrainz.discid.DiscInfo;
@@ -22,7 +22,7 @@ import org.musicbrainz.webservice.ResourceNotFoundException;
 
 public class Disc extends Controller{
 
-   private Log log = LogFactory.getLog(Disc.class);
+    private static Logger log = Logger.getLogger(Disc.class.getName());
    
    
    public Disc(){
@@ -149,7 +149,7 @@ public class Disc extends Controller{
             }
             else if (transit.getDiscId() != null && 
                        !transit.getDiscId().equals( disc.getDiscId())){
-                log.warn("libdiscId changed discId");
+                log.warning("libdiscId changed discId");
             };
         }
         else if ((disc.getTracks() == null|| disc.getTracks().isEmpty()) &&
@@ -163,7 +163,7 @@ public class Disc extends Controller{
             }
             else if (transit.getDiscId() != null && 
                        !transit.getDiscId().equals( disc.getDiscId())){
-                log.warn("libdiscId changed discId");
+                log.warning("libdiscId changed discId");
             };
             
         }
@@ -182,7 +182,7 @@ public class Disc extends Controller{
             }
             else if (transit.getDiscId() != null && 
                        !transit.getDiscId().equals( disc.getDiscId())){
-                log.warn("libdiscId changed discId");
+                log.warning("libdiscId changed discId");
             };
         }
         
@@ -262,7 +262,7 @@ public class Disc extends Controller{
         DiscInfo discInfo;
         try {
             discInfo = DiscInfo.read(drive);
-            log.debug("Disc Information:\n" + discInfo.toString());
+            log.info("Disc Information:\n" + discInfo.toString());
             disc.setDiscId(discInfo.discid);
             disc.setSectors(discInfo.sectors);
             disc.setToc(discInfo.toc);
@@ -294,7 +294,7 @@ public class Disc extends Controller{
         } catch (DiscIdException ex) {
             throw new MBWS2Exception(ex);
         }
-        log.debug("Disc Information:\n" + discInfo.toString());
+        log.log(Level.INFO, "Disc Information:{0}", discInfo.toString());
         return discInfo;
         
     }

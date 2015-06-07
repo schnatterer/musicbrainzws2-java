@@ -1,10 +1,13 @@
 package org.musicbrainz.model.entity;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 
 import org.apache.commons.lang3.StringUtils;
 
+import org.musicbrainz.model.AreaWs2;
 import org.musicbrainz.model.LifeSpanWs2;
 import org.musicbrainz.model.entity.listelement.RecordingListWs2;
 import org.musicbrainz.model.entity.listelement.ReleaseGroupListWs2;
@@ -38,6 +41,9 @@ public class ArtistWs2 extends EntityWs2 {
 	private String sortName;
 
 	private LifeSpanWs2 lifespan;
+           
+           private AreaWs2 beginArea;
+           private AreaWs2 endArea;
         
 	private String disambiguation;
 	
@@ -45,6 +51,7 @@ public class ArtistWs2 extends EntityWs2 {
 	 * The artist's country.
 	 */
            private String country;
+           private AreaWs2 area;
             /**
 	 * The artist's gender.
 	 */
@@ -53,6 +60,8 @@ public class ArtistWs2 extends EntityWs2 {
 	 * The artist's ipi.
 	 */
            private String ipi;
+           private List<String> ipiList= new ArrayList<String>();
+           private List<String> isniList = new ArrayList<String>();
 
 	/**
 	 * The list of releases from this artist.
@@ -111,7 +120,6 @@ public class ArtistWs2 extends EntityWs2 {
 	public void setDisambiguation(String disambiguation) {
 		this.disambiguation = disambiguation;
 	}
-        
    	/**
 	 * @return the type
 	 */
@@ -162,22 +170,122 @@ public class ArtistWs2 extends EntityWs2 {
 		this.gender = gender;
 	}
             /**
-         * @return the ipi
-         */
-            public String getIpi() {
-                return ipi;
-            }
-            /**
-             * @param ipi the ipi to set
+             * @return the beginArea
              */
-            public void setIpi(String ipi) {
-                this.ipi = ipi;
+            public AreaWs2 getBeginArea() {
+                return beginArea;
             }
             /**
-	 * Gets the underlying <code>List</clode> of releaseGroups.
-	 * 
-	 * @return the releaseGroups
-	 */
+             * @param beginArea the beginArea to set
+             */
+            public void setBeginArea(AreaWs2 beginArea) {
+                this.beginArea = beginArea;
+            }
+            /**
+             * @return the endArea
+             */
+            public AreaWs2 getEndArea() {
+                return endArea;
+            }
+            /**
+             * @param endArea the endArea to set
+             */
+            public void setEndArea(AreaWs2 endArea) {
+                this.endArea = endArea;
+            }
+
+            /**
+             * @return the area
+             */
+            public AreaWs2 getArea() {
+                return area;
+            }
+            /**
+             * @param area the area to set
+             */
+            public void setArea(AreaWs2 area) {
+                this.area = area;
+            }
+             /**
+            * @return the ipi
+            */
+              public String getIpi() {
+                    return ipi;
+              }
+              /**
+            * @param ipi the ipi to set
+            */
+              public void setIpi(String ipi) {
+                    this.ipi = ipi;
+                }
+            /**
+         * @param ipiList the ipiList to set
+         */
+            public void setIpiList(List<String> ipiList) {
+                this.ipiList = ipiList;
+            }
+            /**
+         * @return the ipiList
+         */
+            public List<String> getIpiList() {
+                return ipiList;
+            }
+            public String getDisplayIpi() {
+                
+                 String out="";
+                 if ((getIpiList()==null) || (getIpiList().isEmpty())) return out;
+
+                 if ((getIpiList().size()==1)&& 
+                      (getIpiList().get(0).equals(getIpi()))) return getIpi();
+
+                if (getIpiList().size()>1){
+                    String separator="";
+                    Iterator itr = getIpiList().iterator();
+                    while (itr.hasNext()) {
+
+                        String sType = (String)itr.next();
+                        out=out+separator+sType;
+                        separator=", ";
+
+                    }
+                    return out;
+                }
+                return getIpi()+" / "+getIpiList().get(0);
+            }
+             /**
+         * @param isniList the isniList to set
+         */
+            public void setIsniList(List<String> isniList) {
+                this.isniList = isniList;
+            }
+            /**
+             * @return the isniList
+             */
+            public List<String> getIsniList() {
+                return isniList;
+            }
+            public String getDisplayIsni() {
+
+                String out="";
+                if (!(getIsniList()==null) && !(getIsniList().isEmpty())){
+
+                    String separator="";
+                    Iterator itr = getIsniList().iterator();
+                    while (itr.hasNext()) {
+
+                        String sType = (String)itr.next();
+                        out=out+separator+sType;
+                        separator=", ";
+
+                     }
+                }
+                return out;
+           }
+           /**
+	* Gets the underlying <code>List</clode> of releaseGroups.
+        * 
+	* @return the releaseGroups
+	*/
 	public List<ReleaseGroupWs2> getReleaseGroups() {
                 return ( releaseGroupList == null ? null : releaseGroupList.getReleaseGroups());
 	}
@@ -438,61 +546,6 @@ public class ArtistWs2 extends EntityWs2 {
 		} 
 		workList.addWorks(work);
 	}
-            /** // is in mmd but not allowed in ws.
-	 * Gets the underlying <code>List</clode> of releases.
-	 * 
-	 * @return the labels
-	 *
-	public List<LabelWs2> getLabels() {
-		return ( labelList == null ? null : labelList.getLabels());
-	}
-	/**
-	 * Sets the underlying <code>List</clode> of labels.
-	 * 
-	 * Note: This will implicitly create a new {@link #labelList}
-	 * if it is null.
-	 * 
-	 * @param labels the labels to set
-	 *
-	public void setLabels(List<LabelWs2> labels) 
-	{
-		if (labelList == null) {
-			labelList = new LabelListWs2();
-		}
-			
-		this.labelList.setLabels(labels);
-	}
-            /**
-	 * @return the labelList
-	 *
-	public LabelListWs2 getLabelList() {
-		return labelList;
-	}
-
-	/**
-	 * @param labelList the labelList to set
-	 *
-	public void setLabelList(LabelListWs2 labelList) {
-		this.labelList = labelList;
-	}
-            /**
-	 * <p>Adds a label to the underlying <code>List</clode>
-	 * of labels.</p>
-	 * 
-	 * <p><em>Note: This will implicitly create a new {@link #labelList}
-	 * if it is null.</em></p>
-	 * 
-	 * @param labele The {@link labelWs2} to add.
-	 *
-	public void addLabel(LabelWs2 label) 
-	{
-		if (labelList == null) {
-			labelList = new LabelListWs2();
-		} 
-		labelList.addLabel(label);
-	}
-         * is in mmd but not allowed in ws.
-   * /
 
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
@@ -529,5 +582,5 @@ public class ArtistWs2 extends EntityWs2 {
                 }
 
                 return false;
-            }   
+            }
 }

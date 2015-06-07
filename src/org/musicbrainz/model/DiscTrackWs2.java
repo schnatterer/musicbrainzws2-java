@@ -2,7 +2,7 @@ package org.musicbrainz.model;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
-import org.mc2.CalendarUtils;
+import org.mc2.util.miscellaneous.CalendarUtils;
 
 /**
  * A DiscTrack consists of tracknum, offset and length of the drack IN the disc.

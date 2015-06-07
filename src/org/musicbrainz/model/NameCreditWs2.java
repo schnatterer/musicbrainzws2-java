@@ -1,7 +1,6 @@
 package org.musicbrainz.model;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import java.util.logging.Logger;
 import org.musicbrainz.model.entity.ArtistWs2;
 
 /**
@@ -10,7 +9,7 @@ import org.musicbrainz.model.entity.ArtistWs2;
  */
 public class NameCreditWs2 
 {
-    private Log log = LogFactory.getLog(NameCreditWs2.class);
+    private static Logger log = Logger.getLogger(NameCreditWs2.class.getName());
 
     String joinphrase=null;
     String name=null;

@@ -2,9 +2,7 @@ package org.musicbrainz.model;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import java.util.logging.Logger;
 
 /**
  * <p>An Artist Credit used instead of Artist for collaborations or 
@@ -13,7 +11,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class ArtistCreditWs2
 {
-    private Log log = LogFactory.getLog(ArtistCreditWs2.class);
+    private static Logger log = Logger.getLogger(ArtistCreditWs2.class.getName());
 
     /**
      * A string containing the complete credit as join 

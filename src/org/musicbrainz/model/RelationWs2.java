@@ -59,6 +59,7 @@ public class RelationWs2 extends DomainsWs2{
 	 * The relation's tpye
 	 */
 	private String type; 
+           private String typeId; 
 	
 	/**
 	 * The target's id
@@ -89,6 +90,7 @@ public class RelationWs2 extends DomainsWs2{
 	 * The end date
 	 */
 	private String endDate;
+           private boolean ended;
 	/**
 	 * The target entity
 	 */
@@ -218,212 +220,32 @@ public class RelationWs2 extends DomainsWs2{
     public void setTargetType(String targetType) {
             this.targetType = targetType;
     }
-    /* For a wyle, MB returned Type and Attributes
-    * not decoded and we tried to build a meaning
-    * description form that.
-    * 
-    * not used anymore.
-   
-    public String getDescription() {
-        if (description == null)
-        {
-            calcDescription();
-            description ="";
-        }
-        return description;
+
+    /**
+     * @return the typeId
+     */
+    public String getTypeId() {
+        return typeId;
     }
-    public void calcDescription(){
-    
-           attrValList= new ArrayList<String>();
-           attrKeyList= new ArrayList<String>();
-           
-           description="";
-           
-           if (getType()!=null)
-           {    
-                wordList  = getWordList(
-                        MbUtils.extractTypeFromURI(getType()));
-                
-                if (wordList==null)
-                {
-                    description= "# Attributes/Type mismatch";
-                }
-                description = StringUtils.join(wordList, " ");
-           }
-       }
-       private List<String> getWordList(String type)
-       {
-           wordList = new ArrayList<String>();
-           attrKeyList = new ArrayList<String>();
-           attrValList = new ArrayList<String>();
 
-           if (getAttributes() != null)
-           { 
-              attrValList.addAll(getAttributes());
-           }
+    /**
+     * @param typeId the typeId to set
+     */
+    public void setTypeId(String typeId) {
+        this.typeId = typeId;
+    }
 
-           String word="";
-           String key="";
+    /**
+     * @return the ended
+     */
+    public boolean isEnded() {
+        return ended;
+    }
 
-           boolean isOpenKey = false;
-
-           int i=0;
-           while (i<type.length())
-           {
-               String c = type.substring(i,i+1);
-               
-               if (c.equals("_"))
-               {
-                   c = " ";
-               }
-
-               if (c.equals("{"))
-               {
-                   if (isOpenKey) return null;
-
-                   if (!word.equals("") && !word.equals(" ")&& !word.equals("_"))
-                   {
-                       word = word.trim();
-                       wordList.add(word);
-                       word = "";
-                       
-                   }
-                   isOpenKey=true;
-               }
-               else if (c.equals("}"))
-               {
-                   if (!isOpenKey) 
-                       return null;
-                   if (key.equals(""))
-                       return null;
-                   if (word.equals("")) 
-                       return null;
-
-                   closeKey(key);
-
-                   key="";
-                   isOpenKey=false;
-                   word = "";
-               }
-               else
-               {
-                   if (isOpenKey)
-                   {
-                       key=key+c;
-                   }
-                   word=word+c;
-               }
-               i++;
-           }
-           if (!word.equals("") && !word.equals(" ")&& !word.equals("_"))
-           {
-               if (isOpenKey) {return null;}
-               word = word.trim();
-               wordList.add(word);
-               word = "";
-               
-           }
-           if (attrValList.isEmpty() && attrKeyList.isEmpty())
-           {
-               return wordList;
-           }
-            else if (attrKeyList.size()==1 && attrValList.isEmpty())
-           { 
-               wordList.remove(attrKeyList.get(0));
-               return wordList;
-           }
-           else if (attrKeyList.size()==1 && attrValList.size()==1)
-           {
-                String k = attrKeyList.get(0);
-                String v = attrValList.get(0);
-
-                word="";
-
-               if (k.contains(":"))
-               {
-                   String[] res1 = k.split("\\:");
-
-                   String[] res2 = res1[1].split("\\|");
-                   if (res2.length == 2)
-                   {
-                       word = res2[1];
-                   }
-                   else
-                   {
-                       word = res2[0];
-                   }
-               }
-               else
-               {
-                   word= v;
-               }
-               if (word.contains("%"))
-               {
-                   word= word.replace("%", v);
-               }
-               word = word.trim();
-               wordList.set(wordList.indexOf(k), word);
-               return wordList;
-           }
-           return null;
-       }
-       private void closeKey(String key){
-
-           String word="";
-           String attrname="";
-           String valIfTrue="";
-           String valIfFalse="";
-
-           String[] res1 = key.split("\\:");
-
-           attrname = res1[0];
-           if (!getOpenAttributes().contains(attrname))
-           {
-               if (res1.length == 2)
-               {
-                   String[] res2 = res1[1].split("\\|");
-                   valIfTrue = res2[0];
-
-                   if (res2.length == 2)
-                   {
-                       valIfFalse = res2[1];
-                   }
-               }
-
-               if (attrValList.contains(attrname))
-               {
-                   word = valIfTrue;
-                   attrValList.remove(attrname);
-               }
-               else
-               {
-                   word = valIfFalse;
-               }
-               if (!word.equals("") && !word.equals(" ")&& !word.equals("_"))
-               {
-                   word = word.trim();
-                   wordList.add(word);
-               }
-           }
-           else
-           {
-               wordList.add(key);
-               attrKeyList.add(key);
-           }
-       }
-       private List<String> getOpenAttributes(){
-                 
-                List<String> openAttributes = new ArrayList<String>(0);
-                
-                openAttributes.add(ATTR_ORCHESTRA);
-                openAttributes.add(ATTR_VOCAL);
-                openAttributes.add(ATTR_INSTRUMENT);
-                openAttributes.add(ATTR_DESCRIPTION);
-                openAttributes.add(ATTR_LICENSE);
-                openAttributes.add(ATTR_POSITION);
-                                
-                return openAttributes;
-        }
-       // End of CalcDescription.
-       */
+    /**
+     * @param ended the ended to set
+     */
+    public void setEnded(boolean ended) {
+        this.ended = ended;
+    }
 }

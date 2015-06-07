@@ -8,9 +8,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import java.util.logging.Logger;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.musicbrainz.DomainsWs2;
 import org.musicbrainz.query.submission.SubmissionException;
 import org.musicbrainz.wsxml.MbXMLException;
@@ -25,60 +24,57 @@ import org.musicbrainz.wsxml.impl.JDOMWriterWs2;
  * properties of a web service client that can be extended.
  */
 public abstract class DefaultWebServiceWs2 extends DomainsWs2 implements WebService {
-    
-    private Log log = LogFactory.getLog(DefaultWebServiceWs2.class);
+	
+    static Logger log = Logger.getLogger(DefaultWebServiceWs2.class.getName());
+
 
     /**
-     * Encoding used to encode url parameters
-     */
+    * Encoding used to encode url parameters
+    */
     protected static final String URL_ENCODING = "UTF-8";
-    
     /**
-     * Name of this library that will be used as part of the default user agent
-     * string or as part of a custom user agent string.
-     * 
-     * @see DefaultWebServiceWs2#createUserAgent()
-     * @see DefaultWebServiceWs2#createUserAgent(String, String, String)
-     * @see <a
-     *      href="https://musicbrainz.org/doc/XML_Web_Service/Rate_Limiting#How_can_I_be_a_good_citizen_and_be_smart_about_using_the_Web_Service.3F">How
-     *      can I be a good citizen and be smart about using the Web Service?
-     *      </a>
-     */
+    * Name of this library that will be used as part of the default user agent
+    * string or as part of a custom user agent string.
+    *
+    * @see DefaultWebServiceWs2#createUserAgent()
+    * @see DefaultWebServiceWs2#createUserAgent(String, String, String)
+    * @see <a
+    * href="https://musicbrainz.org/doc/XML_Web_Service/Rate_Limiting#How_can_I_be_a_good_citizen_and_be_smart_about_using_the_Web_Service.3F">How
+    * can I be a good citizen and be smart about using the Web Service?
+    * </a>
+    */
     protected static final String USER_AGENT_LIB_NAME
-       = "MusicBrainz-Java";
-
-     // TODO Read the constant value from properties file that gets written during maven build
-     /**
-     * Version of this library that will be used as part of the default user
-     * agent string or as part of a custom user agent string.
-     * 
-     * @see DefaultWebServiceWs2#createUserAgent()
-     * @see DefaultWebServiceWs2#createUserAgent(String, String, String)
-     * @see <a
-     *      href="https://musicbrainz.org/doc/XML_Web_Service/Rate_Limiting#How_can_I_be_a_good_citizen_and_be_smart_about_using_the_Web_Service.3F">How
-     *      can I be a good citizen and be smart about using the Web Service?
-     *      </a>
-     */
-    protected static final String USER_AGENT_LIB_VERSION
-       = "2.01beta-nusicEdition";
-
+    = "MusicBrainz-Java";
+    // TODO Read the constant value from properties file that gets written during maven build
     /**
-     * Contact information of this library that will be used as part of the
-     * default user agent string.
-     * 
-     * @see DefaultWebServiceWs2#createUserAgent()
-     * @see DefaultWebServiceWs2#createUserAgent(String, String, String)
-     * @see <a
-     *      href="https://musicbrainz.org/doc/XML_Web_Service/Rate_Limiting#How_can_I_be_a_good_citizen_and_be_smart_about_using_the_Web_Service.3F">How
-     *      can I be a good citizen and be smart about using the Web Service?
-     *      </a>
-     */
+    * Version of this library that will be used as part of the default user
+    * agent string or as part of a custom user agent string.
+    *
+    * @see DefaultWebServiceWs2#createUserAgent()
+    * @see DefaultWebServiceWs2#createUserAgent(String, String, String)
+    * @see <a
+    * href="https://musicbrainz.org/doc/XML_Web_Service/Rate_Limiting#How_can_I_be_a_good_citizen_and_be_smart_about_using_the_Web_Service.3F">How
+    * can I be a good citizen and be smart about using the Web Service?
+    * </a>
+    */
+    protected static final String USER_AGENT_LIB_VERSION
+    = "2.01beta-nusicEdition";
+    /**
+    * Contact information of this library that will be used as part of the
+    * default user agent string.
+    *
+    * @see DefaultWebServiceWs2#createUserAgent()
+    * @see DefaultWebServiceWs2#createUserAgent(String, String, String)
+    * @see <a
+    * href="https://musicbrainz.org/doc/XML_Web_Service/Rate_Limiting#How_can_I_be_a_good_citizen_and_be_smart_about_using_the_Web_Service.3F">How
+    * can I be a good citizen and be smart about using the Web Service?
+    * </a>
+    */
     protected static final String USER_AGENT_LIB_CONTACT
-       = "http://code.google.com/p/musicbrainzws2-java/";
-
-     /**
-     * The authentication scheme, could only be DIGEST.
-     */
+    = "http://code.google.com/p/musicbrainzws2-java/";
+    /**
+    * The authentication scheme, could only be DIGEST.
+    */
     protected static final String SCHEME = "digest";
     
     /**
@@ -332,7 +328,7 @@ public abstract class DefaultWebServiceWs2 extends DomainsWs2 implements WebServ
                     try {
                             url.append(e.getKey()).append("=").append(URLEncoder.encode(e.getValue(), URL_ENCODING)).append("&");
                     } catch (UnsupportedEncodingException ex) {
-                            log.error("Internal Error: Could not encode url parameter " + e.getKey(), ex);
+                            log.severe("Internal Error: Could not encode url parameter " + e.getKey());
                     }
             }
 
@@ -343,9 +339,9 @@ public abstract class DefaultWebServiceWs2 extends DomainsWs2 implements WebServ
         return USER_AGENT_LIB_NAME + "/" + USER_AGENT_LIB_VERSION + " ( "
                 + USER_AGENT_LIB_CONTACT + " )";
     }
-
     /**
-     * Creates a custom user agent string which will be formatted as follows:<br/>
+     * @return the parser
+     *
      * <code>&lt;name&gt;</code>/<code>&lt;version&gt;</code>
      * {@link #USER_AGENT_LIB_NAME}/{@link #USER_AGENT_LIB_VERSION} (
      * <code>&lt;contact&gt;</code> )

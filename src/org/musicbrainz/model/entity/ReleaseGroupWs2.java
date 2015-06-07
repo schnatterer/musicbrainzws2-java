@@ -2,12 +2,13 @@ package org.musicbrainz.model.entity;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
+import java.util.logging.Logger;
 import java.util.TimeZone;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 import org.musicbrainz.model.ArtistCreditWs2;
 import org.musicbrainz.model.entity.listelement.ReleaseListWs2;
@@ -19,7 +20,7 @@ import org.musicbrainz.model.entity.listelement.ReleaseListWs2;
  */
 public class ReleaseGroupWs2 extends EntityWs2 {
 	
-     private Log log = LogFactory.getLog(ArtistCreditWs2.class);
+     private static Logger log = Logger.getLogger(ReleaseGroupWs2.class.getName());
      
     public static final String TYPE_NONE = NS_MMD_2 + "none";
     
@@ -38,6 +39,10 @@ public class ReleaseGroupWs2 extends EntityWs2 {
 
     private String type;
     private String typeString;
+    
+    private String primaryType;
+    private List<String> secondaryTypes= new ArrayList<String>();
+
     private String title;
     private String firstReleaseDateStr;
     private String disambiguation;
@@ -70,7 +75,57 @@ public class ReleaseGroupWs2 extends EntityWs2 {
     public void setType(String type) {
             this.type = type;
     }
+/**
+     * @return the primaryType
+     */
+    public String getPrimaryType() {
+        return primaryType;
+    }
 
+    /**
+     * @param primaryType the primaryType to set
+     */
+    public void setPrimaryType(String primaryType) {
+        this.primaryType = primaryType;
+    }
+
+    /**
+     * @return the secondaryTypes
+   */
+    public List<String> getSecondaryTypes() {
+        return secondaryTypes;
+    }
+
+    /**
+     * @param secondaryTypes the secondaryTypes to set
+   */
+    public void setSecondaryTypes(List<String> secondaryTypes) {
+        this.secondaryTypes = secondaryTypes;
+    }
+    /**
+     * @return a string containing the prymary AND the secondary types,
+     * no matter what type is.
+   */
+    public String getDisplayType() {
+        
+        String out="";
+        if (!(getPrimaryType()==null) && !(getPrimaryType().isEmpty())) out=getPrimaryType();
+        if (!(getSecondaryTypes()==null) && !(getSecondaryTypes().isEmpty())){
+            
+            if (!out.isEmpty()) out= out+" +";
+            
+            String separator=" ";
+            Iterator itr = getSecondaryTypes().iterator();
+            while (itr.hasNext()) {
+              
+                String sType = (String)itr.next();
+                out=out+separator+sType;
+                separator=", ";
+              
+             }
+        }
+        return out;
+    }
     /**
      * @return the title
     */
@@ -185,7 +240,7 @@ public class ReleaseGroupWs2 extends EntityWs2 {
         try {
                 return f.parse(firstReleaseDateStr);
         } catch (ParseException e) {
-                log.warn("Could not parse date string - returning null", e);
+                log.warning ("Could not parse date string - returning null");
                 return null;
         }
     }
@@ -252,4 +307,6 @@ public class ReleaseGroupWs2 extends EntityWs2 {
 
         return false;
     }
+
+    
 }

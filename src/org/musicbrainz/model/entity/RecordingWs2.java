@@ -5,7 +5,7 @@ import java.util.List;
 
 
 import org.apache.commons.lang3.StringUtils;
-import org.mc2.CalendarUtils;
+import org.mc2.util.miscellaneous.CalendarUtils;
 import org.musicbrainz.model.ArtistCreditWs2;
 import org.musicbrainz.model.IsrcWs2;
 import org.musicbrainz.model.PuidWs2;
@@ -45,7 +45,7 @@ public class RecordingWs2 extends EntityWs2
     }
     
     public Long getDurationInMillis() {
-        return durationInMillis;
+        return durationInMillis == null ?  0 : durationInMillis;
     }
     public void setDurationInMillis(Long durationInMillis) {
         this.durationInMillis = durationInMillis;

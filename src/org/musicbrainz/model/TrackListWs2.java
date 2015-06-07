@@ -5,9 +5,8 @@ import org.musicbrainz.wsxml.element.ListElement;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.mc2.CalendarUtils;
+import java.util.logging.Logger;
+import org.mc2.util.miscellaneous.CalendarUtils;
 
 /**
  * <p>A List of Track Info (Track & catalog number)referred by a release</p>
@@ -15,7 +14,7 @@ import org.mc2.CalendarUtils;
  */
 public class TrackListWs2 extends ListElement
 {
-    private Log log = LogFactory.getLog(TrackListWs2.class);
+    private static Logger log = Logger.getLogger(TrackListWs2.class.getName());
 
     private List<TrackWs2> tracks
                = new ArrayList<TrackWs2>();
