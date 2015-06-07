@@ -1,5 +1,3 @@
-This is a fork of musicbrainzws2-java, originally hosted here: https://code.google.com/p/musicbrainzws2-java/source/browse/musicbrainzws2-java. It includes several bugfixes as well as maven integration.
-
 Java Bindings for the MusicBrainz XML Web Service Version 2 (Ws2)
 -----------------------------------------------------------------
 
