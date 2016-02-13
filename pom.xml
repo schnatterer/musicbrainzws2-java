@@ -20,6 +20,12 @@
 		<tag>HEAD</tag>
 	</scm>
 
+	
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+  </properties>
+  
 	<dependencies>
 		<dependency>
 			<groupId>org.apache.httpcomponents</groupId>
@@ -62,6 +68,16 @@
 		<sourceDirectory>src</sourceDirectory>
 		<testSourceDirectory>test</testSourceDirectory>
 
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.jacoco</groupId>
+					<artifactId>jacoco-maven-plugin</artifactId>
+					<version>0.7.5.201505241946</version>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+		
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -101,19 +117,61 @@
 					<altDeploymentRepository>internal.repo::default::file://${project.build.directory}/mvn-repo</altDeploymentRepository>
 				</configuration>
 			</plugin>
-			<!-- prepare jacoco agent for code coverage -->
+			<!-- prepare jacoco agent for code coverage (unit tests, integration tests, site build) -->
 			<plugin>
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
-				<version>0.7.5.201505241946</version>
-				<executions>
+					<executions>
 					<execution>
-						<phase>initialize</phase>
+						<id>agent-for-ut</id>
 						<goals>
-							<goal>prepare-agent</goal>
+						<goal>prepare-agent</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>agent-for-it</id>
+						<goals>
+						<goal>prepare-agent-integration</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>jacoco-site</id>
+						<phase>verify</phase>
+						<goals>
+						<goal>report</goal>
 						</goals>
 					</execution>
 				</executions>
+			</plugin>
+			<!-- Run the "legacy" test as integration test, because that's what it is (connects to the internet!) -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-failsafe-plugin</artifactId>
+				<version>2.19.1</version>
+				<configuration>
+					<includes>
+						<include>**/UnitTests.java</include>
+					</includes>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>integration-test</goal>
+							<goal>verify</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<!-- Don't run the "legacy" test as unit test, because that's not what it is (connects to the internet!) -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.19.1</version>
+				<configuration>
+					<excludes>
+						<exclude>**/UnitTests.java</exclude>
+					</excludes>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
