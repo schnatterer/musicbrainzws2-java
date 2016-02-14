@@ -100,20 +100,14 @@
 					</includes>
 				</configuration>
 				<executions>
-					<execution>
-						<id>integration-tests</id>
-						<phase>integration-test</phase>
-						<goals>
-							<goal>integration-test</goal>
-						</goals>
-					</execution>
-					<execution>
-						<id>verify-integration-tests</id>
-						<phase>verify</phase>
-						<goals>
-							<goal>verify</goal>
-						</goals>
-					</execution>
+					<executions>
+						<execution>
+							<goals>
+								<goal>integration-test</goal>
+								<goal>verify</goal>
+							</goals>
+						</execution>
+					</executions>
 				</executions>
 			</plugin>
 			<!-- Don't run the "legacy" test as unit test, because that's not what it is (connects to the internet!) -->
@@ -154,20 +148,20 @@
 					<execution>
 						<id>agent-for-ut</id>
 						<goals>
-						<goal>prepare-agent</goal>
+							<goal>prepare-agent</goal>
 						</goals>
 					</execution>
 					<execution>
 						<id>agent-for-it</id>
 						<goals>
-						<goal>prepare-agent-integration</goal>
+							<goal>prepare-agent-integration</goal>
 						</goals>
 					</execution>
 					<execution>
 						<id>jacoco-site</id>
 						<phase>verify</phase>
 						<goals>
-						<goal>report</goal>
+							<goal>report</goal>
 						</goals>
 					</execution>
 				</executions>
