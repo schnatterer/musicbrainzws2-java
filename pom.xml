@@ -100,14 +100,12 @@
 					</includes>
 				</configuration>
 				<executions>
-					<executions>
-						<execution>
-							<goals>
-								<goal>integration-test</goal>
-								<goal>verify</goal>
-							</goals>
-						</execution>
-					</executions>
+					<execution>
+						<goals>
+							<goal>integration-test</goal>
+							<goal>verify</goal>
+						</goals>
+					</execution>
 				</executions>
 			</plugin>
 			<!-- Don't run the "legacy" test as unit test, because that's not what it is (connects to the internet!) -->
