@@ -1,7 +1,8 @@
 # musicbrainzws2-java
 
 [![Build Status](https://jenkins.schnatterer.info/job/musicbrainzws2-java/badge/icon)](https://jenkins.schnatterer.info/job/musicbrainzws2-java/)
-
+[<img alt="powered by openshift" align="right" src="https://www.openshift.com/images/logos/powered_by_openshift.png"/>](https://www.openshift.com/)
+  
 This is a fork of musicbrainzws2-java, originally hosted [here](https://code.google.com/p/musicbrainzws2-java/source/browse/musicbrainzws2-java). It includes several bugfixes as well as maven integration. The original [wiki](https://code.google.com/p/musicbrainzws2-java/w/list) was migrated and can now be found [here](https://github.com/schnatterer/musicbrainzws2-java/wiki).
 You can find the original Readme file [here](README.txt).
 
