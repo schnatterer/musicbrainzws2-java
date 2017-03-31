@@ -94,6 +94,7 @@
                                 <artifactSet>
                                     <includes>
                                         <include>org.apache.httpcomponents:httpclient</include>
+                                        <include>org.apache.httpcomponents:httpcore</include>
                                     </includes>
                                 </artifactSet>
                                 <relocations>
