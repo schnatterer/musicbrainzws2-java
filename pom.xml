@@ -100,8 +100,8 @@
                             </artifactSet>
                             <relocations>
                                 <relocation>
-                                    <pattern>org.apache.(?!.*commons)</pattern>
-                                    <shadedPattern>org.musicbrainz.org.apache</shadedPattern>
+                                    <pattern>org.apache.http</pattern>
+                                    <shadedPattern>org.musicbrainz.org.apache.http</shadedPattern>
                                 </relocation>
                             </relocations>
                         </configuration>
