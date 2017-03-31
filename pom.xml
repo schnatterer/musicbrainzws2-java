@@ -1,52 +1,54 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-	<groupId>info.schnatterer.musicbrainzws2-java</groupId>
-	<artifactId>musicbrainzws2-java</artifactId>
-	<version>3.0.1-SNAPSHOT</version>	<packaging>jar</packaging>
-	<name>musicbrainzws2-java</name>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>info.schnatterer.musicbrainzws2-java</groupId>
+    <artifactId>musicbrainzws2-java</artifactId>
+    <version>3.0.1-SNAPSHOT</version>
+    <packaging>jar</packaging>
+    <name>musicbrainzws2-java</name>
 
-	<licenses>
-		<license>
-			<name>GNU General Public License 3.0</name>
-			<url>http://www.gnu.org/copyleft/gpl.html</url>
-		</license>
-	</licenses>
+    <licenses>
+        <license>
+            <name>GNU General Public License 3.0</name>
+            <url>http://www.gnu.org/copyleft/gpl.html</url>
+        </license>
+    </licenses>
 
-	<scm>
-		<connection>scm:git:ssh://github.com/schnatterer/musicbrainzws2-java.git</connection>
-		<developerConnection>scm:git:ssh://git@github.com/schnatterer/musicbrainzws2-java.git</developerConnection>
-		<url>https://github.com/schnatterer/musicbrainzws2-java.git</url>
-		<tag>HEAD</tag>
-	</scm>
+    <scm>
+        <connection>scm:git:ssh://github.com/schnatterer/musicbrainzws2-java.git</connection>
+        <developerConnection>scm:git:ssh://git@github.com/schnatterer/musicbrainzws2-java.git</developerConnection>
+        <url>https://github.com/schnatterer/musicbrainzws2-java.git</url>
+        <tag>HEAD</tag>
+    </scm>
 
-	
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-  </properties>
-  
-	<dependencies>
-		<dependency>
-			<groupId>org.apache.httpcomponents</groupId>
-			<artifactId>httpclient</artifactId>
-			<version>4.5.3</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.commons</groupId>
-			<artifactId>commons-lang3</artifactId>
-			<version>3.1</version>
-		</dependency>
-		<dependency>
-			<groupId>jdom</groupId>
-			<artifactId>jdom</artifactId>
-			<version>1.0</version>
-		</dependency>
-		<dependency>
-			<groupId>fm.last</groupId>
-			<artifactId>coverartarchive-api</artifactId>
-			<version>2.1.0</version>
-		</dependency>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>4.5.3</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.1</version>
+        </dependency>
+        <dependency>
+            <groupId>jdom</groupId>
+            <artifactId>jdom</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>fm.last</groupId>
+            <artifactId>coverartarchive-api</artifactId>
+            <version>2.1.0</version>
+        </dependency>
         <!-- Coverartarchive uses SLF4j, musicbrainzws2-java uses JUL. Force SLF4J calls to be delegated to jul. See http://www.slf4j.org/legacy.html-->
         <!-- TODO Do it the other way round? Migrate musicbrainzws2-java to SLF4J/Logback?-->
         <dependency>
@@ -54,116 +56,117 @@
             <artifactId>slf4j-jdk14</artifactId>
             <version>1.7.7</version>
         </dependency>
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>4.10</version>
-			<scope>test</scope>
-		</dependency>
-	</dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.10</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
 
-	<build>
-		<!--TODO Refactor directory structure to comply with maven defaults src/main/java 
-			src/test/java -->
-		<sourceDirectory>src</sourceDirectory>
-		<testSourceDirectory>test</testSourceDirectory>
+    <build>
+        <!--TODO Refactor directory structure to comply with maven defaults src/main/java
+            src/test/java -->
+        <sourceDirectory>src</sourceDirectory>
+        <testSourceDirectory>test</testSourceDirectory>
 
-		<pluginManagement>
-			<plugins>
-				<plugin>
-					<groupId>org.jacoco</groupId>
-					<artifactId>jacoco-maven-plugin</artifactId>
-					<version>0.7.5.201505241946</version>
-				</plugin>
-			</plugins>
-		</pluginManagement>
-		
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.1</version>
-				<configuration>
-					<source>1.6</source>
-					<target>1.6</target>
-				</configuration>
-			</plugin>
-			<!-- Run the "legacy" test as integration test, because that's what it is (connects to the internet!) -->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-failsafe-plugin</artifactId>
-				<version>2.19.1</version>
-				<configuration>
-					<includes>
-						<!--TODO Refactor class names to comply with maven defaults -->
-						<include>**/UnitTests.java</include>
-					</includes>
-				</configuration>
-				<executions>
-					<execution>
-						<goals>
-							<goal>integration-test</goal>
-							<goal>verify</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-			<!-- Don't run the "legacy" test as unit test, because that's not what it is (connects to the internet!) -->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-surefire-plugin</artifactId>
-				<version>2.19.1</version>
-				<!-- As this does not adhere to test naming conventions (**/*Test.java) there would be no need to exclude this.
-				Lets just be a bite verbose and do it anyway, just to make our point.-->
-				<configuration>
-					<excludes>
-						<exclude>**/UnitTests.java</exclude>
-					</excludes>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-release-plugin</artifactId>
-				<version>2.5.1</version>
-				<configuration>
-					<arguments>-Prelease</arguments>
-					<!-- Make our tags look like e.g. "v.1.0.1" -->
-					<tagNameFormat>v.@{project.version}</tagNameFormat>
-				</configuration>
-			</plugin>
-			<plugin>
-				<artifactId>maven-deploy-plugin</artifactId>
-				<version>2.8.1</version>
-				<configuration>
-					<altDeploymentRepository>internal.repo::default::file://${project.build.directory}/mvn-repo</altDeploymentRepository>
-				</configuration>
-			</plugin>
-			<!-- prepare jacoco agent for code coverage (unit tests, integration tests, site build) -->
-			<plugin>
-				<groupId>org.jacoco</groupId>
-				<artifactId>jacoco-maven-plugin</artifactId>
-					<executions>
-					<execution>
-						<id>agent-for-ut</id>
-						<goals>
-							<goal>prepare-agent</goal>
-						</goals>
-					</execution>
-					<execution>
-						<id>agent-for-it</id>
-						<goals>
-							<goal>prepare-agent-integration</goal>
-						</goals>
-					</execution>
-					<execution>
-						<id>jacoco-site</id>
-						<phase>verify</phase>
-						<goals>
-							<goal>report</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-		</plugins>
-	</build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.jacoco</groupId>
+                    <artifactId>jacoco-maven-plugin</artifactId>
+                    <version>0.7.5.201505241946</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.1</version>
+                <configuration>
+                    <source>1.6</source>
+                    <target>1.6</target>
+                </configuration>
+            </plugin>
+            <!-- Run the "legacy" test as integration test, because that's what it is (connects to the internet!) -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <version>2.19.1</version>
+                <configuration>
+                    <includes>
+                        <!--TODO Refactor class names to comply with maven defaults -->
+                        <include>**/UnitTests.java</include>
+                    </includes>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>integration-test</goal>
+                            <goal>verify</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <!-- Don't run the "legacy" test as unit test, because that's not what it is (connects to the internet!) -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.19.1</version>
+                <!-- As this does not adhere to test naming conventions (**/*Test.java) there would be no need to exclude this.
+                Lets just be a bite verbose and do it anyway, just to make our point.-->
+                <configuration>
+                    <excludes>
+                        <exclude>**/UnitTests.java</exclude>
+                    </excludes>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-release-plugin</artifactId>
+                <version>2.5.1</version>
+                <configuration>
+                    <arguments>-Prelease</arguments>
+                    <!-- Make our tags look like e.g. "v.1.0.1" -->
+                    <tagNameFormat>v.@{project.version}</tagNameFormat>
+                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-deploy-plugin</artifactId>
+                <version>2.8.1</version>
+                <configuration>
+                    <altDeploymentRepository>internal.repo::default::file://${project.build.directory}/mvn-repo
+                    </altDeploymentRepository>
+                </configuration>
+            </plugin>
+            <!-- prepare jacoco agent for code coverage (unit tests, integration tests, site build) -->
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>agent-for-ut</id>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>agent-for-it</id>
+                        <goals>
+                            <goal>prepare-agent-integration</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>jacoco-site</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 </project> 
