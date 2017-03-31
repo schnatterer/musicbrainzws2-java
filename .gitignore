@@ -1,1 +1,5 @@
 /target
+
+## Android Studio/IntelliJ
+.idea
+*.iml

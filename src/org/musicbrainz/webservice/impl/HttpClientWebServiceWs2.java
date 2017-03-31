@@ -1,43 +1,28 @@
 package org.musicbrainz.webservice.impl;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-
-import java.io.InputStreamReader;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import java.util.zip.GZIPInputStream;
-import javax.net.ssl.SSLHandshakeException;
-
 import org.apache.http.Header;
 import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.HttpStatus;
 import org.apache.http.HttpEntityEnclosingRequest;
 import org.apache.http.HttpRequest;
+import org.apache.http.HttpResponse;
+import org.apache.http.HttpStatus;
 import org.apache.http.NoHttpResponseException;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.HttpRequestRetryHandler;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.params.HttpConnectionParams;
-import org.apache.http.params.HttpParams;
-import org.apache.http.params.BasicHttpParams;
-import org.apache.http.params.HttpProtocolParamBean;
-import org.apache.http.protocol.ExecutionContext;
-import org.apache.http.protocol.HttpContext;
-
-
 import org.apache.http.auth.AuthScope;
 import org.apache.http.auth.UsernamePasswordCredentials;
+import org.apache.http.client.CredentialsProvider;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.HttpRequestRetryHandler;
 import org.apache.http.client.methods.HttpDelete;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpPut;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.BasicCredentialsProvider;
+import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.message.BasicHeader;
-import org.apache.http.util.EntityUtils;
+import org.apache.http.protocol.ExecutionContext;
+import org.apache.http.protocol.HttpContext;
 import org.musicbrainz.webservice.AuthorizationException;
 import org.musicbrainz.webservice.DefaultWebServiceWs2;
 import org.musicbrainz.webservice.RequestException;
@@ -46,22 +31,23 @@ import org.musicbrainz.webservice.WebServiceException;
 import org.musicbrainz.wsxml.MbXMLException;
 import org.musicbrainz.wsxml.element.Metadata;
 
+import javax.net.ssl.SSLHandshakeException;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.zip.GZIPInputStream;
+
 /**
  * A simple http client using Apache Commons HttpClient.
  * 
  */
 public class HttpClientWebServiceWs2 extends DefaultWebServiceWs2 
 {
-    /**
-    * A logger
-    */
-    static Logger log = Logger.getLogger(HttpClientWebServiceWs2.class.getName());
 
-    /**
-     * A {@link HttpClient} instance
-     */
-    private DefaultHttpClient httpClient;
-	
     /**
      * Default constructor creates a httpClient with default properties.      */
     private String userAgent;
@@ -72,14 +58,12 @@ public class HttpClientWebServiceWs2 extends DefaultWebServiceWs2
     public HttpClientWebServiceWs2() 
     {
             userAgent = createUserAgent();
-            this.httpClient = new DefaultHttpClient();
     }
 
     /**
-     * Use this constructor to inject a configured {@link DefaultHttpClient}.
+     * Use this constructor to inject a configured {@link HttpClient}.
      * 
-     * @param httpClient A configured {@link DefaultHttpClient}.
-     *
+     * @param applicationName
      *            custom application name used in user agent string
      * @param applicationVersion
      *            custom application version used in user agent string
@@ -90,44 +74,41 @@ public class HttpClientWebServiceWs2 extends DefaultWebServiceWs2
             String applicationVersion, String applicationContact) {
         userAgent = createUserAgent(applicationName, applicationVersion,
                 applicationContact);
-        this.httpClient = new DefaultHttpClient();
     }
 
-    /**
-     * Use this constructor to inject a configured {@link DefaultHttpClient}.
-     * 
-     * @param httpClient A configured {@link DefaultHttpClient}.
-     */
-    public HttpClientWebServiceWs2(DefaultHttpClient httpClient) 
-    {
-            this.httpClient = httpClient;
-    }
-    
-    private void setConnectionParam(){
-        
-        HttpParams connectionParams = httpClient.getParams();
+    private HttpClient setConnectionParam(boolean retry){
 
-        HttpConnectionParams.setConnectionTimeout(connectionParams, 60000);
-        HttpConnectionParams.setSoTimeout(connectionParams, 60000);
-        connectionParams.setParameter("http.useragent", userAgent);
-        connectionParams.setParameter("http.protocol.content-charset", "UTF-8");
-        
+        HttpClientBuilder httpClientBuilder = HttpClientBuilder.create();
+
         if (getUsername() != null && !getUsername().isEmpty())
         {
-        
-            UsernamePasswordCredentials creds = 
+
+            CredentialsProvider credentialsProvider= new BasicCredentialsProvider();
+
+
+            UsernamePasswordCredentials creds =
                     new UsernamePasswordCredentials(getUsername(), getPassword());
 
-            AuthScope authScope = new AuthScope(getHost(), 
+            AuthScope authScope = new AuthScope(getHost(),
                                                             AuthScope.ANY_PORT, 
                                                             AuthScope.ANY_REALM, 
                                                             AuthScope.ANY_SCHEME);
 
-            httpClient.getCredentialsProvider().setCredentials(authScope, creds);
+            credentialsProvider.setCredentials(authScope, creds);
+
+            httpClientBuilder.setDefaultCredentialsProvider(credentialsProvider);
         }
-        
+        if (retry) {
+            setRetryHandler(httpClientBuilder);// inside the call
+        }
+        httpClientBuilder.setConnectionTimeToLive(60000, TimeUnit.MILLISECONDS);
+
+        HttpClient httpClient = httpClientBuilder.build();
+
+        return httpClient;
     }
-    private void setRetryHandler(){
+
+    private void setRetryHandler(HttpClientBuilder httpClient){
         
         // retry 3 times, do not retry if we got a response, because we
         // may only query the web service once a second
@@ -153,7 +134,7 @@ public class HttpClientWebServiceWs2 extends DefaultWebServiceWs2
                 }
                 HttpRequest request = (HttpRequest) context.getAttribute(
                         ExecutionContext.HTTP_REQUEST);
-                boolean idempotent = !(request instanceof HttpEntityEnclosingRequest); 
+                boolean idempotent = !(request instanceof HttpEntityEnclosingRequest);
                 if (idempotent) {
                     // Retry if the request is considered idempotent 
                     return true;
@@ -162,14 +143,13 @@ public class HttpClientWebServiceWs2 extends DefaultWebServiceWs2
             }
         };
 
-        httpClient.setHttpRequestRetryHandler(myRetryHandler);
+        httpClient.setRetryHandler(myRetryHandler);
     }
     @Override
     protected Metadata doGet(String url) throws WebServiceException, MbXMLException
-    {		
-        setConnectionParam();
-        setRetryHandler();// inside the call
-        
+    {
+        HttpClient httpClient = setConnectionParam(true);
+
         // retry with new calls if the error is 503 Service unavaillable.
         boolean repeat = true;
         int trial=0;
@@ -179,7 +159,7 @@ public class HttpClientWebServiceWs2 extends DefaultWebServiceWs2
             
               trial++;
               HttpGet method = new HttpGet(url);
-              Metadata md = executeMethod(method);
+              Metadata md = executeMethod(httpClient, method);
               if (md == null && trial > maxtrial)
               {
                     String em = "ABORTED: web service returned an error "
@@ -200,11 +180,10 @@ public class HttpClientWebServiceWs2 extends DefaultWebServiceWs2
      * @see org.musicbrainz.webservice.DefaultWebServiceWs1#doGet(java.lang.String, java.io.InputStream)
      */
     @Override
-    protected Metadata doPost(String url, Metadata md) throws WebServiceException, MbXMLException { 
-    
-        setConnectionParam();
-        setRetryHandler();// inside the call
-        
+    protected Metadata doPost(String url, Metadata md) throws WebServiceException, MbXMLException {
+
+        HttpClient httpClient = setConnectionParam(true);
+
         HttpPost method = new HttpPost(url);
   
         try {
@@ -213,7 +192,7 @@ public class HttpClientWebServiceWs2 extends DefaultWebServiceWs2
             httpentity.setContentType(new BasicHeader("Content-Type", "application/xml; charset=UTF-8"));
 
             method.setEntity(httpentity);
-            return executeMethod(method);
+            return executeMethod(httpClient, method);
             
          } catch (IOException ex) {
             Logger.getLogger(HttpClientWebServiceWs2.class.getName()).log(Level.SEVERE, null, ex);
@@ -222,35 +201,32 @@ public class HttpClientWebServiceWs2 extends DefaultWebServiceWs2
     }
     @Override
     protected Metadata doPut(String url) throws WebServiceException, MbXMLException {
-        setConnectionParam();
-        
+        HttpClient httpClient = setConnectionParam(false);
+
         HttpPut method = new HttpPut(url);
-        return executeMethod(method);
+        return executeMethod(httpClient, method);
 
     }
     @Override
     protected Metadata doDelete(String url) throws WebServiceException, MbXMLException {
-        
-        setConnectionParam();
+
+        HttpClient httpClient = setConnectionParam(false);
         HttpDelete method = new HttpDelete(url);
-        return executeMethod(method);
+        return executeMethod(httpClient, method);
     }
 
-    private Metadata executeMethod(HttpUriRequest method) throws MbXMLException, WebServiceException{
-        
-        HttpParams params = new BasicHttpParams();
-        HttpProtocolParamBean paramsBean = new HttpProtocolParamBean(params);
-        paramsBean.setUserAgent(userAgent);
-        method.setParams(params);
+    private Metadata executeMethod(HttpClient httpClient, HttpUriRequest method) throws MbXMLException, WebServiceException{
+
         wait(1);
         // Try using compression
         method.setHeader("Accept-Encoding", "gzip");
+        method.setHeader("User-Agent", userAgent);
         
         try 
         {
           // Execute the method.
           log.finer("Hitting url: " + method.getURI().toString());
-          HttpResponse response = this.httpClient.execute(method);
+          HttpResponse response = httpClient.execute(method);
           
           lastHitTime =System.currentTimeMillis();
           
@@ -258,7 +234,7 @@ public class HttpClientWebServiceWs2 extends DefaultWebServiceWs2
       
           switch (statusCode)
           {
-            case HttpStatus.SC_SERVICE_UNAVAILABLE: { 
+            case HttpStatus.SC_SERVICE_UNAVAILABLE: {
                     // Maybe the server is too busy, let's try again.
                     log.warning(buildMessage(response, "Service unavaillable"));
                     method.abort();

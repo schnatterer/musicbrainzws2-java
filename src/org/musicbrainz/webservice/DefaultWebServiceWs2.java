@@ -25,7 +25,7 @@ import org.musicbrainz.wsxml.impl.JDOMWriterWs2;
  */
 public abstract class DefaultWebServiceWs2 extends DomainsWs2 implements WebService {
 	
-    static Logger log = Logger.getLogger(DefaultWebServiceWs2.class.getName());
+    protected static Logger log = Logger.getLogger(DefaultWebServiceWs2.class.getName());
 
 
     /**
