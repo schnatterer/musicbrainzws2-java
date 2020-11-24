@@ -256,6 +256,37 @@ public class UnitTests {
         System.out.println(artist.getUserRating().getAverageRating());
     }
 
+    /**
+     * Tests if the correct encoding is used for tag submission.
+     * See https://github.com/schnatterer/musicbrainzws2-java/pull/2 for details.
+     */
+    @Test
+    public void AddTagsEncoding() throws MBWS2Exception {
+        ReleaseGroup controller = new ReleaseGroup();
+
+        DefaultWebServiceWs2 ws = new HttpClientWebServiceWs2();
+        ws.setHost(wsHost);
+        controller.setQueryWs(ws);
+        controller.getQueryWs().setUsername(username);
+        controller.getQueryWs().setPassword(password);
+        controller.getQueryWs().setClient(client);
+
+        controller.getIncludes().setUserTags(true);
+
+        ReleaseGroupWs2 releaseGroup = controller.lookUp("686ec242-db40-3713-8f5d-2214e763f515");
+        for (TagWs2 tag : releaseGroup.getUserTags()) {
+            System.out.println(tag.getName());
+        }
+
+        String[] tags = {"progressive", "kayōkyoku"};
+
+        controller.AddTags(tags);
+        controller.lookUp(releaseGroup);
+        for (TagWs2 tag : releaseGroup.getUserTags()) {
+            System.out.println(tag.getName());
+        }
+    }
+
     //@Test
     public void PuidLookUp() throws MBWS2Exception {
 
