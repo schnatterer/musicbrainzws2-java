@@ -41,19 +41,22 @@ import org.musicbrainz.webservice.DefaultWebServiceWs2;
 import org.musicbrainz.webservice.impl.HttpClientWebServiceWs2;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.logging.Handler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import static junit.framework.TestCase.assertTrue;
 
 // TODO proper unit test coverage is needed and all commented @test should pass
 public class UnitTests {
 
     static Logger log = Logger.getLogger(UnitTests.class.getName());
 
-    // Note: tests that write, need a valid user/pw pair with validated email on test.musicbrainz.org
-    String username = System.getenv("MB_USER");
-    String password = System.getenv("MB_PW");
+    String username = "test";
+    String password = "mb"; // This is a development server; all passwords have been reset to "mb".
     String wsHost = "test.musicbrainz.org";
     String client = "xxx-1.02beta";
 
@@ -274,17 +277,16 @@ public class UnitTests {
         controller.getIncludes().setUserTags(true);
 
         ReleaseGroupWs2 releaseGroup = controller.lookUp("686ec242-db40-3713-8f5d-2214e763f515");
-        for (TagWs2 tag : releaseGroup.getUserTags()) {
-            System.out.println(tag.getName());
-        }
-
-        String[] tags = {"progressive", "kayōkyoku"};
-
+        
+        String[] tags = {"kayōkyoku" + System.currentTimeMillis()};
         controller.AddTags(tags);
+        
         controller.lookUp(releaseGroup);
+        Set<String> actualTags = new HashSet<String>();
         for (TagWs2 tag : releaseGroup.getUserTags()) {
-            System.out.println(tag.getName());
+            actualTags.add(tag.getName());
         }
+        assertTrue("Tag " + tags[0] + "not contained in list " + actualTags, actualTags.contains(tags[0]));
     }
 
     //@Test
