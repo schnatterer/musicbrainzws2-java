@@ -81,7 +81,7 @@ public abstract class DefaultWebServiceWs2 extends DomainsWs2 implements WebServ
     
     /**
      * A string that is used in the web service url 
-     * @see DefaultWebServiceWs1#makeUrl(String, String, Map, Map, String, String)
+     * @see DefaultWebServiceWs2#makeURL(String, String, List, Map)
      */
     protected static final String PATHPREFIX = "/ws";
 
@@ -141,7 +141,7 @@ public abstract class DefaultWebServiceWs2 extends DomainsWs2 implements WebServ
    private String password;
 
  /**
-  * Default Constructor that uses {@link JDOMParserWs1}
+  * Default Constructor that uses {@link JDOMParserWs2}
   */
     public DefaultWebServiceWs2() {
             this.parser = new JDOMParserWs2();
@@ -171,7 +171,7 @@ public abstract class DefaultWebServiceWs2 extends DomainsWs2 implements WebServ
      * Sends a POST request to the specified url.
      * 
      * @param url
-     * @param data Input stream of the data to post
+     * @param md Input stream of the data to post
      * @throws WebServiceException
      */
     protected abstract Metadata doPost(String url, Metadata md) throws WebServiceException, MbXMLException;
@@ -236,11 +236,6 @@ public abstract class DefaultWebServiceWs2 extends DomainsWs2 implements WebServ
         /**
      * Constructs a URL that can be used to query the web service. The url is made
      * up of the protocol, host, port, version, type, path and parameters.
-     * 
-     * @param entity The entity (i.e. type, e.g. 'artist') the request is targeting
-     * @param id The id of the entity 
-     * @param includeParams A list containing values for the 'inc' parameter (can be null)
-     * @param filterParams Additional parameters depending on the entity (can be null)
      * 
      * @return An URL as String
      */

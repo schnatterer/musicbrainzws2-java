@@ -7,7 +7,7 @@ import org.musicbrainz.DomainsWs2;
 
 
 /**
- * This abstract class implemets a {@link Filter} and provides
+ * This abstract class implemets a {@link java.util.logging.Filter} and provides
  * some common properties and functions.
  * 
  */
@@ -105,15 +105,9 @@ public abstract class SearchFilterWs2 implements FilterWs2
 	public void setOffset(Long offset) {
 		this.offset = offset;
 	}
-        /**
-	 * @return the offset
-	 */
 	public Long getMinScore() {
 		return minScore;
 	}
-	/**
-	 * @param offset the offset to set
-	 */
 	public void setMinScore(Long minScore) {
 		this.minScore = minScore;
 	}

@@ -24,16 +24,10 @@ public class TagWs2
     */
     private Long count;
 
-    /**
-     * @return the value
-     */
     public String getName() {
             return name;
     }
 
-    /**
-     * @param value the value to set
-     */
     public void setName(String name) {
             this.name = name;
     }

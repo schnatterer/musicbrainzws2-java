@@ -40,7 +40,7 @@ public interface WebService {
     /**
      * Submit data to the web service.
      * 
-     * @param a Metada Object
+     * @param metadata Metada Object
      */
     public Metadata post (Metadata metadata)
             throws WebServiceException, MbXMLException;

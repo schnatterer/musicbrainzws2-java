@@ -40,7 +40,7 @@ public class PuidWs2
         this.id = id;
     }
     /**
-    * Gets the underlying <code>List</clode> of recording.
+    * Gets the underlying <code>List</code> of recording.
     * 
     * @return the recordings
     */
@@ -48,7 +48,7 @@ public class PuidWs2
         return ( recordingList == null ? null : recordingList.getRecordings());
     }
     /**
-    * Sets the underlying <code>List</clode> of recordings.
+    * Sets the underlying <code>List</code> of recordings.
     * 
     * Note: This will implicitly create a new {@link #recordingList}
     * if it is null.
@@ -77,13 +77,13 @@ public class PuidWs2
         this.recordingList = recordingList;
     }
     /**
-    * <p>Adds a recording to the underlying <code>List</clode>
+    * <p>Adds a recording to the underlying <code>List</code>
     * of recordings.</p>
     * 
     * <p><em>Note: This will implicitly create a new {@link #recordingList}
     * if it is null.</em></p>
     * 
-    * @param recordinge The {@link RecordingWs2} to add.
+    * @param recording The {@link RecordingWs2} to add.
     */
     public void addRecording(RecordingWs2 recording) 
     {

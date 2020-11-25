@@ -41,16 +41,10 @@ public class AnnotationSearchtFilterWs2 extends SearchFilterWs2 {
     }
 
 
-    /**
-    * @return the workTitle
-    */
     public String getEntity() {
         return entity;
     }
 
-    /**
-    * @param workTitle the workTitle to set
-    */
     public void setEntity(String entity) {
         this.entity = entity;
     }

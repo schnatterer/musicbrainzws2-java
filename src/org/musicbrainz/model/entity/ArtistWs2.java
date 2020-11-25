@@ -140,7 +140,7 @@ public class ArtistWs2 extends EntityWs2 {
                return lifespan;
            }
            /**
-	 * @param LifeSpan the LifeSpan to set
+	 * @param lifespan the LifeSpan to set
         */
            public void setLifeSpan(LifeSpanWs2 lifespan){
                this.lifespan=lifespan;
@@ -163,9 +163,6 @@ public class ArtistWs2 extends EntityWs2 {
 	public String getGender() {
 		return gender;
 	}
-	/**
-	 * @param country the country to set
-	 */
 	public void setGender(String gender) {
 		this.gender = gender;
 	}
@@ -282,7 +279,7 @@ public class ArtistWs2 extends EntityWs2 {
                 return out;
            }
            /**
-	* Gets the underlying <code>List</clode> of releaseGroups.
+	* Gets the underlying <code>List</code> of releaseGroups.
         * 
 	* @return the releaseGroups
 	*/
@@ -290,7 +287,7 @@ public class ArtistWs2 extends EntityWs2 {
                 return ( releaseGroupList == null ? null : releaseGroupList.getReleaseGroups());
 	}
 	/**
-	 * Sets the underlying <code>List</clode> of releaseGroups.
+	 * Sets the underlying <code>List</code> of releaseGroups.
 	 * 
 	 * Note: This will implicitly create a new {@link #releaseGroupList}
 	 * if it is null.
@@ -313,13 +310,13 @@ public class ArtistWs2 extends EntityWs2 {
 	}
 
 	/**
-	 * @param releaseList the releaseGroupList to set
+	 * @param releaseGroupList the releaseGroupList to set
 	 */
 	public void setReleaseGroupList(ReleaseGroupListWs2 releaseGroupList) {
 		this.releaseGroupList = releaseGroupList;
 	}
             /**
-	 * <p>Adds a releaseGroup to the underlying <code>List</clode>
+	 * <p>Adds a releaseGroup to the underlying <code>List</code>
 	 * of releaseGroups.</p>
 	 * 
 	 * <p><em>Note: This will implicitly create a new {@link #releaseGroupList}
@@ -335,7 +332,7 @@ public class ArtistWs2 extends EntityWs2 {
 		releaseGroupList.addReleaseGroup(releaseGroup);
 	}
 	/**
-	 * Gets the underlying <code>List</clode> of releases.
+	 * Gets the underlying <code>List</code> of releases.
 	 * 
 	 * @return the releases
 	 */
@@ -343,7 +340,7 @@ public class ArtistWs2 extends EntityWs2 {
 		return ( releaseList == null ? null : releaseList.getReleases());
 	}
 	/**
-	 * Sets the underlying <code>List</clode> of releases.
+	 * Sets the underlying <code>List</code> of releases.
 	 * 
 	 * Note: This will implicitly create a new {@link #releaseList}
 	 * if it is null.
@@ -372,13 +369,13 @@ public class ArtistWs2 extends EntityWs2 {
 		this.releaseList = releaseList;
 	}
             /**
-	 * <p>Adds a release to the underlying <code>List</clode>
+	 * <p>Adds a release to the underlying <code>List</code>
 	 * of releases.</p>
 	 * 
 	 * <p><em>Note: This will implicitly create a new {@link #releaseList}
 	 * if it is null.</em></p>
 	 * 
-	 * @param release The {@link ReleaseWs1} to add.
+	 * @param release The {@link ReleaseWs2} to add.
 	 */
 	public void addRelease(ReleaseWs2 release) 
 	{
@@ -388,7 +385,7 @@ public class ArtistWs2 extends EntityWs2 {
 		releaseList.addRelease(release);
 	}
         /**
-	 * Gets the underlying <code>List</clode> of releases.
+	 * Gets the underlying <code>List</code> of releases.
 	 * 
 	 * @return the releases
 	 */
@@ -396,12 +393,12 @@ public class ArtistWs2 extends EntityWs2 {
 		return ( releaseListVA == null ? null : releaseListVA.getReleases());
 	}
 	/**
-	 * Sets the underlying <code>List</clode> of releases.
+	 * Sets the underlying <code>List</code> of releases.
 	 * 
 	 * Note: This will implicitly create a new {@link #releaseList}
 	 * if it is null.
 	 * 
-	 * @param releases the releases to set
+	 * @param releasesVA the releases to set
 	 */
 	public void setReleasesVA(List<ReleaseWs2> releasesVA) 
 	{
@@ -419,19 +416,19 @@ public class ArtistWs2 extends EntityWs2 {
 	}
 
 	/**
-	 * @param releaseList the releaseList to set
+	 * @param releaseListVA the releaseList to set
 	 */
 	public void setReleaseListVA(ReleaseListWs2 releaseListVA) {
 		this.releaseListVA = releaseListVA;
 	}
             /**
-	 * <p>Adds a release to the underlying <code>List</clode>
+	 * <p>Adds a release to the underlying <code>List</code>
 	 * of releases.</p>
 	 * 
 	 * <p><em>Note: This will implicitly create a new {@link #releaseList}
 	 * if it is null.</em></p>
 	 * 
-	 * @param release The {@link ReleaseWs1} to add.
+	 * @param releaseVA The {@link ReleaseWs2} to add.
 	 */
 	public void addReleaseVA(ReleaseWs2 releaseVA) 
 	{
@@ -441,7 +438,7 @@ public class ArtistWs2 extends EntityWs2 {
 		releaseListVA.addRelease(releaseVA);
 	}
            /**
-	 * Gets the underlying <code>List</clode> of releases.
+	 * Gets the underlying <code>List</code> of releases.
 	 * 
 	 * @return the recordings
 	 */
@@ -449,7 +446,7 @@ public class ArtistWs2 extends EntityWs2 {
 		return ( recordingList == null ? null : recordingList.getRecordings());
 	}
 	/**
-	 * Sets the underlying <code>List</clode> of recordings.
+	 * Sets the underlying <code>List</code> of recordings.
 	 * 
 	 * Note: This will implicitly create a new {@link #recordingList}
 	 * if it is null.
@@ -478,13 +475,13 @@ public class ArtistWs2 extends EntityWs2 {
 		this.recordingList = recordingList;
 	}
             /**
-	 * <p>Adds a recording to the underlying <code>List</clode>
+	 * <p>Adds a recording to the underlying <code>List</code>
 	 * of recordings.</p>
 	 * 
 	 * <p><em>Note: This will implicitly create a new {@link #recordingList}
 	 * if it is null.</em></p>
 	 * 
-	 * @param recordinge The {@link RecordingWs2} to add.
+	 * @param recording The {@link RecordingWs2} to add.
 	 */
 	public void addRecording(RecordingWs2 recording) 
 	{
@@ -494,7 +491,7 @@ public class ArtistWs2 extends EntityWs2 {
 		recordingList.addRecording(recording);
 	}
         /**
-	 * Gets the underlying <code>List</clode> of works.
+	 * Gets the underlying <code>List</code> of works.
 	 * 
 	 * @return the works
 	 */
@@ -502,7 +499,7 @@ public class ArtistWs2 extends EntityWs2 {
 		return ( workList == null ? null : workList.getWorks());
 	}
 	/**
-	 * Sets the underlying <code>List</clode> of works.
+	 * Sets the underlying <code>List</code> of works.
 	 * 
 	 * Note: This will implicitly create a new {@link #workList}
 	 * if it is null.
@@ -531,13 +528,13 @@ public class ArtistWs2 extends EntityWs2 {
 		this.workList = workList;
 	}
             /**
-	 * <p>Adds a work to the underlying <code>List</clode>
+	 * <p>Adds a work to the underlying <code>List</code>
 	 * of works.</p>
 	 * 
 	 * <p><em>Note: This will implicitly create a new {@link #workList}
 	 * if it is null.</em></p>
 	 * 
-	 * @param work The {@link workWs2} to add.
+	 * @param work The {@link WorkWs2} to add.
 	 */
 	public void addWork(WorkWs2 work) 
 	{

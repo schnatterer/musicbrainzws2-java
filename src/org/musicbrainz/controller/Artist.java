@@ -861,7 +861,7 @@ public class Artist extends Controller{
         this.releaseIncludes = releaseIncludes;
     }
     /**
-     * @param releaseIncludes the releaseIncludes to set
+     * @param releaseVAIncludes the releaseIncludes to set
      */
     public void setReleaseVAIncludes(ReleaseIncludesWs2 releaseVAIncludes) {
         this.releaseVAIncludes = releaseVAIncludes;

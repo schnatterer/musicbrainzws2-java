@@ -9,7 +9,7 @@ import java.util.logging.Logger;
 import org.mc2.util.miscellaneous.CalendarUtils;
 
 /**
- * <p>A List of Track Info (Track & catalog number)referred by a release</p>
+ * <p>A List of Track Info (Track &amp; catalog number)referred by a release</p>
  * 
  */
 public class TrackListWs2 extends ListElement

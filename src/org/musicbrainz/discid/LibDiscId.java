@@ -29,11 +29,10 @@ import java.net.URL;
 /**
  * Direct translator for MusicBrainz libdiscid, as found at
  * <a href="http://musicbrainz.org/doc/libdiscid">http://musicbrainz.org/doc/libdiscid</a>
- * <p/>
  * While it is possible, this class is not intended to be used directly.  Please use the {@link DiscInfo} utility
  * class.
  * @see DiscInfo
- * @author Andrew Taylor <andy@benow.ca> 
+ * @author Andrew Taylor andy@benow.ca 
  */
 public class LibDiscId {
   private static final String LIBNAME = "discid-java";
@@ -248,7 +247,6 @@ public class LibDiscId {
    *
    * The returned string is only valid as long as the DiscId object exists.
    *
-   * @param d a DiscId object created by discid_new()
    * @return a string containing an URL
    * @throws DiscIdException 
    */
@@ -364,8 +362,7 @@ public class LibDiscId {
    * Only track numbers between (and including) discid_get_first_track_num()
    * and discid_get_last_track_num() may be used.
    *
-   * @param d a DiscId object created by discid_new()
-   * @param track_num the number of a track
+   * @param trackNum the number of a track
    * @return length of the specified track
    * @throws DiscIdException 
    */

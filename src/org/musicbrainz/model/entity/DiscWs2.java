@@ -146,11 +146,9 @@ public class DiscWs2 extends EntityWs2 {
      * <p>Adds a track to the list.</p>
      *
      * <p>This method adds a Track (which contains offset, length) to the list of
-     * tracks. The leadout track must <em>not</em> be added. The total
-     * length of the disc can be set using {@link Disc#setSectors(Integer)}.</p>
+     * tracks. The leadout track must <em>not</em> be added</p>
      * 
      * @param track: a Disc.Track that contains offset and length as Integers
-     * @see getTracks()
      */
     public void addTrack(DiscTrackWs2 track){
             getTracks().add(track);
@@ -191,7 +189,7 @@ public class DiscWs2 extends EntityWs2 {
           return (otherDiscId.equals(this.getDiscId()));
     }
    /**
-     * Gets the underlying <code>List</clode> of releases.
+     * Gets the underlying <code>List</code> of releases.
      * 
      * @return the releases
      */
@@ -199,7 +197,7 @@ public class DiscWs2 extends EntityWs2 {
             return ( releaseList == null ? null : releaseList.getReleases());
     }
     /**
-     * Sets the underlying <code>List</clode> of releases.
+     * Sets the underlying <code>List</code> of releases.
      * 
      * Note: This will implicitly create a new {@link #releaseList}
      * if it is null.
@@ -230,13 +228,13 @@ public class DiscWs2 extends EntityWs2 {
             this.releaseList = releaseList;
     }
         /**
-     * <p>Adds a release to the underlying <code>List</clode>
+     * <p>Adds a release to the underlying <code>List</code>
      * of releases.</p>
      * 
      * <p><em>Note: This will implicitly create a new {@link #releaseList}
      * if it is null.</em></p>
      * 
-     * @param release The {@link ReleaseWs1} to add.
+     * @param release The {@link ReleaseWs2} to add.
      */
     public void addRelease(ReleaseWs2 release) 
     {

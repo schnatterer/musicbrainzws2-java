@@ -77,9 +77,6 @@ public class LabelIncludesWs2 extends IncludesWs2
         return releases;
     }
 
-    /**
-    * @param aliases the aliases to set
-    */
     public void setReleases(boolean releases) {
         this.releases = releases;
     }

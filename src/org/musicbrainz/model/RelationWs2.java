@@ -17,7 +17,7 @@ import org.musicbrainz.model.entity.EntityWs2;
  * attributes, which may or may not be used for a given relation
  * type.</p>
  * 
- * <p>Note that a {@link RelationWs1} object only contains the target but not
+ * <p>Note that a {@link RelationWs2} object only contains the target but not
  * the source end of the relation.</p>
  * 
  */

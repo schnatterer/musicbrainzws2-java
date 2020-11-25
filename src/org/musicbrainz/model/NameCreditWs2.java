@@ -25,7 +25,7 @@ public class NameCreditWs2
     /**
     * Complete Constructor
     * @param joinphrase A string containing the join sentence used to build 
-    * the Artist Credit String ((i.e. &,/, and,...)
+    * the Artist Credit String ((i.e. &amp;,/, and,...)
     * @param name A string containing the name variation used to build 
     * the Artist Credit String 
     * @param artist the ArtistWs2 referred by the element.

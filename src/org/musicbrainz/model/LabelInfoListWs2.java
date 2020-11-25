@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.logging.Logger;
 
 /**
- * <p>A List of Label Info (Label & catalog number)referred by a release</p>
+ * <p>A List of Label Info (Label &amp; catalog number)referred by a release</p>
 
  */
 public class LabelInfoListWs2 extends ListElement
@@ -26,7 +26,7 @@ public class LabelInfoListWs2 extends ListElement
 
     /**
     * Minimal Constructor
-    * @param artistCreditElements A list of  ArtistCreditElementWs2
+    * @param labelInfos A list of  ArtistCreditElementWs2
     * describing the Artist Credit.
    */
     public LabelInfoListWs2(List<LabelInfoWs2> labelInfos)

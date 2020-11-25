@@ -70,7 +70,7 @@ public class ReleaseGroupWs2 extends EntityWs2 {
     }
 
     /**
-     * @param typeString the typeString to set
+     * @param type the typeString to set
      */
     public void setType(String type) {
             this.type = type;
@@ -154,7 +154,7 @@ public class ReleaseGroupWs2 extends EntityWs2 {
     }
 
     /**
-     * @param comment the disambiguation comment to set
+     * @param disambiguation the disambiguation comment to set
      */
     public void setDisambiguation(String disambiguation) {
             this.disambiguation = disambiguation;
@@ -194,7 +194,7 @@ public class ReleaseGroupWs2 extends EntityWs2 {
     }
 
     /**
-     * @param releases the releases to set
+     * @param releaseList the releases to set
      */
     public void setReleaseList(ReleaseListWs2 releaseList) {
             this.releaseList = releaseList;
@@ -207,7 +207,7 @@ public class ReleaseGroupWs2 extends EntityWs2 {
 		releaseList.addRelease(release);
 	}
     /**
-     * Gets the underlying <code>List</clode> of releases.
+     * Gets the underlying <code>List</code> of releases.
      * 
      * @return the releases
      */

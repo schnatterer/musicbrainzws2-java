@@ -19,7 +19,7 @@ public class ReleaseGroupSearchResultsWs2 extends ListElement{
     * 
     * This will create a new <code>ArrayList</code> if {@link #releaseGroupResults} is null.
     * 
-    * @param releaseResult The release result to add
+    * @param releaseGroupResult The release result to add
     */
 
     public void addReleaseGroupResult(ReleaseGroupResultWs2 releaseGroupResult) 

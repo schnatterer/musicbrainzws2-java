@@ -59,13 +59,13 @@ import java.util.logging.Logger;
 
 	/**
 	 * Uses the {@link WebService} instance to make a GET request and
-	 * returns a {@link MetaData} object.
+	 * returns a {@link Metadata} object.
 	 * 
 	 * @param entity The entity
 	 * @param id The id
-	 * @param includes {@link Includes}
-	 * @param filter {@link Filter}
-	 * @return A {@link MetaData} object.
+	 * @param includes {@link IncludesWs2}
+	 * @param filter {@link FilterWs2}
+	 * @return A {@link Metadata} object.
 	 * @throws MBWS2Exception
 	 */
         

@@ -127,7 +127,7 @@ public class LabelWs2 extends EntityWs2 {
                return lifespan;
            }
            /**
-	 * @param LifeSpan the LifeSpan to set
+	 * @param lifespan the LifeSpan to set
         */
            public void setLifeSpan(LifeSpanWs2 lifespan){
                this.lifespan=lifespan;
@@ -157,15 +157,9 @@ public class LabelWs2 extends EntityWs2 {
             public void setArea(AreaWs2 area) {
                 this.area = area;
             }
-            /**
-	 * @return the country
-	 */
 	public String getLabelCode() {
 		return labelCode;
 	}
-	/**
-	 * @param country the country to set
-	 */
 	public void setLabelCode(String labelCode) {
 		this.labelCode = labelCode;
 	}
@@ -182,7 +176,7 @@ public class LabelWs2 extends EntityWs2 {
                 this.ipi = ipi;
             }
 	/**
-	 * Gets the underlying <code>List</clode> of releases.
+	 * Gets the underlying <code>List</code> of releases.
 	 * 
 	 * @return the releases
 	 */
@@ -190,7 +184,7 @@ public class LabelWs2 extends EntityWs2 {
 		return ( releaseList == null ? null : releaseList.getReleases());
 	}
 	/**
-	 * Sets the underlying <code>List</clode> of releases.
+	 * Sets the underlying <code>List</code> of releases.
 	 * 
 	 * Note: This will implicitly create a new {@link #releaseList}
 	 * if it is null.
@@ -219,13 +213,13 @@ public class LabelWs2 extends EntityWs2 {
 		this.releaseList = releaseList;
 	}
             /**
-	 * <p>Adds a release to the underlying <code>List</clode>
+	 * <p>Adds a release to the underlying <code>List</code>
 	 * of releases.</p>
 	 * 
 	 * <p><em>Note: This will implicitly create a new {@link #releaseList}
 	 * if it is null.</em></p>
 	 * 
-	 * @param release The {@link ReleaseWs1} to add.
+	 * @param release The {@link ReleaseWs2} to add.
 	 */
 	public void addRelease(ReleaseWs2 release) 
 	{

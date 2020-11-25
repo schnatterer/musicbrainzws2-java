@@ -13,7 +13,7 @@ public class CollectionSearchResultsWs2 extends ListElement{
     private CollectionListWs2 collectionList = new CollectionListWs2();
 
     /**
-     * Convenience method to adds an {@link CollectionResultWs1} to the list.
+     * Convenience method to adds an {@link CollectionResultWs2} to the list.
      * 
      * This will create a new <code>ArrayList</code> if {@link #collectionResults} is null.
      * 

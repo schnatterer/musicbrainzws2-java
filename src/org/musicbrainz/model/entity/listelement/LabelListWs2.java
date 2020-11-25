@@ -34,7 +34,7 @@ public class LabelListWs2 extends ListElement{
      * It will also create and set new ArrayList if
      * {@link #labels} is null.
      * 
-     * @param release The release to add
+     * @param label The release to add
      */
     public void addLabel(LabelWs2 label) 
     {

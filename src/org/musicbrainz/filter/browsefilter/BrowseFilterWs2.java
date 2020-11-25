@@ -7,7 +7,7 @@ import org.musicbrainz.DomainsWs2;
 
 
 /**
- * This abstract class implemets a {@link Filter} and provides
+ * This abstract class implemets a {@link java.util.logging.Filter} and provides
  * some common properties and functions.
 
  */
@@ -53,8 +53,6 @@ public abstract class BrowseFilterWs2 implements FilterWs2
 	 * 
 	 * @param limit The maximum number of artists to return
 	 * @param offset Start results at this zero-based offset
-	 * @param query A string containing a query in Lucene syntax
-	  * @param minScore The minimum score of the query results.
          */
 	
           protected BrowseFilterWs2(long limit, long offset, 

@@ -35,7 +35,7 @@ public class ReleaseGroupListWs2 extends ListElement{
 	 * It will also create and set new ArrayList if
 	 * {@link #releaseGroups} is null.
 	 * 
-	 * @param release The releaseGroup to add
+	 * @param releaseGroup The releaseGroup to add
 	 */
 	public void addReleaseGroup(ReleaseGroupWs2 releaseGroup) 
 	{

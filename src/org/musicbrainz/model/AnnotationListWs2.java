@@ -14,16 +14,10 @@ public class AnnotationListWs2 extends ListElement{
 
 	private List<AnnotationWs2> annotations = new ArrayList<AnnotationWs2>();
 
-	/**
-	 * @return the works
-	 */
 	public List<AnnotationWs2> getAnnotations() {
 		return annotations;
 	}
 
-	/**
-	 * @param works the works to set
-	 */
 	public void setAnnotations(List<AnnotationWs2> annotations) {
 		this.annotations = annotations;
 	}

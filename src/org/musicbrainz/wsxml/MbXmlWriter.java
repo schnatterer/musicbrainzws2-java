@@ -8,10 +8,10 @@ import org.musicbrainz.wsxml.element.Metadata;
 
 /**
  * A simple writer interface to built XML body of the MusicBrainz's
- * web service post reqests. The {@link DefaultWebServiceWs2} class uses 
- * {@link JDOMWriterWs2} as a default {@link MbXmlWriter} implementation. 
+ * web service post reqests. The {@link org.musicbrainz.webservice.DefaultWebServiceWs2} class uses 
+ * {@link org.musicbrainz.wsxml.impl.JDOMWriterWs2} as a default {@link MbXmlWriter} implementation. 
  * However, you can write your own implementation and inject it to the 
- * {@link DefaultWebServiceWs2} using particolar constructor.
+ * {@link org.musicbrainz.webservice.DefaultWebServiceWs2} using particolar constructor.
 
  */
 public interface MbXmlWriter {
@@ -23,7 +23,7 @@ public interface MbXmlWriter {
      * @param metadata the Metadata Object.
      * @return an xml String.
      * 
-     * @throws MbXMLException A {@link MbXMLWriteException} is thrown 
+     * @throws MbXMLException A {@link MbXMLException} is thrown 
      * if the xml could not be writed. In all other exceptional cases
      * a general {@link MbXMLException} is thrown. 
      */

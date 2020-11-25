@@ -6,10 +6,10 @@ import org.musicbrainz.wsxml.element.Metadata;
 
 /**
  * A simple parser interface to parse XML responses of the MusicBrainz's
- * web service. The {@link DefaultWebServiceWs2} class uses {@link JDOMParserWs2} as a default
+ * web service. The {@link org.musicbrainz.webservice.DefaultWebServiceWs2} class uses {@link org.musicbrainz.wsxml.impl.JDOMParserWs2} as a default
  * {@link MbXmlParser} implementation. However, you can write your own
- * implementation and inject it to the {@link DefaultWebServiceWs2} using 
- * particolar constructor: {@link DefaultWebServiceWs2#DefaultWebServiceWs2(MbXmlParser)}.
+ * implementation and inject it to the {@link org.musicbrainz.webservice.DefaultWebServiceWs2} using 
+ * particolar constructor: {@link org.musicbrainz.webservice.DefaultWebServiceWs2#DefaultWebServiceWs2(MbXmlParser, MbXmlWriter)} (MbXmlParser)}.
  * 
  * @see Metadata
  */

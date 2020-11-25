@@ -36,7 +36,7 @@ public class RecordingListWs2 extends ListElement{
 	 * It will also create and set new ArrayList if
 	 * {@link #recordings} is null.
 	 * 
-	 * @param track The track to add
+	 * @param recording The track to add
 	 */
 	public void addRecording(RecordingWs2 recording) 
 	{

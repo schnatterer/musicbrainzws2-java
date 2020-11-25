@@ -110,13 +110,12 @@ public class MbUtils {
 	 * checking only works if <code>uriStr</code> is an absolute URI, of course.
 	 * 
 	 * Example:
-	 * >>>  MBUtils.extractUuid('http://musicbrainz.org/artist/c0b2500e-0cef-4130-869d-732b23ed9df5', 'artist')
+	 * &gt;&gt;&gt;  MBUtils.extractUuid('http://musicbrainz.org/artist/c0b2500e-0cef-4130-869d-732b23ed9df5', 'artist')
 	 * 'c0b2500e-0cef-4130-869d-732b23ed9df5'
 	 * 
 	 * @param uriStr A string containing a MusicBrainz ID (an URI), or null
 	 * @param resType A string containing a resource type
 	 * @return A String containing a relative URI or null
-	 * @throws URISyntaxException 
 	 */
 	public static String extractUuid(String uriStr, String resType)
 	{

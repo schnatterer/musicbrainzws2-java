@@ -58,7 +58,7 @@ public class DiscInfo {
   /** MusicBrainz DiscId for the cd */
   public final String discid;
   /** FreeDB id for the cd
-   * FreeDB: <a href="http://www.freedb.org/">http://www.freedb.org/</a><br/>
+   * FreeDB: <a href="http://www.freedb.org/">http://www.freedb.org/</a>
    * BeNOW FreeDB Project: <a href="http://benow.ca/projects">http://benow.ca/projects</a>
    */
   public final String freeDBid;

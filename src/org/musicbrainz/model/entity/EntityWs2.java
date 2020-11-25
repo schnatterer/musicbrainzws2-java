@@ -27,7 +27,7 @@ import org.musicbrainz.webservice.WebService;
  * where they link to. MusicBrainz currently supports four target types
  * (artists, releases, tracks, and URLs) each identified using a URI.
  * To get all relations with a specific target type, you can use
- * {@link EntityWs1#getRelations(String, String, List, String)} and pass
+ * {@link EntityWs2#getRelations(String, String, List, String)} and pass
  * one of the following constants as the parameter:</p>
  * <ul>
  *   <li>{@link RelationWs2#TO_ARTIST}</li>
@@ -108,7 +108,7 @@ public abstract class EntityWs2 extends DomainsWs2 {
            return idStr;
     }
     /**
-     * @param idUri the idUri to set
+     * @param id the idUri to set
      */
     public void setIdUri(String id) {
             this.idUri = id;
@@ -151,7 +151,7 @@ public abstract class EntityWs2 extends DomainsWs2 {
             return userTags;
     }
     /**
-     * @param tags the tags to set
+     * @param userTags the tags to set
   */
     public void setUserTags(List<TagWs2> userTags) {
             this.userTags = userTags;
@@ -183,8 +183,8 @@ public abstract class EntityWs2 extends DomainsWs2 {
      * lists attributes that have to be part of all returned relations.
      * 
      * If <code>direction</code> is set, only relations with the given reading
-     * direction are returned. You can use the {@link RelationWs1#DIR_FORWARD},
-     * {@link RelationWs1#DIR_BACKWARD}, and {@link RelationWs1#DIR_BOTH} constants
+     * direction are returned. You can use the {@link RelationWs2#DIR_FORWARD},
+     * {@link RelationWs2#DIR_BACKWARD}, and {@link RelationWs2#DIR_BOTH} constants
      * for this.
      * 
      * @param targetType The target relation type (can be null)

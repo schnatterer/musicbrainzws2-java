@@ -29,11 +29,6 @@ public class LifeSpanWs2
     private String end;
     private boolean ended=false;
     
-    /**
-    * Minimal Constructor
-    * @param nameCredits A list of  NameCreditWs2
-    * describing the Artist Credit.
-    */
     public LifeSpanWs2(String begin, String end, boolean ended)
     {
         this.begin= begin;

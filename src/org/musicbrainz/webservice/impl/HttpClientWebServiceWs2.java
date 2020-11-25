@@ -333,7 +333,7 @@ public class HttpClientWebServiceWs2 extends DefaultWebServiceWs2
       * method to convert an InputStream to a string using the BufferedReader.readLine() method 
       * this methods reads the InputStream line by line until the null line is encountered 
       * it appends each line to a StringBuilder object for optimal performance 
-      * @param is 
+      * @param inputStream
       * @return 
       * @throws IOException 
       */  

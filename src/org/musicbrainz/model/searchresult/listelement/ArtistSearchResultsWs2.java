@@ -13,7 +13,7 @@ public class ArtistSearchResultsWs2 extends ListElement{
     private ArtistListWs2 artistList = new ArtistListWs2();
 
     /**
-     * Convenience method to adds an {@link ArtistResultWs1} to the list.
+     * Convenience method to adds an {@link ArtistResultWs2} to the list.
      * 
      * This will create a new <code>ArrayList</code> if {@link #artistResults} is null.
      * 

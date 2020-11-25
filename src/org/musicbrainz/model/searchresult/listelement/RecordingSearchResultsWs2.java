@@ -25,7 +25,7 @@ public class RecordingSearchResultsWs2 extends ListElement{
      * 
      * This will create a new <code>ArrayList</code> if {@link #recordingResults} is null.
      * 
-     * @param trackResult The track result to add
+     * @param recordingResult The track result to add
      */
     public void addRecordingResult(RecordingResultWs2 recordingResult) 
     {
