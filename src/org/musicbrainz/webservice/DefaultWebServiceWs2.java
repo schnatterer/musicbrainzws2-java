@@ -18,11 +18,13 @@ import org.musicbrainz.wsxml.MbXmlWriter;
 import org.musicbrainz.wsxml.element.Metadata;
 import org.musicbrainz.wsxml.impl.JDOMParserWs2;
 import org.musicbrainz.wsxml.impl.JDOMWriterWs2;
+import com.cloudogu.versionname.VersionName;
 
 /**
  * A default abstract web service implementation that provides common
  * properties of a web service client that can be extended.
  */
+@VersionName
 public abstract class DefaultWebServiceWs2 extends DomainsWs2 implements WebService {
 	
     protected static Logger log = Logger.getLogger(DefaultWebServiceWs2.class.getName());
@@ -58,7 +60,7 @@ public abstract class DefaultWebServiceWs2 extends DomainsWs2 implements WebServ
     * </a>
     */
     protected static final String USER_AGENT_LIB_VERSION
-    = "2.01beta-nusicEdition";
+    = Version.NAME + "-nusicEdition";
     /**
     * Contact information of this library that will be used as part of the
     * default user agent string.

@@ -26,6 +26,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <versionName>${project.version}</versionName>
     </properties>
 
     <dependencies>
@@ -62,6 +63,13 @@
             <version>4.13.1</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>com.cloudogu.versionName</groupId>
+            <artifactId>processor</artifactId>
+            <version>2.1.0</version>
+            <!-- This dependency is only needed during compile time and should not be packaged into final JAR -->
+        <scope>provided</scope>
+    </dependency>
     </dependencies>
 
     <build>
@@ -111,10 +119,13 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.1</version>
+                <version>3.8.0</version>
                 <configuration>
                     <source>1.6</source>
                     <target>1.6</target>
+                    <compilerArgs>
+                        <arg>-AversionName=${versionName}</arg>
+                    </compilerArgs>
                 </configuration>
             </plugin>
             <!-- Run the "legacy" test as integration test, because that's what it is (connects to the internet!) -->
