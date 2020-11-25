@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
+    
     <groupId>info.schnatterer.musicbrainzws2-java</groupId>
     <artifactId>musicbrainzws2-java</artifactId>
     <version>3.0.2-SNAPSHOT</version>
     <packaging>jar</packaging>
+    
     <name>musicbrainzws2-java</name>
-
+    <url>https://github.com/schnatterer/musicbrainzws2-java/</url>
+    <description> java binding for MusicBrainz XML Web Service/Version 2</description>
+    
     <licenses>
         <license>
             <name>GNU General Public License 3.0</name>
@@ -15,14 +18,39 @@
         </license>
     </licenses>
 
+    <inceptionYear>2011</inceptionYear>
+
+    <organization>
+        <name>github/schnatterer</name>
+        <url>https://github.com/schnatterer/</url>
+    </organization>
+
+    <developers>
+        <developer>
+            <name>Johannes Schnatterer</name>
+            <email>schnatterer@users.noreply.github.com email</email>
+            <timezone>Europe/Berlin</timezone>
+        </developer>
+    </developers>
+    
     <scm>
         <connection>scm:git:ssh://github.com/schnatterer/musicbrainzws2-java.git</connection>
         <developerConnection>scm:git:ssh://git@github.com/schnatterer/musicbrainzws2-java.git</developerConnection>
         <url>https://github.com/schnatterer/musicbrainzws2-java.git</url>
         <tag>HEAD</tag>
     </scm>
-
-
+    
+    <distributionManagement>
+        <snapshotRepository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+        <repository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
+    </distributionManagement>
+    
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -85,6 +113,11 @@
                     <artifactId>jacoco-maven-plugin</artifactId>
                     <version>0.8.6</version>
                 </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-javadoc-plugin</artifactId>
+                    <version>3.2.0</version>
+                </plugin>
             </plugins>
         </pluginManagement>
 
@@ -119,7 +152,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.0</version>
+                <version>3.8.1</version>
                 <configuration>
                     <source>1.6</source>
                     <target>1.6</target>
@@ -128,27 +161,6 @@
                     </compilerArgs>
                 </configuration>
             </plugin>
-            <!-- Run the "legacy" test as integration test, because that's what it is (connects to the internet!) -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-failsafe-plugin</artifactId>
-                <version>2.19.1</version>
-                <configuration>
-                    <includes>
-                        <!--TODO Refactor class names to comply with maven defaults -->
-                        <include>**/UnitTests.java</include>
-                    </includes>
-                </configuration>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>integration-test</goal>
-                            <goal>verify</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <!-- Don't run the "legacy" test as unit test, because that's not what it is (connects to the internet!) -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
@@ -157,19 +169,10 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-release-plugin</artifactId>
-                <version>2.5.1</version>
+                <version>2.5.3</version>
                 <configuration>
-                    <arguments>-Prelease</arguments>
                     <!-- Make our tags look like e.g. "v.1.0.1" -->
                     <tagNameFormat>v.@{project.version}</tagNameFormat>
-                </configuration>
-            </plugin>
-            <plugin>
-                <artifactId>maven-deploy-plugin</artifactId>
-                <version>2.8.1</version>
-                <configuration>
-                    <altDeploymentRepository>internal.repo::default::file://${project.build.directory}/mvn-repo
-                    </altDeploymentRepository>
                 </configuration>
             </plugin>
             <!-- prepare jacoco agent for code coverage (unit tests, integration tests, site build) -->
@@ -200,4 +203,60 @@
             </plugin>
         </plugins>
     </build>
+
+
+    <profiles>
+        <profile>
+            <id>release</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-source-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>attach-sources</id>
+                                <goals>
+                                    <goal>jar-no-fork</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-javadoc-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>attach-javadocs</id>
+                                <goals>
+                                    <goal>jar</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.sonatype.plugins</groupId>
+                        <artifactId>nexus-staging-maven-plugin</artifactId>
+                        <extensions>true</extensions>
+                        <configuration>
+                            <serverId>ossrh</serverId>
+                            <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+                            <autoReleaseAfterClose>true</autoReleaseAfterClose>
+                        </configuration>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.kohsuke</groupId>
+                        <artifactId>pgp-maven-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>sign</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 </project> 
