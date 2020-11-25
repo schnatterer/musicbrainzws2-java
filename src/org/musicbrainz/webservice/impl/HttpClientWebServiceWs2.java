@@ -1,5 +1,6 @@
 package org.musicbrainz.webservice.impl;
 
+import org.apache.http.Consts;
 import org.apache.http.Header;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpEntityEnclosingRequest;
@@ -185,19 +186,12 @@ public class HttpClientWebServiceWs2 extends DefaultWebServiceWs2
         HttpClient httpClient = setConnectionParam(true);
 
         HttpPost method = new HttpPost(url);
-  
-        try {
 
-            StringEntity httpentity = new StringEntity(getWriter().getXmlString(md));
-            httpentity.setContentType(new BasicHeader("Content-Type", "application/xml; charset=UTF-8"));
+        StringEntity httpentity = new StringEntity(getWriter().getXmlString(md), Consts.UTF_8);
+        httpentity.setContentType(new BasicHeader("Content-Type", "application/xml; charset=UTF-8"));
 
-            method.setEntity(httpentity);
-            return executeMethod(httpClient, method);
-            
-         } catch (IOException ex) {
-            Logger.getLogger(HttpClientWebServiceWs2.class.getName()).log(Level.SEVERE, null, ex);
-        } 
-        return null;
+        method.setEntity(httpentity);
+        return executeMethod(httpClient, method);
     }
     @Override
     protected Metadata doPut(String url) throws WebServiceException, MbXMLException {
