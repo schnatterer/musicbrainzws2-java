@@ -33,7 +33,7 @@ script:
   # Once there unit tests, wrap "package" with the following
   # org.jacoco:jacoco-maven-plugin:prepare-agent \
   # org.jacoco:jacoco-maven-plugin:report \
-  - ./mvnw clean package sonar:sonar
+  - ./mvnw clean install sonar:sonar
 
 deploy:
   skip_cleanup: true
