@@ -101,11 +101,6 @@
     </dependencies>
 
     <build>
-        <!--TODO Refactor directory structure to comply with maven defaults src/main/java
-            src/test/java -->
-        <sourceDirectory>src</sourceDirectory>
-        <testSourceDirectory>test</testSourceDirectory>
-
         <pluginManagement>
             <plugins>
                 <plugin>
