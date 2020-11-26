@@ -4,7 +4,7 @@
     
     <groupId>info.schnatterer.musicbrainzws2-java</groupId>
     <artifactId>musicbrainzws2-java</artifactId>
-    <version>3.0.2-SNAPSHOT</version>
+    <version>3.0.2</version>
     <packaging>jar</packaging>
     
     <name>musicbrainzws2-java</name>
@@ -37,7 +37,7 @@
         <connection>scm:git:ssh://github.com/schnatterer/musicbrainzws2-java.git</connection>
         <developerConnection>scm:git:ssh://git@github.com/schnatterer/musicbrainzws2-java.git</developerConnection>
         <url>https://github.com/schnatterer/musicbrainzws2-java.git</url>
-        <tag>HEAD</tag>
+        <tag>v.3.0.2</tag>
     </scm>
     
     <distributionManagement>
