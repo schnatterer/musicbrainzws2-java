@@ -14,7 +14,6 @@ import org.musicbrainz.model.entity.ReleaseWs2;
 import org.musicbrainz.model.entity.WorkWs2;
 import org.musicbrainz.query.lookUp.LookUpWs2;
 import org.musicbrainz.query.search.SearchWs2;
-import org.musicbrainz.webservice.DefaultWebServiceWs2;
 import org.musicbrainz.webservice.WebService;
 import org.musicbrainz.webservice.impl.HttpClientWebServiceWs2;
 import org.musicbrainz.DomainsWs2;
@@ -417,12 +416,8 @@ public abstract class Controller extends DomainsWs2{
     }
     private WebService getDefaultAnnotationWs(){
         
-        WebService adws = createWebService(applicationName, applicationVersion,
+        return createWebService(applicationName, applicationVersion,
                 applicationContact);
-
-        ((DefaultWebServiceWs2)adws).setHost(ANNOTATIONHOST);
-        
-        return adws;
     }
 
     /**

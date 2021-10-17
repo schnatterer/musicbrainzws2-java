@@ -755,8 +755,6 @@ public class UnitTests {
         org.musicbrainz.junit.MyWebServiceImplementation myAnnotationsWs =
                 new org.musicbrainz.junit.MyWebServiceImplementation();
 
-        ((DefaultWebServiceWs2) myAnnotationsWs).setHost("search.musicbrainz.org");
-
         Artist artist = new Artist();
         artist.setQueryWs(myQueryWs);
         artist.setAnnotationWs(myAnnotationsWs);
