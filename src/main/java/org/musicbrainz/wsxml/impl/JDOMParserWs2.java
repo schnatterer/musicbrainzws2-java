@@ -258,6 +258,10 @@ public class JDOMParserWs2 extends DomainsWs2 implements MbXmlParser  {
             {
                 annotation.setType(MbUtils.convertTypeToURI(attribute.getValue(), NS_MMD_2_PREFIX));
             }
+            else if (attribute.getName().equals(TYPEID))
+            {
+              //ignore.
+            }
             else if (attribute.getName().equals(SCORE))
             {
               //ignore.
@@ -301,6 +305,10 @@ public class JDOMParserWs2 extends DomainsWs2 implements MbXmlParser  {
             }
             else if (attribute.getName().equals(TYPE)){
                 label.setType(MbUtils.convertTypeToURI(attribute.getValue(), NS_MMD_2_PREFIX));
+            }
+            else if (attribute.getName().equals(TYPEID))
+            {
+              //ignore.
             }
             else if (attribute.getName().equals(SCORE)){
               //ignore.
@@ -383,6 +391,10 @@ public class JDOMParserWs2 extends DomainsWs2 implements MbXmlParser  {
             }
             else if (attribute.getName().equals(TYPE)){
               artist.setType(MbUtils.convertTypeToURI(attribute.getValue(), NS_MMD_2_PREFIX));
+            }
+            else if (attribute.getName().equals(TYPEID))
+            {
+              //ignore.
             }
             else if (attribute.getName().equals(SCORE)){
               //ignore.
@@ -499,6 +511,10 @@ public class JDOMParserWs2 extends DomainsWs2 implements MbXmlParser  {
                           NS_MMD_2_PREFIX));
                   
                   releaseGroup.setTypeString(attribute.getValue());
+              }
+              else if (attribute.getName().equals(TYPEID))
+              {
+                //ignore.
               }
               else if (attribute.getName().equals(SCORE)) {
                   //ignore.
@@ -760,6 +776,10 @@ public class JDOMParserWs2 extends DomainsWs2 implements MbXmlParser  {
               }
               else if (attribute.getName().equals(TYPE)){
                   work.setTypeURI(MbUtils.convertTypeToURI(attribute.getValue(), NS_MMD_2_PREFIX));
+              }
+              else if (attribute.getName().equals(TYPEID))
+              {
+                //ignore.
               }
               else if (attribute.getName().equals(SCORE)){
                   //ignore.
@@ -1297,6 +1317,10 @@ public class JDOMParserWs2 extends DomainsWs2 implements MbXmlParser  {
               else if (attribute.getName().equals(TYPE)){
                    area.setType(attribute.getValue());
               }
+              else if (attribute.getName().equals(TYPEID))
+              {
+                //ignore.
+              }
               else{
                 log.warning("Unrecognised Isrc attribute: "+attribute.getName());
               }
@@ -1802,6 +1826,10 @@ protected List<AliasWs2> createAliasList(Element node){
                   }
                   else if (attribute.getName().equals(TYPE)){
                         alias.setType(attribute.getValue());
+                  }
+                  else if (attribute.getName().equals(TYPEID))
+                  {
+                    //ignore.
                   }
                   else if (attribute.getName().equals(BEGINDATE)){
                         alias.setBeginDate(child.getText());
