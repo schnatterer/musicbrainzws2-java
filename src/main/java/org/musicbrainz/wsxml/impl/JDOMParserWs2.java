@@ -43,6 +43,7 @@ import org.musicbrainz.model.ReleaseEventWs2;
 import org.musicbrainz.model.AreaWs2;
 import org.musicbrainz.model.CoverArtArchiveWs2;
 import org.musicbrainz.model.NameCreditWs2;
+import org.musicbrainz.model.OffsetWs2;
 import org.musicbrainz.model.PuidWs2;
 import org.musicbrainz.model.RatingsWs2;
 import org.musicbrainz.model.RelationWs2;
@@ -51,6 +52,7 @@ import org.musicbrainz.model.TrackWs2;
 import org.musicbrainz.model.TagWs2;
 import org.musicbrainz.model.entity.ArtistWs2;
 import org.musicbrainz.model.entity.CollectionWs2;
+import org.musicbrainz.model.entity.DiscWs2;
 import org.musicbrainz.model.entity.EntityWs2;
 import org.musicbrainz.model.entity.LabelWs2;
 import org.musicbrainz.model.entity.RecordingWs2;
@@ -58,7 +60,9 @@ import org.musicbrainz.model.entity.ReleaseGroupWs2;
 import org.musicbrainz.model.entity.ReleaseWs2;
 import org.musicbrainz.model.entity.WorkWs2;
 import org.musicbrainz.model.entity.listelement.ArtistListWs2;
+import org.musicbrainz.model.entity.listelement.DiscListWs2;
 import org.musicbrainz.model.entity.listelement.LabelListWs2;
+import org.musicbrainz.model.entity.listelement.OffsetListWs2;
 import org.musicbrainz.model.entity.listelement.RecordingListWs2;
 import org.musicbrainz.model.RelationListWs2;
 import org.musicbrainz.model.entity.listelement.ReleaseGroupListWs2;
@@ -732,6 +736,9 @@ public class JDOMParserWs2 extends DomainsWs2 implements MbXmlParser  {
             else if (ARTISTCREDIT.equals(child.getName())) {
                 recording.setArtistCredit(createArtistCredit(child));
             }
+            else if (FIRSTRELEASEDATE.equals(child.getName())) {
+              recording.setFirstReleaseDateStr(child.getText());
+            }
             else if (RATING.equals(child.getName())) {
                 recording.setRating(createRating(child));
             }
@@ -808,6 +815,9 @@ public class JDOMParserWs2 extends DomainsWs2 implements MbXmlParser  {
             }
             else if (LANGUAGE.equals(child.getName())) {
                 work.setTextLanguage(getText(child.getText(),languagePattern,child.getText()));
+            }
+            else if (LANGUAGELIST.equals(child.getName())) {
+              work.setTextLanguageList(getArrayElementsAsList(child));
             }
             else if (ARTISTCREDIT.equals(child.getName())) {
                 work.setArtistCredit(createArtistCredit(child));
@@ -1494,6 +1504,9 @@ public class JDOMParserWs2 extends DomainsWs2 implements MbXmlParser  {
             if (SECTORS.equals(child.getName())) {
                 disc.setSectors(getInt(child.getText()));
             }
+            else if (OFFSETLIST.equals(child.getName())) {
+              disc.setOffsetList(createOffsetList(child));
+            }
             else if (RELEASELIST.equals(child.getName())) {
                 addReleasesToList(child, disc.getReleaseList());
             }
@@ -1503,6 +1516,64 @@ public class JDOMParserWs2 extends DomainsWs2 implements MbXmlParser  {
             }
         }
         return disc;
+    }
+    protected OffsetListWs2 createOffsetList(Element node){
+      List<OffsetWs2> offsets
+          = new ArrayList<OffsetWs2>();
+
+      Iterator itr = node.getAttributes().iterator();
+      while (itr.hasNext()) {
+        Attribute attribute = (Attribute)itr.next();
+        if (attribute.getName().equals(COUNT)||
+                attribute.getName().equals(OFFSET))
+        {
+          //ignore (see updateListElement).
+        }
+        else log.warning("Unrecognised Offset List attribute: "+attribute.getName());
+      }
+
+      itr = node.getChildren().iterator();
+      Element child;
+      while(itr.hasNext())
+      {
+        child = (Element)itr.next();
+        if (OFFSET.equals(child.getName()))
+        {
+          offsets.add(createOffset(child));
+        }
+        else
+        {
+          log.warning("Unrecognised Offset List element: "+child.getName());
+        }
+      }
+      OffsetListWs2 out = new OffsetListWs2();
+      updateListElement(node, out);
+
+      return out;
+    }
+    protected OffsetWs2 createOffset(Element node) {
+      OffsetWs2 offset = new OffsetWs2();
+
+      Iterator itr = node.getAttributes().iterator();
+      while (itr.hasNext()) {
+
+        Attribute attribute = (Attribute)itr.next();
+
+        if (attribute.getName().equals(POSITION))
+        {
+          offset.setPosition(getInt(attribute.getValue()));
+        }
+        else
+        {
+          log.warning("Unrecognised Offset attribute: "+attribute.getName());
+        }
+      }
+
+      if (node.getChildren().size() > 0) {
+        log.warning("Offset cannot have elements");
+      }
+      offset.setOffset(getInt(node.getText()));
+      return offset;
     }
     protected PuidWs2 createPuid(Element node){
         PuidWs2 puid = new PuidWs2();

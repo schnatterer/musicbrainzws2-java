@@ -30,6 +30,7 @@ public class WorkWs2 extends EntityWs2
     private List<String> iswcList = new ArrayList <String>();
     private String disambiguation;
     private String textLanguage;
+    private List<String> textLanguageList = new ArrayList<String>();
     
     public WorkWs2() {
 
@@ -59,6 +60,12 @@ public class WorkWs2 extends EntityWs2
     }
     public void setTextLanguage(String textLanguage) {
         this.textLanguage = textLanguage;
+    }
+    public List<String> getTextLanguageList() {
+        return textLanguageList;
+    }
+    public void setTextLanguageList(List<String> textLanguageList) {
+        this.textLanguageList = textLanguageList;
     }
     public ArtistCreditWs2 getArtistCredit() {
         return artistCredit;
