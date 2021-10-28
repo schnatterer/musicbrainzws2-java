@@ -27,6 +27,23 @@ public class Collection extends Controller{
         
     }
    
+    /**
+     * Creates a Collection with a custom user agent string.
+     * 
+     * @param applicationName
+     *            custom application name used in user agent string. If
+     *            <code>null</code>, the default user agent string is used
+     * @param applicationVersion
+     *            custom application version used in user agent string
+     * @param applicationContact
+     *            contact URL or author email used in user agent string
+     */
+    public Collection(String applicationName, String applicationVersion,
+            String applicationContact) {
+        super(applicationName, applicationVersion, applicationContact);
+        setIncluded(new CollectionIncludesWs2());
+    }
+
     // -------------- Search  -------------------------------------------------//
 
   
