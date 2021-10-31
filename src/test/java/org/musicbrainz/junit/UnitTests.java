@@ -292,6 +292,11 @@ public class UnitTests {
         assertTrue("Tag " + tags[0] + "not contained in list " + actualTags, actualTags.contains(tags[0]));
     }
 
+    @Test
+    public void fetchesAnnotations() throws MBWS2Exception {
+        
+    }
+
     //@Test
     public void PuidLookUp() throws MBWS2Exception {
 
