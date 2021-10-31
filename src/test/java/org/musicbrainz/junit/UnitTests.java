@@ -49,6 +49,8 @@ import java.util.logging.Handler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import static junit.framework.TestCase.assertEquals;
+import static junit.framework.TestCase.assertFalse;
 import static junit.framework.TestCase.assertTrue;
 
 // TODO proper unit test coverage is needed and all commented @test should pass
@@ -294,7 +296,9 @@ public class UnitTests {
 
     @Test
     public void fetchesAnnotations() throws MBWS2Exception {
-        
+        RecordingWs2 recording = new Recording().lookUp("05f54b65-23ee-4ead-a090-4a1902a671a5");
+        assertEquals("Faith Divides Us – Death Unites Us", recording.getTitle());
+        assertFalse("Does not return annotation", recording.getAnnotation(new HttpClientWebServiceWs2()).isEmpty());
     }
 
     //@Test
