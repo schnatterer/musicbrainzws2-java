@@ -38,5 +38,4 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          # TODO fix tests!
-        run: ./mvnw -B -DskipTests verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=info.schnatterer.musicbrainzws2-java:musicbrainzws2-java
+        run: ./mvnw -B  verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=info.schnatterer.musicbrainzws2-java:musicbrainzws2-java
