@@ -6,6 +6,7 @@ package org.musicbrainz.junit;
 
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.musicbrainz.MBWS2Exception;
 import org.musicbrainz.controller.Artist;
@@ -227,6 +228,7 @@ public class UnitTests {
         System.out.println(artist.getUserRating().getAverageRating());
     }
 
+    @Ignore // Unfortunately, test.musicbrainz.org returns 502
     @Test
     public void AddTagsAndRating() throws MBWS2Exception {
 
@@ -263,6 +265,7 @@ public class UnitTests {
      * Tests if the correct encoding is used for tag submission.
      * See https://github.com/schnatterer/musicbrainzws2-java/pull/2 for details.
      */
+    @Ignore // Unfortunately, test.musicbrainz.org returns 502
     @Test
     public void AddTagsEncoding() throws MBWS2Exception {
         ReleaseGroup controller = new ReleaseGroup();

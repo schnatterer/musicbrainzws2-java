@@ -1,6 +1,5 @@
 # musicbrainzws2-java
-
-[![Build Status](https://travis-ci.org/schnatterer/musicbrainzws2-java.svg?branch=nusicFork)](https://travis-ci.org/schnatterer/musicbrainzws2-java)
+[![Build](https://github.com/schnatterer/musicbrainzws2-java/actions/workflows/main.yaml/badge.svg)](https://github.com/schnatterer/musicbrainzws2-java/actions/workflows/main.yaml)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=info.schnatterer.musicbrainzws2-java%3Amusicbrainzws2-java&metric=alert_status)](https://sonarcloud.io/dashboard?id=info.schnatterer.musicbrainzws2-java%3Amusicbrainzws2-java)
 
 This is a fork of musicbrainzws2-java, originally hosted [here](https://code.google.com/archive/p/musicbrainzws2-java/). It includes several bugfixes as well as maven integration. The original [wiki](https://code.google.com/p/musicbrainzws2-java/w/list) was migrated and can now be found [here](https://github.com/schnatterer/musicbrainzws2-java/wiki).
