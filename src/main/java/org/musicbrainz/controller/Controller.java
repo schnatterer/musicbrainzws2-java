@@ -368,8 +368,7 @@ public abstract class Controller extends DomainsWs2{
     
     // ------------- Submission --------------------------------------------//
        
-    public final void AddTags(String[] userTags) throws MBWS2Exception{
-        
+    public final void addTags(String[] userTags) throws MBWS2Exception {
         for (String tag : userTags)
         {
             TagWs2 t = new TagWs2();
@@ -377,6 +376,13 @@ public abstract class Controller extends DomainsWs2{
             entity.addUserTag(t);
         }
         postUserTags();
+    }
+
+    /**
+     * @deprecated Replaced by {@link #addTags(String[])}.
+     */
+    public final void AddTags(String[] userTags) throws MBWS2Exception {
+        addTags(userTags);
     }
     
     public final void postUserTags() throws MBWS2Exception{
