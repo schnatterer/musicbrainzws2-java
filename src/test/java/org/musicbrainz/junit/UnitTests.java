@@ -230,7 +230,7 @@ public class UnitTests {
 
     @Ignore // Unfortunately, test.musicbrainz.org returns 502
     @Test
-    public void AddTagsAndRating() throws MBWS2Exception {
+    public void addTagsAndRating() throws MBWS2Exception {
 
         Artist controller = new Artist();
 
@@ -252,7 +252,7 @@ public class UnitTests {
 
         String[] tags = {"progressive", "electronic", "english"};
 
-        controller.AddTags(tags);
+        controller.addTags(tags);
         controller.rate(5F);
         controller.lookUp(artist);
         for (TagWs2 tag : artist.getUserTags()) {
@@ -267,7 +267,7 @@ public class UnitTests {
      */
     @Ignore // Unfortunately, test.musicbrainz.org returns 502
     @Test
-    public void AddTagsEncoding() throws MBWS2Exception {
+    public void addTagsEncoding() throws MBWS2Exception {
         ReleaseGroup controller = new ReleaseGroup();
 
         DefaultWebServiceWs2 ws = new HttpClientWebServiceWs2();
@@ -282,8 +282,8 @@ public class UnitTests {
         ReleaseGroupWs2 releaseGroup = controller.lookUp("686ec242-db40-3713-8f5d-2214e763f515");
         
         String[] tags = {"kayōkyoku" + System.currentTimeMillis()};
-        controller.AddTags(tags);
-        
+        controller.addTags(tags);
+
         controller.lookUp(releaseGroup);
         Set<String> actualTags = new HashSet<String>();
         for (TagWs2 tag : releaseGroup.getUserTags()) {
