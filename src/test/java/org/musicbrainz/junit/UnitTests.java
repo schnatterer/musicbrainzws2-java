@@ -301,6 +301,40 @@ public class UnitTests {
         assertFalse("Does not return annotation", recording.getAnnotation(new HttpClientWebServiceWs2()).isEmpty());
     }
 
+    @Test
+    public void fetchesAnnotations() throws MBWS2Exception {
+        RecordingWs2 recording = new Recording().lookUp("05f54b65-23ee-4ead-a090-4a1902a671a5");
+        assertEquals("Faith Divides Us – Death Unites Us", recording.getTitle());
+        assertFalse("Does not return annotation", recording.getAnnotation(new HttpClientWebServiceWs2()).isEmpty());
+    }
+
+    @Test
+    public void testRecordingFirstReleaseDate() throws MBWS2Exception {
+        RecordingWs2 recording = new Recording().lookUp("05f54b65-23ee-4ead-a090-4a1902a671a5");
+        assertEquals("Faith Divides Us – Death Unites Us", recording.getTitle());
+        assertEquals("2009-09-25", recording.getFirstReleaseDateStr());
+    }
+
+    @Test
+    public void testWorkLanguageList() throws MBWS2Exception {
+        WorkWs2 workWs2 = new Work().lookUp("46cb7450-be83-30c9-b139-196cc3487e43");
+        assertEquals("Faith Divides Us – Death Unites Us", workWs2.getTitle());
+        assertEquals(Collections.singletonList("eng"), workWs2.getTextLanguageList());
+    }
+
+    @Test
+    public void testDiscOffsetList() throws MBWS2Exception {
+        ReleaseWs2 releaseWs2 = new Release().lookUp("df3c96be-63f6-4291-b73e-afc776b85601");
+        assertEquals("Faith Divides Us – Death Unites Us", releaseWs2.getTitle());
+        List<OffsetWs2> offsetWs2List = releaseWs2.getMediumList().getMedia().get(0).getDiscList().getDiscs().get(0).getOffsetList().getOffsets();
+        assertEquals("F1p5Nt9rAPd_4JZjrQGdXFTm4pM-", releaseWs2.getMediumList().getMedia().get(0).getDiscList().getDiscs().get(0).getDiscId());
+
+        assertEquals(Integer.valueOf(1), offsetWs2List.get(0).getPosition());
+        assertEquals(Integer.valueOf(150), offsetWs2List.get(0).getOffset());
+        assertEquals(Integer.valueOf(2), offsetWs2List.get(1).getPosition());
+        assertEquals(Integer.valueOf(24808), offsetWs2List.get(1).getOffset());
+    }
+
     //@Test
     public void PuidLookUp() throws MBWS2Exception {
 
