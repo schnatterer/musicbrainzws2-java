@@ -1546,7 +1546,7 @@ public class JDOMParserWs2 extends DomainsWs2 implements MbXmlParser  {
           log.warning("Unrecognised Offset List element: "+child.getName());
         }
       }
-      OffsetListWs2 out = new OffsetListWs2();
+      OffsetListWs2 out = new OffsetListWs2(offsets);
       updateListElement(node, out);
 
       return out;
