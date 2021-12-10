@@ -18,6 +18,7 @@ public class RecordingWs2 extends EntityWs2
 {
     private String title;
     private Long durationInMillis;
+    private String firstReleaseDateStr;
     private String disambiguation;
     
     private ArtistCreditWs2 artistCredit;
@@ -44,6 +45,13 @@ public class RecordingWs2 extends EntityWs2
         this.title = title;
     }
     
+    public String getFirstReleaseDateStr() {
+        return firstReleaseDateStr;
+    }
+    public void setFirstReleaseDateStr(String firstReleaseDateStr) {
+        this.firstReleaseDateStr = firstReleaseDateStr;
+    }
+
     public Long getDurationInMillis() {
         return durationInMillis == null ?  0 : durationInMillis;
     }

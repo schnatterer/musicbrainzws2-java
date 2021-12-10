@@ -6,7 +6,6 @@ import org.musicbrainz.MBWS2Exception;
 import org.musicbrainz.filter.searchfilter.AnnotationSearchtFilterWs2;
 import org.musicbrainz.model.searchresult.AnnotationResultWs2;
 import org.musicbrainz.model.searchresult.listelement.AnnotationSearchResultsWs2;
-import org.musicbrainz.webservice.DefaultWebServiceWs2;
 import org.musicbrainz.webservice.WebService;
 
 public class AnnotationSearchWs2 extends SearchWs2{
@@ -15,7 +14,6 @@ public class AnnotationSearchWs2 extends SearchWs2{
   
     public AnnotationSearchWs2(AnnotationSearchtFilterWs2 filter){
        super(filter);
-       ((DefaultWebServiceWs2)super.getWs()).setHost(ANNOTATIONHOST);
     }
     public AnnotationSearchWs2(WebService ws, AnnotationSearchtFilterWs2 filter){
        super(ws, filter);

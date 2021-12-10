@@ -6,6 +6,7 @@ import java.util.logging.Logger;
 import org.musicbrainz.controller.Disc;
 import org.musicbrainz.model.DiscTrackWs2;
 import org.musicbrainz.model.MediumWs2;
+import org.musicbrainz.model.entity.listelement.OffsetListWs2;
 import org.musicbrainz.model.entity.listelement.ReleaseListWs2;
 
 
@@ -35,6 +36,11 @@ public class DiscWs2 extends EntityWs2 {
      * The length in sectors
      */
     private Integer sectors;
+
+    /**
+     * The disc's offsets
+     */
+    private OffsetListWs2 offsets;
 
     /**
      * The 28-character disc id
@@ -84,6 +90,12 @@ public class DiscWs2 extends EntityWs2 {
      */
     public void setSectors(Integer sectors) {
             this.sectors = sectors;
+    }
+    public OffsetListWs2 getOffsetList() {
+      return offsets;
+    }
+    public void setOffsetList(OffsetListWs2 offsets) {
+      this.offsets = offsets;
     }
     /**
      * @return the toc

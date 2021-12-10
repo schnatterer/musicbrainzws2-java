@@ -33,6 +33,23 @@ public class ReleaseGroup extends Controller {
         setIncluded(new ReleaseGroupIncludesWs2());
     }
     
+    /**
+     * Creates a ReleaseGroup with a custom user agent string.
+     * 
+     * @param applicationName
+     *            custom application name used in user agent string. If
+     *            <code>null</code>, the default user agent string is used
+     * @param applicationVersion
+     *            custom application version used in user agent string
+     * @param applicationContact
+     *            contact URL or author email used in user agent string
+     */
+    public ReleaseGroup(String applicationName, String applicationVersion,
+            String applicationContact) {
+        super(applicationName, applicationVersion, applicationContact);
+        setIncluded(new ReleaseGroupIncludesWs2());
+    }
+    
     // -------------- Search  -------------------------------------------------//
     
     @Override

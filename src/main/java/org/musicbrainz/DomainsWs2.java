@@ -59,6 +59,7 @@ public abstract class DomainsWs2 {
     public static final String RECORDING = "recording";
     public static final String COLLECTION = "collection";
     public static final String DISC = "disc";
+    public static final String OFFSETLIST = "offset-list";
     public static final String ANNOTATION = "annotation";
     public static final String RELATION = "relation";
     
@@ -162,6 +163,7 @@ public abstract class DomainsWs2 {
     public static final String ENDAREA ="end-area";
     
     public static final String LANGUAGE = "language";
+    public static final String LANGUAGELIST = "language-list";
     public static final String SCRIPT = "script";
     public static final String LOCALE = "locale";
     public static final String PRIMARY = "primary";
