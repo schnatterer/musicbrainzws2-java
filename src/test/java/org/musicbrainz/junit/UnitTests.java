@@ -20,6 +20,7 @@ import org.musicbrainz.controller.ReleaseGroup;
 import org.musicbrainz.controller.Work;
 import org.musicbrainz.filter.ReleaseTypeFilterWs2;
 import org.musicbrainz.model.DiscTrackWs2;
+import org.musicbrainz.model.OffsetWs2;
 import org.musicbrainz.model.PuidWs2;
 import org.musicbrainz.model.TagWs2;
 import org.musicbrainz.model.entity.ArtistWs2;
@@ -42,6 +43,7 @@ import org.musicbrainz.webservice.DefaultWebServiceWs2;
 import org.musicbrainz.webservice.impl.HttpClientWebServiceWs2;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -292,13 +294,6 @@ public class UnitTests {
             actualTags.add(tag.getName());
         }
         assertTrue("Tag " + tags[0] + "not contained in list " + actualTags, actualTags.contains(tags[0]));
-    }
-
-    @Test
-    public void fetchesAnnotations() throws MBWS2Exception {
-        RecordingWs2 recording = new Recording().lookUp("05f54b65-23ee-4ead-a090-4a1902a671a5");
-        assertEquals("Faith Divides Us – Death Unites Us", recording.getTitle());
-        assertFalse("Does not return annotation", recording.getAnnotation(new HttpClientWebServiceWs2()).isEmpty());
     }
 
     @Test
