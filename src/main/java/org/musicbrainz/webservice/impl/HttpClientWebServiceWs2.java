@@ -1,29 +1,27 @@
 package org.musicbrainz.webservice.impl;
 
-import org.apache.http.Consts;
-import org.apache.http.Header;
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpEntityEnclosingRequest;
-import org.apache.http.HttpRequest;
-import org.apache.http.HttpResponse;
-import org.apache.http.HttpStatus;
-import org.apache.http.NoHttpResponseException;
-import org.apache.http.auth.AuthScope;
-import org.apache.http.auth.UsernamePasswordCredentials;
-import org.apache.http.client.CredentialsProvider;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.HttpRequestRetryHandler;
-import org.apache.http.client.methods.HttpDelete;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.client.methods.HttpPut;
-import org.apache.http.client.methods.HttpUriRequest;
-import org.apache.http.entity.StringEntity;
-import org.apache.http.impl.client.BasicCredentialsProvider;
-import org.apache.http.impl.client.HttpClientBuilder;
-import org.apache.http.message.BasicHeader;
-import org.apache.http.protocol.ExecutionContext;
-import org.apache.http.protocol.HttpContext;
+import org.apache.hc.client5.http.HttpRequestRetryStrategy;
+import org.apache.hc.client5.http.auth.AuthScope;
+import org.apache.hc.client5.http.auth.UsernamePasswordCredentials;
+import org.apache.hc.client5.http.classic.HttpClient;
+import org.apache.hc.client5.http.classic.methods.HttpDelete;
+import org.apache.hc.client5.http.classic.methods.HttpGet;
+import org.apache.hc.client5.http.classic.methods.HttpPost;
+import org.apache.hc.client5.http.classic.methods.HttpPut;
+import org.apache.hc.client5.http.classic.methods.HttpUriRequestBase;
+import org.apache.hc.client5.http.impl.DefaultHttpRequestRetryStrategy;
+import org.apache.hc.client5.http.impl.auth.BasicCredentialsProvider;
+import org.apache.hc.client5.http.impl.classic.CloseableHttpClient;
+import org.apache.hc.client5.http.impl.classic.CloseableHttpResponse;
+import org.apache.hc.client5.http.impl.classic.HttpClientBuilder;
+import org.apache.hc.core5.http.ContentType;
+import org.apache.hc.core5.http.Header;
+import org.apache.hc.core5.http.HttpEntity;
+import org.apache.hc.core5.http.HttpRequest;
+import org.apache.hc.core5.http.HttpStatus;
+import org.apache.hc.core5.http.NoHttpResponseException;
+import org.apache.hc.core5.http.io.entity.StringEntity;
+import org.apache.hc.core5.http.protocol.HttpContext;
 import org.musicbrainz.webservice.AuthorizationException;
 import org.musicbrainz.webservice.DefaultWebServiceWs2;
 import org.musicbrainz.webservice.RequestException;
@@ -37,7 +35,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.zip.GZIPInputStream;
@@ -77,23 +74,23 @@ public class HttpClientWebServiceWs2 extends DefaultWebServiceWs2
                 applicationContact);
     }
 
-    private HttpClient setConnectionParam(boolean retry){
+    // TODO we should re-use a single instance of the client!
+    // taking full advantage of persistent connection re-use and connection pooling.
+    // https://hc.apache.org/httpcomponents-client-5.1.x/migration-guide/preparation.html
+    private CloseableHttpClient setConnectionParam(boolean retry){
 
         HttpClientBuilder httpClientBuilder = HttpClientBuilder.create();
 
         if (getUsername() != null && !getUsername().isEmpty())
         {
 
-            CredentialsProvider credentialsProvider= new BasicCredentialsProvider();
+            BasicCredentialsProvider credentialsProvider= new BasicCredentialsProvider();
 
 
             UsernamePasswordCredentials creds =
-                    new UsernamePasswordCredentials(getUsername(), getPassword());
+                    new UsernamePasswordCredentials(getUsername(), getPassword().toCharArray());
 
-            AuthScope authScope = new AuthScope(getHost(),
-                                                            AuthScope.ANY_PORT, 
-                                                            AuthScope.ANY_REALM, 
-                                                            AuthScope.ANY_SCHEME);
+            AuthScope authScope = new AuthScope(getHost(), -1);
 
             credentialsProvider.setCredentials(authScope, creds);
 
@@ -102,24 +99,21 @@ public class HttpClientWebServiceWs2 extends DefaultWebServiceWs2
         if (retry) {
             setRetryHandler(httpClientBuilder);// inside the call
         }
-        httpClientBuilder.setConnectionTimeToLive(60000, TimeUnit.MILLISECONDS);
 
-        HttpClient httpClient = httpClientBuilder.build();
-
-        return httpClient;
+        return httpClientBuilder.build();
     }
 
     private void setRetryHandler(HttpClientBuilder httpClient){
         
         // retry 3 times, do not retry if we got a response, because we
         // may only query the web service once a second
-        
-        HttpRequestRetryHandler myRetryHandler = new HttpRequestRetryHandler() {
-            
+        HttpRequestRetryStrategy myRetryHandler = new DefaultHttpRequestRetryStrategy() {
+
             public boolean retryRequest(
-                    IOException exception, 
-                    int executionCount,
-                    HttpContext context) {
+                    final HttpRequest request,
+                    final IOException exception,
+                    final int executionCount,
+                    final HttpContext context) {
                 
                 if (executionCount >= 3) {
                     // Do not retry if over max retry count
@@ -133,23 +127,16 @@ public class HttpClientWebServiceWs2 extends DefaultWebServiceWs2
                     // Do not retry on SSL handshake exception
                     return false;
                 }
-                HttpRequest request = (HttpRequest) context.getAttribute(
-                        ExecutionContext.HTTP_REQUEST);
-                boolean idempotent = !(request instanceof HttpEntityEnclosingRequest);
-                if (idempotent) {
-                    // Retry if the request is considered idempotent 
-                    return true;
-                }
                 return false;
             }
         };
 
-        httpClient.setRetryHandler(myRetryHandler);
+        httpClient.setRetryStrategy(myRetryHandler);
     }
     @Override
     protected Metadata doGet(String url) throws WebServiceException, MbXMLException
     {
-        HttpClient httpClient = setConnectionParam(true);
+        CloseableHttpClient httpClient = setConnectionParam(true);
 
         // retry with new calls if the error is 503 Service unavaillable.
         boolean repeat = true;
@@ -183,19 +170,18 @@ public class HttpClientWebServiceWs2 extends DefaultWebServiceWs2
     @Override
     protected Metadata doPost(String url, Metadata md) throws WebServiceException, MbXMLException {
 
-        HttpClient httpClient = setConnectionParam(true);
+        CloseableHttpClient httpClient = setConnectionParam(true);
 
         HttpPost method = new HttpPost(url);
 
-        StringEntity httpentity = new StringEntity(getWriter().getXmlString(md), Consts.UTF_8);
-        httpentity.setContentType(new BasicHeader("Content-Type", "application/xml; charset=UTF-8"));
+        StringEntity httpentity = new StringEntity(getWriter().getXmlString(md), ContentType.APPLICATION_XML);
 
         method.setEntity(httpentity);
         return executeMethod(httpClient, method);
     }
     @Override
     protected Metadata doPut(String url) throws WebServiceException, MbXMLException {
-        HttpClient httpClient = setConnectionParam(false);
+        CloseableHttpClient httpClient = setConnectionParam(false);
 
         HttpPut method = new HttpPut(url);
         return executeMethod(httpClient, method);
@@ -204,12 +190,12 @@ public class HttpClientWebServiceWs2 extends DefaultWebServiceWs2
     @Override
     protected Metadata doDelete(String url) throws WebServiceException, MbXMLException {
 
-        HttpClient httpClient = setConnectionParam(false);
+        CloseableHttpClient httpClient = setConnectionParam(false);
         HttpDelete method = new HttpDelete(url);
         return executeMethod(httpClient, method);
     }
 
-    private Metadata executeMethod(HttpClient httpClient, HttpUriRequest method) throws MbXMLException, WebServiceException{
+    private Metadata executeMethod(CloseableHttpClient httpClient, HttpUriRequestBase method) throws MbXMLException, WebServiceException{
 
         wait(1);
         // Try using compression
@@ -219,12 +205,12 @@ public class HttpClientWebServiceWs2 extends DefaultWebServiceWs2
         try 
         {
           // Execute the method.
-          log.finer("Hitting url: " + method.getURI().toString());
-          HttpResponse response = httpClient.execute(method);
+          log.finer("Hitting url: " + method.getRequestUri());
+          CloseableHttpResponse response = httpClient.execute(method);
           
           lastHitTime =System.currentTimeMillis();
           
-          int statusCode = response.getStatusLine().getStatusCode();
+          int statusCode = response.getCode();
       
           switch (statusCode)
           {
@@ -289,11 +275,11 @@ public class HttpClientWebServiceWs2 extends DefaultWebServiceWs2
             throw new WebServiceException(e.getMessage(), e);
         }
     }
-    private String buildMessage(HttpResponse response, String status){
+    private String buildMessage(CloseableHttpResponse response, String status){
         String msg="";
         InputStream instream;
-        int statusCode = response.getStatusLine().getStatusCode();
-        String reasonPhrase = response.getStatusLine().getReasonPhrase();
+        int statusCode = response.getCode();
+        String reasonPhrase = response.getReasonPhrase();
         
         if (reasonPhrase==null || reasonPhrase.isEmpty())
             reasonPhrase=status;

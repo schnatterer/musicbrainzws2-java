@@ -1,6 +1,6 @@
 package org.musicbrainz.query.lookUp;
 
-import org.apache.http.HttpStatus;
+import org.apache.hc.core5.http.HttpStatus;
 import org.musicbrainz.MBWS2Exception;
 import org.musicbrainz.filter.DiscTocFilterWs2;
 import org.musicbrainz.webservice.RequestException;
