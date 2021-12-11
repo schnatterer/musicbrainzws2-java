@@ -6,7 +6,6 @@ package org.musicbrainz.junit;
 
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.musicbrainz.MBWS2Exception;
 import org.musicbrainz.controller.Artist;
@@ -232,7 +231,6 @@ public class UnitTests {
         System.out.println(artist.getUserRating().getAverageRating());
     }
 
-    @Ignore // Unfortunately, test.musicbrainz.org returns 502
     @Test
     public void addTagsAndRating() throws MBWS2Exception {
 
@@ -269,7 +267,6 @@ public class UnitTests {
      * Tests if the correct encoding is used for tag submission.
      * See https://github.com/schnatterer/musicbrainzws2-java/pull/2 for details.
      */
-    @Ignore // Unfortunately, test.musicbrainz.org returns 502
     @Test
     public void addTagsEncoding() throws MBWS2Exception {
         ReleaseGroup controller = new ReleaseGroup();
@@ -781,48 +778,6 @@ public class UnitTests {
         // will complete the release list, but be careful...
         // only the last results reports Recordings and ArtistRelations!!!
 
-    }
-
-    //@Test
-    public void SynopsisUseCase10() throws MBWS2Exception {
-
-        log.info("SynopsisUseCase10");
-
-        String name = "pink floyd";
-
-        org.musicbrainz.junit.MyWebServiceImplementation myQueryWs =
-                new org.musicbrainz.junit.MyWebServiceImplementation();
-
-        org.musicbrainz.junit.MyWebServiceImplementation myAnnotationsWs =
-                new org.musicbrainz.junit.MyWebServiceImplementation();
-
-        Artist artist = new Artist();
-        artist.setQueryWs(myQueryWs);
-        artist.setAnnotationWs(myAnnotationsWs);
-        artist.search(name);
-
-        List<ArtistResultWs2> results = artist.getFullSearchResultList();
-
-        if (results.isEmpty()) return;
-
-        ArtistWs2 pinkFloyd = results.get(0).getArtist();
-
-        artist = new Artist();
-        artist.lookUp(pinkFloyd);
-
-        artist.setQueryWs(myQueryWs);
-        artist.setAnnotationWs(myAnnotationsWs);
-
-        artist.getComplete(pinkFloyd);
-
-        // ERROR: Keep using the default ws
-
-        artist = new Artist();
-        artist.setQueryWs(myQueryWs);
-        artist.setAnnotationWs(myAnnotationsWs);
-        artist.getComplete(pinkFloyd);
-
-        // OK: Is using the correct one
     }
 
     //@Test

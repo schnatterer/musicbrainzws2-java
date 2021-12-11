@@ -1,9 +1,10 @@
 package org.musicbrainz;
 
-import java.util.regex.Pattern;
 import org.jdom.Namespace;
 import org.musicbrainz.model.RelationWs2;
 import org.musicbrainz.model.entity.EntityWs2;
+
+import java.util.regex.Pattern;
 
 
 /**
@@ -45,6 +46,7 @@ public abstract class DomainsWs2 {
     public static final String METADATA = "metadata";
     
     public static final String SCORE = "score";
+    public static final String VIDEO = "video";
     public static final String COUNT = "count";
     public static final String OFFSET = "offset";
     
@@ -62,6 +64,10 @@ public abstract class DomainsWs2 {
     public static final String OFFSETLIST = "offset-list";
     public static final String ANNOTATION = "annotation";
     public static final String RELATION = "relation";
+    public static final String TARGET_CREDIT = "target-credit";
+    public static final String ORDERING_KEY = "ordering-key";
+    public static final String SOURCE_CREDIT = "source-credit";
+    
     
     public static final String MESSAGE = "message";
 

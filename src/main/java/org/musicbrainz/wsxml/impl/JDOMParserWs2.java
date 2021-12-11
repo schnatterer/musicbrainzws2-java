@@ -1,55 +1,34 @@
 package org.musicbrainz.wsxml.impl;
 
-import org.musicbrainz.DomainsWs2;
-import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 import org.jdom.Attribute;
 import org.jdom.DataConversionException;
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.Namespace;
 import org.jdom.input.SAXBuilder;
-
-import org.musicbrainz.coverart.Image;
-import org.musicbrainz.coverart.ImageGetter;
-import org.musicbrainz.wsxml.MbXMLException;
-import org.musicbrainz.wsxml.MbXMLParseException;
-import org.musicbrainz.wsxml.MbXmlParser;
-import org.musicbrainz.utils.MbUtils;
-
-import org.musicbrainz.wsxml.element.Metadata;
-import org.musicbrainz.wsxml.element.ListElement;
-
+import org.musicbrainz.DomainsWs2;
 import org.musicbrainz.model.AliasWs2;
 import org.musicbrainz.model.AnnotationWs2;
+import org.musicbrainz.model.AreaWs2;
 import org.musicbrainz.model.ArtistCreditWs2;
-import org.musicbrainz.model.entity.listelement.DiscListWs2;
-import org.musicbrainz.model.entity.DiscWs2;
+import org.musicbrainz.model.CoverArtArchiveWs2;
 import org.musicbrainz.model.IsrcWs2;
 import org.musicbrainz.model.LabelInfoListWs2;
 import org.musicbrainz.model.LabelInfoWs2;
 import org.musicbrainz.model.LifeSpanWs2;
 import org.musicbrainz.model.MediumListWs2;
 import org.musicbrainz.model.MediumWs2;
-import org.musicbrainz.model.ReleaseEventListWs2;
-import org.musicbrainz.model.ReleaseEventWs2;
-import org.musicbrainz.model.AreaWs2;
-import org.musicbrainz.model.CoverArtArchiveWs2;
 import org.musicbrainz.model.NameCreditWs2;
 import org.musicbrainz.model.OffsetWs2;
 import org.musicbrainz.model.PuidWs2;
 import org.musicbrainz.model.RatingsWs2;
+import org.musicbrainz.model.RelationListWs2;
 import org.musicbrainz.model.RelationWs2;
+import org.musicbrainz.model.ReleaseEventListWs2;
+import org.musicbrainz.model.ReleaseEventWs2;
+import org.musicbrainz.model.TagWs2;
 import org.musicbrainz.model.TrackListWs2;
 import org.musicbrainz.model.TrackWs2;
-import org.musicbrainz.model.TagWs2;
 import org.musicbrainz.model.entity.ArtistWs2;
 import org.musicbrainz.model.entity.CollectionWs2;
 import org.musicbrainz.model.entity.DiscWs2;
@@ -64,7 +43,6 @@ import org.musicbrainz.model.entity.listelement.DiscListWs2;
 import org.musicbrainz.model.entity.listelement.LabelListWs2;
 import org.musicbrainz.model.entity.listelement.OffsetListWs2;
 import org.musicbrainz.model.entity.listelement.RecordingListWs2;
-import org.musicbrainz.model.RelationListWs2;
 import org.musicbrainz.model.entity.listelement.ReleaseGroupListWs2;
 import org.musicbrainz.model.entity.listelement.ReleaseListWs2;
 import org.musicbrainz.model.entity.listelement.WorkListWs2;
@@ -84,6 +62,21 @@ import org.musicbrainz.model.searchresult.listelement.RecordingSearchResultsWs2;
 import org.musicbrainz.model.searchresult.listelement.ReleaseGroupSearchResultsWs2;
 import org.musicbrainz.model.searchresult.listelement.ReleaseSearchResultsWs2;
 import org.musicbrainz.model.searchresult.listelement.WorkSearchResultsWs2;
+import org.musicbrainz.utils.MbUtils;
+import org.musicbrainz.wsxml.MbXMLException;
+import org.musicbrainz.wsxml.MbXMLParseException;
+import org.musicbrainz.wsxml.MbXmlParser;
+import org.musicbrainz.wsxml.element.ListElement;
+import org.musicbrainz.wsxml.element.Metadata;
+
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 /**
@@ -685,6 +678,9 @@ public class JDOMParserWs2 extends DomainsWs2 implements MbXmlParser  {
             // not in MB at the moment. 
                 addUserTags (child, release);
             }
+            else if (ALIASLIST.equals(child.getName())) {
+                // Ignore for now
+            }
             else{
                log.log(Level.WARNING, "Unrecognised Release element: {0}", child.getName());
             }
@@ -762,6 +758,9 @@ public class JDOMParserWs2 extends DomainsWs2 implements MbXmlParser  {
             }
             else if (USERTAGLIST.equals(child.getName())) { 
                 addUserTags (child, recording);
+            }
+            else if (VIDEO.equals(child.getName())){
+                //ignore.
             }
             else{
                 log.warning("Unrecognised Recording element: "+child.getName());
@@ -920,6 +919,15 @@ public class JDOMParserWs2 extends DomainsWs2 implements MbXmlParser  {
             }
             else if (WORK.equals(child.getName())) {
                 target = createWork(child);
+            }
+            else if (TARGET_CREDIT.equals(child.getName())) {
+                //ignore for now
+            }
+            else if (ORDERING_KEY.equals(child.getName())) {
+                //ignore for now
+            }
+            else if (SOURCE_CREDIT.equals(child.getName())) {
+                //ignore for now
             }
             // URL is ok this way..
             else{
